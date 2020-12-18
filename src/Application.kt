@@ -1,17 +1,17 @@
 package eu.yeger
 
-import io.ktor.application.*
-import io.ktor.response.*
-import io.ktor.request.*
-import io.ktor.routing.*
-import io.ktor.http.*
-import io.ktor.content.*
-import io.ktor.http.content.*
-import io.ktor.features.*
-import org.slf4j.event.*
-import io.ktor.auth.*
 import com.fasterxml.jackson.databind.*
+import io.ktor.application.*
+import io.ktor.auth.*
+import io.ktor.content.*
+import io.ktor.features.*
+import io.ktor.http.*
+import io.ktor.http.content.*
 import io.ktor.jackson.*
+import io.ktor.request.*
+import io.ktor.response.*
+import io.ktor.routing.*
+import org.slf4j.event.*
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -64,7 +64,6 @@ fun Application.module(testing: Boolean = false) {
             exception<AuthorizationException> { cause ->
                 call.respond(HttpStatusCode.Forbidden)
             }
-
         }
 
         get("/json/jackson") {

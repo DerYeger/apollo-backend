@@ -1,4 +1,5 @@
 val arkenvVersion: String by project
+val jacocoVersion: String by project
 val jUnitVersion: String by project
 val koinVersion: String by project
 val kotlinVersion: String by project
@@ -94,4 +95,8 @@ tasks {
             html.isEnabled = false
         }
     }
+}
+
+jacoco {
+    toolVersion = jacocoVersion
 }

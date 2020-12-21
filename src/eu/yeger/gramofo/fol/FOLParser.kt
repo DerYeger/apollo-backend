@@ -110,36 +110,6 @@ class FOLParser {
         }
     }
 
-    /**
-     * Parses a sequence with antecedent and succedent as string. The several
-     * sub-formulas are expected to be separated by ;'s.
-     * @param antecedentSource antecedent as String
-     * @param succedentSource succedent as String
-     * @return a ParseResult containing either the result or an error message
-     */
-    fun parseSequence(antecedentSource: String, succedentSource: String): ParseResult<FOLSequence> {
-        symbolTable.clear()
-        curBoundedVars = HashSet()
-        var errorMessage: String? = null
-        errorMessageHTMLMode = true
-        val sequence = FOLSequence()
-        try {
-            checkSettings()
-            addOperatorsToSymbolTable()
-            sequence.setAntecedent(parseFormulaSet(antecedentSource)) // parse!!
-            sequence.setSuccedent(parseFormulaSet(succedentSource)) // parse!!
-        } catch (e: ParseException) {
-            // setup nice error message
-            errorMessage = surroundWithHTMLHeader(e.message)
-        }
-        symbolTable.clear()
-        return if (errorMessage == null) {
-            ParseResult(sequence)
-        } else {
-            ParseResult(errorMessage)
-        }
-    }
-
     @Throws(ParseException::class)
     private fun checkSettings() {
         if (settings == null) {

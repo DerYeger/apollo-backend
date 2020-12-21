@@ -3,6 +3,7 @@ package eu.yeger.gramofo.fol.graph
 import eu.yeger.gramofo.fol.FOLParser
 import eu.yeger.gramofo.fol.Settings
 import eu.yeger.gramofo.fol.formula.*
+import eu.yeger.gramofo.fol.formula.FOLFormula.INFIX_EQUALITY
 import java.util.*
 import java.util.function.Consumer
 
@@ -187,7 +188,7 @@ class ModelChecker {
         // note: this could also be done with inheritance. This would maybe the cleaner solution but I did not want to mix this could wit the datamodel.
         // Therefor I decide to make a switch case
         return when (formula.type) {
-            FOLType.Forall -> graph!!.vertexes.stream().allMatch { vertex: Vertex? ->
+            FOLType.ForAll -> graph!!.vertexes.stream().allMatch { vertex: Vertex? ->
                 bindVariableValues!![formula.getChildAt(0).name] = vertex
                 checkModel(formula.getChildAt(1))
             }
@@ -199,7 +200,7 @@ class ModelChecker {
             FOLType.And -> checkModel(formula.getChildAt(0)) && checkModel(formula.getChildAt(1))
             FOLType.Or -> checkModel(formula.getChildAt(0)) || checkModel(formula.getChildAt(1))
             FOLType.Implication -> !checkModel(formula.getChildAt(0)) || checkModel(formula.getChildAt(1))
-            FOLType.Biimplication -> {
+            FOLType.BiImplication -> {
                 val left = checkModel(formula.getChildAt(0))
                 val right = checkModel(formula.getChildAt(1))
                 left && right || !left && !right
@@ -209,7 +210,7 @@ class ModelChecker {
                     oneArySymbolTable!![formula.name]!!
                         .contains(interpret(formula.getChildAt(0)))
                 2 ->
-                    if (formula.name == FOLPredicate.INFIX_EQUALITY) {
+                    if (formula.name == INFIX_EQUALITY) {
                         interpret(formula.getChildAt(0)) == interpret(formula.getChildAt(1))
                     } else {
                         twoArySymbolTable!![formula.name]!!.stream().anyMatch { edge: Edge ->
@@ -222,7 +223,7 @@ class ModelChecker {
                     }
                 else -> throw ModelCheckException("[ModelChecker][Internal error] Found predicate with to many children.")
             }
-            FOLType.Constant -> FOLConstant.TT == formula.name
+            FOLType.Constant -> FOLFormula.TT == formula.name
             else -> throw ModelCheckException("[ModelChecker][Internal error] Unknown FOLFormula-Type: " + formula.type)
         }
     }

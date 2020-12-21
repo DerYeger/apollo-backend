@@ -16,12 +16,12 @@ public abstract class FOLFormula {
     public static final String AND = "\u2227";
     public static final String OR = "\u2228";
     public static final String IMPLICATION = "\u2192";
-    public static final String BIIMPLICATION = "\u2194";
-    public static final List<String> LOGICAL_OPERANDS = Arrays.asList(NOT, AND, OR, IMPLICATION, BIIMPLICATION);
+    public static final String BI_IMPLICATION = "\u2194";
+    public static final List<String> LOGICAL_OPERANDS = Arrays.asList(NOT, AND, OR, IMPLICATION, BI_IMPLICATION);
 
     public static final String EXISTS = "\u2203";
-    public static final String FORALL = "\u2200";
-    public static final List<String> QUANTIFIERS = Arrays.asList(EXISTS, FORALL);
+    public static final String FOR_ALL = "\u2200";
+    public static final List<String> QUANTIFIERS = Arrays.asList(EXISTS, FOR_ALL);
 
     public static final String INFIX_EQUALITY = "="; // equal sign with a dot on top
 
@@ -149,7 +149,7 @@ public abstract class FOLFormula {
 
     public boolean containsImplication() {
 
-        if (getType().equals(FOLType.Implication) || getType().equals(FOLType.Biimplication)) {
+        if (getType().equals(FOLType.Implication) || getType().equals(FOLType.BiImplication)) {
             return true;
         } else if (getChildren() != null && !getChildren().isEmpty()){
             for (FOLFormula folFormula : getChildren()) {

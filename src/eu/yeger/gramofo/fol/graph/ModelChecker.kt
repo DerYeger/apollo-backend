@@ -67,7 +67,7 @@ class ModelChecker {
         if (graph!!.vertexes.size < 1) {
             throw ModelCheckException(
                 "The graph must contain at least one element. This is because the vertexes represent " +
-                        "the universe and a universe must contain at least one element."
+                    "the universe and a universe must contain at least one element."
             )
         }
     }
@@ -91,7 +91,8 @@ class ModelChecker {
                         }
                         relationSet.add(vertex)
                         oneArySymbolTable!![symbol] = relationSet
-                    })
+                    }
+                )
             }
         )
         graph!!.edges.forEach(
@@ -106,13 +107,14 @@ class ModelChecker {
                         }
                         val relationSet = twoArySymbolTable!!.getOrDefault(symbol, HashSet())
                         if (symbolType == "F-1" && relationSet.stream()
-                                .anyMatch { otherEdge: Edge -> edge.fromVertex == otherEdge.fromVertex }
+                            .anyMatch { otherEdge: Edge -> edge.fromVertex == otherEdge.fromVertex }
                         ) {
                             throw ModelCheckException("The 1-ary function '$symbol' has at least for one vertex two function values. A function must be right-unique.")
                         }
                         relationSet.add(edge)
                         twoArySymbolTable!![symbol] = relationSet
-                    })
+                    }
+                )
             }
         )
     }
@@ -135,7 +137,7 @@ class ModelChecker {
                 if (type == "V") {
                     throw ModelCheckException(
                         "The symbol '" + symbol + "' is defined in the formula as a bound variable " +
-                                "but in the graph it is a function symbol. You cannot use one symbol twice for different use cases."
+                            "but in the graph it is a function symbol. You cannot use one symbol twice for different use cases."
                     )
                 } else {
                     throw ModelCheckException("The arity of the symbol '$symbol' in the graph differ from the arity used in the formula.")
@@ -157,11 +159,13 @@ class ModelChecker {
                 }
                 "F-1" -> {
                     val relationSet: Set<Edge> = twoArySymbolTable!![symbol]!!
-                    graph!!.vertexes.forEach(Consumer { vertex: Vertex ->
-                        if (relationSet.stream().noneMatch { edge: Edge -> edge.fromVertex == vertex }) {
-                            throw ModelCheckException("The 1-ary function '$symbol' must be total. Please be sure that it is defined for all vertexes.")
+                    graph!!.vertexes.forEach(
+                        Consumer { vertex: Vertex ->
+                            if (relationSet.stream().noneMatch { edge: Edge -> edge.fromVertex == vertex }) {
+                                throw ModelCheckException("The 1-ary function '$symbol' must be total. Please be sure that it is defined for all vertexes.")
+                            }
                         }
-                    })
+                    )
                 }
             }
         }
@@ -180,8 +184,8 @@ class ModelChecker {
      */
     @Throws(ModelCheckException::class)
     private fun checkModel(formula: FOLFormula): Boolean {
-        //note: this could also be done with inheritance. This would maybe the cleaner solution but I did not want to mix this could wit the datamodel.
-        //Therefor I decide to make a switch case
+        // note: this could also be done with inheritance. This would maybe the cleaner solution but I did not want to mix this could wit the datamodel.
+        // Therefor I decide to make a switch case
         return when (formula.type) {
             FOLType.Forall -> graph!!.vertexes.stream().allMatch { vertex: Vertex? ->
                 bindVariableValues!![formula.getChildAt(0).name] = vertex
@@ -201,19 +205,21 @@ class ModelChecker {
                 left && right || !left && !right
             }
             FOLType.Predicate -> when (formula.children.size) {
-                1 -> oneArySymbolTable!![formula.name]!!
-                    .contains(interpret(formula.getChildAt(0)))
-                2 -> if (formula.name == FOLPredicate.INFIX_EQUALITY) {
-                    interpret(formula.getChildAt(0)) == interpret(formula.getChildAt(1))
-                } else {
-                    twoArySymbolTable!![formula.name]!!.stream().anyMatch { edge: Edge ->
-                        edge.fromVertex == interpret(formula.getChildAt(0)) && edge.toVertex == interpret(
-                            formula.getChildAt(
-                                1
+                1 ->
+                    oneArySymbolTable!![formula.name]!!
+                        .contains(interpret(formula.getChildAt(0)))
+                2 ->
+                    if (formula.name == FOLPredicate.INFIX_EQUALITY) {
+                        interpret(formula.getChildAt(0)) == interpret(formula.getChildAt(1))
+                    } else {
+                        twoArySymbolTable!![formula.name]!!.stream().anyMatch { edge: Edge ->
+                            edge.fromVertex == interpret(formula.getChildAt(0)) && edge.toVertex == interpret(
+                                formula.getChildAt(
+                                    1
+                                )
                             )
-                        )
+                        }
                     }
-                }
                 else -> throw ModelCheckException("[ModelChecker][Internal error] Found predicate with to many children.")
             }
             FOLType.Constant -> FOLConstant.TT == formula.name
@@ -249,7 +255,7 @@ class ModelChecker {
             throw ModelCheckException("[ModelChecker][Internal error] Not a valid function or a variable.")
         }
     }
-    ////////////////////////// helping stuff ///////////////////////////////
+    // //////////////////////// helping stuff ///////////////////////////////
     /**
      * A custom exception to handle error cases happened in the model check.
      */
@@ -259,5 +265,5 @@ class ModelChecker {
      * @param message the detail message. The detail message is saved for
      * later retrieval by the [.getMessage] method.
      */
-        (message: String?) : RuntimeException(message)
+    (message: String?) : RuntimeException(message)
 }

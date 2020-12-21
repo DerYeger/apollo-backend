@@ -5,7 +5,7 @@ import java.util.*
 import kotlin.jvm.JvmOverloads
 
 class Vertex @JvmOverloads constructor(generateID: Boolean = true) : Serializable {
-    ///////////////////////////// getter and setter //////////////////////////
+    // /////////////////////////// getter and setter //////////////////////////
     var id: Int = if (generateID) generateID() else -1
     var outgoingEdges: Set<Edge> = HashSet()
     var incomingEdges: Set<Edge> = HashSet()
@@ -47,7 +47,7 @@ class Vertex @JvmOverloads constructor(generateID: Boolean = true) : Serializabl
 //            }
 //        });
     }
-    ///////////////////////// operations //////////////////////
+    // /////////////////////// operations //////////////////////
     /**
      * @param vertex the edge to check connectivity for
      * @return true, if this vertex has an outgoing edge to the given vertex.
@@ -71,9 +71,9 @@ class Vertex @JvmOverloads constructor(generateID: Boolean = true) : Serializabl
 
     override fun toString(): String {
         return "Vertex{" +
-                "id=" + id +
-                ", stringAttachments=" + stringAttachments +
-                '}'
+            "id=" + id +
+            ", stringAttachments=" + stringAttachments +
+            '}'
     }
 
     companion object {

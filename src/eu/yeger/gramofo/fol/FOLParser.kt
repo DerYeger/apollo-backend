@@ -548,5 +548,4 @@ class FOLParser {
             return errorMessage
         }
     }
-
 }

@@ -38,7 +38,7 @@ class FOLTests {
         graph.edges
             .addAll(listOf(aToB, bToB))
 
-        val modelResult = ModelChecker().checkModel(graph, result.result)
+        val modelResult = ModelChecker().checkModel(graph, result.result!!)
         modelResult shouldBe true
     }
 
@@ -70,7 +70,7 @@ class FOLTests {
         graph.edges
             .addAll(listOf(aToA, bToB))
 
-        val modelResult = ModelChecker().checkModel(graph, result.result)
+        val modelResult = ModelChecker().checkModel(graph, result.result!!)
         modelResult shouldBe false
     }
 }

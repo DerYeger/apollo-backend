@@ -1,26 +1,27 @@
 package eu.yeger.gramofo.fol.graph
 
-import kotlin.Throws
 import java.io.IOException
-import java.lang.ClassNotFoundException
 import java.io.ObjectInputStream
 import java.io.Serializable
+import java.lang.ClassNotFoundException
 import java.util.*
+import kotlin.Throws
 
 /**
  * This class represents a edge in a typical graph.
  */
 class Edge : Serializable {
-    ///////////////////////// operation and information //////////////////////
+    // /////////////////////// operation and information //////////////////////
     var id: Int = generateID()
-    private var fromVertex: Vertex?
+    var fromVertex: Vertex?
+        get() = if (field == null) dummy else field
     var toVertex: Vertex? = null
         get() = if (field == null) dummy else field
     var stringAttachments: List<String>
 
     @Transient
     private var graph: Graph?
-    val dummy: Vertex
+    private val dummy: Vertex = Vertex(false)
 
     /**
      * Ensures that references to other classes are bidirectional. If a new reference to another class
@@ -63,22 +64,6 @@ class Edge : Serializable {
         addReferentialIntegrity()
     }
 
-    fun getFromVertex(): Vertex {
-        return if (fromVertex == null) dummy else fromVertex!!
-    }
-
-    fun setFromVertex(fromVertex: Vertex?) {
-        this.fromVertex = fromVertex
-    }
-
-    fun getGraph(): Optional<Graph> {
-        return Optional.ofNullable(graph)
-    }
-
-    fun setGraph(graph: Graph?) {
-        this.graph = graph
-    }
-
     companion object {
         var idCounter = 0
         private fun generateID(): Int {
@@ -93,6 +78,5 @@ class Edge : Serializable {
         stringAttachments = ArrayList()
         graph = null
         addReferentialIntegrity()
-        dummy = Vertex(false)
     }
 }

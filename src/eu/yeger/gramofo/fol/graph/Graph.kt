@@ -3,8 +3,8 @@ package eu.yeger.gramofo.fol.graph
 import java.util.HashSet
 
 class Graph {
-    val vertexes: Set<Vertex>
-    val edges: Set<Edge>
+    val vertexes: MutableSet<Vertex>
+    val edges: MutableSet<Edge>
 
     /**
      * Ensures that references to other classes are bidirectional. If a new reference to another class

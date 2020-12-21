@@ -7,6 +7,7 @@ import eu.yeger.gramofo.fol.graph.Vertex
 data class ApiGraph(
     val name: String,
     val description: String,
+    val lastEdit: Long,
     val nodes: List<ApiNode>,
     val edges: List<ApiEdge>
 )

@@ -6,6 +6,7 @@ import eu.yeger.gramofo.model.api.ModelCheckerRequest
 import eu.yeger.gramofo.model.api.toDomainModel
 
 class DefaultModelCheckerService : ModelCheckerService {
+
     override fun checkModel(modelCheckerRequest: ModelCheckerRequest): Boolean {
         val parsedFormula = FOLParser().parseFormula(modelCheckerRequest.formula).result ?: return false
         val domainGraph = modelCheckerRequest.graph.toDomainModel()

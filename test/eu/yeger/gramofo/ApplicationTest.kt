@@ -1,4 +1,4 @@
-package eu.yeger
+package eu.yeger.gramofo
 
 import io.ktor.http.*
 import io.ktor.server.testing.*

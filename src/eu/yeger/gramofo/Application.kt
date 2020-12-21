@@ -1,9 +1,8 @@
-package eu.yeger
+package eu.yeger.gramofo
 
 import com.fasterxml.jackson.databind.*
 import io.ktor.application.*
 import io.ktor.auth.*
-import io.ktor.content.*
 import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.http.content.*

@@ -33,7 +33,7 @@ class FOLTests {
         bToB.toVertex = b
         bToB.stringAttachments = listOf("f")
 
-        graph.vertexes
+        graph.vertices
             .addAll(listOf(a, b))
         graph.edges
             .addAll(listOf(aToB, bToB))
@@ -65,7 +65,7 @@ class FOLTests {
         bToB.toVertex = b
         bToB.stringAttachments = listOf("f")
 
-        graph.vertexes
+        graph.vertices
             .addAll(listOf(a, b))
         graph.edges
             .addAll(listOf(aToA, bToB))

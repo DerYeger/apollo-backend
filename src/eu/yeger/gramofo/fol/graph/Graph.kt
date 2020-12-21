@@ -3,7 +3,7 @@ package eu.yeger.gramofo.fol.graph
 import java.util.HashSet
 
 class Graph {
-    val vertexes: MutableSet<Vertex>
+    val vertices: MutableSet<Vertex>
     val edges: MutableSet<Edge>
 
     /**
@@ -31,7 +31,7 @@ class Graph {
     }
 
     init {
-        vertexes = HashSet()
+        vertices = HashSet()
         edges = HashSet()
         addReferentialIntegrity()
     }

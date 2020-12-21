@@ -65,7 +65,7 @@ class ModelChecker {
         if (formulaHead == null) {
             throw ModelCheckException("You must parse a formula first")
         }
-        if (graph!!.vertexes.size < 1) {
+        if (graph!!.vertices.size < 1) {
             throw ModelCheckException(
                 "The graph must contain at least one element. This is because the vertexes represent " +
                     "the universe and a universe must contain at least one element."
@@ -80,7 +80,7 @@ class ModelChecker {
      */
     @Throws(ModelCheckException::class)
     private fun loadGraphSymbols() {
-        graph!!.vertexes.forEach(
+        graph!!.vertices.forEach(
             Consumer { vertex: Vertex ->
                 vertex.stringAttachments.forEach(
                     Consumer { symbol: String ->
@@ -160,7 +160,7 @@ class ModelChecker {
                 }
                 "F-1" -> {
                     val relationSet: Set<Edge> = twoArySymbolTable!![symbol]!!
-                    graph!!.vertexes.forEach(
+                    graph!!.vertices.forEach(
                         Consumer { vertex: Vertex ->
                             if (relationSet.stream().noneMatch { edge: Edge -> edge.fromVertex == vertex }) {
                                 throw ModelCheckException("The 1-ary function '$symbol' must be total. Please be sure that it is defined for all vertexes.")
@@ -188,11 +188,11 @@ class ModelChecker {
         // note: this could also be done with inheritance. This would maybe the cleaner solution but I did not want to mix this could wit the datamodel.
         // Therefor I decide to make a switch case
         return when (formula.type) {
-            FOLType.ForAll -> graph!!.vertexes.stream().allMatch { vertex: Vertex? ->
+            FOLType.ForAll -> graph!!.vertices.stream().allMatch { vertex: Vertex? ->
                 bindVariableValues!![formula.getChildAt(0).name] = vertex
                 checkModel(formula.getChildAt(1))
             }
-            FOLType.Exists -> graph!!.vertexes.stream().anyMatch { vertex: Vertex? ->
+            FOLType.Exists -> graph!!.vertices.stream().anyMatch { vertex: Vertex? ->
                 bindVariableValues!![formula.getChildAt(0).name] = vertex
                 checkModel(formula.getChildAt(1))
             }

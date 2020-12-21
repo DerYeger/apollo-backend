@@ -87,7 +87,7 @@ class FOLParser {
      * @param errorAsHTML format error messages as html
      * @return a ParseResult containing either the result or an error message
      */
-    fun parseFormula(sFormula: String, errorAsHTML: Boolean): ParseResult<FOLFormulaHead> {
+    fun parseFormula(sFormula: String, errorAsHTML: Boolean = false): ParseResult<FOLFormulaHead> {
         symbolTable.clear()
         curBoundedVars = HashSet()
         var errorMessage: String? = null

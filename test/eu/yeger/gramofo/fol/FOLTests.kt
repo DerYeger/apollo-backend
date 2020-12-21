@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 class FOLTests {
     @Test
     fun testFOLParser() {
-        val result = FOLParser().parseFormula("exists x. exists y. f(x) = y", false)
+        val result = FOLParser().parseFormula("exists x. exists y. f(x) = y")
         result shouldNotBe null
 
         val graph = Graph()
@@ -44,7 +44,7 @@ class FOLTests {
 
     @Test
     fun testNegativeFOLParser() {
-        val result = FOLParser().parseFormula("exists x. exists y. f(x) = y && !(x = y)", false)
+        val result = FOLParser().parseFormula("exists x. exists y. f(x) = y && !(x = y)")
 
         val graph = Graph()
 

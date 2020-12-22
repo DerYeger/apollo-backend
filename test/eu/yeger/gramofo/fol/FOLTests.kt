@@ -28,7 +28,7 @@ class FOLTests {
     @Test
     fun testNegativeFOLParser() {
         val result = FOLParser().parseFormula("exists x. exists y. f(x) = y && !(x = y)")
-
+        println(FOLParser().parseFormula("tt && ff").result!!.formula)
         val a = Vertex("a", listOf("A"), listOf())
         val b = Vertex("b", listOf(), listOf())
 

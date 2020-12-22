@@ -56,4 +56,21 @@ class ParserTests {
     fun `verify that parsing universal quantifier works`() {
         FOLParser().parseFormula("forall x. A(x)").result shouldNotBe null
     }
+
+    @Test
+    fun `verify that invalid formulas result in errors`() {
+        val formulas = listOf(
+            "A(A)",
+            "tt)",
+            "exists . A(x)",
+            "exists B. A(B)",
+            "exists x. exists x. x == x",
+            "(tt",
+            "(tt &&",
+            "y = f(x,y"
+        )
+        formulas.forEach { formula ->
+            FOLParser().parseFormula(formula).errorMessage shouldNotBe null
+        }
+    }
 }

@@ -6,8 +6,7 @@ import java.util.*
 /**
  * This is the scanner for the parser class. It translates a stream of chars to a stream of tokens.
  */
-class FOLScanner(source: String, settings: Settings) {
-    private val source: String
+class FOLScanner(private val source: String, settings: Settings) {
     private var pos: Int
     private var curToken: FOLToken
     private var lookAHeadToken: FOLToken
@@ -42,6 +41,15 @@ class FOLScanner(source: String, settings: Settings) {
     private lateinit var allSettings: Array<String>
     private var settingType: HashMap<String, Int>? = null
 
+    init {
+        extractSettings(settings)
+        pos = 0
+        curToken = FOLToken(0, "")
+        lookAHeadToken = FOLToken(0, "")
+        nextToken()
+        nextToken()
+    }
+
     @Throws(ParseException::class)
     private fun extractSettings(settings: Settings) {
         val tt = settings.getSetting(Settings.TRUE)
@@ -62,13 +70,13 @@ class FOLScanner(source: String, settings: Settings) {
         )
         for (i in settingBundle.indices) {
             if (settingBundle[i] == null) {
-                throw ParseException(getString("FOS_INPUT_ERROR_1", settingNames[i]))
+                throw ParseException(getString("FOS_MISSING_SETTING", settingNames[i]))
             }
         }
         settingType = HashMap()
         val temp = ArrayList<String>()
         for (i in settingBundle.indices) {
-            for (j in 0 until settingBundle[i]!!.size) {
+            for (j in settingBundle[i]!!.indices) {
                 temp.add(settingBundle[i]!![j])
                 settingType!![settingBundle[i]!![j]] = settingTypes[i]
             }
@@ -80,7 +88,7 @@ class FOLScanner(source: String, settings: Settings) {
         for (i in 0 until allSettings.size - 1) {
             for (j in i + 1 until allSettings.size) {
                 if (allSettings[i] == allSettings[j]) {
-                    throw ParseException(getString("FOS_INPUT_ERROR_2", allSettings[i]))
+                    throw ParseException(getString("FOS_DUPLICATE_SETTING", allSettings[i]))
                 }
             }
         }
@@ -154,15 +162,15 @@ class FOLScanner(source: String, settings: Settings) {
         }
         // ELSE
 
-        // unkown char
+        // unknown char
         lookAHeadToken.setTypeAndValue(FOLToken.CHAR, sourceCharAt(pos).toString())
         pos++
         return
     }
 
-    private fun sourceCharAt(i: Int): Char {
-        return if (pos < source.length) {
-            source[pos]
+    private fun sourceCharAt(index: Int): Char {
+        return if (0 <= index && index < source.length) {
+            source[index]
         } else {
             Char.MIN_VALUE
         }
@@ -173,22 +181,11 @@ class FOLScanner(source: String, settings: Settings) {
     }
 
     private fun isLetter(c: Char): Boolean {
-//        return ((c >= 'a' && c <= 'z') ||
-//                (c >= 'A' && c <= 'Z') ||
-//                c == 'ä' ||
-//                c == 'Ä' ||
-//                c == 'ö' ||
-//                c == 'Ö' ||
-//                c == 'ü' ||
-//                c == 'Ü' ||
-//                c == 'ß'
-//        );
-        return c >= 'a' && c <= 'z' ||
-            c >= 'A' && c <= 'Z'
+        return c in 'a'..'z' || c in 'A'..'Z'
     }
 
     private fun isSymbolCharacter(c: Char): Boolean {
-        return isLetter(c) || c >= '0' && c <= '9' || c == '_'
+        return isLetter(c) || c in '0'..'9' || c == '_'
     }
 
     fun curValue(): String {
@@ -199,12 +196,8 @@ class FOLScanner(source: String, settings: Settings) {
         return curToken.type
     }
 
-    fun lookAHeadValue(): String {
+    private fun lookAHeadValue(): String {
         return lookAHeadToken.value
-    }
-
-    fun lookAHeadType(): Int {
-        return lookAHeadToken.type
     }
 
     val restOfText: String
@@ -228,20 +221,5 @@ class FOLScanner(source: String, settings: Settings) {
             }
             return array
         }
-    }
-
-    /**
-     * @param source   the text which should be scanned
-     * @param settings an instance from Settings-Class, which contains all Operators and Keywords
-     * @throws ParseException if the settings-file is invalid or incomplete
-     */
-    init {
-        extractSettings(settings)
-        this.source = source
-        pos = 0
-        curToken = FOLToken(0, "")
-        lookAHeadToken = FOLToken(0, "")
-        nextToken()
-        nextToken()
     }
 }

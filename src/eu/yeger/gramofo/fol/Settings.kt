@@ -8,7 +8,7 @@ import java.util.HashMap
  */
 class Settings {
     // a hash for the stored settings for fast accessibility
-    private val settingsCache: HashMap<String, Array<String>>
+    private val settingsCache: HashMap<String, Array<String>> = HashMap()
 
     /**
      * @return a message if something went wrong null else
@@ -46,7 +46,6 @@ class Settings {
      * @param file The file, where to load the settings
      */
     init {
-        settingsCache = HashMap()
         settingsCache[NOT] = arrayOf("!")
         settingsCache[TRUE] = arrayOf("tt")
         settingsCache[FALSE] = arrayOf("ff")

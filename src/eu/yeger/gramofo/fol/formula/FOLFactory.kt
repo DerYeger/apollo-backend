@@ -31,8 +31,8 @@ object FOLFactory {
      * @return a new instance of FOLOperator
      */
     fun createOperatorAnd(
-        leftOperand: FOLFormula?,
-        rightOperand: FOLFormula?,
+        leftOperand: FOLFormula,
+        rightOperand: FOLFormula,
         hasBrackets: Boolean,
         hasDot: Boolean
     ): FOLOperator {
@@ -44,8 +44,8 @@ object FOLFactory {
      * @return a new instance of FOLOperator
      */
     fun createOperatorOr(
-        leftOperand: FOLFormula?,
-        rightOperand: FOLFormula?,
+        leftOperand: FOLFormula,
+        rightOperand: FOLFormula,
         hasBrackets: Boolean,
         hasDot: Boolean
     ): FOLOperator {
@@ -57,8 +57,8 @@ object FOLFactory {
      * @return a new instance of FOLOperator
      */
     fun createOperatorImplication(
-        leftOperand: FOLFormula?,
-        rightOperand: FOLFormula?,
+        leftOperand: FOLFormula,
+        rightOperand: FOLFormula,
         hasBrackets: Boolean,
         hasDot: Boolean
     ): FOLOperator {
@@ -70,8 +70,8 @@ object FOLFactory {
      * @return a new instance of FOLOperator
      */
     fun createOperatorBiImplication(
-        leftOperand: FOLFormula?,
-        rightOperand: FOLFormula?,
+        leftOperand: FOLFormula,
+        rightOperand: FOLFormula,
         hasBrackets: Boolean,
         hasDot: Boolean
     ): FOLOperator {
@@ -89,7 +89,7 @@ object FOLFactory {
      * Creates a not-operator. FOLOperator.NOT is used as name.
      * @return a new instance of FOLOperator
      */
-    fun createOperatorNot(operand: FOLFormula?, hasBrackets: Boolean, hasDot: Boolean): FOLOperator {
+    fun createOperatorNot(operand: FOLFormula, hasBrackets: Boolean, hasDot: Boolean): FOLOperator {
         return FOLOperator(FOLType.Not, operand, hasBrackets, hasDot, FOLFormula.NOT)
     }
     // /////////////////// Function and Predicate /////////////////////////
@@ -98,7 +98,7 @@ object FOLFactory {
      * @return a new instance of FOLFunction
      */
     fun createFunction(
-        children: LinkedHashSet<out FOLFormula?>,
+        children: LinkedHashSet<out FOLFormula>,
         hasBrackets: Boolean,
         hasDot: Boolean,
         name: String

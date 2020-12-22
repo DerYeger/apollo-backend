@@ -4,17 +4,17 @@ import java.util.*
 
 class FOLOperator : FOLFormula {
     constructor(
-        type: FOLType?,
-        leftOperand: FOLFormula?,
-        rightOperand: FOLFormula?,
+        type: FOLType,
+        leftOperand: FOLFormula,
+        rightOperand: FOLFormula,
         hasBrackets: Boolean,
         hasDot: Boolean,
         name: String
     ) : super(type, hasBrackets, hasDot, name, LinkedHashSet<FOLFormula>(listOf(leftOperand, rightOperand)))
 
     constructor(
-        type: FOLType?,
-        operand: FOLFormula?,
+        type: FOLType,
+        operand: FOLFormula,
         hasBrackets: Boolean,
         hasDot: Boolean,
         name: String

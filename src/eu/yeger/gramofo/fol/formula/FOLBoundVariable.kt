@@ -4,8 +4,6 @@ import java.util.*
 
 class FOLBoundVariable(name: String) : FOLFormula(
     type = FOLType.Variable,
-    hasBrackets = false,
-    hasDot = false,
     name = name
 ) {
     val uuid: UUID = UUID.randomUUID()

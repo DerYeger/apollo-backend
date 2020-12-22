@@ -1,24 +1,18 @@
 package eu.yeger.gramofo.fol.formula
 
-import java.util.*
-
 class FOLOperator : FOLFormula {
     constructor(
         type: FOLType,
+        name: String,
         leftOperand: FOLFormula,
-        rightOperand: FOLFormula,
-        hasBrackets: Boolean,
-        hasDot: Boolean,
-        name: String
-    ) : super(type, hasBrackets, hasDot, name, LinkedHashSet<FOLFormula>(listOf(leftOperand, rightOperand)))
+        rightOperand: FOLFormula
+    ) : super(type, name, setOf(leftOperand, rightOperand))
 
     constructor(
         type: FOLType,
+        name: String,
         operand: FOLFormula,
-        hasBrackets: Boolean,
-        hasDot: Boolean,
-        name: String
-    ) : super(type, hasBrackets, hasDot, name, LinkedHashSet<FOLFormula>(listOf(operand)))
+    ) : super(type, name, setOf(operand))
 
     override fun toString(): String {
         val sb = StringBuilder()

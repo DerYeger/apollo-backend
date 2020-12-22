@@ -1,22 +1,16 @@
 package eu.yeger.gramofo.fol.formula
 
-import java.util.*
-import kotlin.collections.LinkedHashSet
-
 /**
  * This is the super class of all formula types.
  * @property type Specifies the type of the formula. This should match with the corresponding subclass.
  */
 abstract class FOLFormula(
-
     val type: FOLType?,
-    var hasBrackets: Boolean,
-    var hasDot: Boolean,
     val name: String,
-    children: LinkedHashSet<out FOLFormula>? = null,
+    val children: Set<FOLFormula> = emptySet(),
 ) {
-    val children = children ?: LinkedHashSet()
-
+    var hasBrackets: Boolean = false
+    var hasDot: Boolean = false
     override fun toString(): String {
         return name
     }
@@ -58,9 +52,8 @@ abstract class FOLFormula(
         const val INFIX_EQUALITY = "=" // equal sign with a dot on top
     }
 
-    object Dummy : FOLFormula(null, false, false, "?") {
-        override fun toString(): String {
-            return name
-        }
-    }
+    object Dummy : FOLFormula(
+        type = null,
+        name = "?",
+    )
 }

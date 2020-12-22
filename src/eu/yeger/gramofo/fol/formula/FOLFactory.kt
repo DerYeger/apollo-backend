@@ -2,7 +2,6 @@ package eu.yeger.gramofo.fol.formula
 
 import eu.yeger.gramofo.fol.formula.FOLFormula.Companion.FF
 import eu.yeger.gramofo.fol.formula.FOLFormula.Companion.TT
-import java.util.*
 
 /**
  * This is a factory class to create FOLFormulas. Because all constructors are package private,
@@ -33,10 +32,13 @@ object FOLFactory {
     fun createOperatorAnd(
         leftOperand: FOLFormula,
         rightOperand: FOLFormula,
-        hasBrackets: Boolean,
-        hasDot: Boolean
     ): FOLOperator {
-        return FOLOperator(FOLType.And, leftOperand, rightOperand, hasBrackets, hasDot, FOLFormula.AND)
+        return FOLOperator(
+            type = FOLType.And,
+            name = FOLFormula.AND,
+            leftOperand = leftOperand,
+            rightOperand = rightOperand
+        )
     }
 
     /**
@@ -46,10 +48,13 @@ object FOLFactory {
     fun createOperatorOr(
         leftOperand: FOLFormula,
         rightOperand: FOLFormula,
-        hasBrackets: Boolean,
-        hasDot: Boolean
     ): FOLOperator {
-        return FOLOperator(FOLType.Or, leftOperand, rightOperand, hasBrackets, hasDot, FOLFormula.OR)
+        return FOLOperator(
+            type = FOLType.Or,
+            name = FOLFormula.OR,
+            leftOperand = leftOperand,
+            rightOperand = rightOperand
+        )
     }
 
     /**
@@ -59,10 +64,13 @@ object FOLFactory {
     fun createOperatorImplication(
         leftOperand: FOLFormula,
         rightOperand: FOLFormula,
-        hasBrackets: Boolean,
-        hasDot: Boolean
     ): FOLOperator {
-        return FOLOperator(FOLType.Implication, leftOperand, rightOperand, hasBrackets, hasDot, FOLFormula.IMPLICATION)
+        return FOLOperator(
+            type = FOLType.Implication,
+            name = FOLFormula.IMPLICATION,
+            leftOperand = leftOperand,
+            rightOperand = rightOperand,
+        )
     }
 
     /**
@@ -72,16 +80,12 @@ object FOLFactory {
     fun createOperatorBiImplication(
         leftOperand: FOLFormula,
         rightOperand: FOLFormula,
-        hasBrackets: Boolean,
-        hasDot: Boolean
     ): FOLOperator {
         return FOLOperator(
-            FOLType.BiImplication,
-            leftOperand,
-            rightOperand,
-            hasBrackets,
-            hasDot,
-            FOLFormula.BI_IMPLICATION
+            type = FOLType.BiImplication,
+            name = FOLFormula.BI_IMPLICATION,
+            leftOperand = leftOperand,
+            rightOperand = rightOperand,
         )
     }
 
@@ -89,8 +93,8 @@ object FOLFactory {
      * Creates a not-operator. FOLOperator.NOT is used as name.
      * @return a new instance of FOLOperator
      */
-    fun createOperatorNot(operand: FOLFormula, hasBrackets: Boolean, hasDot: Boolean): FOLOperator {
-        return FOLOperator(FOLType.Not, operand, hasBrackets, hasDot, FOLFormula.NOT)
+    fun createOperatorNot(operand: FOLFormula): FOLOperator {
+        return FOLOperator(type = FOLType.Not, name = FOLFormula.NOT, operand = operand)
     }
     // /////////////////// Function and Predicate /////////////////////////
     /**
@@ -98,12 +102,10 @@ object FOLFactory {
      * @return a new instance of FOLFunction
      */
     fun createFunction(
-        children: LinkedHashSet<out FOLFormula>,
-        hasBrackets: Boolean,
-        hasDot: Boolean,
-        name: String
+        name: String,
+        children: Set<FOLFormula>
     ): FOLFunction {
-        return FOLFunction(children, hasBrackets, hasDot, name)
+        return FOLFunction(name = name, children = children)
     }
 
     /**
@@ -111,13 +113,11 @@ object FOLFactory {
      * @return a new instance of FOLFunction
      */
     fun createInfixFunction(
+        name: String,
         leftOperand: FOLFormula,
-        rightOperand: FOLFormula,
-        hasBrackets: Boolean,
-        hasDot: Boolean,
-        name: String
+        rightOperand: FOLFormula
     ): FOLFunction {
-        return FOLFunction(leftOperand, rightOperand, hasBrackets, hasDot, name)
+        return FOLFunction(name = name, leftOperand = leftOperand, rightOperand = rightOperand)
     }
 
     /**
@@ -125,12 +125,10 @@ object FOLFactory {
      * @return a new instance of FOLPredicate
      */
     fun createPredicate(
-        children: LinkedHashSet<out FOLFormula>,
-        hasBrackets: Boolean,
-        hasDot: Boolean,
-        name: String
+        name: String,
+        children: Set<FOLFormula>,
     ): FOLPredicate {
-        return FOLPredicate(children, hasBrackets, hasDot, name)
+        return FOLPredicate(name = name, children = children)
     }
 
     /**
@@ -138,13 +136,11 @@ object FOLFactory {
      * @return a new instance of FOLPredicate
      */
     fun createInfixPredicate(
+        name: String,
         leftOperand: FOLFormula,
         rightOperand: FOLFormula,
-        hasBrackets: Boolean,
-        hasDot: Boolean,
-        name: String
     ): FOLPredicate {
-        return FOLPredicate(leftOperand, rightOperand, hasBrackets, hasDot, name)
+        return FOLPredicate(name = name, leftOperand = leftOperand, rightOperand = rightOperand)
     }
     // //////////////// Quantifier and Variables ////////////////////////
     /**
@@ -171,10 +167,8 @@ object FOLFactory {
     fun createQuantifierForAll(
         variable: FOLBoundVariable,
         operand: FOLFormula,
-        hasBrackets: Boolean,
-        hasDot: Boolean
     ): FOLQuantifier {
-        return FOLQuantifier(FOLType.ForAll, variable, operand, hasBrackets, hasDot, FOLFormula.FOR_ALL)
+        return FOLQuantifier(type = FOLType.ForAll, name = FOLFormula.FOR_ALL, variable = variable, operand = operand)
     }
 
     /**
@@ -187,9 +181,7 @@ object FOLFactory {
     fun createQuantifierExists(
         variable: FOLBoundVariable,
         operand: FOLFormula,
-        hasBrackets: Boolean,
-        hasDot: Boolean
     ): FOLQuantifier {
-        return FOLQuantifier(FOLType.Exists, variable, operand, hasBrackets, hasDot, FOLFormula.EXISTS)
+        return FOLQuantifier(type = FOLType.Exists, name = FOLFormula.EXISTS, variable = variable, operand = operand)
     }
 }

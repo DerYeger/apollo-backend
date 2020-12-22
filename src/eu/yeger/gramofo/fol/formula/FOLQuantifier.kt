@@ -2,12 +2,10 @@ package eu.yeger.gramofo.fol.formula
 
 class FOLQuantifier(
     type: FOLType,
+    name: String,
     variable: FOLBoundVariable,
     operand: FOLFormula,
-    hasBrackets: Boolean,
-    hasDot: Boolean,
-    name: String
-) : FOLFormula(type, hasBrackets, hasDot, name, LinkedHashSet(listOfNotNull(variable, operand))) {
+) : FOLFormula(type, name, setOf(variable, operand)) {
 
     override fun toString(): String {
         val child0 = getChildAt(0)

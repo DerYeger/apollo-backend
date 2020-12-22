@@ -12,6 +12,7 @@ class FOLParser {
     val settings: Settings = Settings()
     private val symbolTable: HashMap<String, String> = HashMap()
     private var curBoundedVars: HashSet<FOLBoundVariable>? = null
+
     private fun addOperatorsToSymbolTable() {
         for (infixFunc in settings.getSetting(Settings.TRUE)) {
             symbolTable[infixFunc] = "TT"
@@ -93,7 +94,7 @@ class FOLParser {
         while (scanner.curType() == FOLToken.BI_IMPLICATION) {
             scanner.nextToken()
             val impl = parseImplication(scanner)
-            biimpl = FOLFactory.createOperatorBiImplication(biimpl, impl, hasBrackets = false, hasDot = false)
+            biimpl = FOLFactory.createOperatorBiImplication(biimpl, impl)
         }
         return biimpl
     }
@@ -105,7 +106,7 @@ class FOLParser {
         while (scanner.curType() == FOLToken.IMPLICATION) {
             scanner.nextToken()
             val or = parseOr(scanner)
-            impl = FOLFactory.createOperatorImplication(impl, or, hasBrackets = false, hasDot = false)
+            impl = FOLFactory.createOperatorImplication(impl, or)
         }
         return impl
     }
@@ -117,7 +118,7 @@ class FOLParser {
         while (scanner.curType() == FOLToken.OR) {
             scanner.nextToken()
             val and = parseAnd(scanner)
-            or = FOLFactory.createOperatorOr(or, and, hasBrackets = false, hasDot = false)
+            or = FOLFactory.createOperatorOr(or, and)
         }
         return or
     }
@@ -129,7 +130,7 @@ class FOLParser {
         while (scanner.curType() == FOLToken.AND) {
             scanner.nextToken()
             val unaryOperator = parseUnaryOperator(scanner)
-            and = FOLFactory.createOperatorAnd(and, unaryOperator, hasBrackets = false, hasDot = false)
+            and = FOLFactory.createOperatorAnd(and, unaryOperator)
         }
         return and
     }
@@ -143,7 +144,7 @@ class FOLParser {
             FOLToken.NOT -> {
                 scanner.nextToken()
                 unaryOperator = parseUnaryOperator(scanner)
-                FOLFactory.createOperatorNot(unaryOperator, hasBrackets = false, hasDot = false)
+                FOLFactory.createOperatorNot(unaryOperator)
             }
             FOLToken.FOR_ALL -> {
                 scanner.nextToken()
@@ -151,7 +152,7 @@ class FOLParser {
                 curBoundedVars!!.add(variable)
                 unaryOperator = parseUnaryOperator(scanner)
                 curBoundedVars!!.remove(variable)
-                FOLFactory.createQuantifierForAll(variable, unaryOperator, hasBrackets = false, hasDot = false)
+                FOLFactory.createQuantifierForAll(variable, unaryOperator)
             }
             FOLToken.EXISTS -> {
                 scanner.nextToken()
@@ -159,7 +160,7 @@ class FOLParser {
                 curBoundedVars!!.add(variable)
                 unaryOperator = parseUnaryOperator(scanner)
                 curBoundedVars!!.remove(variable)
-                FOLFactory.createQuantifierExists(variable, unaryOperator, hasBrackets = false, hasDot = false)
+                FOLFactory.createQuantifierExists(variable, unaryOperator)
             }
             else -> parseOperand(scanner)
         }
@@ -243,7 +244,7 @@ class FOLParser {
     private fun parseNormalPredicate(scanner: FOLScanner): FOLFormula {
         val symbol = scanner.curValue()
         scanner.nextToken()
-        val termChildren = LinkedHashSet<FOLFormula>()
+        val termChildren = mutableSetOf<FOLFormula>()
         if (scanner.curType() == FOLToken.BRACKET && scanner.curValue() == "(") {
             scanner.nextToken()
             if (scanner.curType() == FOLToken.BRACKET && scanner.curValue() == ")") {
@@ -264,7 +265,7 @@ class FOLParser {
         } // else no opening bracket -> no term		
         val symbolType = "P-" + termChildren.size
         checkSymbolInfo(symbol, symbolType)
-        return FOLFactory.createPredicate(termChildren, hasBrackets = false, hasDot = false, name = symbol)
+        return FOLFactory.createPredicate(name = symbol, children = termChildren)
     }
 
     // InfixPredicate ::= Term InfixPred Term
@@ -282,11 +283,9 @@ class FOLParser {
         scanner.nextToken()
         val rightOperand = parseInfixTerm(scanner)
         return FOLFactory.createInfixPredicate(
-            leftOperand,
-            rightOperand,
-            hasBrackets = false,
-            hasDot = false,
-            name = symbol
+            name = symbol,
+            leftOperand = leftOperand,
+            rightOperand = rightOperand,
         )
     }
 
@@ -300,11 +299,9 @@ class FOLParser {
             scanner.nextToken()
             val normalTerm = parseNormalTerm(scanner)
             infixTerm = FOLFactory.createInfixFunction(
-                infixTerm,
-                normalTerm,
-                hasBrackets = false,
-                hasDot = false,
-                name = symbol
+                name = symbol,
+                leftOperand = infixTerm,
+                rightOperand = normalTerm,
             )
         }
         return infixTerm
@@ -332,7 +329,7 @@ class FOLParser {
             throw ParseException(getString("FOP_FUNCTION_LOWER_CASE"))
         }
         scanner.nextToken()
-        val termChildren = LinkedHashSet<FOLFormula>()
+        val termChildren = mutableSetOf<FOLFormula>()
         if (scanner.curType() == FOLToken.BRACKET && scanner.curValue() == "(") {
             scanner.nextToken()
             if (scanner.curType() == FOLToken.BRACKET && scanner.curValue() == ")") {
@@ -353,7 +350,7 @@ class FOLParser {
         } // else not opening bracket -> no term		
         return if (!containsSymbol(curBoundedVars, symbol)) {
             checkSymbolInfo(symbol, "F-" + termChildren.size)
-            FOLFactory.createFunction(termChildren, hasBrackets = false, hasDot = false, name = symbol)
+            FOLFactory.createFunction(name = symbol, children = termChildren)
         } else if (termChildren.size == 0) {
             val forSymbol = getForSymbol(curBoundedVars, symbol)
             if (forSymbol != null) {

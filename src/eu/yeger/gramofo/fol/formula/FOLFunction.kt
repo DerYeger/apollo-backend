@@ -1,26 +1,22 @@
 package eu.yeger.gramofo.fol.formula
 
-import java.util.*
-
 class FOLFunction(
-    children: LinkedHashSet<out FOLFormula>,
-    hasBrackets: Boolean,
-    hasDot: Boolean,
-    name: String
-) : FOLFormula(FOLType.Function, hasBrackets, hasDot, name, children) {
+    name: String,
+    children: Set<FOLFormula>
+) : FOLFormula(
+    type = FOLType.Function,
+    name = name,
+    children = children
+) {
     private val isInfix = children.size == 2
 
     constructor(
+        name: String,
         leftOperand: FOLFormula,
-        rightOperand: FOLFormula,
-        hasBrackets: Boolean,
-        hasDot: Boolean,
-        name: String
+        rightOperand: FOLFormula
     ) : this(
-        LinkedHashSet<FOLFormula>(listOf(leftOperand, rightOperand)),
-        hasBrackets,
-        hasDot,
-        name
+        name,
+        setOf(leftOperand, rightOperand)
     )
 
     override fun toString(): String {
@@ -31,7 +27,7 @@ class FOLFunction(
             sb.append(getChildAt(1))
         } else {
             sb.append(name)
-            if (children.size > 0) {
+            if (children.isNotEmpty()) {
                 sb.append("(")
                 sb.append(getChildAt(0))
                 children.stream().skip(1).forEach { child: FOLFormula? -> sb.append(", ").append(child) }

@@ -21,8 +21,8 @@ class FOLTests {
         val bToB = Edge(b, b, listOf(), listOf("f"))
 
         val graph = Graph(listOf(a, b), listOf(aToB, bToB))
-        val modelResult = ModelChecker().checkModel(graph, result.result!!)
-        modelResult shouldBe true
+        val modelResult = ModelChecker(graph, result.result!!).checkIfGraphIsModelFromFormula()
+        modelResult shouldBe null
     }
 
     @Test
@@ -36,7 +36,7 @@ class FOLTests {
         val bToB = Edge(b, b, listOf(), listOf("f"))
 
         val graph = Graph(listOf(a, b), listOf(aToA, bToB))
-        val modelResult = ModelChecker().checkModel(graph, result.result!!)
-        modelResult shouldBe false
+        val modelResult = ModelChecker(graph, result.result!!).checkIfGraphIsModelFromFormula()
+        modelResult shouldBe ""
     }
 }

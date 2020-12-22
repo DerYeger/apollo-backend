@@ -10,6 +10,6 @@ class DefaultModelCheckerService : ModelCheckerService {
     override fun checkModel(modelCheckerRequest: ModelCheckerRequest): Boolean {
         val parsedFormula = FOLParser().parseFormula(modelCheckerRequest.formula).result ?: return false
         val domainGraph = modelCheckerRequest.graph.toDomainModel()
-        return ModelChecker().checkModel(domainGraph, parsedFormula)
+        return ModelChecker(domainGraph, parsedFormula).checkIfGraphIsModelFromFormula() == null
     }
 }

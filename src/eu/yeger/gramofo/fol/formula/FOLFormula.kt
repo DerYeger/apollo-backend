@@ -5,68 +5,32 @@ import kotlin.collections.LinkedHashSet
 
 /**
  * This is the super class of all formula types.
+ * @property type Specifies the type of the formula. This should match with the corresponding subclass.
  */
 abstract class FOLFormula(
-    type: FOLType?,
-    hasBrackets: Boolean,
-    hasDot: Boolean,
-    name: String,
+
+    val type: FOLType?,
+    var hasBrackets: Boolean,
+    var hasDot: Boolean,
+    val name: String,
     children: LinkedHashSet<out FOLFormula>? = null,
 ) {
-
     val children = children ?: LinkedHashSet()
-    /**
-     * Specifies the type of the formula. This should match with the corresponding subclass.
-     * @return .
-     */
-    // ////////////////// getter und setter //////////////////////
-    var type: FOLType?
 
-    /**
-     * The parent is set automatically, if one formula ist set as child of some parent formula.
-     * It indicates, that this formula is a child of the formula, which is assigned to parent.
-     * @return .
-     */
-    var parent: FOLFormula?
-    var hasBrackets: Boolean
-    var hasDot: Boolean
-    var name: String
     var variables: ArrayList<FOLBoundVariable>? = null
         private set
 
-    private fun addReferentialIntegrity() {
-
-//        parent.addListener( (observable, oldValue, newValue ) -> {
-//            if (oldValue != null){
-//                oldValue.getChildren().remove(this);
-//            }
-//            if (newValue != null){
-//                newValue.getChildren().add(this);
-//            }
-//        });
-//
-//        children.addListener( (SetChangeListener<FOLFormula>) change -> {
-//            if(change.wasRemoved()){
-//                change.getElementRemoved().setParent(null);
-//            }
-//            if(change.wasAdded()){
-//                change.getElementAdded().setParent(this);
-//            }
-//        });
-    }
-
-    // ////////////////// operation and information //////////////////////
     abstract override fun toString(): String
 
     /**
-     * @return the child at the specified position of this FOLFormula or a DUMMY, if there is no child at this position.
+     * @return the child at the specified position of this FOLFormula or a Dummy, if there is no child at this position.
      */
     fun getChildAt(position: Int): FOLFormula {
         val list = ArrayList(children)
         return if (list.size > position) {
             list[position]
         } else {
-            DUMMY
+            Dummy
         }
     }
 
@@ -94,42 +58,13 @@ abstract class FOLFormula(
         return list
     }
 
-    fun containsImplication(): Boolean {
-        if (type == FOLType.Implication || type == FOLType.BiImplication) {
-            return true
-        } else if (children.isNotEmpty()) {
-            for (folFormula in children) {
-                if (folFormula.containsImplication()) {
-                    return true
-                }
-            }
-        }
-        return false
-    }
-
     fun countVariables() {
         // Remove duplicates
 //        this.variables = new ArrayList<>(new LinkedHashSet<>(variables()));
         variables = variables()
     }
 
-    val clearChildren: Set<FOLFormula>?
-        get() {
-            val toRemove = ArrayList<FOLFormula>()
-            if (this is FOLPredicate) {
-                return LinkedHashSet()
-            }
-            for (folFormula in children) {
-                if (this is FOLQuantifier && folFormula is FOLBoundVariable) {
-                    toRemove.add(folFormula)
-                }
-            }
-            children.removeAll(toRemove)
-            return children
-        }
-
     companion object {
-        const val DOT = "..."
         const val TT = "tt"
         const val FF = "ff"
         const val NOT = "\u00AC"
@@ -137,24 +72,14 @@ abstract class FOLFormula(
         const val OR = "\u2228"
         const val IMPLICATION = "\u2192"
         const val BI_IMPLICATION = "\u2194"
-        val LOGICAL_OPERANDS = listOf(NOT, AND, OR, IMPLICATION, BI_IMPLICATION)
         const val EXISTS = "\u2203"
         const val FOR_ALL = "\u2200"
-        val QUANTIFIERS = listOf(EXISTS, FOR_ALL)
         const val INFIX_EQUALITY = "=" // equal sign with a dot on top
-        val DUMMY: FOLFormula = object : FOLFormula(null, false, false, "?") {
-            override fun toString(): String {
-                return name
-            }
-        }
     }
 
-    init {
-        this.type = type
-        parent = null
-        this.hasBrackets = hasBrackets
-        this.hasDot = hasDot
-        this.name = name
-        addReferentialIntegrity()
+    object Dummy : FOLFormula(null, false, false, "?") {
+        override fun toString(): String {
+            return name
+        }
     }
 }

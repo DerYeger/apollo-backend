@@ -7,7 +7,11 @@ import eu.yeger.gramofo.fol.formula.FOLFormula.Companion.INFIX_EQUALITY
 import java.util.*
 
 fun checkModel(graph: Graph, formulaHead: FOLFormulaHead, locale: Locale = Locale.ENGLISH): String? {
-    return ModelChecker(graph, formulaHead, Lang(locale)).checkIfGraphIsModelFromFormula()
+    return try {
+        ModelChecker(graph, formulaHead, Lang(locale)).checkIfGraphIsModelFromFormula()
+    } catch (e: ModelChecker.ModelCheckException) {
+        e.message
+    }
 }
 
 /**

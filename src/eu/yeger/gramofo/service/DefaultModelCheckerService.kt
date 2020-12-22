@@ -9,15 +9,15 @@ import java.util.*
 
 class DefaultModelCheckerService : ModelCheckerService {
 
-    override fun checkModel(request: ModelCheckerRequest): ModelCheckerResponse {
-        val locale = when (request.language) {
+    override fun checkModel(modelCheckerRequest: ModelCheckerRequest): ModelCheckerResponse {
+        val locale = when (modelCheckerRequest.language) {
             "en" -> Locale.ENGLISH
             "de" -> Locale.GERMAN
-            else -> return ModelCheckerResponse("Unsupported language \"${request.language}\".")
+            else -> return ModelCheckerResponse("Unsupported language \"${modelCheckerRequest.language}\".")
         }
-        val parseResult = parseFormula(request.formula, locale)
+        val parseResult = parseFormula(modelCheckerRequest.formula, locale)
         val parsedFormula = parseResult.result ?: return ModelCheckerResponse(parseResult.errorMessage ?: "Error")
-        val domainGraph = request.graph.toDomainModel()
+        val domainGraph = modelCheckerRequest.graph.toDomainModel()
         val checkResult = checkModel(domainGraph, parsedFormula)
         return ModelCheckerResponse(checkResult)
     }

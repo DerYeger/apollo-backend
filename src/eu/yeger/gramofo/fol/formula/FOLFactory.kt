@@ -1,7 +1,7 @@
 package eu.yeger.gramofo.fol.formula
 
-import eu.yeger.gramofo.fol.formula.FOLFormula.FF
-import eu.yeger.gramofo.fol.formula.FOLFormula.TT
+import eu.yeger.gramofo.fol.formula.FOLFormula.Companion.FF
+import eu.yeger.gramofo.fol.formula.FOLFormula.Companion.TT
 import java.util.*
 
 /**
@@ -69,7 +69,7 @@ object FOLFactory {
      * Creates a biimplication-operator. FOLOperator.BIIMPLICATION is used as name.
      * @return a new instance of FOLOperator
      */
-    fun createOperatorBiimplication(
+    fun createOperatorBiImplication(
         leftOperand: FOLFormula?,
         rightOperand: FOLFormula?,
         hasBrackets: Boolean,
@@ -101,7 +101,7 @@ object FOLFactory {
         children: LinkedHashSet<out FOLFormula?>?,
         hasBrackets: Boolean,
         hasDot: Boolean,
-        name: String?
+        name: String
     ): FOLFunction {
         return FOLFunction(children, hasBrackets, hasDot, name)
     }
@@ -115,7 +115,7 @@ object FOLFactory {
         rightOperand: FOLFormula?,
         hasBrackets: Boolean,
         hasDot: Boolean,
-        name: String?
+        name: String
     ): FOLFunction {
         return FOLFunction(leftOperand, rightOperand, hasBrackets, hasDot, name)
     }
@@ -128,7 +128,7 @@ object FOLFactory {
         children: LinkedHashSet<out FOLFormula?>?,
         hasBrackets: Boolean,
         hasDot: Boolean,
-        name: String?
+        name: String
     ): FOLPredicate {
         return FOLPredicate(children, hasBrackets, hasDot, name)
     }
@@ -142,7 +142,7 @@ object FOLFactory {
         rightOperand: FOLFormula?,
         hasBrackets: Boolean,
         hasDot: Boolean,
-        name: String?
+        name: String
     ): FOLPredicate {
         return FOLPredicate(leftOperand, rightOperand, hasBrackets, hasDot, name)
     }
@@ -153,11 +153,11 @@ object FOLFactory {
      * @param name the name of the variable
      * @return a new instance of BoundVariable
      */
-    fun createBoundVariable(name: String?): FOLBoundVariable {
+    fun createBoundVariable(name: String): FOLBoundVariable {
         return FOLBoundVariable(name)
     }
 
-    fun createBoundVariable(name: String?, quantorSymbol: FOLFormula?): FOLFormula {
+    fun createBoundVariable(name: String, quantorSymbol: FOLFormula?): FOLFormula {
         return FOLBoundVariable(name).withQuantorSymbol(quantorSymbol)
     }
 
@@ -168,7 +168,7 @@ object FOLFactory {
      * @param operand the root of the subtree
      * @return a new instance of FOLQuantifier
      */
-    fun createQuantifierForall(
+    fun createQuantifierForAll(
         variable: FOLBoundVariable?,
         operand: FOLFormula?,
         hasBrackets: Boolean,

@@ -93,7 +93,7 @@ class FOLParser {
         while (scanner.curType() == FOLToken.BI_IMPLICATION) {
             scanner.nextToken()
             val impl = parseImplication(scanner)
-            biimpl = FOLFactory.createOperatorBiimplication(biimpl, impl, hasBrackets = false, hasDot = false)
+            biimpl = FOLFactory.createOperatorBiImplication(biimpl, impl, hasBrackets = false, hasDot = false)
         }
         return biimpl
     }
@@ -151,7 +151,7 @@ class FOLParser {
                 curBoundedVars!!.add(variable)
                 unaryOperator = parseUnaryOperator(scanner)
                 curBoundedVars!!.remove(variable)
-                FOLFactory.createQuantifierForall(variable, unaryOperator, hasBrackets = false, hasDot = false)
+                FOLFactory.createQuantifierForAll(variable, unaryOperator, hasBrackets = false, hasDot = false)
             }
             FOLToken.EXISTS -> {
                 scanner.nextToken()

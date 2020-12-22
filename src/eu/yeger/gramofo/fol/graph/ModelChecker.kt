@@ -3,7 +3,7 @@ package eu.yeger.gramofo.fol.graph
 import eu.yeger.gramofo.fol.FOLParser
 import eu.yeger.gramofo.fol.Settings
 import eu.yeger.gramofo.fol.formula.*
-import eu.yeger.gramofo.fol.formula.FOLFormula.INFIX_EQUALITY
+import eu.yeger.gramofo.fol.formula.FOLFormula.Companion.INFIX_EQUALITY
 import java.util.*
 
 /**
@@ -190,11 +190,11 @@ class ModelChecker(
     private fun interpret(symbol: FOLFormula): Vertex? {
         return when (symbol) {
             is FOLFunction -> {
-                when (symbol.getChildren().size) {
-                    0 -> oneArySymbolTable[symbol.getName()]!!.stream().findAny().get()
+                when (symbol.children.size) {
+                    0 -> oneArySymbolTable[symbol.name]!!.stream().findAny().get()
                     1 -> {
                         val childResult = interpret(symbol.getChildAt(0))
-                        twoArySymbolTable[symbol.getName()]!!.stream()
+                        twoArySymbolTable[symbol.name]!!.stream()
                             .filter { edge: Edge -> edge.source == childResult }
                             .findAny().get().target
                     }
@@ -202,10 +202,10 @@ class ModelChecker(
                 }
             }
             is FOLBoundVariable -> {
-                if (bindVariableValues[symbol.getName()] == null) {
+                if (bindVariableValues[symbol.name] == null) {
                     throw ModelCheckException("[ModelChecker][Internal error] No bind value found for variable.")
                 }
-                bindVariableValues[symbol.getName()]
+                bindVariableValues[symbol.name]
             }
             else -> throw ModelCheckException("[ModelChecker][Internal error] Not a valid function or a variable.")
         }

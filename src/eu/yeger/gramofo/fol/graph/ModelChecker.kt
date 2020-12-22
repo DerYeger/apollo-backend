@@ -5,38 +5,32 @@ import eu.yeger.gramofo.fol.Settings
 import eu.yeger.gramofo.fol.formula.*
 import eu.yeger.gramofo.fol.formula.FOLFormula.INFIX_EQUALITY
 import java.util.*
-import java.util.function.Consumer
 
 /**
- * This class is used to check if the drawn graph is a model of the formula. Both are available throw the datamodel.
- * (please be patient I wrote this drunk =). I think its a little bit necessary for this theory stuff)
+ * This class is used to check if a graph is model of a formula.
  */
 class ModelChecker(
     private var graph: Graph,
     private var formulaHead: FOLFormulaHead
 ) {
-    private val oneArySymbolTable: MutableMap<String, MutableSet<Vertex?>> = HashMap()
-    private val twoArySymbolTable: MutableMap<String, MutableSet<Edge>> = HashMap()
-    private val symbolTypeTable: MutableMap<String, String> = HashMap()
-    private val bindVariableValues: MutableMap<String, Vertex?> = HashMap()
-    private val infixPredicates: HashSet<String> =
-        HashSet(listOf(*FOLParser().settings.getSetting(Settings.INFIX_PRED)))
+    private val oneArySymbolTable: MutableMap<String, MutableSet<Vertex?>> = mutableMapOf()
+    private val twoArySymbolTable: MutableMap<String, MutableSet<Edge>> = mutableMapOf()
+    private val symbolTypeTable: MutableMap<String, String> = mutableMapOf()
+    private val bindVariableValues: MutableMap<String, Vertex?> = mutableMapOf()
+    private val infixPredicates: Set<String> = setOf(*FOLParser().settings.getSetting(Settings.INFIX_PRED))
+
+    init {
+        loadGraphSymbols()
+        loadFormulaSymbols()
+        checkTotality()
+    }
 
     /**
-     * Checks if the graph, which is drawn, is a model from the formula.
-     * @param graph the interpretation as a graph.
-     * @param formulaHead the formula to be checked
-     * @return null if the graph is model of the formula and a String containing a error message else.
+     * Checks if the graph is a model of the formula.
+     * @return null if the graph is model of the formula or a String containing a error message else.
      */
     fun checkIfGraphIsModelFromFormula(): String? {
-        oneArySymbolTable.clear()
-        twoArySymbolTable.clear()
-        symbolTypeTable.clear()
-        bindVariableValues.clear()
         return try {
-            loadGraphSymbols()
-            loadFormulaSymbols()
-            checkTotality()
             if (checkModel(formulaHead.formula)) {
                 null
             } else {
@@ -55,38 +49,34 @@ class ModelChecker(
     @Throws(ModelCheckException::class)
     private fun loadGraphSymbols() {
         graph.vertices.forEach { vertex: Vertex ->
-            vertex.stringAttachments.forEach(
-                Consumer { symbol: String ->
-                    val symbolType = if (Character.isUpperCase(symbol[0])) "P-1" else "F-0"
-                    symbolTypeTable[symbol] = symbolType
-                    val relationSet = oneArySymbolTable.getOrDefault(symbol, HashSet())
-                    if (symbolType == "F-0" && relationSet.size != 0) {
-                        throw ModelCheckException("The 0-ary function symbol '$symbol' can only be assigned to one vertex.")
-                    }
-                    relationSet.add(vertex)
-                    oneArySymbolTable[symbol] = relationSet
+            vertex.stringAttachments.forEach { symbol: String ->
+                val symbolType = if (Character.isUpperCase(symbol[0])) "P-1" else "F-0"
+                symbolTypeTable[symbol] = symbolType
+                val relationSet = oneArySymbolTable.getOrDefault(symbol, HashSet())
+                if (symbolType == "F-0" && relationSet.size != 0) {
+                    throw ModelCheckException("The 0-ary function symbol '$symbol' can only be assigned to one vertex.")
                 }
-            )
+                relationSet.add(vertex)
+                oneArySymbolTable[symbol] = relationSet
+            }
         }
         graph.edges.forEach { edge: Edge ->
-            edge.stringAttachments.forEach(
-                Consumer { symbol: String ->
-                    val symbolType =
-                        if (Character.isUpperCase(symbol[0]) || infixPredicates.contains(symbol)) "P-2" else "F-1"
-                    symbolTypeTable.putIfAbsent(symbol, symbolType)
-                    if (symbolType != symbolTypeTable[symbol]) {
-                        throw ModelCheckException("The symbol '$symbol' is defined with different arities within the graph.")
-                    }
-                    val relationSet = twoArySymbolTable.getOrDefault(symbol, HashSet())
-                    if (symbolType == "F-1" && relationSet.stream()
-                        .anyMatch { otherEdge: Edge -> edge.source == otherEdge.source }
-                    ) {
-                        throw ModelCheckException("The 1-ary function '$symbol' has at least for one vertex two function values. A function must be right-unique.")
-                    }
-                    relationSet.add(edge)
-                    twoArySymbolTable[symbol] = relationSet
+            edge.stringAttachments.forEach { symbol: String ->
+                val symbolType =
+                    if (Character.isUpperCase(symbol[0]) || infixPredicates.contains(symbol)) "P-2" else "F-1"
+                symbolTypeTable.putIfAbsent(symbol, symbolType)
+                if (symbolType != symbolTypeTable[symbol]) {
+                    throw ModelCheckException("The symbol '$symbol' is defined with different arities within the graph.")
                 }
-            )
+                val relationSet = twoArySymbolTable.getOrDefault(symbol, HashSet())
+                if (symbolType == "F-1" && relationSet.stream()
+                    .anyMatch { otherEdge: Edge -> edge.source == otherEdge.source }
+                ) {
+                    throw ModelCheckException("The 1-ary function '$symbol' has at least for one vertex two function values. A function must be right-unique.")
+                }
+                relationSet.add(edge)
+                twoArySymbolTable[symbol] = relationSet
+            }
         }
     }
 
@@ -118,7 +108,7 @@ class ModelChecker(
     }
 
     /**
-     * Functions mus be left total. Therefor this method checks all function symbols, if they are defined for all inputs.
+     * Functions mus be left total. Therefore this method checks all function symbols, if they are defined for all inputs.
      * @throws ModelCheckException if some function symbols aren't defined for all inputs.
      */
     @Throws(ModelCheckException::class)
@@ -153,8 +143,6 @@ class ModelChecker(
      */
     @Throws(ModelCheckException::class)
     private fun checkModel(formula: FOLFormula): Boolean {
-        // note: this could also be done with inheritance. This would maybe the cleaner solution but I did not want to mix this could wit the datamodel.
-        // Therefor I decide to make a switch case
         return when (formula.type) {
             FOLType.ForAll -> graph.vertices.stream().allMatch { vertex: Vertex? ->
                 bindVariableValues[formula.getChildAt(0).name] = vertex
@@ -174,18 +162,14 @@ class ModelChecker(
                 left && right || !left && !right
             }
             FOLType.Predicate -> when (formula.children.size) {
-                1 ->
-                    oneArySymbolTable[formula.name]!!
-                        .contains(interpret(formula.getChildAt(0)))
+                1 -> oneArySymbolTable[formula.name]!!.contains(interpret(formula.getChildAt(0)))
                 2 ->
                     if (formula.name == INFIX_EQUALITY) {
                         interpret(formula.getChildAt(0)) == interpret(formula.getChildAt(1))
                     } else {
                         twoArySymbolTable[formula.name]!!.stream().anyMatch { edge: Edge ->
                             edge.source == interpret(formula.getChildAt(0)) && edge.target == interpret(
-                                formula.getChildAt(
-                                    1
-                                )
+                                formula.getChildAt(1)
                             )
                         }
                     }
@@ -204,24 +188,26 @@ class ModelChecker(
      */
     @Throws(ModelCheckException::class)
     private fun interpret(symbol: FOLFormula): Vertex? {
-        return if (symbol is FOLFunction) {
-            if (symbol.getChildren().size == 0) {
-                oneArySymbolTable[symbol.getName()]!!.stream().findAny().get()
-            } else if (symbol.getChildren().size == 1) {
-                val childResult = interpret(symbol.getChildAt(0))
-                twoArySymbolTable[symbol.getName()]!!.stream()
-                    .filter { edge: Edge -> edge.source == childResult }
-                    .findAny().get().target
-            } else {
-                throw ModelCheckException("[ModelChecker][Internal error] Found function with to many children.")
+        return when (symbol) {
+            is FOLFunction -> {
+                when (symbol.getChildren().size) {
+                    0 -> oneArySymbolTable[symbol.getName()]!!.stream().findAny().get()
+                    1 -> {
+                        val childResult = interpret(symbol.getChildAt(0))
+                        twoArySymbolTable[symbol.getName()]!!.stream()
+                            .filter { edge: Edge -> edge.source == childResult }
+                            .findAny().get().target
+                    }
+                    else -> throw ModelCheckException("[ModelChecker][Internal error] Found function with to many children.")
+                }
             }
-        } else if (symbol is FOLBoundVariable) {
-            if (bindVariableValues[symbol.getName()] == null) {
-                throw ModelCheckException("[ModelChecker][Internal error] No bind value found for variable.")
+            is FOLBoundVariable -> {
+                if (bindVariableValues[symbol.getName()] == null) {
+                    throw ModelCheckException("[ModelChecker][Internal error] No bind value found for variable.")
+                }
+                bindVariableValues[symbol.getName()]
             }
-            bindVariableValues[symbol.getName()]
-        } else {
-            throw ModelCheckException("[ModelChecker][Internal error] Not a valid function or a variable.")
+            else -> throw ModelCheckException("[ModelChecker][Internal error] Not a valid function or a variable.")
         }
     }
 

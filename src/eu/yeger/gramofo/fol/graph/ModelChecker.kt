@@ -108,7 +108,7 @@ class ModelChecker {
                         }
                         val relationSet = twoArySymbolTable!!.getOrDefault(symbol, HashSet())
                         if (symbolType == "F-1" && relationSet.stream()
-                            .anyMatch { otherEdge: Edge -> edge.fromVertex == otherEdge.fromVertex }
+                            .anyMatch { otherEdge: Edge -> edge.source == otherEdge.source }
                         ) {
                             throw ModelCheckException("The 1-ary function '$symbol' has at least for one vertex two function values. A function must be right-unique.")
                         }
@@ -162,7 +162,7 @@ class ModelChecker {
                     val relationSet: Set<Edge> = twoArySymbolTable!![symbol]!!
                     graph!!.vertices.forEach(
                         Consumer { vertex: Vertex ->
-                            if (relationSet.stream().noneMatch { edge: Edge -> edge.fromVertex == vertex }) {
+                            if (relationSet.stream().noneMatch { edge: Edge -> edge.source == vertex }) {
                                 throw ModelCheckException("The 1-ary function '$symbol' must be total. Please be sure that it is defined for all vertexes.")
                             }
                         }
@@ -214,7 +214,7 @@ class ModelChecker {
                         interpret(formula.getChildAt(0)) == interpret(formula.getChildAt(1))
                     } else {
                         twoArySymbolTable!![formula.name]!!.stream().anyMatch { edge: Edge ->
-                            edge.fromVertex == interpret(formula.getChildAt(0)) && edge.toVertex == interpret(
+                            edge.source == interpret(formula.getChildAt(0)) && edge.target == interpret(
                                 formula.getChildAt(
                                     1
                                 )
@@ -242,8 +242,8 @@ class ModelChecker {
             } else if (symbol.getChildren().size == 1) {
                 val childResult = interpret(symbol.getChildAt(0))
                 twoArySymbolTable!![symbol.getName()]!!.stream()
-                    .filter { edge: Edge -> edge.fromVertex == childResult }
-                    .findAny().get().toVertex
+                    .filter { edge: Edge -> edge.source == childResult }
+                    .findAny().get().target
             } else {
                 throw ModelCheckException("[ModelChecker][Internal error] Found function with to many children.")
             }

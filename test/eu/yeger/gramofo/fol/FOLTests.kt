@@ -14,8 +14,6 @@ class FOLTests {
         val result = FOLParser().parseFormula("exists x. exists y. f(x) = y")
         result shouldNotBe null
 
-        val graph = Graph()
-
         val a = Vertex()
         a.readableName = "a"
         a.stringAttachments = listOf("A")
@@ -23,21 +21,10 @@ class FOLTests {
         val b = Vertex()
         b.readableName = "b"
 
-        val aToB = Edge()
-        aToB.fromVertex = a
-        aToB.toVertex = b
-        aToB.stringAttachments = listOf("f")
+        val aToB = Edge(a, b, listOf(), listOf("f"))
+        val bToB = Edge(b, b, listOf(), listOf("f"))
 
-        val bToB = Edge()
-        bToB.fromVertex = b
-        bToB.toVertex = b
-        bToB.stringAttachments = listOf("f")
-
-        graph.vertices
-            .addAll(listOf(a, b))
-        graph.edges
-            .addAll(listOf(aToB, bToB))
-
+        val graph = Graph(listOf(a, b), listOf(aToB, bToB))
         val modelResult = ModelChecker().checkModel(graph, result.result!!)
         modelResult shouldBe true
     }
@@ -46,8 +33,6 @@ class FOLTests {
     fun testNegativeFOLParser() {
         val result = FOLParser().parseFormula("exists x. exists y. f(x) = y && !(x = y)")
 
-        val graph = Graph()
-
         val a = Vertex()
         a.readableName = "a"
         a.stringAttachments = listOf("A")
@@ -55,21 +40,10 @@ class FOLTests {
         val b = Vertex()
         b.readableName = "b"
 
-        val aToA = Edge()
-        aToA.fromVertex = a
-        aToA.toVertex = a
-        aToA.stringAttachments = listOf("f")
+        val aToA = Edge(a, a, listOf(), listOf("f"))
+        val bToB = Edge(b, b, listOf(), listOf("f"))
 
-        val bToB = Edge()
-        bToB.fromVertex = b
-        bToB.toVertex = b
-        bToB.stringAttachments = listOf("f")
-
-        graph.vertices
-            .addAll(listOf(a, b))
-        graph.edges
-            .addAll(listOf(aToA, bToB))
-
+        val graph = Graph(listOf(a, b), listOf(aToA, bToB))
         val modelResult = ModelChecker().checkModel(graph, result.result!!)
         modelResult shouldBe false
     }

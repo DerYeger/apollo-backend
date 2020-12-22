@@ -1,19 +1,17 @@
 package eu.yeger.gramofo.model.api
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import eu.yeger.gramofo.fol.graph.Edge
 import eu.yeger.gramofo.fol.graph.Graph
 import eu.yeger.gramofo.fol.graph.Vertex
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class ApiGraph(
-    val name: String,
-    val description: String,
-    val lastEdit: Long,
     val nodes: List<ApiNode>,
     val edges: List<ApiEdge>
 )
 
 fun ApiGraph.toDomainModel(): Graph {
-    val graph = Graph()
     val vertices = nodes.associate { node ->
         node.name to Vertex().apply {
             readableName = node.name
@@ -21,13 +19,12 @@ fun ApiGraph.toDomainModel(): Graph {
         }
     }
     val domainEdges = edges.map { edge ->
-        Edge().apply {
-            fromVertex = vertices[edge.source]
-            toVertex = vertices[edge.target]
-            stringAttachments = edge.relations + edge.functions
-        }
+        Edge(
+            source = vertices[edge.source]!!,
+            target = vertices[edge.target]!!,
+            relations = edge.relations,
+            functions = edge.functions
+        )
     }
-    graph.vertices.addAll(vertices.values)
-    graph.edges.addAll(domainEdges)
-    return graph
+    return Graph(vertices.values.toList(), domainEdges)
 }

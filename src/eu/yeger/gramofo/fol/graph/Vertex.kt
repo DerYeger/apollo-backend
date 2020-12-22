@@ -54,7 +54,7 @@ class Vertex @JvmOverloads constructor(generateID: Boolean = true) : Serializabl
      */
     fun isConnectedTo(vertex: Vertex): Boolean {
         for (edge in outgoingEdges) {
-            if (edge.toVertex === vertex) {
+            if (edge.target === vertex) {
                 return true
             }
         }

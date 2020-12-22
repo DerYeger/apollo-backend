@@ -1,5 +1,6 @@
 package eu.yeger.gramofo.fol
 
+import org.slf4j.LoggerFactory
 import java.lang.Exception
 import java.text.MessageFormat
 import java.util.ListResourceBundle
@@ -11,9 +12,8 @@ import kotlin.jvm.JvmOverloads
 /**
  * Used to simplify internationalization.
  */
-object Lang {
-    // property file is: package/name/messages.properties
-    private val resourceBundle = loadBundle("lang", "language", Locale.getDefault())
+class Lang(locale: Locale) {
+    private val resourceBundle = loadBundle("lang", "language", locale)
 
     /**
      * Get a internationalized string for the given key
@@ -37,7 +37,6 @@ object Lang {
      * is specified by the string itself
      * @return a internationalized string
      */
-    @JvmStatic
     fun getString(key: String, vararg args: Any?): String {
         return try {
             MessageFormat.format(resourceBundle.getString(key), *args)
@@ -51,8 +50,7 @@ object Lang {
         return try {
             ResourceBundle.getBundle("$relativePath.$bundleName", locale)
         } catch (e: Exception) {
-            println(e)
-            System.err.println("\nCouldn't find language-files on path '$relativePath'")
+            LoggerFactory.getLogger(Lang::class.java).error("\nCouldn't find language-files on path '$relativePath'")
             object : ListResourceBundle() {
                 override fun getContents(): Array<Array<Any>> {
                     return arrayOf()

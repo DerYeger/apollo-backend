@@ -1,20 +1,22 @@
 package eu.yeger.gramofo.fol.graph
 
+import eu.yeger.gramofo.fol.Lang
 import eu.yeger.gramofo.fol.Settings
 import eu.yeger.gramofo.fol.formula.*
 import eu.yeger.gramofo.fol.formula.FOLFormula.Companion.INFIX_EQUALITY
 import java.util.*
 
-fun checkModel(graph: Graph, formulaHead: FOLFormulaHead): String? {
-    return ModelChecker(graph, formulaHead).checkIfGraphIsModelFromFormula()
+fun checkModel(graph: Graph, formulaHead: FOLFormulaHead, locale: Locale = Locale.ENGLISH): String? {
+    return ModelChecker(graph, formulaHead, Lang(locale)).checkIfGraphIsModelFromFormula()
 }
 
 /**
  * This class is used to check if a graph is model of a formula.
  */
 private class ModelChecker(
-    private var graph: Graph,
-    private var formulaHead: FOLFormulaHead
+    private val graph: Graph,
+    private val formulaHead: FOLFormulaHead,
+    private val lang: Lang
 ) {
     private val oneArySymbolTable: MutableMap<String, MutableSet<Vertex?>> = mutableMapOf()
     private val twoArySymbolTable: MutableMap<String, MutableSet<Edge>> = mutableMapOf()

@@ -14,7 +14,7 @@ data class ApiGraph(
 fun ApiGraph.toDomainModel(): Graph {
     val vertices = nodes.associate { node ->
         node.name to Vertex(
-            readableName = node.name,
+            name = node.name,
             relations = node.relations,
             constants = node.constants
         )

@@ -1,7 +1,5 @@
 package eu.yeger.gramofo.fol.formula
 
-import java.lang.StringBuilder
-
 class FOLPredicate(
     name: String,
     children: Set<FOLFormula>,

@@ -1,7 +1,6 @@
 package eu.yeger.gramofo.fol
 
 import eu.yeger.gramofo.fol.Lang.getString
-import java.util.*
 
 /**
  * This is the scanner for the parser class. It translates a stream of chars to a stream of tokens.
@@ -17,9 +16,9 @@ class FOLScanner(private val source: String, settings: Settings) {
         Settings.AND,
         Settings.NOT,
         Settings.IMPLICATION,
-        Settings.BIIMPLICATION,
+        Settings.BI_IMPLICATION,
         Settings.EXISTS,
-        Settings.FORALL,
+        Settings.FOR_ALL,
         Settings.INFIX_PRED,
         Settings.EQUAL_SIGN,
         Settings.INFIX_FUNC
@@ -58,9 +57,9 @@ class FOLScanner(private val source: String, settings: Settings) {
         val and = settings.getSetting(Settings.AND)
         val not = settings.getSetting(Settings.NOT)
         val implication = settings.getSetting(Settings.IMPLICATION)
-        val biImplication = settings.getSetting(Settings.BIIMPLICATION)
+        val biImplication = settings.getSetting(Settings.BI_IMPLICATION)
         val exists = settings.getSetting(Settings.EXISTS)
-        val forAll = settings.getSetting(Settings.FORALL)
+        val forAll = settings.getSetting(Settings.FOR_ALL)
         val infixPred = settings.getSetting(Settings.INFIX_PRED)
         val equalSigns = settings.getSetting(Settings.EQUAL_SIGN)
         val infixFunc = settings.getSetting(Settings.INFIX_FUNC)

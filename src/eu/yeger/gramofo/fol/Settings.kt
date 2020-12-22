@@ -1,19 +1,25 @@
 package eu.yeger.gramofo.fol
 
-import java.util.HashMap
-
 /**
  * This class is used to store the settings which are loading from a
  * configuration file.
  */
 class Settings {
     // a hash for the stored settings for fast accessibility
-    private val settingsCache: HashMap<String, Array<String>> = HashMap()
-
-    /**
-     * @return a message if something went wrong null else
-     */
-    val errorMessage: String? = null
+    private val settingsCache: Map<String, Array<String>> = mapOf(
+        NOT to arrayOf("!"),
+        TRUE to arrayOf("tt"),
+        FALSE to arrayOf("ff"),
+        OR to arrayOf("|", "||"),
+        AND to arrayOf("&", "&&"),
+        IMPLICATION to arrayOf("->"),
+        BI_IMPLICATION to arrayOf("<->"),
+        EXISTS to arrayOf("exists"),
+        FOR_ALL to arrayOf("forall"),
+        INFIX_PRED to arrayOf(">", "<", "<=", ">=", "~"),
+        INFIX_FUNC to arrayOf(),
+        EQUAL_SIGN to arrayOf("=")
+    )
 
     /**
      * Returns the value of a required settings.
@@ -32,31 +38,11 @@ class Settings {
         const val AND = "\u2227"
         const val NOT = "\u00AC"
         const val IMPLICATION = "\u2192"
-        const val BIIMPLICATION = "\u2194"
+        const val BI_IMPLICATION = "\u2194"
         const val EXISTS = "\u2203"
-        const val FORALL = "\u2200"
+        const val FOR_ALL = "\u2200"
         const val INFIX_PRED = "infix_predicates"
         const val INFIX_FUNC = "infix_functions"
         const val EQUAL_SIGN = "equality"
-    }
-
-    /**
-     * Creates a new instance of settings with the specified settings file.
-     *
-     * @param file The file, where to load the settings
-     */
-    init {
-        settingsCache[NOT] = arrayOf("!")
-        settingsCache[TRUE] = arrayOf("tt")
-        settingsCache[FALSE] = arrayOf("ff")
-        settingsCache[OR] = arrayOf("|", "||")
-        settingsCache[AND] = arrayOf("&", "&&")
-        settingsCache[IMPLICATION] = arrayOf("->")
-        settingsCache[BIIMPLICATION] = arrayOf("<->")
-        settingsCache[EXISTS] = arrayOf("exists")
-        settingsCache[FORALL] = arrayOf("forall")
-        settingsCache[INFIX_PRED] = arrayOf(">", "<", "<=", ">=", "~")
-        settingsCache[INFIX_FUNC] = arrayOf()
-        settingsCache[EQUAL_SIGN] = arrayOf("=")
     }
 }

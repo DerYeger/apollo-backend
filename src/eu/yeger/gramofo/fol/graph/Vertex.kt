@@ -1,7 +1,7 @@
 package eu.yeger.gramofo.fol.graph
 
-class Vertex(
-    val readableName: String,
+data class Vertex(
+    val name: String,
     val relations: List<String>,
     val constants: List<String>
 ) {

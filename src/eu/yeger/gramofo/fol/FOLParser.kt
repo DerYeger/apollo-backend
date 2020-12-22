@@ -2,7 +2,6 @@ package eu.yeger.gramofo.fol
 
 import eu.yeger.gramofo.fol.Lang.getString
 import eu.yeger.gramofo.fol.formula.*
-import java.util.*
 
 /**
  * This class provides a singleton object, which can parse input strings into
@@ -32,13 +31,13 @@ class FOLParser {
         for (infixFunc in settings.getSetting(Settings.IMPLICATION)) {
             symbolTable[infixFunc] = "IMP"
         }
-        for (infixFunc in settings.getSetting(Settings.BIIMPLICATION)) {
+        for (infixFunc in settings.getSetting(Settings.BI_IMPLICATION)) {
             symbolTable[infixFunc] = "BIIMP"
         }
         for (infixFunc in settings.getSetting(Settings.EXISTS)) {
             symbolTable[infixFunc] = "EX"
         }
-        for (infixFunc in settings.getSetting(Settings.FORALL)) {
+        for (infixFunc in settings.getSetting(Settings.FOR_ALL)) {
             symbolTable[infixFunc] = "FOR"
         }
         for (infixPred in settings.getSetting(Settings.INFIX_PRED)) {
@@ -61,7 +60,6 @@ class FOLParser {
         symbolTable.clear()
         curBoundedVars = HashSet()
         return try {
-            checkSettings()
             addOperatorsToSymbolTable()
             val scanner = FOLScanner(sFormula, settings)
             val formula = parseFormula(scanner)
@@ -71,13 +69,6 @@ class FOLParser {
             ParseResult(FOLFormulaHead(formula, symbolTable))
         } catch (e: ParseException) {
             ParseResult(e.message)
-        }
-    }
-
-    @Throws(ParseException::class)
-    private fun checkSettings() {
-        if (settings.errorMessage != null) {
-            throw ParseException(settings.errorMessage)
         }
     }
 

@@ -30,7 +30,7 @@ class FOLFunction(
             if (children.isNotEmpty()) {
                 sb.append("(")
                 sb.append(getChildAt(0))
-                children.stream().skip(1).forEach { child: FOLFormula? -> sb.append(", ").append(child) }
+                children.drop(1).forEach { child: FOLFormula? -> sb.append(", ").append(child) }
                 sb.append(")")
             }
         }

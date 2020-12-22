@@ -36,6 +36,6 @@ class FOLTests {
 
         val graph = Graph(listOf(a, b), listOf(aToA, bToB))
         val modelResult = checkModel(graph, result.result!!)
-        modelResult shouldBe ""
+        modelResult shouldNotBe null
     }
 }

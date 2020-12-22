@@ -18,10 +18,10 @@ private class ModelChecker(
     private val formulaHead: FOLFormulaHead,
     private val lang: Lang
 ) {
-    private val oneArySymbolTable: MutableMap<String, MutableSet<Vertex?>> = mutableMapOf()
+    private val oneArySymbolTable: MutableMap<String, MutableSet<Vertex>> = mutableMapOf()
     private val twoArySymbolTable: MutableMap<String, MutableSet<Edge>> = mutableMapOf()
     private val symbolTypeTable: MutableMap<String, String> = mutableMapOf()
-    private val bindVariableValues: MutableMap<String, Vertex?> = mutableMapOf()
+    private val bindVariableValues: MutableMap<String, Vertex> = mutableMapOf()
     private val infixPredicates: Set<String> = Settings[Settings.INFIX_PRED].toSet()
 
     init {
@@ -39,7 +39,7 @@ private class ModelChecker(
             if (checkModel(formulaHead.formula)) {
                 null
             } else {
-                ""
+                "Not a model"
             }
         } catch (mce: ModelCheckException) {
             mce.message
@@ -74,9 +74,7 @@ private class ModelChecker(
                     throw ModelCheckException("The symbol '$symbol' is defined with different arities within the graph.")
                 }
                 val relationSet = twoArySymbolTable.getOrDefault(symbol, HashSet())
-                if (symbolType == "F-1" && relationSet.stream()
-                    .anyMatch { otherEdge: Edge -> edge.source == otherEdge.source }
-                ) {
+                if (symbolType == "F-1" && relationSet.any { otherEdge: Edge -> edge.source == otherEdge.source }) {
                     throw ModelCheckException("The 1-ary function '$symbol' has at least for one vertex two function values. A function must be right-unique.")
                 }
                 relationSet.add(edge)
@@ -118,7 +116,7 @@ private class ModelChecker(
      */
     @Throws(ModelCheckException::class)
     private fun checkTotality() {
-        symbolTypeTable.forEach { (symbol: String, type: String?) ->
+        symbolTypeTable.forEach { (symbol: String, type: String) ->
             when (type) {
                 "F-0" -> if (oneArySymbolTable[symbol]!!.size != 1) {
                     throw ModelCheckException("The 0-ary function '$symbol' must be defined. Please add it to the graph.")
@@ -126,7 +124,7 @@ private class ModelChecker(
                 "F-1" -> {
                     val relationSet: Set<Edge> = twoArySymbolTable[symbol]!!
                     graph.vertices.forEach { vertex: Vertex ->
-                        if (relationSet.stream().noneMatch { edge: Edge -> edge.source == vertex }) {
+                        if (relationSet.none { edge: Edge -> edge.source == vertex }) {
                             throw ModelCheckException("The 1-ary function '$symbol' must be total. Please be sure that it is defined for all vertexes.")
                         }
                     }
@@ -149,11 +147,11 @@ private class ModelChecker(
     @Throws(ModelCheckException::class)
     private fun checkModel(formula: FOLFormula): Boolean {
         return when (formula.type) {
-            FOLType.ForAll -> graph.vertices.stream().allMatch { vertex: Vertex? ->
+            FOLType.ForAll -> graph.vertices.all { vertex: Vertex ->
                 bindVariableValues[formula.getChildAt(0).name] = vertex
                 checkModel(formula.getChildAt(1))
             }
-            FOLType.Exists -> graph.vertices.stream().anyMatch { vertex: Vertex? ->
+            FOLType.Exists -> graph.vertices.any { vertex: Vertex ->
                 bindVariableValues[formula.getChildAt(0).name] = vertex
                 checkModel(formula.getChildAt(1))
             }
@@ -172,7 +170,7 @@ private class ModelChecker(
                     if (formula.name == INFIX_EQUALITY) {
                         interpret(formula.getChildAt(0)) == interpret(formula.getChildAt(1))
                     } else {
-                        twoArySymbolTable[formula.name]!!.stream().anyMatch { edge: Edge ->
+                        twoArySymbolTable[formula.name]!!.any { edge: Edge ->
                             edge.source == interpret(formula.getChildAt(0)) && edge.target == interpret(
                                 formula.getChildAt(1)
                             )
@@ -196,12 +194,10 @@ private class ModelChecker(
         return when (symbol) {
             is FOLFunction -> {
                 when (symbol.children.size) {
-                    0 -> oneArySymbolTable[symbol.name]!!.stream().findAny().get()
+                    0 -> oneArySymbolTable[symbol.name]!!.first()
                     1 -> {
                         val childResult = interpret(symbol.getChildAt(0))
-                        twoArySymbolTable[symbol.name]!!.stream()
-                            .filter { edge: Edge -> edge.source == childResult }
-                            .findAny().get().target
+                        twoArySymbolTable[symbol.name]!!.first { edge: Edge -> edge.source == childResult }.target
                     }
                     else -> throw ModelCheckException("[ModelChecker][Internal error] Found function with to many children.")
                 }

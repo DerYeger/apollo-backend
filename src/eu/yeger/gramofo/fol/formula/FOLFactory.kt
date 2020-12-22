@@ -153,10 +153,6 @@ object FOLFactory {
         return FOLBoundVariable(name)
     }
 
-    fun createBoundVariable(name: String, quantorSymbol: FOLFormula): FOLFormula {
-        return FOLBoundVariable(name).withQuantorSymbol(quantorSymbol)
-    }
-
     /**
      * Creates a new forAll quantifier.
      * @param variable an instance of FOLBoundVariables. The name of this variable is used to bind other variables in

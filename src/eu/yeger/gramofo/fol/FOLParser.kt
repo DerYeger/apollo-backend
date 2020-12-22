@@ -343,10 +343,7 @@ class FOLParser {
             checkSymbolInfo(symbol, "F-" + termChildren.size)
             FOLFactory.createFunction(name = symbol, children = termChildren)
         } else if (termChildren.size == 0) {
-            val forSymbol = getForSymbol(curBoundedVars, symbol)
-            if (forSymbol != null) {
-                FOLFactory.createBoundVariable(symbol, forSymbol)
-            } else FOLFactory.createBoundVariable(symbol)
+            FOLFactory.createBoundVariable(symbol)
         } else {
             throw ParseException(getString("FOP_SYMBOL_ALREADY_IN_USE_AS_BOUND_VARIABLE", symbol))
         }

@@ -1,0 +1,9 @@
+*
+!gradle/**
+!resources/**
+!src/**
+!test/*8
+!.editorconfig
+!build.gradle.kts
+!gradle.properties
+!settings.gradle.kts

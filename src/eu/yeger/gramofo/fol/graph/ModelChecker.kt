@@ -1,15 +1,18 @@
 package eu.yeger.gramofo.fol.graph
 
-import eu.yeger.gramofo.fol.FOLParser
 import eu.yeger.gramofo.fol.Settings
 import eu.yeger.gramofo.fol.formula.*
 import eu.yeger.gramofo.fol.formula.FOLFormula.Companion.INFIX_EQUALITY
 import java.util.*
 
+fun checkModel(graph: Graph, formulaHead: FOLFormulaHead): String? {
+    return ModelChecker(graph, formulaHead).checkIfGraphIsModelFromFormula()
+}
+
 /**
  * This class is used to check if a graph is model of a formula.
  */
-class ModelChecker(
+private class ModelChecker(
     private var graph: Graph,
     private var formulaHead: FOLFormulaHead
 ) {
@@ -17,7 +20,7 @@ class ModelChecker(
     private val twoArySymbolTable: MutableMap<String, MutableSet<Edge>> = mutableMapOf()
     private val symbolTypeTable: MutableMap<String, String> = mutableMapOf()
     private val bindVariableValues: MutableMap<String, Vertex?> = mutableMapOf()
-    private val infixPredicates: Set<String> = setOf(*FOLParser().settings.getSetting(Settings.INFIX_PRED))
+    private val infixPredicates: Set<String> = Settings[Settings.INFIX_PRED].toSet()
 
     init {
         loadGraphSymbols()

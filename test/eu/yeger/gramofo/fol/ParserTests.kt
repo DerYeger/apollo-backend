@@ -7,54 +7,66 @@ class ParserTests {
 
     @Test
     fun `verify that parsing constants works`() {
-        FOLParser().parseFormula("a = b").result shouldNotBe null
+        parseFormula("a = b").result.also { println(it!!.formula) } shouldNotBe null
     }
 
     @Test
     fun `verify that parsing functions works`() {
-        FOLParser().parseFormula("f(x) = y").result shouldNotBe null
+        parseFormula("f(x) = y").result.also { println(it!!.formula) } shouldNotBe null
+        parseFormula("f(x, z) = y").result.also { println(it!!.formula) } shouldNotBe null
     }
 
     @Test
     fun `verify that parsing predicates works`() {
-        FOLParser().parseFormula("A(x)").result shouldNotBe null
+        parseFormula("A()").result.also { println(it!!.formula) } shouldNotBe null
+        parseFormula("A(x)").result.also { println(it!!.formula) } shouldNotBe null
+        parseFormula("A(x,y)").result.also { println(it!!.formula) } shouldNotBe null
     }
 
     @Test
     fun `verify that parsing negations works`() {
-        FOLParser().parseFormula("!A()").result shouldNotBe null
+        parseFormula("!A()").result.also { println(it!!.formula) } shouldNotBe null
     }
 
     @Test
     fun `verify that parsing junction works`() {
-        FOLParser().parseFormula("A() && B()").result shouldNotBe null
-        FOLParser().parseFormula("A() & B()").result shouldNotBe null
+        parseFormula("A() && B()").result.also { println(it!!.formula) } shouldNotBe null
+        parseFormula("A() & B()").result.also { println(it!!.formula) } shouldNotBe null
     }
 
     @Test
     fun `verify that parsing disjunction works`() {
-        FOLParser().parseFormula("A() || B()").result shouldNotBe null
-        FOLParser().parseFormula("A() | B()").result shouldNotBe null
+        parseFormula("A() || B()").result.also { println(it!!.formula) } shouldNotBe null
+        parseFormula("A() | B()").result.also { println(it!!.formula) } shouldNotBe null
     }
 
     @Test
     fun `verify that parsing implication works`() {
-        FOLParser().parseFormula("A() -> B()").result shouldNotBe null
+        parseFormula("A() -> B()").result.also { println(it!!.formula) } shouldNotBe null
     }
 
     @Test
     fun `verify that parsing bi-implication works`() {
-        FOLParser().parseFormula("A() <-> B()").result shouldNotBe null
+        parseFormula("A() <-> B()").result.also { println(it!!.formula) } shouldNotBe null
     }
 
     @Test
     fun `verify that parsing existential quantifier works`() {
-        FOLParser().parseFormula("exists x. A(x)").result shouldNotBe null
+        parseFormula("exists x. A(x)").result.also { println(it!!.formula) } shouldNotBe null
     }
 
     @Test
     fun `verify that parsing universal quantifier works`() {
-        FOLParser().parseFormula("forall x. A(x)").result shouldNotBe null
+        println("start")
+        parseFormula("forall x. A(x)").result.also { println(it!!.formula) } shouldNotBe null
+        parseFormula("forall x. forall y. A(x, y)").result.also { println(it!!.formula) } shouldNotBe null
+        parseFormula("(forall x. A(x)) && (exists x. B(x))").result.also { println(it!!.formula) } shouldNotBe null
+        println("end")
+    }
+
+    @Test
+    fun `verify that parsing nested formulas works`() {
+        parseFormula("forall x. exists y. forall z. f(x) = y && R(y,z) && R(z,y) || (f(x) = x -> f(z) = a <-> ff)").result.also { println(it!!.formula) } shouldNotBe null
     }
 
     @Test
@@ -70,7 +82,7 @@ class ParserTests {
             "y = f(x,y"
         )
         formulas.forEach { formula ->
-            FOLParser().parseFormula(formula).errorMessage shouldNotBe null
+            parseFormula(formula).errorMessage shouldNotBe null
         }
     }
 }

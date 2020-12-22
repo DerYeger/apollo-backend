@@ -5,24 +5,10 @@ import eu.yeger.gramofo.fol.Lang.getString
 /**
  * This is the scanner for the parser class. It translates a stream of chars to a stream of tokens.
  */
-class FOLScanner(private val source: String, settings: Settings) {
-    private var pos: Int
-    private var curToken: FOLToken
-    private var lookAHeadToken: FOLToken
-    private val settingNames = arrayOf(
-        Settings.TRUE,
-        Settings.FALSE,
-        Settings.OR,
-        Settings.AND,
-        Settings.NOT,
-        Settings.IMPLICATION,
-        Settings.BI_IMPLICATION,
-        Settings.EXISTS,
-        Settings.FOR_ALL,
-        Settings.INFIX_PRED,
-        Settings.EQUAL_SIGN,
-        Settings.INFIX_FUNC
-    )
+class FOLScanner(private val source: String) {
+    private var pos: Int = 0
+    private var curToken: FOLToken = FOLToken(0, "")
+    private var lookAHeadToken: FOLToken = FOLToken(0, "")
     private val settingTypes = intArrayOf(
         FOLToken.TRUE,
         FOLToken.FALSE,
@@ -38,46 +24,37 @@ class FOLScanner(private val source: String, settings: Settings) {
         FOLToken.INFIX_FUNC
     )
     private lateinit var allSettings: Array<String>
-    private var settingType: HashMap<String, Int>? = null
+    private val settingType: HashMap<String, Int> = HashMap()
 
     init {
-        extractSettings(settings)
-        pos = 0
-        curToken = FOLToken(0, "")
-        lookAHeadToken = FOLToken(0, "")
+        extractSettings()
         nextToken()
         nextToken()
     }
 
     @Throws(ParseException::class)
-    private fun extractSettings(settings: Settings) {
-        val tt = settings.getSetting(Settings.TRUE)
-        val ff = settings.getSetting(Settings.FALSE)
-        val or = settings.getSetting(Settings.OR)
-        val and = settings.getSetting(Settings.AND)
-        val not = settings.getSetting(Settings.NOT)
-        val implication = settings.getSetting(Settings.IMPLICATION)
-        val biImplication = settings.getSetting(Settings.BI_IMPLICATION)
-        val exists = settings.getSetting(Settings.EXISTS)
-        val forAll = settings.getSetting(Settings.FOR_ALL)
-        val infixPred = settings.getSetting(Settings.INFIX_PRED)
-        val equalSigns = settings.getSetting(Settings.EQUAL_SIGN)
-        val infixFunc = settings.getSetting(Settings.INFIX_FUNC)
-        val settingBundle = arrayOf<Array<String>?>(
+    private fun extractSettings() {
+        val tt = Settings[Settings.TRUE]
+        val ff = Settings[Settings.FALSE]
+        val or = Settings[Settings.OR]
+        val and = Settings[Settings.AND]
+        val not = Settings[Settings.NOT]
+        val implication = Settings[Settings.IMPLICATION]
+        val biImplication = Settings[Settings.BI_IMPLICATION]
+        val exists = Settings[Settings.EXISTS]
+        val forAll = Settings[Settings.FOR_ALL]
+        val infixPred = Settings[Settings.INFIX_PRED]
+        val equalSigns = Settings[Settings.EQUAL_SIGN]
+        val infixFunc = Settings[Settings.INFIX_FUNC]
+        val settingBundle = arrayOf(
             tt, ff, or, and, not, implication, biImplication, exists,
             forAll, infixPred, equalSigns, infixFunc
         )
-        for (i in settingBundle.indices) {
-            if (settingBundle[i] == null) {
-                throw ParseException(getString("FOS_MISSING_SETTING", settingNames[i]))
-            }
-        }
-        settingType = HashMap()
         val temp = ArrayList<String>()
         for (i in settingBundle.indices) {
-            for (j in settingBundle[i]!!.indices) {
-                temp.add(settingBundle[i]!![j])
-                settingType!![settingBundle[i]!![j]] = settingTypes[i]
+            for (j in settingBundle[i].indices) {
+                temp.add(settingBundle[i][j])
+                settingType[settingBundle[i][j]] = settingTypes[i]
             }
         }
         allSettings = temp.toTypedArray()
@@ -143,7 +120,7 @@ class FOLScanner(private val source: String, settings: Settings) {
                     // seems to be a symbol, which start like a keyword
                     continue
                 }
-                lookAHeadToken.setTypeAndValue(settingType!![token]!!, token)
+                lookAHeadToken.setTypeAndValue(settingType[token]!!, token)
                 pos += token.length
                 return
             }

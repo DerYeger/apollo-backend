@@ -13,6 +13,8 @@ fun Route.modelCheckerRoutes() {
 
     post("modelchecker") {
         val request = call.receive<ModelCheckerRequest>()
-        call.respond(modelCheckerService.checkModel(request))
+        val result = modelCheckerService.checkModel(request)
+        println(result)
+        call.respond(result)
     }
 }

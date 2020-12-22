@@ -3,50 +3,53 @@ package eu.yeger.gramofo.fol
 import eu.yeger.gramofo.fol.Lang.getString
 import eu.yeger.gramofo.fol.formula.*
 
+fun parseFormula(formula: String): ParseResult<FOLFormulaHead> {
+    return FOLParser().parseFormula(formula)
+}
+
 /**
  * This class provides a singleton object, which can parse input strings into
  * data structures. It works like a recursive descent parser.
  */
-class FOLParser {
-    val settings: Settings = Settings()
+private class FOLParser {
     private val symbolTable: HashMap<String, String> = HashMap()
     private var curBoundedVars: HashSet<FOLBoundVariable>? = null
 
     private fun addOperatorsToSymbolTable() {
-        for (infixFunc in settings.getSetting(Settings.TRUE)) {
+        for (infixFunc in Settings[Settings.TRUE]) {
             symbolTable[infixFunc] = "TT"
         }
-        for (infixFunc in settings.getSetting(Settings.FALSE)) {
+        for (infixFunc in Settings[Settings.FALSE]) {
             symbolTable[infixFunc] = "FF"
         }
-        for (infixFunc in settings.getSetting(Settings.OR)) {
+        for (infixFunc in Settings[Settings.OR]) {
             symbolTable[infixFunc] = "OR"
         }
-        for (infixFunc in settings.getSetting(Settings.AND)) {
+        for (infixFunc in Settings[Settings.AND]) {
             symbolTable[infixFunc] = "AND"
         }
-        for (infixFunc in settings.getSetting(Settings.NOT)) {
+        for (infixFunc in Settings[Settings.NOT]) {
             symbolTable[infixFunc] = "NOT"
         }
-        for (infixFunc in settings.getSetting(Settings.IMPLICATION)) {
+        for (infixFunc in Settings[Settings.IMPLICATION]) {
             symbolTable[infixFunc] = "IMP"
         }
-        for (infixFunc in settings.getSetting(Settings.BI_IMPLICATION)) {
+        for (infixFunc in Settings[Settings.BI_IMPLICATION]) {
             symbolTable[infixFunc] = "BIIMP"
         }
-        for (infixFunc in settings.getSetting(Settings.EXISTS)) {
+        for (infixFunc in Settings[Settings.EXISTS]) {
             symbolTable[infixFunc] = "EX"
         }
-        for (infixFunc in settings.getSetting(Settings.FOR_ALL)) {
+        for (infixFunc in Settings[Settings.FOR_ALL]) {
             symbolTable[infixFunc] = "FOR"
         }
-        for (infixPred in settings.getSetting(Settings.INFIX_PRED)) {
+        for (infixPred in Settings[Settings.INFIX_PRED]) {
             symbolTable[infixPred] = "P-2"
         }
-        for (infixFunc in settings.getSetting(Settings.INFIX_FUNC)) {
+        for (infixFunc in Settings[Settings.INFIX_FUNC]) {
             symbolTable[infixFunc] = "F-2"
         }
-        for (infixFunc in settings.getSetting(Settings.EQUAL_SIGN)) {
+        for (infixFunc in Settings[Settings.EQUAL_SIGN]) {
             symbolTable[infixFunc] = "P-2"
         }
     }
@@ -61,7 +64,7 @@ class FOLParser {
         curBoundedVars = HashSet()
         return try {
             addOperatorsToSymbolTable()
-            val scanner = FOLScanner(sFormula, settings)
+            val scanner = FOLScanner(sFormula)
             val formula = parseFormula(scanner)
             if (scanner.curType() != FOLToken.END_OF_SOURCE) {
                 throw ParseException(getString("FOP_END_OF_INPUT", scanner.curValue(), scanner.restOfText))

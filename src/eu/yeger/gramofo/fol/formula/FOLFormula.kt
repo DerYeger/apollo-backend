@@ -17,10 +17,9 @@ abstract class FOLFormula(
 ) {
     val children = children ?: LinkedHashSet()
 
-    var variables: ArrayList<FOLBoundVariable>? = null
-        private set
-
-    abstract override fun toString(): String
+    override fun toString(): String {
+        return name
+    }
 
     /**
      * @return the child at the specified position of this FOLFormula or a Dummy, if there is no child at this position.
@@ -44,24 +43,6 @@ abstract class FOLFormula(
         sb.insert(0, if (hasDot) ". " else "")
         sb.append(if (hasBrackets) ")" else "")
         return sb
-    }
-
-    private fun variables(): ArrayList<FOLBoundVariable> {
-        val list = ArrayList<FOLBoundVariable>()
-        for (i in children.indices) {
-            val child = getChildAt(i)
-            if (this is FOLQuantifier && child is FOLBoundVariable) {
-                list.add(child)
-            }
-            list.addAll(child.variables())
-        }
-        return list
-    }
-
-    fun countVariables() {
-        // Remove duplicates
-//        this.variables = new ArrayList<>(new LinkedHashSet<>(variables()));
-        variables = variables()
     }
 
     companion object {

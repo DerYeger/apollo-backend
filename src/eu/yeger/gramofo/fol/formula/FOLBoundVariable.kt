@@ -2,16 +2,16 @@ package eu.yeger.gramofo.fol.formula
 
 import java.util.*
 
-class FOLBoundVariable(name: String) : FOLFormula(FOLType.Variable, false, false, name) {
+class FOLBoundVariable(name: String) : FOLFormula(
+    type = FOLType.Variable,
+    hasBrackets = false,
+    hasDot = false,
+    name = name
+) {
     val uuid: UUID = UUID.randomUUID()
-    var quantorSymbolUuid: UUID? = null
-        private set
+    private var quantorSymbolUuid: UUID? = null
 
-    override fun toString(): String {
-        return name
-    }
-
-    fun withQuantorSymbol(quantorSymbol: FOLFormula?): FOLBoundVariable {
+    fun withQuantorSymbol(quantorSymbol: FOLFormula): FOLBoundVariable {
         if (quantorSymbol is FOLBoundVariable) {
             quantorSymbolUuid = quantorSymbol.uuid
         }

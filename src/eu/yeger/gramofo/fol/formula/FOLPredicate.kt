@@ -3,33 +3,32 @@ package eu.yeger.gramofo.fol.formula
 import java.lang.StringBuilder
 import java.util.LinkedHashSet
 
-class FOLPredicate : FOLFormula {
-    var isInfixProperty = false
+class FOLPredicate(
+    children: LinkedHashSet<out FOLFormula>,
+    hasBrackets: Boolean,
+    hasDot: Boolean,
+    name: String
+) : FOLFormula(
+    type = FOLType.Predicate,
+    hasBrackets = hasBrackets,
+    hasDot = hasDot,
+    name = name,
+    children = children
+) {
+    private val isInfixProperty = children.size == 2
 
     constructor(
-        children: LinkedHashSet<out FOLFormula?>?,
+        leftOperand: FOLFormula,
+        rightOperand: FOLFormula,
         hasBrackets: Boolean,
         hasDot: Boolean,
         name: String
-    ) : super(FOLType.Predicate, hasBrackets, hasDot, name, children) {
-        isInfixProperty = false
-    }
-
-    constructor(
-        leftOperand: FOLFormula?,
-        rightOperand: FOLFormula?,
-        hasBrackets: Boolean,
-        hasDot: Boolean,
-        name: String
-    ) : super(
-        FOLType.Predicate,
-        hasBrackets,
-        hasDot,
-        name,
-        LinkedHashSet<FOLFormula>(listOf(leftOperand, rightOperand)),
-    ) {
-        isInfixProperty = true
-    }
+    ) : this(
+        children = LinkedHashSet<FOLFormula>(listOf(leftOperand, rightOperand)),
+        hasBrackets = hasBrackets,
+        hasDot = hasDot,
+        name = name,
+    )
 
     override fun toString(): String {
         val sb = StringBuilder()

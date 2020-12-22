@@ -2,33 +2,26 @@ package eu.yeger.gramofo.fol.formula
 
 import java.util.*
 
-class FOLFunction : FOLFormula {
-    var isInfix: Boolean
+class FOLFunction(
+    children: LinkedHashSet<out FOLFormula>,
+    hasBrackets: Boolean,
+    hasDot: Boolean,
+    name: String
+) : FOLFormula(FOLType.Function, hasBrackets, hasDot, name, children) {
+    private val isInfix = children.size == 2
 
     constructor(
-        children: LinkedHashSet<out FOLFormula?>?,
+        leftOperand: FOLFormula,
+        rightOperand: FOLFormula,
         hasBrackets: Boolean,
         hasDot: Boolean,
         name: String
-    ) : super(FOLType.Function, hasBrackets, hasDot, name, children) {
-        isInfix = false
-    }
-
-    constructor(
-        leftOperand: FOLFormula?,
-        rightOperand: FOLFormula?,
-        hasBrackets: Boolean,
-        hasDot: Boolean,
-        name: String
-    ) : super(
-        FOLType.Function,
+    ) : this(
+        LinkedHashSet<FOLFormula>(listOf(leftOperand, rightOperand)),
         hasBrackets,
         hasDot,
-        name,
-        LinkedHashSet<FOLFormula>(listOf(leftOperand, rightOperand)),
-    ) {
-        isInfix = true
-    }
+        name
+    )
 
     override fun toString(): String {
         val sb = StringBuilder()

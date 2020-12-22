@@ -66,7 +66,7 @@ object FOLFactory {
     }
 
     /**
-     * Creates a biimplication-operator. FOLOperator.BIIMPLICATION is used as name.
+     * Creates a bi-implication-operator. FOLOperator.BI_IMPLICATION is used as name.
      * @return a new instance of FOLOperator
      */
     fun createOperatorBiImplication(
@@ -98,7 +98,7 @@ object FOLFactory {
      * @return a new instance of FOLFunction
      */
     fun createFunction(
-        children: LinkedHashSet<out FOLFormula?>?,
+        children: LinkedHashSet<out FOLFormula?>,
         hasBrackets: Boolean,
         hasDot: Boolean,
         name: String
@@ -111,8 +111,8 @@ object FOLFactory {
      * @return a new instance of FOLFunction
      */
     fun createInfixFunction(
-        leftOperand: FOLFormula?,
-        rightOperand: FOLFormula?,
+        leftOperand: FOLFormula,
+        rightOperand: FOLFormula,
         hasBrackets: Boolean,
         hasDot: Boolean,
         name: String
@@ -125,7 +125,7 @@ object FOLFactory {
      * @return a new instance of FOLPredicate
      */
     fun createPredicate(
-        children: LinkedHashSet<out FOLFormula?>?,
+        children: LinkedHashSet<out FOLFormula>,
         hasBrackets: Boolean,
         hasDot: Boolean,
         name: String
@@ -138,8 +138,8 @@ object FOLFactory {
      * @return a new instance of FOLPredicate
      */
     fun createInfixPredicate(
-        leftOperand: FOLFormula?,
-        rightOperand: FOLFormula?,
+        leftOperand: FOLFormula,
+        rightOperand: FOLFormula,
         hasBrackets: Boolean,
         hasDot: Boolean,
         name: String
@@ -157,20 +157,20 @@ object FOLFactory {
         return FOLBoundVariable(name)
     }
 
-    fun createBoundVariable(name: String, quantorSymbol: FOLFormula?): FOLFormula {
+    fun createBoundVariable(name: String, quantorSymbol: FOLFormula): FOLFormula {
         return FOLBoundVariable(name).withQuantorSymbol(quantorSymbol)
     }
 
     /**
-     * Creates a new forall quantifier.
+     * Creates a new forAll quantifier.
      * @param variable an instance of FOLBoundVariables. The name of this variable is used to bind other variables in
      * the formula subtree
      * @param operand the root of the subtree
      * @return a new instance of FOLQuantifier
      */
     fun createQuantifierForAll(
-        variable: FOLBoundVariable?,
-        operand: FOLFormula?,
+        variable: FOLBoundVariable,
+        operand: FOLFormula,
         hasBrackets: Boolean,
         hasDot: Boolean
     ): FOLQuantifier {
@@ -185,8 +185,8 @@ object FOLFactory {
      * @return a new instance of FOLQuantifier
      */
     fun createQuantifierExists(
-        variable: FOLBoundVariable?,
-        operand: FOLFormula?,
+        variable: FOLBoundVariable,
+        operand: FOLFormula,
         hasBrackets: Boolean,
         hasDot: Boolean
     ): FOLQuantifier {

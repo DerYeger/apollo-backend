@@ -1,9 +1,9 @@
 package eu.yeger.gramofo.fol.formula
 
 class FOLQuantifier(
-    type: FOLType?,
-    variable: FOLBoundVariable?,
-    operand: FOLFormula?,
+    type: FOLType,
+    variable: FOLBoundVariable,
+    operand: FOLFormula,
     hasBrackets: Boolean,
     hasDot: Boolean,
     name: String

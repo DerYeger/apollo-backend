@@ -1,10 +1,9 @@
 package eu.yeger.gramofo.fol
 
-import eu.yeger.gramofo.fol.graph.Edge
-import eu.yeger.gramofo.fol.graph.Graph
-import eu.yeger.gramofo.fol.graph.Vertex
-import eu.yeger.gramofo.fol.graph.checkModel
-import eu.yeger.gramofo.utils.shouldBe
+import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
+import eu.yeger.gramofo.fol.graph.*
+import eu.yeger.gramofo.utils.shouldBeInstanceOf
 import eu.yeger.gramofo.utils.shouldNotBe
 import org.junit.jupiter.api.Test
 
@@ -22,7 +21,8 @@ class FOLTests {
 
         val graph = Graph(listOf(a, b), listOf(aToB, bToB))
         val modelResult = checkModel(graph, result.result!!)
-        modelResult shouldBe null
+        println(modelResult)
+        modelResult shouldBeInstanceOf Ok::class.java
     }
 
     @Test
@@ -36,6 +36,7 @@ class FOLTests {
 
         val graph = Graph(listOf(a, b), listOf(aToA, bToB))
         val modelResult = checkModel(graph, result.result!!)
-        modelResult shouldNotBe null
+        println(modelResult)
+        modelResult shouldBeInstanceOf Err::class.java
     }
 }

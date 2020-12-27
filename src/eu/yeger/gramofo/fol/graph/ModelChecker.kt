@@ -1,5 +1,8 @@
 package eu.yeger.gramofo.fol.graph
 
+import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.Result
 import eu.yeger.gramofo.fol.Lang
 import eu.yeger.gramofo.fol.Settings
 import eu.yeger.gramofo.fol.formula.*
@@ -19,6 +22,8 @@ import kotlin.collections.mutableMapOf
 import kotlin.collections.none
 import kotlin.collections.set
 import kotlin.collections.toSet
+
+typealias ModelCheckerResult = Result<ModelCheckerTrace, String>
 
 fun checkModel(graph: Graph, formulaHead: FOLFormulaHead, locale: Locale = Locale.ENGLISH): ModelCheckerResult {
     return ModelChecker(graph, formulaHead, Lang(locale)).result
@@ -46,9 +51,9 @@ private class ModelChecker(
         checkTotality()
 
         result = try {
-            checkModel(formulaHead.formula)
+            Ok(checkModel(formulaHead.formula))
         } catch (mce: ModelCheckException) {
-            formulaHead.formula.invalidated(mce.message ?: "An error occurred")
+            Err(mce.message ?: "An error occurred")
         }
     }
 
@@ -151,7 +156,7 @@ private class ModelChecker(
      * @throws ModelCheckException if the data is invalid. This should not happen.
      */
     @Throws(ModelCheckException::class)
-    private fun checkModel(formula: FOLFormula): ModelCheckerResult {
+    private fun checkModel(formula: FOLFormula): ModelCheckerTrace {
         return when (formula.type) {
             FOLType.ForAll -> checkForAll(formula)
             FOLType.Exists -> checkExists(formula)
@@ -197,7 +202,7 @@ private class ModelChecker(
 
     class ModelCheckException(message: String) : RuntimeException(message)
 
-    private fun checkForAll(formula: FOLFormula): ModelCheckerResult {
+    private fun checkForAll(formula: FOLFormula): ModelCheckerTrace {
         val (valid, invalid) = graph.vertices.map { vertex: Vertex ->
             bindVariableValues[formula.getChildAt(0).name] = vertex
             checkModel(formula.getChildAt(1))
@@ -209,7 +214,7 @@ private class ModelChecker(
         }
     }
 
-    private fun checkExists(formula: FOLFormula): ModelCheckerResult {
+    private fun checkExists(formula: FOLFormula): ModelCheckerTrace {
         val (valid, invalid) = graph.vertices.map { vertex: Vertex ->
             bindVariableValues[formula.getChildAt(0).name] = vertex
             checkModel(formula.getChildAt(1))
@@ -221,59 +226,64 @@ private class ModelChecker(
         }
     }
 
-    private fun checkNot(formula: FOLFormula): ModelCheckerResult {
-        return when (val result = checkModel(formula.getChildAt(0))) {
-            is ModelCheckerSuccess -> formula.invalidated("Child matches", result.trace)
-            is ModelCheckerFailure -> formula.validated("Child does not match", result.trace)
+    private fun checkNot(formula: FOLFormula): ModelCheckerTrace {
+        val result = checkModel(formula.getChildAt(0))
+        return when (result.isModel) {
+            true -> formula.invalidated("Child matches", result)
+            false -> formula.validated("Child does not match", result)
         }
     }
 
-    private fun checkAnd(formula: FOLFormula): ModelCheckerResult {
+    private fun checkAnd(formula: FOLFormula): ModelCheckerTrace {
         val left = checkModel(formula.getChildAt(0))
         val right = checkModel(formula.getChildAt(1))
         return when {
-            left is ModelCheckerSuccess && right is ModelCheckerSuccess -> formula.validated(
+            left.isModel && right.isModel -> formula.validated(
                 "Both children match",
-                left.trace,
-                right.trace
+                left,
+                right
             )
-            left is ModelCheckerFailure -> formula.invalidated("First child does not match", left.trace)
-            else -> formula.invalidated("Second child does not match", right.trace)
+            left.isModel.not() && right.isModel.not() -> formula.invalidated("Neither child matches", left, right)
+            left.isModel.not() -> formula.invalidated("First child does not match", left)
+            else -> formula.invalidated("Second child does not match", right)
         }
     }
 
-    private fun checkOr(formula: FOLFormula): ModelCheckerResult {
+    private fun checkOr(formula: FOLFormula): ModelCheckerTrace {
         val left = checkModel(formula.getChildAt(0))
         val right = checkModel(formula.getChildAt(1))
         return when {
-            left is ModelCheckerSuccess -> formula.validated("First child matches", left.trace)
-            right is ModelCheckerSuccess -> formula.validated("Second child matches", right.trace)
-            else -> formula.invalidated("Both children do not match", left.trace, right.trace)
+            left.isModel && right.isModel -> formula.validated(
+                "Both children match",
+                left,
+                right
+            )
+            left.isModel -> formula.validated("First child matches", left)
+            right.isModel -> formula.validated("Second child matches", right)
+            else -> formula.invalidated("Neither child matches", left, right)
         }
     }
 
-    private fun checkImplication(formula: FOLFormula): ModelCheckerResult {
+    private fun checkImplication(formula: FOLFormula): ModelCheckerTrace {
         val left = checkModel(formula.getChildAt(0))
         val right = checkModel(formula.getChildAt(1))
         return when {
-            right is ModelCheckerSuccess -> formula.validated("Right side matches", right.trace)
-            left is ModelCheckerFailure -> formula.validated("Left side does not match", left.trace)
-            else -> formula.invalidated("Left side matches but right side does not", left.trace, right.trace)
+            right.isModel -> formula.validated("Right side matches", right)
+            left.isModel.not() -> formula.validated("Left side does not match", left)
+            else -> formula.invalidated("Left side matches but right side does not", left, right)
         }
     }
 
-    private fun checkBiImplication(formula: FOLFormula): ModelCheckerResult {
+    private fun checkBiImplication(formula: FOLFormula): ModelCheckerTrace {
         val left = checkModel(formula.getChildAt(0))
         val right = checkModel(formula.getChildAt(1))
-        val leftIsValid = left is ModelCheckerSuccess
-        val rightIsValid = right is ModelCheckerSuccess
         return when {
-            leftIsValid == rightIsValid -> formula.validated("Both sides are the same", left.trace, right.trace)
-            else -> formula.invalidated("The sides are not equal", left.trace, right.trace)
+            left.isModel == right.isModel -> formula.validated("Both sides are the same", left, right)
+            else -> formula.invalidated("The sides are not equal", left, right)
         }
     }
 
-    private fun checkPredicate(formula: FOLFormula): ModelCheckerResult {
+    private fun checkPredicate(formula: FOLFormula): ModelCheckerTrace {
         return when (formula.children.size) {
             1 -> checkUnaryPredicate(formula)
             2 -> checkBinaryPredicate(formula)
@@ -281,7 +291,7 @@ private class ModelChecker(
         }
     }
 
-    private fun checkUnaryPredicate(formula: FOLFormula): ModelCheckerResult {
+    private fun checkUnaryPredicate(formula: FOLFormula): ModelCheckerTrace {
         val vertex = interpret(formula.getChildAt(0))
         return when (oneArySymbolTable[formula.name]!!.contains(vertex)) {
             true -> formula.validated("Unary relation ${formula.name} contains $vertex")
@@ -289,7 +299,7 @@ private class ModelChecker(
         }
     }
 
-    private fun checkBinaryPredicate(formula: FOLFormula): ModelCheckerResult {
+    private fun checkBinaryPredicate(formula: FOLFormula): ModelCheckerTrace {
         val left = interpret(formula.getChildAt(0))
         val right = interpret(formula.getChildAt(1))
         return if (formula.name == INFIX_EQUALITY) {
@@ -305,7 +315,7 @@ private class ModelChecker(
         }
     }
 
-    private fun checkConstant(formula: FOLFormula): ModelCheckerResult {
+    private fun checkConstant(formula: FOLFormula): ModelCheckerTrace {
         return when (FOLFormula.TT == formula.name) {
             true -> formula.invalidated("Constant is true")
             else -> formula.invalidated("Constant is false")

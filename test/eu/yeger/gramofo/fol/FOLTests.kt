@@ -1,11 +1,11 @@
 package eu.yeger.gramofo.fol
 
-import com.github.michaelbull.result.Err
-import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.getOrElse
 import eu.yeger.gramofo.fol.graph.*
-import eu.yeger.gramofo.utils.shouldBeInstanceOf
+import eu.yeger.gramofo.utils.shouldBe
 import eu.yeger.gramofo.utils.shouldNotBe
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.fail
 
 class FOLTests {
     @Test
@@ -20,9 +20,9 @@ class FOLTests {
         val bToB = Edge(b, b, listOf(), listOf("f"))
 
         val graph = Graph(listOf(a, b), listOf(aToB, bToB))
-        val modelResult = checkModel(graph, result.result!!)
+        val modelResult = checkModel(graph, result.result!!).getOrElse { fail("Input should have been valid.") }
         println(modelResult)
-        modelResult shouldBeInstanceOf Ok::class.java
+        modelResult.isModel shouldBe true
     }
 
     @Test
@@ -35,8 +35,8 @@ class FOLTests {
         val bToB = Edge(b, b, listOf(), listOf("f"))
 
         val graph = Graph(listOf(a, b), listOf(aToA, bToB))
-        val modelResult = checkModel(graph, result.result!!)
+        val modelResult = checkModel(graph, result.result!!).getOrElse { fail("Input should have been valid.") }
         println(modelResult)
-        modelResult shouldBeInstanceOf Err::class.java
+        modelResult.isModel shouldBe false
     }
 }

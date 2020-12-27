@@ -317,7 +317,7 @@ private class ModelChecker(
 
     private fun checkConstant(formula: FOLFormula): ModelCheckerTrace {
         return when (FOLFormula.TT == formula.name) {
-            true -> formula.invalidated("Constant is true")
+            true -> formula.validated("Constant is true")
             else -> formula.invalidated("Constant is false")
         }
     }

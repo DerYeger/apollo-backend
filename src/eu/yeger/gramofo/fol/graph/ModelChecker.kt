@@ -7,6 +7,7 @@ import eu.yeger.gramofo.fol.Lang
 import eu.yeger.gramofo.fol.Settings
 import eu.yeger.gramofo.fol.formula.*
 import eu.yeger.gramofo.fol.formula.FOLFormula.Companion.INFIX_EQUALITY
+import eu.yeger.gramofo.model.api.TranslationDTO
 import java.util.*
 import kotlin.collections.MutableMap
 import kotlin.collections.MutableSet
@@ -14,7 +15,6 @@ import kotlin.collections.Set
 import kotlin.collections.any
 import kotlin.collections.component1
 import kotlin.collections.component2
-import kotlin.collections.contains
 import kotlin.collections.first
 import kotlin.collections.forEach
 import kotlin.collections.map
@@ -178,7 +178,7 @@ private class ModelChecker(
      * @throws ModelCheckException if the data is invalid. This should not happen.
      */
     @Throws(ModelCheckException::class)
-    private fun interpret(symbol: FOLFormula): Vertex? {
+    private fun interpret(symbol: FOLFormula): Vertex {
         return when (symbol) {
             is FOLFunction -> {
                 when (symbol.children.size) {
@@ -190,12 +190,8 @@ private class ModelChecker(
                     else -> throw ModelCheckException("[ModelChecker][Internal error] Found function with to many children.")
                 }
             }
-            is FOLBoundVariable -> {
-                if (bindVariableValues[symbol.name] == null) {
-                    throw ModelCheckException("[ModelChecker][Internal error] No bind value found for variable.")
-                }
-                bindVariableValues[symbol.name]
-            }
+            is FOLBoundVariable ->
+                bindVariableValues[symbol.name] ?: throw ModelCheckException("[ModelChecker][Internal error] No bind value found for variable.")
             else -> throw ModelCheckException("[ModelChecker][Internal error] Not a valid function or a variable.")
         }
     }
@@ -208,9 +204,9 @@ private class ModelChecker(
             checkModel(formula.getChildAt(1))
         }.split()
         return if (invalid.isEmpty()) {
-            formula.validated("All children match", valid)
+            formula.validated(TranslationDTO("api.forall.valid"), valid)
         } else {
-            formula.invalidated("Some children do not match", invalid)
+            formula.invalidated(TranslationDTO("api.forall.invalid"), invalid)
         }
     }
 
@@ -220,17 +216,17 @@ private class ModelChecker(
             checkModel(formula.getChildAt(1))
         }.split()
         return if (valid.isEmpty()) {
-            formula.invalidated("No children match", invalid)
+            formula.invalidated(TranslationDTO("api.exists.valid"), invalid)
         } else {
-            formula.validated("Some children match", valid)
+            formula.validated(TranslationDTO("api.exists.invalid"), valid)
         }
     }
 
     private fun checkNot(formula: FOLFormula): ModelCheckerTrace {
         val result = checkModel(formula.getChildAt(0))
         return when (result.isModel) {
-            true -> formula.invalidated("Child matches", result)
-            false -> formula.validated("Child does not match", result)
+            true -> formula.invalidated(TranslationDTO("api.not.invalid"), result)
+            false -> formula.validated(TranslationDTO("api.not.valid"), result)
         }
     }
 
@@ -239,13 +235,13 @@ private class ModelChecker(
         val right = checkModel(formula.getChildAt(1))
         return when {
             left.isModel && right.isModel -> formula.validated(
-                "Both children match",
+                TranslationDTO("api.and.both"),
                 left,
                 right
             )
-            left.isModel.not() && right.isModel.not() -> formula.invalidated("Neither child matches", left, right)
-            left.isModel.not() -> formula.invalidated("First child does not match", left)
-            else -> formula.invalidated("Second child does not match", right)
+            left.isModel.not() && right.isModel.not() -> formula.invalidated(TranslationDTO("api.and.neither"), left, right)
+            left.isModel.not() -> formula.invalidated(TranslationDTO("api.and.left"), left)
+            else -> formula.invalidated(TranslationDTO("api.and.right"), right)
         }
     }
 
@@ -254,13 +250,13 @@ private class ModelChecker(
         val right = checkModel(formula.getChildAt(1))
         return when {
             left.isModel && right.isModel -> formula.validated(
-                "Both children match",
+                TranslationDTO("api.or.both"),
                 left,
                 right
             )
-            left.isModel -> formula.validated("First child matches", left)
-            right.isModel -> formula.validated("Second child matches", right)
-            else -> formula.invalidated("Neither child matches", left, right)
+            left.isModel -> formula.validated(TranslationDTO("api.or.left"), left)
+            right.isModel -> formula.validated(TranslationDTO("api.or.right"), right)
+            else -> formula.invalidated(TranslationDTO("api.or.neither"), left, right)
         }
     }
 
@@ -268,18 +264,18 @@ private class ModelChecker(
         val left = checkModel(formula.getChildAt(0))
         val right = checkModel(formula.getChildAt(1))
         return when {
-            right.isModel -> formula.validated("Right side matches", right)
-            left.isModel.not() -> formula.validated("Left side does not match", left)
-            else -> formula.invalidated("Left side matches but right side does not", left, right)
+            right.isModel -> formula.validated(TranslationDTO("api.implication.right"), right)
+            left.isModel.not() -> formula.validated(TranslationDTO("api.implication.left"), left)
+            else -> formula.invalidated(TranslationDTO("api.implication.invalid"), left, right)
         }
     }
 
     private fun checkBiImplication(formula: FOLFormula): ModelCheckerTrace {
         val left = checkModel(formula.getChildAt(0))
         val right = checkModel(formula.getChildAt(1))
-        return when {
-            left.isModel == right.isModel -> formula.validated("Both sides are the same", left, right)
-            else -> formula.invalidated("The sides are not equal", left, right)
+        return when (left.isModel) {
+            right.isModel -> formula.validated(TranslationDTO("api.bi-implication.valid"), left, right)
+            else -> formula.invalidated(TranslationDTO("api.bi-implication.invalid"), left, right)
         }
     }
 
@@ -293,32 +289,35 @@ private class ModelChecker(
 
     private fun checkUnaryPredicate(formula: FOLFormula): ModelCheckerTrace {
         val vertex = interpret(formula.getChildAt(0))
+        val translationParams = mapOf("relation" to formula.name, "node" to vertex.name)
         return when (oneArySymbolTable[formula.name]!!.contains(vertex)) {
-            true -> formula.validated("Unary relation ${formula.name} contains $vertex")
-            false -> formula.invalidated("Unary relation ${formula.name} does not contain $vertex")
+            true -> formula.validated(TranslationDTO("api.relation.unary.valid", translationParams))
+            false -> formula.invalidated(TranslationDTO("api.relation.unary.invalid", translationParams))
         }
     }
 
     private fun checkBinaryPredicate(formula: FOLFormula): ModelCheckerTrace {
         val left = interpret(formula.getChildAt(0))
         val right = interpret(formula.getChildAt(1))
+        val translationParams = mapOf("first" to left.toString(), "second" to right.toString())
         return if (formula.name == INFIX_EQUALITY) {
             when (left) {
-                right -> formula.validated("Terms are equal")
-                else -> formula.invalidated("Terms are not equals")
+                right -> formula.validated(TranslationDTO("api.relation.quality.valid", translationParams))
+                else -> formula.invalidated(TranslationDTO("api.relation.equality.invalid", translationParams))
             }
         } else {
+            val binaryTranslationParams = translationParams + ("relation" to formula.name)
             when (twoArySymbolTable[formula.name]!!.any { edge: Edge -> edge.source == left && edge.target == right }) {
-                true -> formula.validated("Terms are part of relation")
-                else -> formula.invalidated("Terms are not part of relation")
+                true -> formula.validated(TranslationDTO("api.relation.binary.valid", binaryTranslationParams))
+                else -> formula.invalidated(TranslationDTO("api.relation.binary.invalid", binaryTranslationParams))
             }
         }
     }
 
     private fun checkConstant(formula: FOLFormula): ModelCheckerTrace {
         return when (FOLFormula.TT == formula.name) {
-            true -> formula.validated("Constant is true")
-            else -> formula.invalidated("Constant is false")
+            true -> formula.validated(TranslationDTO("api.constant.true"))
+            else -> formula.invalidated(TranslationDTO("api.constant.false"))
         }
     }
 }

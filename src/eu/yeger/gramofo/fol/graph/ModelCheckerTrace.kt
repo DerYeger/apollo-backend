@@ -1,10 +1,11 @@
 package eu.yeger.gramofo.fol.graph
 
 import eu.yeger.gramofo.fol.formula.FOLFormula
+import eu.yeger.gramofo.model.api.TranslationDTO
 
 data class ModelCheckerTrace(
     val formula: String,
-    val text: String,
+    val description: TranslationDTO,
     val isModel: Boolean,
     val children: List<ModelCheckerTrace>
 )
@@ -17,8 +18,12 @@ fun List<ModelCheckerTrace>.split(): Pair<List<ModelCheckerTrace>, List<ModelChe
     }
 }
 
-fun FOLFormula.validated(text: String, children: List<ModelCheckerTrace>) = ModelCheckerTrace(this.toString(), text, true, children.toList())
-fun FOLFormula.validated(text: String, vararg children: ModelCheckerTrace) = ModelCheckerTrace(this.toString(), text, true, children.toList())
+fun FOLFormula.validated(description: TranslationDTO, children: List<ModelCheckerTrace>) =
+    ModelCheckerTrace(this.toString(), description, true, children.toList())
+fun FOLFormula.validated(description: TranslationDTO, vararg children: ModelCheckerTrace) =
+    ModelCheckerTrace(this.toString(), description, true, children.toList())
 
-fun FOLFormula.invalidated(text: String, children: List<ModelCheckerTrace>) = ModelCheckerTrace(this.toString(), text, false, children.toList())
-fun FOLFormula.invalidated(text: String, vararg children: ModelCheckerTrace) = ModelCheckerTrace(this.toString(), text, false, children.toList())
+fun FOLFormula.invalidated(description: TranslationDTO, children: List<ModelCheckerTrace>) =
+    ModelCheckerTrace(this.toString(), description, false, children.toList())
+fun FOLFormula.invalidated(description: TranslationDTO, vararg children: ModelCheckerTrace) =
+    ModelCheckerTrace(this.toString(), description, false, children.toList())

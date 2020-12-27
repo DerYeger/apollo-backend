@@ -3,12 +3,12 @@ package eu.yeger.gramofo.fol.formula
 class FOLPredicate(
     name: String,
     children: Set<FOLFormula>,
+    private val isInfix: Boolean
 ) : FOLFormula(
     type = FOLType.Predicate,
     name = name,
     children = children
 ) {
-    private val isInfixProperty = children.size == 2
 
     constructor(
         name: String,
@@ -16,12 +16,13 @@ class FOLPredicate(
         rightOperand: FOLFormula,
     ) : this(
         name = name,
-        children = setOf(leftOperand, rightOperand)
+        children = setOf(leftOperand, rightOperand),
+        isInfix = true
     )
 
     override fun toString(): String {
         val sb = StringBuilder()
-        if (isInfixProperty) {
+        if (isInfix) {
             sb.append(getChildAt(0))
             sb.append(specialNames.getOrDefault(name, name))
             sb.append(getChildAt(1))

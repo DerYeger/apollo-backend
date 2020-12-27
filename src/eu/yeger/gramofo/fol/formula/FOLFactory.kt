@@ -128,7 +128,7 @@ object FOLFactory {
         name: String,
         children: Set<FOLFormula>,
     ): FOLPredicate {
-        return FOLPredicate(name = name, children = children)
+        return FOLPredicate(name = name, children = children, isInfix = false)
     }
 
     /**

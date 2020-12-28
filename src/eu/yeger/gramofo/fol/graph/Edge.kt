@@ -1,8 +1,8 @@
 package eu.yeger.gramofo.fol.graph
 
 data class Edge(
-    val source: Vertex,
-    val target: Vertex,
+    val source: Node,
+    val target: Node,
     val relations: List<String>,
     val functions: List<String>
 ) {

@@ -1,6 +1,6 @@
 package eu.yeger.gramofo.fol.formula
 
-import eu.yeger.gramofo.fol.graph.Vertex
+import eu.yeger.gramofo.fol.graph.Node
 
 class FOLQuantifier(
     type: FOLType,
@@ -9,7 +9,7 @@ class FOLQuantifier(
     operand: FOLFormula,
 ) : FOLFormula(type, name, setOf(variable, operand)) {
 
-    override fun getFormulaString(variableBindings: Map<String, Vertex>): String {
+    override fun getFormulaString(variableBindings: Map<String, Node>): String {
         val child0 = getChildAt(0)
         val child1 = getChildAt(1)
         val sb = StringBuilder()

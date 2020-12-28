@@ -85,8 +85,8 @@ class ModelCheckerTests {
     fun `verify that checking unary relations works`() {
         val graph = Graph(
             listOf(
-                Vertex("0", listOf("R"), listOf("a")),
-                Vertex("1", listOf(), listOf("b")),
+                Node("0", listOf("R"), listOf("a")),
+                Node("1", listOf(), listOf("b")),
             ),
             listOf()
         )
@@ -102,14 +102,14 @@ class ModelCheckerTests {
 
     @Test
     fun `verify that checking binary relations works`() {
-        val vertices = listOf(
-            Vertex("0", listOf(), listOf("a")),
-            Vertex("1", listOf(), listOf("b")),
+        val nodes = listOf(
+            Node("0", listOf(), listOf("a")),
+            Node("1", listOf(), listOf("b")),
         )
         val edges = listOf(
-            Edge(vertices[0], vertices[1], listOf("R"), listOf())
+            Edge(nodes[0], nodes[1], listOf("R"), listOf())
         )
-        val graph = Graph(vertices, edges)
+        val graph = Graph(nodes, edges)
         listOf(
             "R(a, b)" to true,
             "R(b, a)" to false,
@@ -122,15 +122,15 @@ class ModelCheckerTests {
 
     @Test
     fun `verify that checking equality works`() {
-        val vertices = listOf(
-            Vertex("0", listOf(), listOf("a")),
-            Vertex("1", listOf(), listOf("b")),
+        val nodes = listOf(
+            Node("0", listOf(), listOf("a")),
+            Node("1", listOf(), listOf("b")),
         )
         val edges = listOf(
-            Edge(vertices[0], vertices[1], listOf(), listOf("f")),
-            Edge(vertices[1], vertices[1], listOf(), listOf("f"))
+            Edge(nodes[0], nodes[1], listOf(), listOf("f")),
+            Edge(nodes[1], nodes[1], listOf(), listOf("f"))
         )
-        val graph = Graph(vertices, edges)
+        val graph = Graph(nodes, edges)
         listOf(
             "f(a)=b" to true,
             "f(b)=b" to true,
@@ -145,15 +145,15 @@ class ModelCheckerTests {
 
     @Test
     fun `verify that checking existential quantor works`() {
-        val vertices = listOf(
-            Vertex("0", listOf(), listOf("a")),
-            Vertex("1", listOf(), listOf("b")),
+        val nodes = listOf(
+            Node("0", listOf(), listOf("a")),
+            Node("1", listOf(), listOf("b")),
         )
         val edges = listOf(
-            Edge(vertices[0], vertices[1], listOf(), listOf("f")),
-            Edge(vertices[1], vertices[1], listOf(), listOf("f"))
+            Edge(nodes[0], nodes[1], listOf(), listOf("f")),
+            Edge(nodes[1], nodes[1], listOf(), listOf("f"))
         )
-        val graph = Graph(vertices, edges)
+        val graph = Graph(nodes, edges)
         listOf(
             "exists x. f(x)=x" to true,
             "exists x. f(x)=b" to true,
@@ -165,15 +165,15 @@ class ModelCheckerTests {
 
     @Test
     fun `verify that checking universal quantor works`() {
-        val vertices = listOf(
-            Vertex("0", listOf(), listOf("a")),
-            Vertex("1", listOf(), listOf("b")),
+        val nodes = listOf(
+            Node("0", listOf(), listOf("a")),
+            Node("1", listOf(), listOf("b")),
         )
         val edges = listOf(
-            Edge(vertices[0], vertices[1], listOf(), listOf("f")),
-            Edge(vertices[1], vertices[1], listOf(), listOf("f"))
+            Edge(nodes[0], nodes[1], listOf(), listOf("f")),
+            Edge(nodes[1], nodes[1], listOf(), listOf("f"))
         )
-        val graph = Graph(vertices, edges)
+        val graph = Graph(nodes, edges)
         listOf(
             "forall x. f(x)=b" to true,
             "forall x. f(x)=a" to false,

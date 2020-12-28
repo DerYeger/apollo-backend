@@ -1,6 +1,6 @@
 package eu.yeger.gramofo.fol.formula
 
-import eu.yeger.gramofo.fol.graph.Vertex
+import eu.yeger.gramofo.fol.graph.Node
 
 /**
  * This is the super class of all formula types.
@@ -14,13 +14,13 @@ abstract class FOLFormula(
     var hasBrackets: Boolean = false
     var hasDot: Boolean = false
 
-    abstract fun getFormulaString(variableBindings: Map<String, Vertex>): String
+    abstract fun getFormulaString(variableBindings: Map<String, Node>): String
 
     final override fun toString(): String {
         return getFormulaString(emptyMap()).removePrefix(". ")
     }
 
-    fun toString(variableBindings: Map<String, Vertex>): String {
+    fun toString(variableBindings: Map<String, Node>): String {
         return getFormulaString(variableBindings).removePrefix(". ")
     }
 
@@ -65,7 +65,7 @@ abstract class FOLFormula(
         type = null,
         name = "?",
     ) {
-        override fun getFormulaString(variableBindings: Map<String, Vertex>): String {
+        override fun getFormulaString(variableBindings: Map<String, Node>): String {
             return "?"
         }
     }

@@ -3,7 +3,7 @@ package eu.yeger.gramofo.model.api
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import eu.yeger.gramofo.fol.graph.Edge
 import eu.yeger.gramofo.fol.graph.Graph
-import eu.yeger.gramofo.fol.graph.Vertex
+import eu.yeger.gramofo.fol.graph.Node
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ApiGraph(
@@ -12,8 +12,8 @@ data class ApiGraph(
 )
 
 fun ApiGraph.toDomainModel(): Graph {
-    val vertices = nodes.associate { node ->
-        node.name to Vertex(
+    val domainNodes = nodes.associate { node ->
+        node.name to Node(
             name = node.name,
             relations = node.relations,
             constants = node.constants
@@ -21,11 +21,11 @@ fun ApiGraph.toDomainModel(): Graph {
     }
     val domainEdges = edges.map { edge ->
         Edge(
-            source = vertices[edge.source]!!,
-            target = vertices[edge.target]!!,
+            source = domainNodes[edge.source]!!,
+            target = domainNodes[edge.target]!!,
             relations = edge.relations,
             functions = edge.functions
         )
     }
-    return Graph(vertices.values.toList(), domainEdges)
+    return Graph(domainNodes.values.toList(), domainEdges)
 }

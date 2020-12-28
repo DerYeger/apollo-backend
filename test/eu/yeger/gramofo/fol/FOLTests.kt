@@ -13,8 +13,8 @@ class FOLTests {
         val result = parseFormula("exists x. exists y. f(x) = y")
         result shouldNotBe null
 
-        val a = Vertex("a", listOf("A"), listOf())
-        val b = Vertex("b", listOf(), listOf())
+        val a = Node("a", listOf("A"), listOf())
+        val b = Node("b", listOf(), listOf())
 
         val aToB = Edge(a, b, listOf(), listOf("f"))
         val bToB = Edge(b, b, listOf(), listOf("f"))
@@ -28,8 +28,8 @@ class FOLTests {
     @Test
     fun testNegativeFOLParser() {
         val result = parseFormula("exists x. exists y. f(x) = y && !(x = y)")
-        val a = Vertex("a", listOf("A"), listOf())
-        val b = Vertex("b", listOf(), listOf())
+        val a = Node("a", listOf("A"), listOf())
+        val b = Node("b", listOf(), listOf())
 
         val aToA = Edge(a, a, listOf(), listOf("f"))
         val bToB = Edge(b, b, listOf(), listOf("f"))

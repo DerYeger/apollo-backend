@@ -1,6 +1,6 @@
 package eu.yeger.gramofo.fol.formula
 
-import eu.yeger.gramofo.fol.graph.Vertex
+import eu.yeger.gramofo.fol.graph.Node
 
 class FOLOperator : FOLFormula {
     constructor(
@@ -16,7 +16,7 @@ class FOLOperator : FOLFormula {
         operand: FOLFormula,
     ) : super(type, name, setOf(operand))
 
-    override fun getFormulaString(variableBindings: Map<String, Vertex>): String {
+    override fun getFormulaString(variableBindings: Map<String, Node>): String {
         val sb = StringBuilder()
         if (name == NOT) {
             sb.append(name)

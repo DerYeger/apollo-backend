@@ -1,6 +1,6 @@
 package eu.yeger.gramofo.fol.formula
 
-import eu.yeger.gramofo.fol.graph.Vertex
+import eu.yeger.gramofo.fol.graph.Node
 
 private val specialNames = mapOf(
     "=" to "\u2250",
@@ -28,7 +28,7 @@ class FOLPredicate(
         isInfix = true
     )
 
-    override fun getFormulaString(variableBindings: Map<String, Vertex>): String {
+    override fun getFormulaString(variableBindings: Map<String, Node>): String {
         val sb = StringBuilder()
         if (isInfix) {
             sb.append(getChildAt(0).getFormulaString(variableBindings))

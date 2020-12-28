@@ -37,10 +37,10 @@ private class ModelChecker(
     private val formulaHead: FOLFormulaHead,
     private val lang: Lang
 ) {
-    private val oneArySymbolTable: MutableMap<String, MutableSet<Vertex>> = mutableMapOf()
+    private val oneArySymbolTable: MutableMap<String, MutableSet<Node>> = mutableMapOf()
     private val twoArySymbolTable: MutableMap<String, MutableSet<Edge>> = mutableMapOf()
     private val symbolTypeTable: MutableMap<String, String> = mutableMapOf()
-    private val bindVariableValues: MutableMap<String, Vertex> = mutableMapOf()
+    private val bindVariableValues: MutableMap<String, Node> = mutableMapOf()
     private val infixPredicates: Set<String> = Settings[Settings.INFIX_PRED].toSet()
 
     val result: ModelCheckerResult
@@ -64,15 +64,15 @@ private class ModelChecker(
      */
     @Throws(ModelCheckException::class)
     private fun loadGraphSymbols() {
-        graph.vertices.forEach { vertex: Vertex ->
-            vertex.stringAttachments.forEach { symbol: String ->
+        graph.nodes.forEach { node: Node ->
+            node.stringAttachments.forEach { symbol: String ->
                 val symbolType = if (Character.isUpperCase(symbol[0])) "P-1" else "F-0"
                 symbolTypeTable[symbol] = symbolType
                 val relationSet = oneArySymbolTable.getOrDefault(symbol, HashSet())
                 if (symbolType == "F-0" && relationSet.size != 0) {
-                    throw ModelCheckException("The 0-ary function symbol '$symbol' can only be assigned to one vertex.")
+                    throw ModelCheckException("The 0-ary function symbol '$symbol' can only be assigned to one node.")
                 }
-                relationSet.add(vertex)
+                relationSet.add(node)
                 oneArySymbolTable[symbol] = relationSet
             }
         }
@@ -86,7 +86,7 @@ private class ModelChecker(
                 }
                 val relationSet = twoArySymbolTable.getOrDefault(symbol, HashSet())
                 if (symbolType == "F-1" && relationSet.any { otherEdge: Edge -> edge.source == otherEdge.source }) {
-                    throw ModelCheckException("The 1-ary function '$symbol' has at least for one vertex two function values. A function must be right-unique.")
+                    throw ModelCheckException("The 1-ary function '$symbol' has two function values for at least one node. A function must be right-unique.")
                 }
                 relationSet.add(edge)
                 twoArySymbolTable[symbol] = relationSet
@@ -131,9 +131,9 @@ private class ModelChecker(
                 }
                 "F-1" -> {
                     val relationSet: Set<Edge> = twoArySymbolTable[symbol]!!
-                    graph.vertices.forEach { vertex: Vertex ->
-                        if (relationSet.none { edge: Edge -> edge.source == vertex }) {
-                            throw ModelCheckException("The 1-ary function '$symbol' must be total. Please be sure that it is defined for all vertexes.")
+                    graph.nodes.forEach { node: Node ->
+                        if (relationSet.none { edge: Edge -> edge.source == node }) {
+                            throw ModelCheckException("The 1-ary function '$symbol' must be total. Please be sure that it is defined for all nodes.")
                         }
                     }
                 }
@@ -141,18 +141,6 @@ private class ModelChecker(
         }
     }
 
-    /**
-     * This function does the main job: the model checking. It handles the top-level type of the given formula
-     * and call it self recursively on all children.<br></br>
-     * The base case are: <br></br>
-     * - the bind variables, which are associated with an real element throw an quantifier before<br></br>
-     * - 0-are function symbols, which must be specified throw the graph <br></br>
-     * Predicates and function interpretation are given throw the graph too.<br></br>
-     * The Equality is simply implemented as the equality of two vertexes: vertexFromChild1 == vertexFromChild2 ?.
-     * This is possible, because every term can be interpreted with a vertex.
-     * @throws ModelCheckException if the data is invalid. This should not happen.
-     */
-    @Throws(ModelCheckException::class)
     private fun checkModel(formula: FOLFormula): ModelCheckerTrace {
         return when (formula.type) {
             FOLType.ForAll -> checkForAll(formula)
@@ -169,13 +157,13 @@ private class ModelChecker(
     }
 
     /**
-     * Takes a FOLFunction or FOLVariable and return the associated vertex within this interpretation.
+     * Takes a FOLFunction or FOLVariable and return the associated node within this interpretation.
      * @param symbol mus be a FOLFunction or an FOLVariable
-     * @return a vertex which is associated with this term.
+     * @return a node which is associated with this term.
      * @throws ModelCheckException if the data is invalid. This should not happen.
      */
     @Throws(ModelCheckException::class)
-    private fun interpret(symbol: FOLFormula): Vertex {
+    private fun interpret(symbol: FOLFormula): Node {
         return when (symbol) {
             is FOLFunction -> {
                 when (symbol.children.size) {
@@ -197,8 +185,8 @@ private class ModelChecker(
 
     private fun checkForAll(formula: FOLFormula): ModelCheckerTrace {
         val variableName = formula.getChildAt(0).name
-        val children = graph.vertices.map { vertex: Vertex ->
-            bindVariableValues[variableName] = vertex
+        val children = graph.nodes.map { node: Node ->
+            bindVariableValues[variableName] = node
             checkModel(formula.getChildAt(1))
         }
         bindVariableValues.remove(variableName)
@@ -211,8 +199,8 @@ private class ModelChecker(
 
     private fun checkExists(formula: FOLFormula): ModelCheckerTrace {
         val variableName = formula.getChildAt(0).name
-        val children = graph.vertices.map { vertex: Vertex ->
-            bindVariableValues[variableName] = vertex
+        val children = graph.nodes.map { node: Node ->
+            bindVariableValues[variableName] = node
             checkModel(formula.getChildAt(1))
         }
         bindVariableValues.remove(variableName)
@@ -289,9 +277,9 @@ private class ModelChecker(
     }
 
     private fun checkUnaryPredicate(formula: FOLFormula): ModelCheckerTrace {
-        val vertex = interpret(formula.getChildAt(0))
-        val translationParams = mapOf("relation" to formula.name, "node" to vertex.name)
-        return when (oneArySymbolTable[formula.name]!!.contains(vertex)) {
+        val node = interpret(formula.getChildAt(0))
+        val translationParams = mapOf("relation" to formula.name, "node" to node.name)
+        return when (oneArySymbolTable[formula.name]!!.contains(node)) {
             true -> formula.validated(TranslationDTO("api.relation.unary.valid", translationParams))
             false -> formula.invalidated(TranslationDTO("api.relation.unary.invalid", translationParams))
         }

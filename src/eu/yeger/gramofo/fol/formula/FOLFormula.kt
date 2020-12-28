@@ -1,5 +1,7 @@
 package eu.yeger.gramofo.fol.formula
 
+import eu.yeger.gramofo.fol.graph.Vertex
+
 /**
  * This is the super class of all formula types.
  * @property type Specifies the type of the formula. This should match with the corresponding subclass.
@@ -12,11 +14,14 @@ abstract class FOLFormula(
     var hasBrackets: Boolean = false
     var hasDot: Boolean = false
 
-    open val formulaString: String
-        get() = name
+    abstract fun getFormulaString(variableBindings: Map<String, Vertex>): String
 
     final override fun toString(): String {
-        return formulaString.removePrefix(". ")
+        return getFormulaString(emptyMap()).removePrefix(". ")
+    }
+
+    fun toString(variableBindings: Map<String, Vertex>): String {
+        return getFormulaString(variableBindings).removePrefix(". ")
     }
 
     /**
@@ -59,5 +64,9 @@ abstract class FOLFormula(
     object Dummy : FOLFormula(
         type = null,
         name = "?",
-    )
+    ) {
+        override fun getFormulaString(variableBindings: Map<String, Vertex>): String {
+            return "?"
+        }
+    }
 }

@@ -110,10 +110,7 @@ private class ModelChecker(
             val typeInGraph = symbolTypeTable[symbol]
             if (type != typeInGraph) { // types are different?
                 if (type == "V") {
-                    throw ModelCheckException(
-                        "The symbol '" + symbol + "' is defined in the formula as a bound variable " +
-                            "but in the graph it is a function symbol. You cannot use one symbol twice for different use cases."
-                    )
+                    throw ModelCheckException("The symbol '$symbol' is defined in the formula as a bound variable but in the graph it is a function symbol. You cannot use one symbol twice for different use cases.")
                 } else {
                     throw ModelCheckException("The arity of the symbol '$symbol' in the graph differ from the arity used in the formula.")
                 }
@@ -199,26 +196,30 @@ private class ModelChecker(
     class ModelCheckException(message: String) : RuntimeException(message)
 
     private fun checkForAll(formula: FOLFormula): ModelCheckerTrace {
-        val (valid, invalid) = graph.vertices.map { vertex: Vertex ->
-            bindVariableValues[formula.getChildAt(0).name] = vertex
+        val variableName = formula.getChildAt(0).name
+        val children = graph.vertices.map { vertex: Vertex ->
+            bindVariableValues[variableName] = vertex
             checkModel(formula.getChildAt(1))
-        }.split()
-        return if (invalid.isEmpty()) {
-            formula.validated(TranslationDTO("api.forall.valid"), valid)
+        }
+        bindVariableValues.remove(variableName)
+        return if (children.all(ModelCheckerTrace::isModel)) {
+            formula.validated(TranslationDTO("api.forall.valid"), *children.toTypedArray())
         } else {
-            formula.invalidated(TranslationDTO("api.forall.invalid"), invalid)
+            formula.invalidated(TranslationDTO("api.forall.invalid"), *children.toTypedArray())
         }
     }
 
     private fun checkExists(formula: FOLFormula): ModelCheckerTrace {
-        val (valid, invalid) = graph.vertices.map { vertex: Vertex ->
-            bindVariableValues[formula.getChildAt(0).name] = vertex
+        val variableName = formula.getChildAt(0).name
+        val children = graph.vertices.map { vertex: Vertex ->
+            bindVariableValues[variableName] = vertex
             checkModel(formula.getChildAt(1))
-        }.split()
-        return if (valid.isEmpty()) {
-            formula.invalidated(TranslationDTO("api.exists.invalid"), invalid)
+        }
+        bindVariableValues.remove(variableName)
+        return if (children.any(ModelCheckerTrace::isModel)) {
+            formula.validated(TranslationDTO("api.exists.valid"), *children.toTypedArray())
         } else {
-            formula.validated(TranslationDTO("api.exists.valid"), valid)
+            formula.invalidated(TranslationDTO("api.exists.invalid"), *children.toTypedArray())
         }
     }
 
@@ -320,4 +321,10 @@ private class ModelChecker(
             else -> formula.invalidated(TranslationDTO("api.constant.false"))
         }
     }
+
+    private fun FOLFormula.validated(description: TranslationDTO, vararg children: ModelCheckerTrace) =
+        ModelCheckerTrace(this.toString(bindVariableValues), description, true, children.toList())
+
+    private fun FOLFormula.invalidated(description: TranslationDTO, vararg children: ModelCheckerTrace) =
+        ModelCheckerTrace(this.toString(bindVariableValues), description, false, children.toList())
 }

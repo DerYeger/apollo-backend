@@ -179,6 +179,7 @@ class ModelCheckerTests {
             "forall x. f(x)=a" to false,
             "forall x. f(a)=x" to false,
             "forall x. f(b)=x" to false,
+            "forall x f(x)=b && forall x !(f(x)=a) " to true,
         ).forEach { (formula, expectedResult) ->
             checkModel(graph, parseFormula(formula).result!!).get()?.isModel shouldBe expectedResult
         }

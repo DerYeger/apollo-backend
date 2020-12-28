@@ -216,9 +216,9 @@ private class ModelChecker(
             checkModel(formula.getChildAt(1))
         }.split()
         return if (valid.isEmpty()) {
-            formula.invalidated(TranslationDTO("api.exists.valid"), invalid)
+            formula.invalidated(TranslationDTO("api.exists.invalid"), invalid)
         } else {
-            formula.validated(TranslationDTO("api.exists.invalid"), valid)
+            formula.validated(TranslationDTO("api.exists.valid"), valid)
         }
     }
 
@@ -299,10 +299,10 @@ private class ModelChecker(
     private fun checkBinaryPredicate(formula: FOLFormula): ModelCheckerTrace {
         val left = interpret(formula.getChildAt(0))
         val right = interpret(formula.getChildAt(1))
-        val translationParams = mapOf("first" to left.toString(), "second" to right.toString())
+        val translationParams = mapOf("first" to left.name, "second" to right.name)
         return if (formula.name == INFIX_EQUALITY) {
             when (left) {
-                right -> formula.validated(TranslationDTO("api.relation.quality.valid", translationParams))
+                right -> formula.validated(TranslationDTO("api.relation.equality.valid", translationParams))
                 else -> formula.invalidated(TranslationDTO("api.relation.equality.invalid", translationParams))
             }
         } else {

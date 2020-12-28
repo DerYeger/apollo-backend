@@ -7,19 +7,20 @@ class FOLQuantifier(
     operand: FOLFormula,
 ) : FOLFormula(type, name, setOf(variable, operand)) {
 
-    override fun toString(): String {
-        val child0 = getChildAt(0)
-        val child1 = getChildAt(1)
-        val sb = StringBuilder()
-        sb.append(name)
-        sb.append(child0)
-        if (!child1.hasDot && !isUnary(child1)) {
-            sb.append(" ")
+    override val formulaString: String
+        get() {
+            val child0 = getChildAt(0)
+            val child1 = getChildAt(1)
+            val sb = StringBuilder()
+            sb.append(name)
+            sb.append(child0.formulaString)
+            if (!child1.hasDot && !isUnary(child1)) {
+                sb.append(" ")
+            }
+            sb.append(child1.formulaString)
+            maybeWrapBracketsAndDot(sb)
+            return sb.toString()
         }
-        sb.append(child1)
-        maybeWrapBracketsAndDot(sb)
-        return sb.toString()
-    }
 
     private fun isUnary(formula: FOLFormula): Boolean {
         val type = formula.type

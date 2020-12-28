@@ -11,8 +11,12 @@ abstract class FOLFormula(
 ) {
     var hasBrackets: Boolean = false
     var hasDot: Boolean = false
-    override fun toString(): String {
-        return name
+
+    open val formulaString: String
+        get() = name
+
+    final override fun toString(): String {
+        return formulaString.removePrefix(". ")
     }
 
     /**

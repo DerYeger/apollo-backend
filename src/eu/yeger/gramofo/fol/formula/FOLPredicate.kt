@@ -20,24 +20,25 @@ class FOLPredicate(
         isInfix = true
     )
 
-    override fun toString(): String {
-        val sb = StringBuilder()
-        if (isInfix) {
-            sb.append(getChildAt(0))
-            sb.append(specialNames.getOrDefault(name, name))
-            sb.append(getChildAt(1))
-        } else {
-            sb.append(specialNames.getOrDefault(name, name))
-            sb.append("(")
-            if (children.isNotEmpty()) {
-                sb.append(getChildAt(0))
-                children.drop(1).forEach { child: FOLFormula? -> sb.append(", ").append(child) }
+    override val formulaString: String
+        get() {
+            val sb = StringBuilder()
+            if (isInfix) {
+                sb.append(getChildAt(0).formulaString)
+                sb.append(specialNames.getOrDefault(name, name))
+                sb.append(getChildAt(1).formulaString)
+            } else {
+                sb.append(specialNames.getOrDefault(name, name))
+                sb.append("(")
+                if (children.isNotEmpty()) {
+                    sb.append(getChildAt(0).formulaString)
+                    children.drop(1).forEach { child: FOLFormula -> sb.append(", ").append(child.formulaString) }
+                }
+                sb.append(")")
             }
-            sb.append(")")
+            maybeWrapBracketsAndDot(sb)
+            return sb.toString()
         }
-        maybeWrapBracketsAndDot(sb)
-        return sb.toString()
-    }
 
     companion object {
         val specialNames = mapOf(

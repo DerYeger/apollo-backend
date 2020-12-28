@@ -14,19 +14,20 @@ class FOLOperator : FOLFormula {
         operand: FOLFormula,
     ) : super(type, name, setOf(operand))
 
-    override fun toString(): String {
-        val sb = StringBuilder()
-        if (name == NOT) {
-            sb.append(name)
-            sb.append(getChildAt(0))
-        } else {
-            sb.append(getChildAt(0))
-            sb.append(" ")
-            sb.append(name)
-            sb.append(" ")
-            sb.append(getChildAt(1))
+    override val formulaString: String
+        get() {
+            val sb = StringBuilder()
+            if (name == NOT) {
+                sb.append(name)
+                sb.append(getChildAt(0).formulaString)
+            } else {
+                sb.append(getChildAt(0).formulaString)
+                sb.append(" ")
+                sb.append(name)
+                sb.append(" ")
+                sb.append(getChildAt(1).formulaString)
+            }
+            maybeWrapBracketsAndDot(sb)
+            return sb.toString()
         }
-        maybeWrapBracketsAndDot(sb)
-        return sb.toString()
-    }
 }

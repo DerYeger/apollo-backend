@@ -151,7 +151,12 @@ private fun FOLFormula.checkUnaryRelation(symbolTable: SymbolTable, variableAssi
 private fun FOLFormula.checkBinaryRelation(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): ModelCheckerTrace {
     val left = getChildAt(0).interpret(symbolTable, variableAssignments)
     val right = getChildAt(1).interpret(symbolTable, variableAssignments)
-    val translationParams = mapOf("first" to left.name, "second" to right.name)
+    val translationParams = mapOf(
+        "firstTerm" to getChildAt(0).toString(variableAssignments),
+        "secondTerm" to getChildAt(1).toString(variableAssignments),
+        "firstResult" to left.name,
+        "secondResult" to right.name
+    )
     return if (name == INFIX_EQUALITY) {
         when (left) {
             right -> validated(TranslationDTO("api.relation.equality.valid", translationParams), variableAssignments)

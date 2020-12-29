@@ -128,7 +128,7 @@ object FOLFactory {
         name: String,
         children: Set<FOLFormula>,
     ): FOLPredicate {
-        return FOLPredicate(name = name, children = children)
+        return FOLPredicate(name = name, children = children, isInfix = false)
     }
 
     /**
@@ -155,8 +155,8 @@ object FOLFactory {
 
     /**
      * Creates a new forAll quantifier.
-     * @param variable an instance of FOLBoundVariables. The name of this variable is used to bind other variables in
-     * the formula subtree
+     * @param variable an instance of FOLBoundVariables. The name of this variable is used to assign other variables in
+     * the formula subtree.
      * @param operand the root of the subtree
      * @return a new instance of FOLQuantifier
      */
@@ -169,8 +169,8 @@ object FOLFactory {
 
     /**
      * Creates a new exists quantifier.
-     * @param variable an instance of FOLBoundVariables. The name of this variable is used to bind other variables in
-     * the formula subtree
+     * @param variable an instance of FOLBoundVariables. The name of this variable is used to assign other variables in
+     * the formula subtree.
      * @param operand the root of the subtree
      * @return a new instance of FOLQuantifier
      */

@@ -1,24 +1,25 @@
 package eu.yeger.gramofo.service
 
+import com.github.michaelbull.result.Err
+import eu.yeger.gramofo.fol.graph.ModelCheckerResult
 import eu.yeger.gramofo.fol.graph.checkModel
 import eu.yeger.gramofo.fol.parseFormula
 import eu.yeger.gramofo.model.api.ModelCheckerRequest
-import eu.yeger.gramofo.model.api.ModelCheckerResponse
 import eu.yeger.gramofo.model.api.toDomainModel
 import java.util.*
 
 class DefaultModelCheckerService : ModelCheckerService {
 
-    override fun checkModel(modelCheckerRequest: ModelCheckerRequest): ModelCheckerResponse {
+    override fun checkModel(modelCheckerRequest: ModelCheckerRequest): ModelCheckerResult {
         val locale = when (modelCheckerRequest.language) {
             "en" -> Locale.ENGLISH
             "de" -> Locale.GERMAN
-            else -> return ModelCheckerResponse("Unsupported language \"${modelCheckerRequest.language}\".")
+            else -> return Err("Unsupported language \"${modelCheckerRequest.language}\".")
         }
         val parseResult = parseFormula(modelCheckerRequest.formula, locale)
-        val parsedFormula = parseResult.result ?: return ModelCheckerResponse(parseResult.errorMessage ?: "Error")
+        val parsedFormula =
+            parseResult.result ?: return Err(parseResult.errorMessage ?: "Error")
         val domainGraph = modelCheckerRequest.graph.toDomainModel()
-        val checkResult = checkModel(domainGraph, parsedFormula)
-        return ModelCheckerResponse(checkResult)
+        return checkModel(domainGraph, parsedFormula)
     }
 }

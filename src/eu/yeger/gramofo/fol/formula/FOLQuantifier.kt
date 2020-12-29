@@ -1,5 +1,7 @@
 package eu.yeger.gramofo.fol.formula
 
+import eu.yeger.gramofo.fol.graph.Node
+
 class FOLQuantifier(
     type: FOLType,
     name: String,
@@ -7,16 +9,16 @@ class FOLQuantifier(
     operand: FOLFormula,
 ) : FOLFormula(type, name, setOf(variable, operand)) {
 
-    override fun toString(): String {
+    override fun getFormulaString(variableAssignments: Map<String, Node>): String {
         val child0 = getChildAt(0)
         val child1 = getChildAt(1)
         val sb = StringBuilder()
         sb.append(name)
-        sb.append(child0)
+        sb.append(child0.getFormulaString(variableAssignments))
         if (!child1.hasDot && !isUnary(child1)) {
             sb.append(" ")
         }
-        sb.append(child1)
+        sb.append(child1.getFormulaString(variableAssignments))
         maybeWrapBracketsAndDot(sb)
         return sb.toString()
     }

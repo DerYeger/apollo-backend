@@ -3,6 +3,7 @@ val jacocoVersion: String by project
 val jUnitVersion: String by project
 val koinVersion: String by project
 val kotlinVersion: String by project
+val kotlinResultVersion: String by project
 val ktorVersion: String by project
 val logbackVersion: String by project
 
@@ -54,6 +55,7 @@ dependencies {
     // Other dependencies
     implementation("org.koin:koin-ktor:$koinVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
+    implementation("com.michael-bull.kotlin-result:kotlin-result:$kotlinResultVersion")
 
     // Test dependencies
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")

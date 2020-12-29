@@ -1,5 +1,7 @@
 package eu.yeger.gramofo.fol.formula
 
+import eu.yeger.gramofo.fol.graph.Node
+
 class FOLOperator : FOLFormula {
     constructor(
         type: FOLType,
@@ -14,17 +16,17 @@ class FOLOperator : FOLFormula {
         operand: FOLFormula,
     ) : super(type, name, setOf(operand))
 
-    override fun toString(): String {
+    override fun getFormulaString(variableAssignments: Map<String, Node>): String {
         val sb = StringBuilder()
         if (name == NOT) {
             sb.append(name)
-            sb.append(getChildAt(0))
+            sb.append(getChildAt(0).getFormulaString(variableAssignments))
         } else {
-            sb.append(getChildAt(0))
+            sb.append(getChildAt(0).getFormulaString(variableAssignments))
             sb.append(" ")
             sb.append(name)
             sb.append(" ")
-            sb.append(getChildAt(1))
+            sb.append(getChildAt(1).getFormulaString(variableAssignments))
         }
         maybeWrapBracketsAndDot(sb)
         return sb.toString()

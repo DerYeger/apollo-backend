@@ -1,5 +1,7 @@
 package eu.yeger.gramofo.fol.formula
 
+import eu.yeger.gramofo.fol.graph.Node
+
 /**
  * This is the super class of all formula types.
  * @property type Specifies the type of the formula. This should match with the corresponding subclass.
@@ -11,8 +13,15 @@ abstract class FOLFormula(
 ) {
     var hasBrackets: Boolean = false
     var hasDot: Boolean = false
-    override fun toString(): String {
-        return name
+
+    abstract fun getFormulaString(variableAssignments: Map<String, Node>): String
+
+    final override fun toString(): String {
+        return getFormulaString(emptyMap()).removePrefix(". ")
+    }
+
+    fun toString(variableAssignments: Map<String, Node>): String {
+        return getFormulaString(variableAssignments).removePrefix(". ")
     }
 
     /**
@@ -55,5 +64,9 @@ abstract class FOLFormula(
     object Dummy : FOLFormula(
         type = null,
         name = "?",
-    )
+    ) {
+        override fun getFormulaString(variableAssignments: Map<String, Node>): String {
+            return "?"
+        }
+    }
 }

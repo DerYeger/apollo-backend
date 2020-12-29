@@ -6,7 +6,7 @@ class FOLConstant(name: String) : FOLFormula(
     type = FOLType.Constant,
     name = name
 ) {
-    override fun getFormulaString(variableBindings: Map<String, Node>): String {
+    override fun getFormulaString(variableAssignments: Map<String, Node>): String {
         return name
     }
 }

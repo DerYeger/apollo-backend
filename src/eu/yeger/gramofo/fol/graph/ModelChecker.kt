@@ -52,7 +52,7 @@ private fun FOLFormula.checkFormula(graph: Graph, symbolTable: SymbolTable, vari
         FOLType.Or -> checkOr(graph, symbolTable, variableAssignments)
         FOLType.Implication -> checkImplication(graph, symbolTable, variableAssignments)
         FOLType.BiImplication -> checkBiImplication(graph, symbolTable, variableAssignments)
-        FOLType.Predicate -> checkPredicate(symbolTable, variableAssignments)
+        FOLType.Predicate -> checkRelation(symbolTable, variableAssignments)
         FOLType.Constant -> checkConstant(variableAssignments)
         else -> throw ModelCheckException("[ModelChecker][Internal error] Unknown FOLFormula-Type: " + type)
     }
@@ -94,12 +94,7 @@ private fun FOLFormula.checkAnd(graph: Graph, symbolTable: SymbolTable, variable
     val left = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments)
     val right = getChildAt(1).checkFormula(graph, symbolTable, variableAssignments)
     return when {
-        left.isModel && right.isModel -> validated(
-            TranslationDTO("api.and.both"),
-            variableAssignments,
-            left,
-            right
-        )
+        left.isModel && right.isModel -> validated(TranslationDTO("api.and.both"), variableAssignments, left, right)
         left.isModel.not() && right.isModel.not() -> invalidated(TranslationDTO("api.and.neither"), variableAssignments, left, right)
         left.isModel.not() -> invalidated(TranslationDTO("api.and.left"), variableAssignments, left, right)
         else -> invalidated(TranslationDTO("api.and.right"), variableAssignments, left, right)
@@ -110,12 +105,7 @@ private fun FOLFormula.checkOr(graph: Graph, symbolTable: SymbolTable, variableA
     val left = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments)
     val right = getChildAt(1).checkFormula(graph, symbolTable, variableAssignments)
     return when {
-        left.isModel && right.isModel -> validated(
-            TranslationDTO("api.or.both"),
-            variableAssignments,
-            left,
-            right
-        )
+        left.isModel && right.isModel -> validated(TranslationDTO("api.or.both"), variableAssignments, left, right)
         left.isModel -> validated(TranslationDTO("api.or.left"), variableAssignments, left, right)
         right.isModel -> validated(TranslationDTO("api.or.right"), variableAssignments, left, right)
         else -> invalidated(TranslationDTO("api.or.neither"), variableAssignments, left, right)
@@ -126,8 +116,8 @@ private fun FOLFormula.checkImplication(graph: Graph, symbolTable: SymbolTable, 
     val left = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments)
     val right = getChildAt(1).checkFormula(graph, symbolTable, variableAssignments)
     return when {
-        right.isModel -> validated(TranslationDTO("api.implication.right"), variableAssignments, right)
-        left.isModel.not() -> validated(TranslationDTO("api.implication.left"), variableAssignments, left)
+        right.isModel -> validated(TranslationDTO("api.implication.right"), variableAssignments, left, right)
+        left.isModel.not() -> validated(TranslationDTO("api.implication.left"), variableAssignments, left, right)
         else -> invalidated(TranslationDTO("api.implication.invalid"), variableAssignments, left, right)
     }
 }
@@ -141,7 +131,7 @@ private fun FOLFormula.checkBiImplication(graph: Graph, symbolTable: SymbolTable
     }
 }
 
-private fun FOLFormula.checkPredicate(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): ModelCheckerTrace {
+private fun FOLFormula.checkRelation(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): ModelCheckerTrace {
     return when (children.size) {
         1 -> checkUnaryRelation(symbolTable, variableAssignments)
         2 -> checkBinaryRelation(symbolTable, variableAssignments)
@@ -288,7 +278,7 @@ private fun FOLFormula.interpret(symbolTable: SymbolTable, variableAssignments: 
             }
         }
         is FOLBoundVariable ->
-            variableAssignments[name] ?: throw ModelCheckException("[ModelChecker][Internal error] No bind value found for variable.")
+            variableAssignments[name] ?: throw ModelCheckException("[ModelChecker][Internal error] Variable is not assigned.")
         else -> throw ModelCheckException("[ModelChecker][Internal error] Not a valid function or a variable.")
     }
 }

@@ -21,18 +21,18 @@ class FOLFunction(
         setOf(leftOperand, rightOperand)
     )
 
-    override fun getFormulaString(variableBindings: Map<String, Node>): String {
+    override fun getFormulaString(variableAssignments: Map<String, Node>): String {
         val sb = StringBuilder()
         if (isInfix) {
-            sb.append(getChildAt(0).getFormulaString(variableBindings))
+            sb.append(getChildAt(0).getFormulaString(variableAssignments))
             sb.append(name)
-            sb.append(getChildAt(1).getFormulaString(variableBindings))
+            sb.append(getChildAt(1).getFormulaString(variableAssignments))
         } else {
             sb.append(name)
             if (children.isNotEmpty()) {
                 sb.append("(")
-                sb.append(getChildAt(0).getFormulaString(variableBindings))
-                children.drop(1).forEach { child: FOLFormula -> sb.append(", ").append(child.getFormulaString(variableBindings)) }
+                sb.append(getChildAt(0).getFormulaString(variableAssignments))
+                children.drop(1).forEach { child: FOLFormula -> sb.append(", ").append(child.getFormulaString(variableAssignments)) }
                 sb.append(")")
             }
         }

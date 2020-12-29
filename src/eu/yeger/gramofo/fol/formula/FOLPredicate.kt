@@ -28,18 +28,18 @@ class FOLPredicate(
         isInfix = true
     )
 
-    override fun getFormulaString(variableBindings: Map<String, Node>): String {
+    override fun getFormulaString(variableAssignments: Map<String, Node>): String {
         val sb = StringBuilder()
         if (isInfix) {
-            sb.append(getChildAt(0).getFormulaString(variableBindings))
+            sb.append(getChildAt(0).getFormulaString(variableAssignments))
             sb.append(specialNames.getOrDefault(name, name))
-            sb.append(getChildAt(1).getFormulaString(variableBindings))
+            sb.append(getChildAt(1).getFormulaString(variableAssignments))
         } else {
             sb.append(specialNames.getOrDefault(name, name))
             sb.append("(")
             if (children.isNotEmpty()) {
-                sb.append(getChildAt(0).getFormulaString(variableBindings))
-                children.drop(1).forEach { child: FOLFormula -> sb.append(", ").append(child.getFormulaString(variableBindings)) }
+                sb.append(getChildAt(0).getFormulaString(variableAssignments))
+                children.drop(1).forEach { child: FOLFormula -> sb.append(", ").append(child.getFormulaString(variableAssignments)) }
             }
             sb.append(")")
         }

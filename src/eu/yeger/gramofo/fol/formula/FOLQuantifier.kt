@@ -9,16 +9,16 @@ class FOLQuantifier(
     operand: FOLFormula,
 ) : FOLFormula(type, name, setOf(variable, operand)) {
 
-    override fun getFormulaString(variableBindings: Map<String, Node>): String {
+    override fun getFormulaString(variableAssignments: Map<String, Node>): String {
         val child0 = getChildAt(0)
         val child1 = getChildAt(1)
         val sb = StringBuilder()
         sb.append(name)
-        sb.append(child0.getFormulaString(variableBindings))
+        sb.append(child0.getFormulaString(variableAssignments))
         if (!child1.hasDot && !isUnary(child1)) {
             sb.append(" ")
         }
-        sb.append(child1.getFormulaString(variableBindings))
+        sb.append(child1.getFormulaString(variableAssignments))
         maybeWrapBracketsAndDot(sb)
         return sb.toString()
     }

@@ -14,14 +14,14 @@ abstract class FOLFormula(
     var hasBrackets: Boolean = false
     var hasDot: Boolean = false
 
-    abstract fun getFormulaString(variableBindings: Map<String, Node>): String
+    abstract fun getFormulaString(variableAssignments: Map<String, Node>): String
 
     final override fun toString(): String {
         return getFormulaString(emptyMap()).removePrefix(". ")
     }
 
-    fun toString(variableBindings: Map<String, Node>): String {
-        return getFormulaString(variableBindings).removePrefix(". ")
+    fun toString(variableAssignments: Map<String, Node>): String {
+        return getFormulaString(variableAssignments).removePrefix(". ")
     }
 
     /**
@@ -65,7 +65,7 @@ abstract class FOLFormula(
         type = null,
         name = "?",
     ) {
-        override fun getFormulaString(variableBindings: Map<String, Node>): String {
+        override fun getFormulaString(variableAssignments: Map<String, Node>): String {
             return "?"
         }
     }

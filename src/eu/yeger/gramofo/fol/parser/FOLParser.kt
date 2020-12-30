@@ -1,21 +1,26 @@
 package eu.yeger.gramofo.fol.parser
 
-import eu.yeger.gramofo.fol.Lang
+import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.Result
+import eu.yeger.gramofo.fol.English
+import eu.yeger.gramofo.fol.Language
 import eu.yeger.gramofo.fol.Settings
 import eu.yeger.gramofo.fol.formula.*
-import java.util.*
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 
-fun parseFormula(formula: String, locale: Locale = Locale.ENGLISH): ParseResult<FOLFormulaHead> {
-    return FOLParser(Lang(locale)).parseFormula(formula)
+typealias ParserResult = Result<FOLFormulaHead, String>
+
+fun parseFormula(formula: String, language: Language = English): ParserResult {
+    return FOLParser(language).parseFormula(formula)
 }
 
 /**
  * This class provides a singleton object, which can parse input strings into
  * data structures. It works like a recursive descent parser.
  */
-private class FOLParser(private val lang: Lang) {
+private class FOLParser(private val language: Language) {
     private val symbolTable: HashMap<String, String> = HashMap()
     private var curBoundedVars: HashSet<FOLBoundVariable>? = null
 
@@ -63,19 +68,19 @@ private class FOLParser(private val lang: Lang) {
      * @param sFormula string to be parsed
      * @return a ParseResult containing either the result or an error message
      */
-    fun parseFormula(sFormula: String): ParseResult<FOLFormulaHead> {
+    fun parseFormula(sFormula: String): Result<FOLFormulaHead, String> {
         symbolTable.clear()
         curBoundedVars = HashSet()
         return try {
             addOperatorsToSymbolTable()
-            val scanner = FOLScanner(sFormula, lang)
+            val scanner = FOLScanner(sFormula, language)
             val formula = parseFormula(scanner)
             if (scanner.curType() != FOLToken.END_OF_SOURCE) {
-                throw ParseException(lang.getString("FOP_END_OF_INPUT", scanner.curValue(), scanner.restOfText))
+                throw ParseException(language.getString("FOP_END_OF_INPUT", scanner.curValue(), scanner.restOfText))
             }
-            ParseResult(FOLFormulaHead(formula, symbolTable))
+            Ok(FOLFormulaHead(formula, symbolTable))
         } catch (e: ParseException) {
-            ParseResult(e.message)
+            Err(e.message)
         }
     }
 
@@ -168,15 +173,15 @@ private class FOLParser(private val lang: Lang) {
     @Throws(ParseException::class)
     private fun parseVarSymbol(scanner: FOLScanner): FOLBoundVariable {
         if (scanner.curType() != FOLToken.SYMBOL) {
-            throw ParseException(lang.getString("FOP_VARIABLE_EXPECTED", scanner.curValue()))
+            throw ParseException(language.getString("FOP_VARIABLE_EXPECTED", scanner.curValue()))
         } // else
         val symbol = scanner.curValue()
         if (symbol[0] !in 'a'..'z') {
-            throw ParseException(lang.getString("FOP_VARIABLE_LOWER_CASE"))
+            throw ParseException(language.getString("FOP_VARIABLE_LOWER_CASE"))
         }
         checkSymbolInfo(symbol, "V")
         if (containsSymbol(curBoundedVars, symbol)) {
-            throw ParseException(lang.getString("FOP_VARIABLE_ALREADY_BOUND", symbol))
+            throw ParseException(language.getString("FOP_VARIABLE_ALREADY_BOUND", symbol))
         }
         scanner.nextToken()
         return FOLFactory.createBoundVariable(symbol)
@@ -198,12 +203,12 @@ private class FOLParser(private val lang: Lang) {
             }
             FOLToken.BRACKET -> {
                 if (scanner.curValue() == ")") {
-                    throw ParseException(lang.getString("FOP_EXTRA_CLOSING_BRACKET"))
+                    throw ParseException(language.getString("FOP_EXTRA_CLOSING_BRACKET"))
                 } // else
                 scanner.nextToken()
                 formula = parseFormula(scanner)
                 if (scanner.curType() != FOLToken.BRACKET || scanner.curValue() != ")") {
-                    throw ParseException(lang.getString("FOP_MISSING_CLOSING_BRACKET"))
+                    throw ParseException(language.getString("FOP_MISSING_CLOSING_BRACKET"))
                 } // else
                 formula.hasBrackets = true
                 scanner.nextToken()
@@ -223,7 +228,7 @@ private class FOLParser(private val lang: Lang) {
     @Throws(ParseException::class)
     private fun parsePredicate(scanner: FOLScanner): FOLFormula {
         if (scanner.curType() != FOLToken.SYMBOL) {
-            throw ParseException(lang.getString("FOP_MISSING_OPERATOR", scanner.curValue()))
+            throw ParseException(language.getString("FOP_MISSING_OPERATOR", scanner.curValue()))
         }
         val symbol = scanner.curValue()
         // its not yet read, because scanner.nextToken isn't called
@@ -256,7 +261,7 @@ private class FOLParser(private val lang: Lang) {
                     termChildren.add(parseInfixTerm(scanner))
                 }
                 if (scanner.curType() != FOLToken.BRACKET || scanner.curValue() != ")") {
-                    throw ParseException(lang.getString("FOP_MISSING_OPERATOR", symbol))
+                    throw ParseException(language.getString("FOP_MISSING_OPERATOR", symbol))
                 }
                 scanner.nextToken()
             }
@@ -271,7 +276,7 @@ private class FOLParser(private val lang: Lang) {
     private fun parseInfixPredicate(scanner: FOLScanner): FOLFormula {
         val leftOperand = parseInfixTerm(scanner)
         if (!(scanner.curType() == FOLToken.INFIX_PRED || scanner.curType() == FOLToken.EQUAL_SIGN)) {
-            throw ParseException(lang.getString("FOP_INFIX_EXPECTED", leftOperand.name, scanner.curValue()))
+            throw ParseException(language.getString("FOP_INFIX_EXPECTED", leftOperand.name, scanner.curValue()))
         } // else
         val symbol = scanner.curValue()
         val symbolType = "P-" + 2
@@ -314,15 +319,15 @@ private class FOLParser(private val lang: Lang) {
                 termNode.hasBrackets = true
                 termNode
             } else {
-                throw ParseException(lang.getString("FOP_CLOSING_BRACKET_EXPECTED", scanner.curValue()))
+                throw ParseException(language.getString("FOP_CLOSING_BRACKET_EXPECTED", scanner.curValue()))
             }
         } // else
         if (scanner.curType() != FOLToken.SYMBOL) {
-            throw ParseException(lang.getString("FOP_FUNCTION_EXPECTED", scanner.curValue()))
+            throw ParseException(language.getString("FOP_FUNCTION_EXPECTED", scanner.curValue()))
         } // else
         val symbol = scanner.curValue()
         if (symbol[0] !in 'a'..'z') {
-            throw ParseException(lang.getString("FOP_FUNCTION_LOWER_CASE"))
+            throw ParseException(language.getString("FOP_FUNCTION_LOWER_CASE"))
         }
         scanner.nextToken()
         val termChildren = mutableSetOf<FOLFormula>()
@@ -339,7 +344,7 @@ private class FOLParser(private val lang: Lang) {
                     termChildren.add(parseInfixTerm(scanner))
                 }
                 if (scanner.curType() != FOLToken.BRACKET || scanner.curValue() != ")") {
-                    throw ParseException(lang.getString("FOP_MISSING_PARAMETER_LIST_CLOSING_BRACKET", symbol))
+                    throw ParseException(language.getString("FOP_MISSING_PARAMETER_LIST_CLOSING_BRACKET", symbol))
                 }
                 scanner.nextToken()
             }
@@ -350,7 +355,7 @@ private class FOLParser(private val lang: Lang) {
         } else if (termChildren.size == 0) {
             FOLFactory.createBoundVariable(symbol)
         } else {
-            throw ParseException(lang.getString("FOP_SYMBOL_ALREADY_IN_USE_AS_BOUND_VARIABLE", symbol))
+            throw ParseException(language.getString("FOP_SYMBOL_ALREADY_IN_USE_AS_BOUND_VARIABLE", symbol))
         }
     }
 
@@ -370,21 +375,21 @@ private class FOLParser(private val lang: Lang) {
         // error handling:
         val infos = symbolTable[symbol]!!.split("-".toRegex()).toTypedArray()
         val info: String = when (infos[0]) {
-            "TT" -> lang.getString("FOP_OPERATOR_TT")
-            "FF" -> lang.getString("FOP_OPERATOR_FF")
-            "OR" -> lang.getString("FOP_OPERATOR_OR")
-            "AND" -> lang.getString("FOP_OPERATOR_AND")
-            "NOT" -> lang.getString("FOP_OPERATOR_NOT")
-            "IMP" -> lang.getString("FOP_OPERATOR_IMP")
-            "BIIMP" -> lang.getString("FOP_OPERATOR_BIIMP")
-            "EX" -> lang.getString("FOP_OPERATOR_EX")
-            "FOR" -> lang.getString("FOP_OPERATOR_FOR")
-            "P" -> lang.getString("FOP_OPERATOR_P", infos[1])
-            "F" -> lang.getString("FOP_OPERATOR_F", infos[1])
-            "V" -> lang.getString("FOP_OPERATOR_V")
-            else -> lang.getString("FOP_OPERATOR_ERROR")
+            "TT" -> language.getString("FOP_OPERATOR_TT")
+            "FF" -> language.getString("FOP_OPERATOR_FF")
+            "OR" -> language.getString("FOP_OPERATOR_OR")
+            "AND" -> language.getString("FOP_OPERATOR_AND")
+            "NOT" -> language.getString("FOP_OPERATOR_NOT")
+            "IMP" -> language.getString("FOP_OPERATOR_IMP")
+            "BIIMP" -> language.getString("FOP_OPERATOR_BIIMP")
+            "EX" -> language.getString("FOP_OPERATOR_EX")
+            "FOR" -> language.getString("FOP_OPERATOR_FOR")
+            "P" -> language.getString("FOP_OPERATOR_P", infos[1])
+            "F" -> language.getString("FOP_OPERATOR_F", infos[1])
+            "V" -> language.getString("FOP_OPERATOR_V")
+            else -> language.getString("FOP_OPERATOR_ERROR")
         }
-        throw ParseException(lang.getString("FOP_SYMBOL_ALREADY_IN_USE_AS", symbol, info))
+        throw ParseException(language.getString("FOP_SYMBOL_ALREADY_IN_USE_AS", symbol, info))
     }
 
     private fun containsSymbol(curBoundedVars: HashSet<FOLBoundVariable>?, symbol: String): Boolean {

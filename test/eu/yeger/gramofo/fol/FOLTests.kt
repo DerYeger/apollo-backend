@@ -1,5 +1,6 @@
 package eu.yeger.gramofo.fol
 
+import com.github.michaelbull.result.get
 import com.github.michaelbull.result.getOrElse
 import eu.yeger.gramofo.fol.graph.*
 import eu.yeger.gramofo.fol.parser.parseFormula
@@ -21,7 +22,7 @@ class FOLTests {
         val bToB = Edge(b, b, listOf(), listOf("f"))
 
         val graph = Graph(listOf(a, b), listOf(aToB, bToB))
-        val modelResult = checkModel(graph, result.result!!).getOrElse { fail("Input should have been valid.") }
+        val modelResult = checkModel(graph, result.get()!!).getOrElse { fail("Input should have been valid.") }
         println(modelResult)
         modelResult.isModel shouldBe true
     }
@@ -36,7 +37,7 @@ class FOLTests {
         val bToB = Edge(b, b, listOf(), listOf("f"))
 
         val graph = Graph(listOf(a, b), listOf(aToA, bToB))
-        val modelResult = checkModel(graph, result.result!!).getOrElse { fail("Input should have been valid.") }
+        val modelResult = checkModel(graph, result.get()!!).getOrElse { fail("Input should have been valid.") }
         println(modelResult)
         modelResult.isModel shouldBe false
     }

@@ -6,4 +6,4 @@ package eu.yeger.gramofo.fol.parser
  * occurred to create useful error messages.
  *
  */
-class ParseException(message: String?) : Exception(message)
+class ParseException(override val message: String) : Exception(message)

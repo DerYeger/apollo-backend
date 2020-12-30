@@ -1,12 +1,12 @@
 package eu.yeger.gramofo.fol.parser
 
-import eu.yeger.gramofo.fol.Lang
+import eu.yeger.gramofo.fol.Language
 import eu.yeger.gramofo.fol.Settings
 
 /**
  * This is the scanner for the parser class. It translates a stream of chars to a stream of tokens.
  */
-class FOLScanner(private val source: String, private val lang: Lang) {
+class FOLScanner(private val source: String, private val language: Language) {
     private var pos: Int = 0
     private var curToken: FOLToken = FOLToken(0, "")
     private var lookAHeadToken: FOLToken = FOLToken(0, "")
@@ -65,7 +65,7 @@ class FOLScanner(private val source: String, private val lang: Lang) {
         for (i in 0 until allSettings.size - 1) {
             for (j in i + 1 until allSettings.size) {
                 if (allSettings[i] == allSettings[j]) {
-                    throw ParseException(lang.getString("FOS_DUPLICATE_SETTING", allSettings[i]))
+                    throw ParseException(language.getString("FOS_DUPLICATE_SETTING", allSettings[i]))
                 }
             }
         }

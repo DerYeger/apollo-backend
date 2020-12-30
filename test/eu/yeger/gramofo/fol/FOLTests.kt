@@ -2,6 +2,7 @@ package eu.yeger.gramofo.fol
 
 import com.github.michaelbull.result.getOrElse
 import eu.yeger.gramofo.fol.graph.*
+import eu.yeger.gramofo.fol.parser.parseFormula
 import eu.yeger.gramofo.utils.shouldBe
 import eu.yeger.gramofo.utils.shouldNotBe
 import org.junit.jupiter.api.Test

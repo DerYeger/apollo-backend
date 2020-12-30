@@ -1,5 +1,6 @@
 package eu.yeger.gramofo.fol
 
+import eu.yeger.gramofo.fol.parser.parseFormula
 import eu.yeger.gramofo.utils.shouldNotBe
 import org.junit.jupiter.api.Test
 

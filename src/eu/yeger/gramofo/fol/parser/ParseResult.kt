@@ -1,4 +1,4 @@
-package eu.yeger.gramofo.fol
+package eu.yeger.gramofo.fol.parser
 
 /**
  * This class is used to represent the result of a parsing operation,

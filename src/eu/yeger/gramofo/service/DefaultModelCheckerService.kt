@@ -3,7 +3,7 @@ package eu.yeger.gramofo.service
 import com.github.michaelbull.result.Err
 import eu.yeger.gramofo.fol.graph.ModelCheckerResult
 import eu.yeger.gramofo.fol.graph.checkModel
-import eu.yeger.gramofo.fol.parseFormula
+import eu.yeger.gramofo.fol.parser.parseFormula
 import eu.yeger.gramofo.model.api.ModelCheckerRequest
 import eu.yeger.gramofo.model.api.toDomainModel
 import java.util.*

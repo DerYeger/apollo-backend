@@ -1,7 +1,7 @@
 package eu.yeger.gramofo.fol.graph
 
 import com.github.michaelbull.result.get
-import eu.yeger.gramofo.fol.parseFormula
+import eu.yeger.gramofo.fol.parser.parseFormula
 import eu.yeger.gramofo.utils.shouldBe
 import org.junit.jupiter.api.Test
 

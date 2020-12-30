@@ -1,6 +1,7 @@
 package eu.yeger.gramofo.fol.graph
 
 import com.github.michaelbull.result.*
+import com.github.michaelbull.result.binding
 import eu.yeger.gramofo.fol.Settings
 import eu.yeger.gramofo.fol.formula.*
 import eu.yeger.gramofo.fol.formula.FOLFormula.Companion.INFIX_EQUALITY
@@ -18,7 +19,7 @@ import kotlin.collections.none
 import kotlin.collections.set
 import kotlin.collections.toSet
 
-typealias ModelCheckerResult = Result<ModelCheckerTrace, String>
+typealias ModelCheckerResult = Result<ModelCheckerTrace, TranslationDTO>
 
 private val infixPredicates = Settings[Settings.INFIX_PRED].toSet()
 
@@ -30,17 +31,13 @@ private data class SymbolTable(
     val symbolTypes: Map<String, String>
 )
 
-fun checkModel(graph: Graph, formulaHead: FOLFormulaHead): ModelCheckerResult {
-    return loadGraphSymbols(graph)
-        .andThen { symbolTable -> loadFormulaSymbols(formulaHead, symbolTable) }
-        .andThen { symbolTable -> checkTotality(graph, symbolTable) }
-        .andThen { symbolTable ->
-            try {
-                Ok(formulaHead.formula.checkFormula(graph, symbolTable, emptyMap()))
-            } catch (e: Exception) {
-                Err(e.message ?: "api.error.unknown")
-            }
-        }
+fun checkModel(graph: Graph, formulaHead: FOLFormulaHead): ModelCheckerResult = binding {
+    val symbolTable = graph.loadSymbols()
+        .andThen { symbolTable -> formulaHead.loadSymbols(symbolTable) }
+        .andThen { symbolTable -> checkTotality(graph, symbolTable) }.bind()
+    runCatching { formulaHead.formula.checkFormula(graph, symbolTable, emptyMap()) }
+        .mapError { error -> TranslationDTO(error.message ?: "api.error.unknown") }
+        .bind()
 }
 
 private fun FOLFormula.checkFormula(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>): ModelCheckerTrace {
@@ -54,7 +51,7 @@ private fun FOLFormula.checkFormula(graph: Graph, symbolTable: SymbolTable, vari
         FOLType.BiImplication -> checkBiImplication(graph, symbolTable, variableAssignments)
         FOLType.Predicate -> checkRelation(symbolTable, variableAssignments)
         FOLType.Constant -> checkConstant(variableAssignments)
-        else -> throw ModelCheckException("[ModelChecker][Internal error] Unknown FOLFormula-Type: " + type)
+        else -> throw ModelCheckException("[ModelChecker][Internal error] Unknown FOLFormula-Type: $type")
     }
 }
 
@@ -181,33 +178,33 @@ private fun FOLFormula.checkConstant(variableAssignments: Map<String, Node>): Mo
 /**
  * Iterates over the graph and puts all found symbols in a symbol table.
  */
-private fun loadGraphSymbols(graph: Graph): Result<SymbolTable, String> {
+private fun Graph.loadSymbols(): Result<SymbolTable, TranslationDTO> {
     val unarySymbols = mutableMapOf<String, MutableSet<Node>>()
     val binarySymbols = mutableMapOf<String, MutableSet<Edge>>()
     val symbolTypes = mutableMapOf<String, String>()
-    graph.nodes.forEach { node: Node ->
+    nodes.forEach { node: Node ->
         node.stringAttachments.forEach { symbol: String ->
             val symbolType = if (Character.isUpperCase(symbol[0])) "P-1" else "F-0"
             symbolTypes[symbol] = symbolType
             val relationSet = unarySymbols.getOrDefault(symbol, HashSet())
             if (symbolType == "F-0" && relationSet.size != 0) {
-                return@loadGraphSymbols Err("The constant symbol '$symbol' can only be assigned to one node.")
+                return@loadSymbols Err(TranslationDTO(key = "api.error.duplicate-constant", mapOf("constant" to symbol)))
             }
             relationSet.add(node)
             unarySymbols[symbol] = relationSet
         }
     }
-    graph.edges.forEach { edge: Edge ->
+    edges.forEach { edge: Edge ->
         edge.stringAttachments.forEach { symbol: String ->
             val symbolType =
                 if (Character.isUpperCase(symbol[0]) || infixPredicates.contains(symbol)) "P-2" else "F-1"
             symbolTypes.putIfAbsent(symbol, symbolType)
             if (symbolType != symbolTypes[symbol]) {
-                return@loadGraphSymbols Err("The symbol '$symbol' is defined with different arities within the graph.")
+                return@loadSymbols Err(TranslationDTO("api.error.different-arities", mapOf("symbol" to symbol)))
             }
             val relationSet = binarySymbols.getOrDefault(symbol, HashSet())
             if (symbolType == "F-1" && relationSet.any { otherEdge: Edge -> edge.source == otherEdge.source }) {
-                return@loadGraphSymbols Err("The unary function '$symbol' has two function values for at least one node. A function must be right-unique.")
+                return@loadSymbols Err(TranslationDTO("api.error.different-function-values", mapOf("function" to symbol)))
             }
             relationSet.add(edge)
             binarySymbols[symbol] = relationSet
@@ -219,11 +216,11 @@ private fun loadGraphSymbols(graph: Graph): Result<SymbolTable, String> {
 /**
  * Iterates over the formula and add new symbols to the symbol tables.
  */
-private fun loadFormulaSymbols(formulaHead: FOLFormulaHead, symbolTable: SymbolTable): Result<SymbolTable, String> {
+private fun FOLFormulaHead.loadSymbols(symbolTable: SymbolTable): Result<SymbolTable, TranslationDTO> {
     val unarySymbols = symbolTable.unarySymbols.toMutableMap()
     val binarySymbols = symbolTable.binarySymbols.toMutableMap()
     val symbolTypes = symbolTable.symbolTypes.toMutableMap()
-    formulaHead.symbolTable.forEach { (symbol: String, type: String) ->
+    this.symbolTable.forEach { (symbol: String, type: String) ->
         symbolTypes.putIfAbsent(symbol, type)
         if (type == "P-1" || type == "F-0") {
             unarySymbols.putIfAbsent(symbol, HashSet())
@@ -233,9 +230,9 @@ private fun loadFormulaSymbols(formulaHead: FOLFormulaHead, symbolTable: SymbolT
         val typeInGraph = symbolTypes[symbol]
         if (type != typeInGraph) { // types are different?
             if (type == "V") {
-                return@loadFormulaSymbols Err("The symbol '$symbol' is defined in the formula as a bound variable but in the graph it is a function symbol. You cannot use one symbol twice for different use cases.")
+                return@loadSymbols Err(TranslationDTO("api.error.bound-variable-reuse", mapOf("symbol" to symbol)))
             } else {
-                return@loadFormulaSymbols Err("The arity of the symbol '$symbol' in the graph differ from the arity used in the formula.")
+                return@loadSymbols Err(TranslationDTO("api.error.different-arities-formula", mapOf("symbol" to symbol)))
             }
         }
     }
@@ -245,17 +242,17 @@ private fun loadFormulaSymbols(formulaHead: FOLFormulaHead, symbolTable: SymbolT
 /**
  * Functions mus be left total. Therefore this method checks if all function symbols are defined for all inputs.
  */
-private fun checkTotality(graph: Graph, symbolTable: SymbolTable): Result<SymbolTable, String> {
+private fun checkTotality(graph: Graph, symbolTable: SymbolTable): Result<SymbolTable, TranslationDTO> {
     symbolTable.symbolTypes.forEach { (symbol: String, type: String) ->
         when (type) {
             "F-0" -> if (symbolTable.unarySymbols[symbol]!!.size != 1) {
-                return@checkTotality Err("The constant '$symbol' must be defined. Please add it to the graph.")
+                return@checkTotality Err(TranslationDTO("api.error.undefined-constant", mapOf("constant" to symbol)))
             }
             "F-1" -> {
                 val relationSet: Set<Edge> = symbolTable.binarySymbols[symbol]!!
                 graph.nodes.forEach { node: Node ->
                     if (relationSet.none { edge: Edge -> edge.source == node }) {
-                        return@checkTotality Err("The unary function '$symbol' must be total. Please be sure that it is defined for all nodes.")
+                        return@checkTotality Err(TranslationDTO("api.error.function-totality", mapOf("function" to symbol)))
                     }
                 }
             }

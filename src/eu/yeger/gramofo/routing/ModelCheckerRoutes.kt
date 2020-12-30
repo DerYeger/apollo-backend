@@ -4,6 +4,7 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import eu.yeger.gramofo.fol.graph.ModelCheckerTrace
 import eu.yeger.gramofo.model.api.ModelCheckerRequest
+import eu.yeger.gramofo.model.api.TranslationDTO
 import eu.yeger.gramofo.service.ModelCheckerService
 import io.ktor.application.*
 import io.ktor.http.*
@@ -19,7 +20,7 @@ fun Route.modelCheckerRoutes() {
         val request = call.receive<ModelCheckerRequest>()
         when (val result = modelCheckerService.checkModel(request)) {
             is Ok<ModelCheckerTrace> -> call.respond(result.value)
-            is Err<String> -> call.respond(HttpStatusCode.UnprocessableEntity, mapOf("message" to result.error))
+            is Err<TranslationDTO> -> call.respond(HttpStatusCode.UnprocessableEntity, mapOf("message" to result.error))
         }
     }
 }

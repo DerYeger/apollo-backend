@@ -17,11 +17,11 @@ abstract class FOLFormula(
     abstract fun getFormulaString(variableAssignments: Map<String, Node>): String
 
     final override fun toString(): String {
-        return getFormulaString(emptyMap()).removePrefix(". ")
+        return toString(emptyMap())
     }
 
     fun toString(variableAssignments: Map<String, Node>): String {
-        return getFormulaString(variableAssignments).removePrefix(". ")
+        return getFormulaString(variableAssignments).removePrefix(". ").removeSurrounding(prefix = "(", suffix = ")")
     }
 
     /**

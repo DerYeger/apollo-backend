@@ -1,18 +1,24 @@
 package eu.yeger.gramofo.fol.formula
 
+import eu.yeger.gramofo.fol.ModelCheckerException
+import eu.yeger.gramofo.fol.ModelCheckerTrace
+import eu.yeger.gramofo.fol.SymbolTable
+import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
+import eu.yeger.gramofo.model.dto.TranslationDTO
 
 /**
  * This is the super class of all formula types.
  * @property type Specifies the type of the formula. This should match with the corresponding subclass.
  */
 abstract class FOLFormula(
-    val type: FOLType?,
     val name: String,
     val children: Set<FOLFormula> = emptySet(),
 ) {
     var hasBrackets: Boolean = false
     var hasDot: Boolean = false
+
+    abstract fun checkModel(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>, shouldBeModel: Boolean): ModelCheckerTrace
 
     abstract fun getFormulaString(variableAssignments: Map<String, Node>): String
 
@@ -61,12 +67,36 @@ abstract class FOLFormula(
         const val INFIX_EQUALITY = "=" // equal sign with a dot on top
     }
 
-    object Dummy : FOLFormula(
-        type = null,
-        name = "?",
-    ) {
+    object Dummy : FOLFormula("?") {
+        override fun checkModel(
+            graph: Graph,
+            symbolTable: SymbolTable,
+            variableAssignments: Map<String, Node>,
+            shouldBeModel: Boolean,
+        ): ModelCheckerTrace {
+            throw ModelCheckerException("[ModelChecker][Internal error] checkModel cannot be called for instances of Dummy")
+        }
+
         override fun getFormulaString(variableAssignments: Map<String, Node>): String {
-            return "?"
+            return name
         }
     }
+
+    protected fun validated(description: TranslationDTO, variableAssignments: Map<String, Node>, shouldBeModel: Boolean, vararg children: ModelCheckerTrace) =
+        ModelCheckerTrace(
+            formula = this.toString(variableAssignments),
+            description = description,
+            isModel = true,
+            shouldBeModel = shouldBeModel,
+            children = children.toList()
+        )
+
+    protected fun invalidated(description: TranslationDTO, variableAssignments: Map<String, Node>, shouldBeModel: Boolean, vararg children: ModelCheckerTrace) =
+        ModelCheckerTrace(
+            formula = this.toString(variableAssignments),
+            description = description,
+            isModel = false,
+            shouldBeModel = shouldBeModel,
+            children = children.toList()
+        )
 }

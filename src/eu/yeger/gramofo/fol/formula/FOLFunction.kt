@@ -1,12 +1,15 @@
 package eu.yeger.gramofo.fol.formula
 
+import eu.yeger.gramofo.fol.ModelCheckerException
+import eu.yeger.gramofo.fol.ModelCheckerTrace
+import eu.yeger.gramofo.fol.SymbolTable
+import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
 
 class FOLFunction(
     name: String,
     children: Set<FOLFormula>
 ) : FOLFormula(
-    type = FOLType.Function,
     name = name,
     children = children
 ) {
@@ -20,6 +23,15 @@ class FOLFunction(
         name,
         setOf(leftOperand, rightOperand)
     )
+
+    override fun checkModel(
+        graph: Graph,
+        symbolTable: SymbolTable,
+        variableAssignments: Map<String, Node>,
+        shouldBeModel: Boolean,
+    ): ModelCheckerTrace {
+        throw ModelCheckerException("[ModelChecker][Internal error] checkModel cannot be called for instances of FOLFunction")
+    }
 
     override fun getFormulaString(variableAssignments: Map<String, Node>): String {
         val sb = StringBuilder()

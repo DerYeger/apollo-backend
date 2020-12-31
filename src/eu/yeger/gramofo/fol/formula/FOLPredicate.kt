@@ -8,7 +8,8 @@ private val specialNames = mapOf(
     ">=" to "\u2265"
 )
 
-class FOLPredicate(
+class FOLPredicate
+private constructor(
     name: String,
     children: Set<FOLFormula>,
     private val isInfix: Boolean
@@ -18,7 +19,7 @@ class FOLPredicate(
     children = children
 ) {
 
-    constructor(
+    private constructor(
         name: String,
         leftOperand: FOLFormula,
         rightOperand: FOLFormula,
@@ -45,5 +46,15 @@ class FOLPredicate(
         }
         maybeWrapBracketsAndDot(sb)
         return sb.toString()
+    }
+
+    companion object {
+        fun prefixPredicate(name: String, children: Set<FOLFormula>): FOLPredicate {
+            return FOLPredicate(name = name, children = children, isInfix = false)
+        }
+
+        fun infixPredicate(name: String, leftOperand: FOLFormula, rightOperand: FOLFormula): FOLPredicate {
+            return FOLPredicate(name = name, leftOperand = leftOperand, rightOperand = rightOperand)
+        }
     }
 }

@@ -39,4 +39,14 @@ class FOLFunction(
         maybeWrapBracketsAndDot(sb)
         return sb.toString()
     }
+
+    companion object {
+        fun prefixFunction(name: String, children: Set<FOLFormula>): FOLFunction {
+            return FOLFunction(name = name, children = children)
+        }
+
+        fun infixFunction(name: String, leftOperand: FOLFormula, rightOperand: FOLFormula): FOLFunction {
+            return FOLFunction(name = name, leftOperand = leftOperand, rightOperand = rightOperand)
+        }
+    }
 }

@@ -184,7 +184,7 @@ private class FOLParser(private val language: Language) {
             throw ParseException(language.getString("FOP_VARIABLE_ALREADY_BOUND", symbol))
         }
         scanner.nextToken()
-        return FOLFactory.createBoundVariable(symbol)
+        return FOLBoundVariable(symbol)
     }
 
     // Operand ::= Predicate | Constant | '(' Formula ')' | '.' Formula
@@ -268,7 +268,7 @@ private class FOLParser(private val language: Language) {
         } // else no opening bracket -> no term		
         val symbolType = "P-" + termChildren.size
         checkSymbolInfo(symbol, symbolType)
-        return FOLFactory.createPredicate(name = symbol, children = termChildren)
+        return FOLPredicate.prefixPredicate(name = symbol, children = termChildren)
     }
 
     // InfixPredicate ::= Term InfixPred Term
@@ -283,7 +283,7 @@ private class FOLParser(private val language: Language) {
         checkSymbolInfo(symbol, symbolType)
         scanner.nextToken()
         val rightOperand = parseInfixTerm(scanner)
-        return FOLFactory.createInfixPredicate(
+        return FOLPredicate.infixPredicate(
             name = symbol,
             leftOperand = leftOperand,
             rightOperand = rightOperand,
@@ -299,7 +299,7 @@ private class FOLParser(private val language: Language) {
             checkSymbolInfo(symbol, "F-2")
             scanner.nextToken()
             val normalTerm = parseNormalTerm(scanner)
-            infixTerm = FOLFactory.createInfixFunction(
+            infixTerm = FOLFunction.infixFunction(
                 name = symbol,
                 leftOperand = infixTerm,
                 rightOperand = normalTerm,
@@ -351,9 +351,9 @@ private class FOLParser(private val language: Language) {
         } // else not opening bracket -> no term		
         return if (!containsSymbol(curBoundedVars, symbol)) {
             checkSymbolInfo(symbol, "F-" + termChildren.size)
-            FOLFactory.createFunction(name = symbol, children = termChildren)
+            FOLFunction.prefixFunction(name = symbol, children = termChildren)
         } else if (termChildren.size == 0) {
-            FOLFactory.createBoundVariable(symbol)
+            FOLBoundVariable(symbol)
         } else {
             throw ParseException(language.getString("FOP_SYMBOL_ALREADY_IN_USE_AS_BOUND_VARIABLE", symbol))
         }

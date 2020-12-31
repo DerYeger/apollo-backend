@@ -170,11 +170,40 @@ private fun FOLFormula.checkBiImplication(
     variableAssignments: Map<String, Node>,
     shouldBeModel: Boolean,
 ): ModelCheckerTrace {
+    val positive = checkPositiveBiImplication(graph, symbolTable, variableAssignments, shouldBeModel)
+    val negative by lazy { checkNegativeBiImplication(graph, symbolTable, variableAssignments, shouldBeModel) }
+    return when {
+        positive.isModel -> positive
+        negative.isModel -> negative
+        else -> invalidated(TranslationDTO("api.bi-implication.invalid"), variableAssignments, shouldBeModel, positive, negative)
+    }
+}
+
+private fun FOLFormula.checkPositiveBiImplication(
+    graph: Graph,
+    symbolTable: SymbolTable,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+): ModelCheckerTrace {
     val left = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments, shouldBeModel)
     val right = getChildAt(1).checkFormula(graph, symbolTable, variableAssignments, shouldBeModel)
-    return when (left.isModel) {
-        right.isModel -> validated(TranslationDTO("api.bi-implication.valid"), variableAssignments, shouldBeModel, left, right)
-        else -> invalidated(TranslationDTO("api.bi-implication.invalid"), variableAssignments, shouldBeModel, left, right)
+    return when {
+        left.isModel && right.isModel -> validated(TranslationDTO("api.bi-implication.positive.valid"), variableAssignments, shouldBeModel, left, right)
+        else -> invalidated(TranslationDTO("api.bi-implication.positive.invalid"), variableAssignments, shouldBeModel, left, right)
+    }
+}
+
+private fun FOLFormula.checkNegativeBiImplication(
+    graph: Graph,
+    symbolTable: SymbolTable,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+): ModelCheckerTrace {
+    val left = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments, shouldBeModel.not())
+    val right = getChildAt(1).checkFormula(graph, symbolTable, variableAssignments, shouldBeModel.not())
+    return when {
+        left.isModel.not() && right.isModel.not() -> validated(TranslationDTO("api.bi-implication.negative.valid"), variableAssignments, shouldBeModel, left, right)
+        else -> invalidated(TranslationDTO("api.bi-implication.negative.invalid"), variableAssignments, shouldBeModel, left, right)
     }
 }
 

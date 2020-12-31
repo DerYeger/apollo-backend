@@ -133,32 +133,4 @@ object FOLFactory {
     fun createBoundVariable(name: String): FOLBoundVariable {
         return FOLBoundVariable(name)
     }
-
-    /**
-     * Creates a new forAll quantifier.
-     * @param variable an instance of FOLBoundVariables. The name of this variable is used to assign other variables in
-     * the formula subtree.
-     * @param operand the root of the subtree
-     * @return a new instance of FOLQuantifier
-     */
-    fun createQuantifierForAll(
-        variable: FOLBoundVariable,
-        operand: FOLFormula,
-    ): FOLQuantifier {
-        return FOLQuantifier(type = FOLType.ForAll, name = FOLFormula.FOR_ALL, variable = variable, operand = operand)
-    }
-
-    /**
-     * Creates a new exists quantifier.
-     * @param variable an instance of FOLBoundVariables. The name of this variable is used to assign other variables in
-     * the formula subtree.
-     * @param operand the root of the subtree
-     * @return a new instance of FOLQuantifier
-     */
-    fun createQuantifierExists(
-        variable: FOLBoundVariable,
-        operand: FOLFormula,
-    ): FOLQuantifier {
-        return FOLQuantifier(type = FOLType.Exists, name = FOLFormula.EXISTS, variable = variable, operand = operand)
-    }
 }

@@ -2,12 +2,15 @@ package eu.yeger.gramofo.fol.formula
 
 import eu.yeger.gramofo.model.domain.Node
 
-class FOLQuantifier(
+sealed class FOLQuantifier(
     type: FOLType,
     name: String,
     variable: FOLBoundVariable,
     operand: FOLFormula,
 ) : FOLFormula(type, name, setOf(variable, operand)) {
+
+    class Existential(variable: FOLBoundVariable, operand: FOLFormula) : FOLQuantifier(FOLType.Exists, EXISTS, variable, operand)
+    class Universal(variable: FOLBoundVariable, operand: FOLFormula) : FOLQuantifier(FOLType.ForAll, FOR_ALL, variable, operand)
 
     override fun getFormulaString(variableAssignments: Map<String, Node>): String {
         val child0 = getChildAt(0)

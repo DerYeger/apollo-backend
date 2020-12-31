@@ -155,7 +155,7 @@ private class FOLParser(private val language: Language) {
                 curBoundedVars!!.add(variable)
                 unaryOperator = parseUnaryOperator(scanner)
                 curBoundedVars!!.remove(variable)
-                FOLFactory.createQuantifierForAll(variable, unaryOperator)
+                FOLQuantifier.Universal(variable, unaryOperator)
             }
             FOLToken.EXISTS -> {
                 scanner.nextToken()
@@ -163,7 +163,7 @@ private class FOLParser(private val language: Language) {
                 curBoundedVars!!.add(variable)
                 unaryOperator = parseUnaryOperator(scanner)
                 curBoundedVars!!.remove(variable)
-                FOLFactory.createQuantifierExists(variable, unaryOperator)
+                FOLQuantifier.Existential(variable, unaryOperator)
             }
             else -> parseOperand(scanner)
         }

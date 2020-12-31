@@ -14,12 +14,13 @@ import java.util.*
 
 class DefaultModelCheckerService : ModelCheckerService {
 
-    override fun checkModel(modelCheckerRequest: ModelCheckerRequest): ModelCheckerResult {
-        val domainGraph = modelCheckerRequest.graph.toDomainModel()
-        return extractLanguage(modelCheckerRequest)
+    override fun checkModel(modelCheckerRequest: ModelCheckerRequest): ModelCheckerResult = binding {
+        val domainGraph = modelCheckerRequest.graph.toDomainModel().bind()
+        extractLanguage(modelCheckerRequest)
             .andThen { language -> parseFormula(modelCheckerRequest.formula, language) }
             .mapError { error -> TranslationDTO(error) }
             .andThen { formula -> checkModel(domainGraph, formula) }
+            .bind()
     }
 
     private fun extractLanguage(modelCheckerRequest: ModelCheckerRequest): Result<Language, String> {

@@ -21,7 +21,7 @@ abstract class FOLFormula(
     }
 
     fun toString(variableAssignments: Map<String, Node>): String {
-        return getFormulaString(variableAssignments).removePrefix(". ").removeSurrounding(prefix = "(", suffix = ")")
+        return getFormulaString(variableAssignments).removePrefix(". ")
     }
 
     /**

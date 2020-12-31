@@ -1,4 +1,4 @@
-package eu.yeger.gramofo.fol.graph
+package eu.yeger.gramofo.model.domain
 
 data class Node(
     val name: String,

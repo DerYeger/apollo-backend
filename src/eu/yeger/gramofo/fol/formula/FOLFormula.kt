@@ -1,6 +1,6 @@
 package eu.yeger.gramofo.fol.formula
 
-import eu.yeger.gramofo.fol.graph.Node
+import eu.yeger.gramofo.model.domain.Node
 
 /**
  * This is the super class of all formula types.

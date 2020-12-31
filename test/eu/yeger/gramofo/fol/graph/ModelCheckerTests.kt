@@ -1,7 +1,11 @@
 package eu.yeger.gramofo.fol.graph
 
 import com.github.michaelbull.result.get
+import eu.yeger.gramofo.fol.checkModel
 import eu.yeger.gramofo.fol.parser.parseFormula
+import eu.yeger.gramofo.model.domain.Edge
+import eu.yeger.gramofo.model.domain.Graph
+import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.utils.shouldBe
 import org.junit.jupiter.api.Test
 

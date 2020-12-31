@@ -1,4 +1,4 @@
-package eu.yeger.gramofo.model.api
+package eu.yeger.gramofo.model.dto
 
 data class TranslationDTO(
     val key: String,

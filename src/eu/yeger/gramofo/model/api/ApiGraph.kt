@@ -5,9 +5,10 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.binding
-import eu.yeger.gramofo.fol.graph.Edge
-import eu.yeger.gramofo.fol.graph.Graph
-import eu.yeger.gramofo.fol.graph.Node
+import eu.yeger.gramofo.model.domain.Edge
+import eu.yeger.gramofo.model.domain.Graph
+import eu.yeger.gramofo.model.domain.Node
+import eu.yeger.gramofo.model.dto.TranslationDTO
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ApiGraph(

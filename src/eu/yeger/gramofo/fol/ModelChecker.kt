@@ -1,11 +1,13 @@
-package eu.yeger.gramofo.fol.graph
+package eu.yeger.gramofo.fol
 
 import com.github.michaelbull.result.*
 import com.github.michaelbull.result.binding
-import eu.yeger.gramofo.fol.Settings
 import eu.yeger.gramofo.fol.formula.*
 import eu.yeger.gramofo.fol.formula.FOLFormula.Companion.INFIX_EQUALITY
-import eu.yeger.gramofo.model.api.TranslationDTO
+import eu.yeger.gramofo.model.domain.Edge
+import eu.yeger.gramofo.model.domain.Graph
+import eu.yeger.gramofo.model.domain.Node
+import eu.yeger.gramofo.model.dto.TranslationDTO
 import java.util.*
 import kotlin.collections.MutableSet
 import kotlin.collections.Set
@@ -23,13 +25,20 @@ typealias ModelCheckerResult = Result<ModelCheckerTrace, TranslationDTO>
 
 private val infixPredicates = Settings[Settings.INFIX_PRED].toSet()
 
-private class ModelCheckException(message: String) : RuntimeException(message)
+data class ModelCheckerTrace(
+    val formula: String,
+    val description: TranslationDTO,
+    val isModel: Boolean,
+    val children: List<ModelCheckerTrace>
+)
 
 private data class SymbolTable(
     val unarySymbols: Map<String, Set<Node>>,
     val binarySymbols: Map<String, Set<Edge>>,
     val symbolTypes: Map<String, String>
 )
+
+private class ModelCheckException(message: String) : RuntimeException(message)
 
 fun checkModel(graph: Graph, formulaHead: FOLFormulaHead): ModelCheckerResult = binding {
     val symbolTable = graph.loadSymbols()

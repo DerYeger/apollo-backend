@@ -4,6 +4,9 @@ import com.github.michaelbull.result.get
 import com.github.michaelbull.result.getOrElse
 import eu.yeger.gramofo.fol.graph.*
 import eu.yeger.gramofo.fol.parser.parseFormula
+import eu.yeger.gramofo.model.domain.Edge
+import eu.yeger.gramofo.model.domain.Graph
+import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.utils.shouldBe
 import eu.yeger.gramofo.utils.shouldNotBe
 import org.junit.jupiter.api.Test

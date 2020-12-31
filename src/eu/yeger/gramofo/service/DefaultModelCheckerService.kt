@@ -4,13 +4,12 @@ import com.github.michaelbull.result.*
 import eu.yeger.gramofo.fol.English
 import eu.yeger.gramofo.fol.German
 import eu.yeger.gramofo.fol.Language
-import eu.yeger.gramofo.fol.graph.ModelCheckerResult
-import eu.yeger.gramofo.fol.graph.checkModel
+import eu.yeger.gramofo.fol.ModelCheckerResult
+import eu.yeger.gramofo.fol.checkModel
 import eu.yeger.gramofo.fol.parser.parseFormula
 import eu.yeger.gramofo.model.api.ModelCheckerRequest
-import eu.yeger.gramofo.model.api.TranslationDTO
 import eu.yeger.gramofo.model.api.toDomainModel
-import java.util.*
+import eu.yeger.gramofo.model.dto.TranslationDTO
 
 class DefaultModelCheckerService : ModelCheckerService {
 

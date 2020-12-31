@@ -2,9 +2,9 @@ package eu.yeger.gramofo.routing
 
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
-import eu.yeger.gramofo.fol.graph.ModelCheckerTrace
+import eu.yeger.gramofo.fol.ModelCheckerTrace
 import eu.yeger.gramofo.model.api.ModelCheckerRequest
-import eu.yeger.gramofo.model.api.TranslationDTO
+import eu.yeger.gramofo.model.dto.TranslationDTO
 import eu.yeger.gramofo.service.ModelCheckerService
 import io.ktor.application.*
 import io.ktor.http.*

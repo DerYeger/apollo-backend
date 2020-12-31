@@ -195,11 +195,11 @@ private class FOLParser(private val language: Language) {
         return when (scanner.curType()) {
             FOLToken.TRUE -> {
                 scanner.nextToken()
-                FOLFactory.createTrueConstant()
+                FOLConstant.True()
             }
             FOLToken.FALSE -> {
                 scanner.nextToken()
-                FOLFactory.createFalseConstant()
+                FOLConstant.False()
             }
             FOLToken.BRACKET -> {
                 if (scanner.curValue() == ")") {

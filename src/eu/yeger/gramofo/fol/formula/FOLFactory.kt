@@ -1,29 +1,10 @@
 package eu.yeger.gramofo.fol.formula
 
-import eu.yeger.gramofo.fol.formula.FOLFormula.Companion.FF
-import eu.yeger.gramofo.fol.formula.FOLFormula.Companion.TT
-
 /**
  * This is a factory class to create FOLFormulas. Because all constructors are package private,
  * this is the only was to create them. This is to avoid misuse and to make it more comfortable.
  */
 object FOLFactory {
-    // /////////////////// Constants /////////////////////////
-    /**
-     * Creates the constant True (tt). FOLConstant.TT is used as name.
-     * @return a new instance of FOLConstant
-     */
-    fun createTrueConstant(): FOLConstant {
-        return FOLConstant(TT)
-    }
-
-    /**
-     * Creates the constant False (ff). FOLConstant.FF is used as name.
-     * @return a new instance of FOLConstant
-     */
-    fun createFalseConstant(): FOLConstant {
-        return FOLConstant(FF)
-    }
     // /////////////////// Operands /////////////////////////
     /**
      * Creates an and-operator. FOLOperator.AND is used as name.

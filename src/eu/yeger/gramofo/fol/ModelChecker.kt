@@ -29,13 +29,14 @@ data class ModelCheckerTrace(
     val formula: String,
     val description: TranslationDTO,
     val isModel: Boolean,
-    val children: List<ModelCheckerTrace>
+    val shouldBeModel: Boolean,
+    val children: List<ModelCheckerTrace>,
 )
 
 private data class SymbolTable(
     val unarySymbols: Map<String, Set<Node>>,
     val binarySymbols: Map<String, Set<Edge>>,
-    val symbolTypes: Map<String, String>
+    val symbolTypes: Map<String, String>,
 )
 
 private class ModelCheckException(message: String) : RuntimeException(message)
@@ -44,117 +45,169 @@ fun checkModel(graph: Graph, formulaHead: FOLFormulaHead): ModelCheckerResult = 
     val symbolTable = graph.loadSymbols()
         .andThen { symbolTable -> formulaHead.loadSymbols(symbolTable) }
         .andThen { symbolTable -> checkTotality(graph, symbolTable) }.bind()
-    runCatching { formulaHead.formula.checkFormula(graph, symbolTable, emptyMap()) }
+    runCatching { formulaHead.formula.checkFormula(graph, symbolTable, emptyMap(), true) }
         .mapError { error -> TranslationDTO(error.message ?: "api.error.unknown") }
         .bind()
 }
 
-private fun FOLFormula.checkFormula(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>): ModelCheckerTrace {
+private fun FOLFormula.checkFormula(
+    graph: Graph,
+    symbolTable: SymbolTable,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+): ModelCheckerTrace {
     return when (type) {
-        FOLType.ForAll -> checkForAll(graph, symbolTable, variableAssignments)
-        FOLType.Exists -> checkExists(graph, symbolTable, variableAssignments)
-        FOLType.Not -> checkNot(graph, symbolTable, variableAssignments)
-        FOLType.And -> checkAnd(graph, symbolTable, variableAssignments)
-        FOLType.Or -> checkOr(graph, symbolTable, variableAssignments)
-        FOLType.Implication -> checkImplication(graph, symbolTable, variableAssignments)
-        FOLType.BiImplication -> checkBiImplication(graph, symbolTable, variableAssignments)
-        FOLType.Predicate -> checkRelation(symbolTable, variableAssignments)
-        FOLType.Constant -> checkConstant(variableAssignments)
+        FOLType.ForAll -> checkForAll(graph, symbolTable, variableAssignments, shouldBeModel)
+        FOLType.Exists -> checkExists(graph, symbolTable, variableAssignments, shouldBeModel)
+        FOLType.Not -> checkNot(graph, symbolTable, variableAssignments, shouldBeModel)
+        FOLType.And -> checkAnd(graph, symbolTable, variableAssignments, shouldBeModel)
+        FOLType.Or -> checkOr(graph, symbolTable, variableAssignments, shouldBeModel)
+        FOLType.Implication -> checkImplication(graph, symbolTable, variableAssignments, shouldBeModel)
+        FOLType.BiImplication -> checkBiImplication(graph, symbolTable, variableAssignments, shouldBeModel)
+        FOLType.Predicate -> checkRelation(symbolTable, variableAssignments, shouldBeModel)
+        FOLType.Constant -> checkConstant(variableAssignments, shouldBeModel)
         else -> throw ModelCheckException("[ModelChecker][Internal error] Unknown FOLFormula-Type: $type")
     }
 }
 
-private fun FOLFormula.checkForAll(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>): ModelCheckerTrace {
+private fun FOLFormula.checkForAll(
+    graph: Graph,
+    symbolTable: SymbolTable,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+): ModelCheckerTrace {
     val variableName = getChildAt(0).name
     val children = graph.nodes.map { node: Node ->
-        getChildAt(1).checkFormula(graph, symbolTable, variableAssignments + (variableName to node))
+        getChildAt(1).checkFormula(graph, symbolTable, variableAssignments + (variableName to node), shouldBeModel)
     }
     return if (children.all(ModelCheckerTrace::isModel)) {
-        validated(TranslationDTO("api.forall.valid"), variableAssignments, *children.toTypedArray())
+        validated(TranslationDTO("api.forall.valid"), variableAssignments, shouldBeModel, *children.toTypedArray())
     } else {
-        invalidated(TranslationDTO("api.forall.invalid"), variableAssignments, *children.toTypedArray())
+        invalidated(TranslationDTO("api.forall.invalid"), variableAssignments, shouldBeModel, *children.toTypedArray())
     }
 }
 
-private fun FOLFormula.checkExists(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>): ModelCheckerTrace {
+private fun FOLFormula.checkExists(
+    graph: Graph,
+    symbolTable: SymbolTable,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+): ModelCheckerTrace {
     val variableName = getChildAt(0).name
     val children = graph.nodes.map { node: Node ->
-        getChildAt(1).checkFormula(graph, symbolTable, variableAssignments + (variableName to node))
+        getChildAt(1).checkFormula(graph, symbolTable, variableAssignments + (variableName to node), shouldBeModel)
     }
     return if (children.any(ModelCheckerTrace::isModel)) {
-        validated(TranslationDTO("api.exists.valid"), variableAssignments, *children.toTypedArray())
+        validated(TranslationDTO("api.exists.valid"), variableAssignments, shouldBeModel, *children.toTypedArray())
     } else {
-        invalidated(TranslationDTO("api.exists.invalid"), variableAssignments, *children.toTypedArray())
+        invalidated(TranslationDTO("api.exists.invalid"), variableAssignments, shouldBeModel, *children.toTypedArray())
     }
 }
 
-private fun FOLFormula.checkNot(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>): ModelCheckerTrace {
-    val child = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments)
+private fun FOLFormula.checkNot(
+    graph: Graph,
+    symbolTable: SymbolTable,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+): ModelCheckerTrace {
+    val child = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments, shouldBeModel.not())
     return when (child.isModel) {
-        true -> invalidated(TranslationDTO("api.not.invalid"), variableAssignments, child)
-        false -> validated(TranslationDTO("api.not.valid"), variableAssignments, child)
+        true -> invalidated(TranslationDTO("api.not.invalid"), variableAssignments, shouldBeModel, child)
+        false -> validated(TranslationDTO("api.not.valid"), variableAssignments, shouldBeModel, child)
     }
 }
 
-private fun FOLFormula.checkAnd(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>): ModelCheckerTrace {
-    val left = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments)
-    val right = getChildAt(1).checkFormula(graph, symbolTable, variableAssignments)
+private fun FOLFormula.checkAnd(
+    graph: Graph,
+    symbolTable: SymbolTable,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+): ModelCheckerTrace {
+    val left = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments, shouldBeModel)
+    val right = getChildAt(1).checkFormula(graph, symbolTable, variableAssignments, shouldBeModel)
     return when {
-        left.isModel && right.isModel -> validated(TranslationDTO("api.and.both"), variableAssignments, left, right)
-        left.isModel.not() && right.isModel.not() -> invalidated(TranslationDTO("api.and.neither"), variableAssignments, left, right)
-        left.isModel.not() -> invalidated(TranslationDTO("api.and.left"), variableAssignments, left, right)
-        else -> invalidated(TranslationDTO("api.and.right"), variableAssignments, left, right)
+        left.isModel && right.isModel -> validated(TranslationDTO("api.and.both"), variableAssignments, shouldBeModel, left, right)
+        left.isModel.not() && right.isModel.not() -> invalidated(TranslationDTO("api.and.neither"), variableAssignments, shouldBeModel, left, right)
+        left.isModel.not() -> invalidated(TranslationDTO("api.and.left"), variableAssignments, shouldBeModel, left, right)
+        else -> invalidated(TranslationDTO("api.and.right"), variableAssignments, shouldBeModel, left, right)
     }
 }
 
-private fun FOLFormula.checkOr(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>): ModelCheckerTrace {
-    val left = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments)
-    val right = getChildAt(1).checkFormula(graph, symbolTable, variableAssignments)
+private fun FOLFormula.checkOr(
+    graph: Graph,
+    symbolTable: SymbolTable,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+): ModelCheckerTrace {
+    val left = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments, shouldBeModel)
+    val right = getChildAt(1).checkFormula(graph, symbolTable, variableAssignments, shouldBeModel)
     return when {
-        left.isModel && right.isModel -> validated(TranslationDTO("api.or.both"), variableAssignments, left, right)
-        left.isModel -> validated(TranslationDTO("api.or.left"), variableAssignments, left, right)
-        right.isModel -> validated(TranslationDTO("api.or.right"), variableAssignments, left, right)
-        else -> invalidated(TranslationDTO("api.or.neither"), variableAssignments, left, right)
+        left.isModel && right.isModel -> validated(TranslationDTO("api.or.both"), variableAssignments, shouldBeModel, left, right)
+        left.isModel -> validated(TranslationDTO("api.or.left"), variableAssignments, shouldBeModel, left, right)
+        right.isModel -> validated(TranslationDTO("api.or.right"), variableAssignments, shouldBeModel, left, right)
+        else -> invalidated(TranslationDTO("api.or.neither"), variableAssignments, shouldBeModel, left, right)
     }
 }
 
-private fun FOLFormula.checkImplication(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>): ModelCheckerTrace {
-    val left = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments)
-    val right = getChildAt(1).checkFormula(graph, symbolTable, variableAssignments)
+private fun FOLFormula.checkImplication(
+    graph: Graph,
+    symbolTable: SymbolTable,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+): ModelCheckerTrace {
+    val left = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments, shouldBeModel)
+    val right = getChildAt(1).checkFormula(graph, symbolTable, variableAssignments, shouldBeModel)
     return when {
-        right.isModel -> validated(TranslationDTO("api.implication.right"), variableAssignments, left, right)
-        left.isModel.not() -> validated(TranslationDTO("api.implication.left"), variableAssignments, left, right)
-        else -> invalidated(TranslationDTO("api.implication.invalid"), variableAssignments, left, right)
+        right.isModel -> validated(TranslationDTO("api.implication.right"), variableAssignments, shouldBeModel, left, right)
+        left.isModel.not() -> validated(TranslationDTO("api.implication.left"), variableAssignments, shouldBeModel, left, right)
+        else -> invalidated(TranslationDTO("api.implication.invalid"), variableAssignments, shouldBeModel, left, right)
     }
 }
 
-private fun FOLFormula.checkBiImplication(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>): ModelCheckerTrace {
-    val left = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments)
-    val right = getChildAt(1).checkFormula(graph, symbolTable, variableAssignments)
+private fun FOLFormula.checkBiImplication(
+    graph: Graph,
+    symbolTable: SymbolTable,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+): ModelCheckerTrace {
+    val left = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments, shouldBeModel)
+    val right = getChildAt(1).checkFormula(graph, symbolTable, variableAssignments, shouldBeModel)
     return when (left.isModel) {
-        right.isModel -> validated(TranslationDTO("api.bi-implication.valid"), variableAssignments, left, right)
-        else -> invalidated(TranslationDTO("api.bi-implication.invalid"), variableAssignments, left, right)
+        right.isModel -> validated(TranslationDTO("api.bi-implication.valid"), variableAssignments, shouldBeModel, left, right)
+        else -> invalidated(TranslationDTO("api.bi-implication.invalid"), variableAssignments, shouldBeModel, left, right)
     }
 }
 
-private fun FOLFormula.checkRelation(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): ModelCheckerTrace {
+private fun FOLFormula.checkRelation(
+    symbolTable: SymbolTable,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+): ModelCheckerTrace {
     return when (children.size) {
-        1 -> checkUnaryRelation(symbolTable, variableAssignments)
-        2 -> checkBinaryRelation(symbolTable, variableAssignments)
+        1 -> checkUnaryRelation(symbolTable, variableAssignments, shouldBeModel)
+        2 -> checkBinaryRelation(symbolTable, variableAssignments, shouldBeModel)
         else -> throw ModelCheckException("[ModelChecker][Internal error] Found predicate with to many children.")
     }
 }
 
-private fun FOLFormula.checkUnaryRelation(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): ModelCheckerTrace {
+private fun FOLFormula.checkUnaryRelation(
+    symbolTable: SymbolTable,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+): ModelCheckerTrace {
     val node = getChildAt(0).interpret(symbolTable, variableAssignments)
     val translationParams = mapOf("relation" to name, "node" to node.name)
     return when (symbolTable.unarySymbols[name]!!.contains(node)) {
-        true -> validated(TranslationDTO("api.relation.unary.valid", translationParams), variableAssignments)
-        false -> invalidated(TranslationDTO("api.relation.unary.invalid", translationParams), variableAssignments)
+        true -> validated(TranslationDTO("api.relation.unary.valid", translationParams), variableAssignments, shouldBeModel)
+        false -> invalidated(TranslationDTO("api.relation.unary.invalid", translationParams), variableAssignments, shouldBeModel)
     }
 }
 
-private fun FOLFormula.checkBinaryRelation(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): ModelCheckerTrace {
+private fun FOLFormula.checkBinaryRelation(
+    symbolTable: SymbolTable,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+): ModelCheckerTrace {
     val left = getChildAt(0).interpret(symbolTable, variableAssignments)
     val right = getChildAt(1).interpret(symbolTable, variableAssignments)
     val translationParams = mapOf(
@@ -165,22 +218,25 @@ private fun FOLFormula.checkBinaryRelation(symbolTable: SymbolTable, variableAss
     )
     return if (name == INFIX_EQUALITY) {
         when (left) {
-            right -> validated(TranslationDTO("api.relation.equality.valid", translationParams), variableAssignments)
-            else -> invalidated(TranslationDTO("api.relation.equality.invalid", translationParams), variableAssignments)
+            right -> validated(TranslationDTO("api.relation.equality.valid", translationParams), variableAssignments, shouldBeModel)
+            else -> invalidated(TranslationDTO("api.relation.equality.invalid", translationParams), variableAssignments, shouldBeModel)
         }
     } else {
         val binaryTranslationParams = translationParams + ("relation" to name)
         when (symbolTable.binarySymbols[name]!!.any { edge: Edge -> edge.source == left && edge.target == right }) {
-            true -> validated(TranslationDTO("api.relation.binary.valid", binaryTranslationParams), variableAssignments)
-            else -> invalidated(TranslationDTO("api.relation.binary.invalid", binaryTranslationParams), variableAssignments)
+            true -> validated(TranslationDTO("api.relation.binary.valid", binaryTranslationParams), variableAssignments, shouldBeModel)
+            else -> invalidated(TranslationDTO("api.relation.binary.invalid", binaryTranslationParams), variableAssignments, shouldBeModel)
         }
     }
 }
 
-private fun FOLFormula.checkConstant(variableAssignments: Map<String, Node>): ModelCheckerTrace {
+private fun FOLFormula.checkConstant(
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+): ModelCheckerTrace {
     return when (name == FOLFormula.TT) {
-        true -> validated(TranslationDTO("api.constant.true"), variableAssignments)
-        else -> invalidated(TranslationDTO("api.constant.false"), variableAssignments)
+        true -> validated(TranslationDTO("api.constant.true"), variableAssignments, shouldBeModel)
+        else -> invalidated(TranslationDTO("api.constant.false"), variableAssignments, shouldBeModel)
     }
 }
 
@@ -294,8 +350,20 @@ private fun FOLFormula.interpret(symbolTable: SymbolTable, variableAssignments: 
     }
 }
 
-private fun FOLFormula.validated(description: TranslationDTO, variableAssignments: Map<String, Node>, vararg children: ModelCheckerTrace) =
-    ModelCheckerTrace(this.toString(variableAssignments), description, true, children.toList())
+private fun FOLFormula.validated(description: TranslationDTO, variableAssignments: Map<String, Node>, shouldBeModel: Boolean, vararg children: ModelCheckerTrace) =
+    ModelCheckerTrace(
+        formula = this.toString(variableAssignments),
+        description = description,
+        isModel = true,
+        shouldBeModel = shouldBeModel,
+        children = children.toList()
+    )
 
-private fun FOLFormula.invalidated(description: TranslationDTO, variableAssignments: Map<String, Node>, vararg children: ModelCheckerTrace) =
-    ModelCheckerTrace(this.toString(variableAssignments), description, false, children.toList())
+private fun FOLFormula.invalidated(description: TranslationDTO, variableAssignments: Map<String, Node>, shouldBeModel: Boolean, vararg children: ModelCheckerTrace) =
+    ModelCheckerTrace(
+        formula = this.toString(variableAssignments),
+        description = description,
+        isModel = false,
+        shouldBeModel = shouldBeModel,
+        children = children.toList()
+    )

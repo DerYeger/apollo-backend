@@ -97,7 +97,7 @@ private class FOLParser(private val language: Language) {
         while (scanner.curType() == FOLToken.BI_IMPLICATION) {
             scanner.nextToken()
             val impl = parseImplication(scanner)
-            biimpl = FOLFactory.createOperatorBiImplication(biimpl, impl)
+            biimpl = FOLOperator.BiImplication(biimpl, impl)
         }
         return biimpl
     }
@@ -109,7 +109,7 @@ private class FOLParser(private val language: Language) {
         while (scanner.curType() == FOLToken.IMPLICATION) {
             scanner.nextToken()
             val or = parseOr(scanner)
-            impl = FOLFactory.createOperatorImplication(impl, or)
+            impl = FOLOperator.Implication(impl, or)
         }
         return impl
     }
@@ -121,7 +121,7 @@ private class FOLParser(private val language: Language) {
         while (scanner.curType() == FOLToken.OR) {
             scanner.nextToken()
             val and = parseAnd(scanner)
-            or = FOLFactory.createOperatorOr(or, and)
+            or = FOLOperator.Or(or, and)
         }
         return or
     }
@@ -133,7 +133,7 @@ private class FOLParser(private val language: Language) {
         while (scanner.curType() == FOLToken.AND) {
             scanner.nextToken()
             val unaryOperator = parseUnaryOperator(scanner)
-            and = FOLFactory.createOperatorAnd(and, unaryOperator)
+            and = FOLOperator.And(and, unaryOperator)
         }
         return and
     }
@@ -147,7 +147,7 @@ private class FOLParser(private val language: Language) {
             FOLToken.NOT -> {
                 scanner.nextToken()
                 unaryOperator = parseUnaryOperator(scanner)
-                FOLFactory.createOperatorNot(unaryOperator)
+                FOLOperator.Not(unaryOperator)
             }
             FOLToken.FOR_ALL -> {
                 scanner.nextToken()

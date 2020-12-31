@@ -5,78 +5,7 @@ package eu.yeger.gramofo.fol.formula
  * this is the only was to create them. This is to avoid misuse and to make it more comfortable.
  */
 object FOLFactory {
-    // /////////////////// Operands /////////////////////////
-    /**
-     * Creates an and-operator. FOLOperator.AND is used as name.
-     * @return a new instance of FOLOperator
-     */
-    fun createOperatorAnd(
-        leftOperand: FOLFormula,
-        rightOperand: FOLFormula,
-    ): FOLOperator {
-        return FOLOperator(
-            type = FOLType.And,
-            name = FOLFormula.AND,
-            leftOperand = leftOperand,
-            rightOperand = rightOperand
-        )
-    }
 
-    /**
-     * Creates an or-operator. FOLOperator.OR is used as name.
-     * @return a new instance of FOLOperator
-     */
-    fun createOperatorOr(
-        leftOperand: FOLFormula,
-        rightOperand: FOLFormula,
-    ): FOLOperator {
-        return FOLOperator(
-            type = FOLType.Or,
-            name = FOLFormula.OR,
-            leftOperand = leftOperand,
-            rightOperand = rightOperand
-        )
-    }
-
-    /**
-     * Creates an implication-operator. FOLOperator.IMPLICATION is used as name.
-     * @return a new instance of FOLOperator
-     */
-    fun createOperatorImplication(
-        leftOperand: FOLFormula,
-        rightOperand: FOLFormula,
-    ): FOLOperator {
-        return FOLOperator(
-            type = FOLType.Implication,
-            name = FOLFormula.IMPLICATION,
-            leftOperand = leftOperand,
-            rightOperand = rightOperand,
-        )
-    }
-
-    /**
-     * Creates a bi-implication-operator. FOLOperator.BI_IMPLICATION is used as name.
-     * @return a new instance of FOLOperator
-     */
-    fun createOperatorBiImplication(
-        leftOperand: FOLFormula,
-        rightOperand: FOLFormula,
-    ): FOLOperator {
-        return FOLOperator(
-            type = FOLType.BiImplication,
-            name = FOLFormula.BI_IMPLICATION,
-            leftOperand = leftOperand,
-            rightOperand = rightOperand,
-        )
-    }
-
-    /**
-     * Creates a not-operator. FOLOperator.NOT is used as name.
-     * @return a new instance of FOLOperator
-     */
-    fun createOperatorNot(operand: FOLFormula): FOLOperator {
-        return FOLOperator(type = FOLType.Not, name = FOLFormula.NOT, operand = operand)
-    }
     // /////////////////// Function and Predicate /////////////////////////
     /**
      * Creates new postfix notated function. The name of the function is the symbol name.

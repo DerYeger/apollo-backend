@@ -155,7 +155,7 @@ private fun FOLFormula.checkImplication(
     variableAssignments: Map<String, Node>,
     shouldBeModel: Boolean,
 ): ModelCheckerTrace {
-    val left = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments, shouldBeModel)
+    val left = getChildAt(0).checkFormula(graph, symbolTable, variableAssignments, shouldBeModel.not())
     val right = getChildAt(1).checkFormula(graph, symbolTable, variableAssignments, shouldBeModel)
     return when {
         right.isModel -> validated(TranslationDTO("api.implication.right"), variableAssignments, shouldBeModel, left, right)

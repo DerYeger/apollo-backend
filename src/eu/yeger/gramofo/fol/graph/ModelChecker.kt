@@ -188,7 +188,7 @@ private fun Graph.loadSymbols(): Result<SymbolTable, TranslationDTO> {
             symbolTypes[symbol] = symbolType
             val relationSet = unarySymbols.getOrDefault(symbol, HashSet())
             if (symbolType == "F-0" && relationSet.size != 0) {
-                return@loadSymbols Err(TranslationDTO(key = "api.error.duplicate-constant", mapOf("constant" to symbol)))
+                return@loadSymbols Err(TranslationDTO(key = "api.error.duplicate-constant", "constant" to symbol))
             }
             relationSet.add(node)
             unarySymbols[symbol] = relationSet
@@ -200,11 +200,11 @@ private fun Graph.loadSymbols(): Result<SymbolTable, TranslationDTO> {
                 if (Character.isUpperCase(symbol[0]) || infixPredicates.contains(symbol)) "P-2" else "F-1"
             symbolTypes.putIfAbsent(symbol, symbolType)
             if (symbolType != symbolTypes[symbol]) {
-                return@loadSymbols Err(TranslationDTO("api.error.different-arities", mapOf("symbol" to symbol)))
+                return@loadSymbols Err(TranslationDTO("api.error.different-arities", "symbol" to symbol))
             }
             val relationSet = binarySymbols.getOrDefault(symbol, HashSet())
             if (symbolType == "F-1" && relationSet.any { otherEdge: Edge -> edge.source == otherEdge.source }) {
-                return@loadSymbols Err(TranslationDTO("api.error.different-function-values", mapOf("function" to symbol)))
+                return@loadSymbols Err(TranslationDTO("api.error.different-function-values", "function" to symbol))
             }
             relationSet.add(edge)
             binarySymbols[symbol] = relationSet
@@ -230,9 +230,9 @@ private fun FOLFormulaHead.loadSymbols(symbolTable: SymbolTable): Result<SymbolT
         val typeInGraph = symbolTypes[symbol]
         if (type != typeInGraph) { // types are different?
             if (type == "V") {
-                return@loadSymbols Err(TranslationDTO("api.error.bound-variable-reuse", mapOf("symbol" to symbol)))
+                return@loadSymbols Err(TranslationDTO("api.error.bound-variable-reuse", "symbol" to symbol))
             } else {
-                return@loadSymbols Err(TranslationDTO("api.error.different-arities-formula", mapOf("symbol" to symbol)))
+                return@loadSymbols Err(TranslationDTO("api.error.different-arities-formula", "symbol" to symbol))
             }
         }
     }
@@ -246,13 +246,13 @@ private fun checkTotality(graph: Graph, symbolTable: SymbolTable): Result<Symbol
     symbolTable.symbolTypes.forEach { (symbol: String, type: String) ->
         when (type) {
             "F-0" -> if (symbolTable.unarySymbols[symbol]!!.size != 1) {
-                return@checkTotality Err(TranslationDTO("api.error.undefined-constant", mapOf("constant" to symbol)))
+                return@checkTotality Err(TranslationDTO("api.error.undefined-constant", "constant" to symbol))
             }
             "F-1" -> {
                 val relationSet: Set<Edge> = symbolTable.binarySymbols[symbol]!!
                 graph.nodes.forEach { node: Node ->
                     if (relationSet.none { edge: Edge -> edge.source == node }) {
-                        return@checkTotality Err(TranslationDTO("api.error.function-totality", mapOf("function" to symbol)))
+                        return@checkTotality Err(TranslationDTO("api.error.function-totality", "function" to symbol))
                     }
                 }
             }

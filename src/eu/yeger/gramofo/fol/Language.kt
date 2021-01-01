@@ -50,7 +50,7 @@ sealed class Language(locale: Locale) {
         return try {
             MessageFormat.format(resourceBundle.getString(key), *args)
         } catch (e: MissingResourceException) {
-            "[$key]"
+            key
         }
     }
 }

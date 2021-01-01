@@ -16,41 +16,40 @@ class ParserTests {
     @Test
     fun `verify that parsing functions works`() {
         parseFormula("f(x) = y").get()shouldNotBe null
-        parseFormula("f(x, z) = y").get()shouldNotBe null
+        parseFormula("f(g(x)) = y").get()shouldNotBe null
     }
 
     @Test
     fun `verify that parsing predicates works`() {
-        parseFormula("A()").get() shouldNotBe null
         parseFormula("A(x)").get()shouldNotBe null
         parseFormula("A(x,y)").get()shouldNotBe null
     }
 
     @Test
     fun `verify that parsing negations works`() {
-        parseFormula("!A()").get()shouldNotBe null
+        parseFormula("!A(x)").get()shouldNotBe null
     }
 
     @Test
     fun `verify that parsing junction works`() {
-        parseFormula("A() && B()").get()shouldNotBe null
-        parseFormula("A() & B()").get()shouldNotBe null
+        parseFormula("A(x) && B(x)").get()shouldNotBe null
+        parseFormula("A(x) & B(x)").get()shouldNotBe null
     }
 
     @Test
     fun `verify that parsing disjunction works`() {
-        parseFormula("A() || B()").get()shouldNotBe null
-        parseFormula("A() | B()").get()shouldNotBe null
+        parseFormula("A(x) || B(x)").get()shouldNotBe null
+        parseFormula("A(x) | B(x)").get()shouldNotBe null
     }
 
     @Test
     fun `verify that parsing implication works`() {
-        parseFormula("A() -> B()").get()shouldNotBe null
+        parseFormula("A(x) -> B(x)").get()shouldNotBe null
     }
 
     @Test
     fun `verify that parsing bi-implication works`() {
-        parseFormula("A() <-> B()").get()shouldNotBe null
+        parseFormula("A(x) <-> B(x)").get()shouldNotBe null
     }
 
     @Test

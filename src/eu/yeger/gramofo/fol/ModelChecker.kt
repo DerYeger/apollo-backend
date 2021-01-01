@@ -132,27 +132,3 @@ private fun checkTotality(graph: Graph, symbolTable: SymbolTable): Result<Symbol
     }
     return Ok(symbolTable)
 }
-
-/**
- * Takes a FOLFunction or FOLVariable and return the associated node within this interpretation.
- * @return a node which is associated with this term.
- * @throws ModelCheckerException if the data is invalid. This should not happen.
- */
-@Throws(ModelCheckerException::class)
-fun FOLFormula.interpret(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): Node {
-    return when (this) {
-        is FOLFunction -> {
-            when (children.size) {
-                0 -> symbolTable.unarySymbols[name]!!.first()
-                1 -> {
-                    val childResult = getChildAt(0).interpret(symbolTable, variableAssignments)
-                    symbolTable.binarySymbols[name]!!.first { edge: Edge -> edge.source == childResult }.target
-                }
-                else -> throw ModelCheckerException("[ModelChecker][Internal error] Found function with to many children.")
-            }
-        }
-        is FOLBoundVariable ->
-            variableAssignments[name] ?: throw ModelCheckerException("[ModelChecker][Internal error] Variable is not assigned.")
-        else -> throw ModelCheckerException("[ModelChecker][Internal error] Not a valid function or a variable.")
-    }
-}

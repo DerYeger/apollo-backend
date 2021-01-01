@@ -97,7 +97,7 @@ private class FOLParser(private val language: Language) {
         while (scanner.curType() == FOLToken.BI_IMPLICATION) {
             scanner.nextToken()
             val impl = parseImplication(scanner)
-            biimpl = FOLOperator.BiImplication(biimpl, impl)
+            biimpl = FOLOperator.Binary.BiImplication(biimpl, impl)
         }
         return biimpl
     }
@@ -109,7 +109,7 @@ private class FOLParser(private val language: Language) {
         while (scanner.curType() == FOLToken.IMPLICATION) {
             scanner.nextToken()
             val or = parseOr(scanner)
-            impl = FOLOperator.Implication(impl, or)
+            impl = FOLOperator.Binary.Implication(impl, or)
         }
         return impl
     }
@@ -121,7 +121,7 @@ private class FOLParser(private val language: Language) {
         while (scanner.curType() == FOLToken.OR) {
             scanner.nextToken()
             val and = parseAnd(scanner)
-            or = FOLOperator.Or(or, and)
+            or = FOLOperator.Binary.Or(or, and)
         }
         return or
     }
@@ -133,7 +133,7 @@ private class FOLParser(private val language: Language) {
         while (scanner.curType() == FOLToken.AND) {
             scanner.nextToken()
             val unaryOperator = parseUnaryOperator(scanner)
-            and = FOLOperator.And(and, unaryOperator)
+            and = FOLOperator.Binary.And(and, unaryOperator)
         }
         return and
     }
@@ -147,7 +147,7 @@ private class FOLParser(private val language: Language) {
             FOLToken.NOT -> {
                 scanner.nextToken()
                 unaryOperator = parseUnaryOperator(scanner)
-                FOLOperator.Not(unaryOperator)
+                FOLOperator.Unary.Not(unaryOperator)
             }
             FOLToken.FOR_ALL -> {
                 scanner.nextToken()
@@ -247,7 +247,7 @@ private class FOLParser(private val language: Language) {
     private fun parseNormalPredicate(scanner: FOLScanner): FOLFormula {
         val symbol = scanner.curValue()
         scanner.nextToken()
-        val termChildren = mutableSetOf<FOLFormula>()
+        val termChildren = mutableSetOf<Term>()
         if (scanner.curType() == FOLToken.BRACKET && scanner.curValue() == "(") {
             scanner.nextToken()
             if (scanner.curType() == FOLToken.BRACKET && scanner.curValue() == ")") {
@@ -268,7 +268,12 @@ private class FOLParser(private val language: Language) {
         } // else no opening bracket -> no term		
         val symbolType = "P-" + termChildren.size
         checkSymbolInfo(symbol, symbolType)
-        return FOLPredicate.prefixPredicate(name = symbol, children = termChildren)
+        val children = termChildren.toList()
+        return when (children.size) {
+            1 -> FOLPredicate.Unary(name = symbol, term = children[0])
+            2 -> FOLPredicate.Binary(name = symbol, firstTerm = children[0], secondTerm = children[1], isInfix = false)
+            else -> throw ParseException(language.getString("FOP_RELATION_INVALID_CHILDREN", symbol, children.size))
+        }
     }
 
     // InfixPredicate ::= Term InfixPred Term
@@ -283,26 +288,27 @@ private class FOLParser(private val language: Language) {
         checkSymbolInfo(symbol, symbolType)
         scanner.nextToken()
         val rightOperand = parseInfixTerm(scanner)
-        return FOLPredicate.infixPredicate(
+        return FOLPredicate.Binary(
             name = symbol,
-            leftOperand = leftOperand,
-            rightOperand = rightOperand,
+            firstTerm = leftOperand,
+            secondTerm = rightOperand,
+            isInfix = true
         )
     }
 
-    // InfixTerm ::= NormalTerm [infixFunc NormalTerm]* 
+    // InfixTerm ::= NormalTerm [infixFunc NormalTerm]*
     @Throws(ParseException::class)
-    private fun parseInfixTerm(scanner: FOLScanner): FOLFormula {
+    private fun parseInfixTerm(scanner: FOLScanner): Term {
         var infixTerm = parseNormalTerm(scanner)
         while (scanner.curType() == FOLToken.INFIX_FUNC) {
             val symbol = scanner.curValue()
             checkSymbolInfo(symbol, "F-2")
             scanner.nextToken()
             val normalTerm = parseNormalTerm(scanner)
-            infixTerm = FOLFunction.infixFunction(
+            infixTerm = FOLFunction.Infix(
                 name = symbol,
                 leftOperand = infixTerm,
-                rightOperand = normalTerm,
+                rightOperand = normalTerm
             )
         }
         return infixTerm
@@ -310,7 +316,7 @@ private class FOLParser(private val language: Language) {
 
     // NormalTerm ::='(' infixTerm ')' | Variable | FuncSymbol '(' ((InfixTerm) [',' InfixTerm]* )? ')'
     @Throws(ParseException::class)
-    private fun parseNormalTerm(scanner: FOLScanner): FOLFormula {
+    private fun parseNormalTerm(scanner: FOLScanner): Term {
         if (scanner.curType() == FOLToken.BRACKET && scanner.curValue() == "(") {
             scanner.nextToken()
             val termNode = parseInfixTerm(scanner)
@@ -330,7 +336,7 @@ private class FOLParser(private val language: Language) {
             throw ParseException(language.getString("FOP_FUNCTION_LOWER_CASE"))
         }
         scanner.nextToken()
-        val termChildren = mutableSetOf<FOLFormula>()
+        val termChildren = mutableSetOf<Term>()
         if (scanner.curType() == FOLToken.BRACKET && scanner.curValue() == "(") {
             scanner.nextToken()
             if (scanner.curType() == FOLToken.BRACKET && scanner.curValue() == ")") {
@@ -351,7 +357,11 @@ private class FOLParser(private val language: Language) {
         } // else not opening bracket -> no term		
         return if (!containsSymbol(curBoundedVars, symbol)) {
             checkSymbolInfo(symbol, "F-" + termChildren.size)
-            FOLFunction.prefixFunction(name = symbol, children = termChildren)
+            when (termChildren.size) {
+                0 -> FOLFunction.Constant(symbol)
+                1 -> FOLFunction.Unary(symbol, termChildren.first())
+                else -> throw ParseException(language.getString("FOP_FUNCTION_TOO_MANY_CHILDREN", symbol, termChildren.size))
+            }
         } else if (termChildren.size == 0) {
             FOLBoundVariable(symbol)
         } else {

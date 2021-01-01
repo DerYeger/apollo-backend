@@ -1,57 +1,21 @@
 package eu.yeger.gramofo.fol.formula
 
-import eu.yeger.gramofo.fol.ModelCheckerException
 import eu.yeger.gramofo.fol.ModelCheckerTrace
 import eu.yeger.gramofo.fol.SymbolTable
 import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.model.dto.TranslationDTO
 
-/**
- * This is the super class of all formula types.
- * @property type Specifies the type of the formula. This should match with the corresponding subclass.
- */
-abstract class FOLFormula(
-    val name: String,
-    val children: Set<FOLFormula> = emptySet(),
-) {
-    var hasBrackets: Boolean = false
-    var hasDot: Boolean = false
+abstract class FOLFormula(override val name: String) : FOLEntity {
+    override var hasBrackets: Boolean = false
+    override var hasDot: Boolean = false
 
     abstract fun checkModel(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>, shouldBeModel: Boolean): ModelCheckerTrace
 
-    abstract fun getFormulaString(variableAssignments: Map<String, Node>): String
+    abstract override fun getFormulaString(variableAssignments: Map<String, Node>): String
 
     final override fun toString(): String {
         return toString(emptyMap())
-    }
-
-    fun toString(variableAssignments: Map<String, Node>): String {
-        return getFormulaString(variableAssignments).removePrefix(". ")
-    }
-
-    /**
-     * @return the child at the specified position of this FOLFormula or a Dummy, if there is no child at this position.
-     */
-    fun getChildAt(position: Int): FOLFormula {
-        val list = ArrayList(children)
-        return if (list.size > position) {
-            list[position]
-        } else {
-            Dummy
-        }
-    }
-
-    /**
-     * If this formula has brackets and/or a dot it will be added to the StringBuilder
-     * @param sb a StringBuilder in which to add brackets and and dot
-     * @return the given StringBuilder sb
-     */
-    fun maybeWrapBracketsAndDot(sb: StringBuilder): StringBuilder {
-        sb.insert(0, if (hasBrackets) "(" else "")
-        sb.insert(0, if (hasDot) ". " else "")
-        sb.append(if (hasBrackets) ")" else "")
-        return sb
     }
 
     companion object {
@@ -65,21 +29,6 @@ abstract class FOLFormula(
         const val EXISTS = "\u2203"
         const val FOR_ALL = "\u2200"
         const val INFIX_EQUALITY = "=" // equal sign with a dot on top
-    }
-
-    object Dummy : FOLFormula("?") {
-        override fun checkModel(
-            graph: Graph,
-            symbolTable: SymbolTable,
-            variableAssignments: Map<String, Node>,
-            shouldBeModel: Boolean,
-        ): ModelCheckerTrace {
-            throw ModelCheckerException("[ModelChecker][Internal error] checkModel cannot be called for instances of Dummy")
-        }
-
-        override fun getFormulaString(variableAssignments: Map<String, Node>): String {
-            return name
-        }
     }
 
     protected fun validated(description: TranslationDTO, variableAssignments: Map<String, Node>, shouldBeModel: Boolean, vararg children: ModelCheckerTrace) =

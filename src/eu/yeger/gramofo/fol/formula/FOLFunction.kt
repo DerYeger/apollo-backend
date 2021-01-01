@@ -3,26 +3,51 @@ package eu.yeger.gramofo.fol.formula
 import eu.yeger.gramofo.fol.ModelCheckerException
 import eu.yeger.gramofo.fol.ModelCheckerTrace
 import eu.yeger.gramofo.fol.SymbolTable
+import eu.yeger.gramofo.model.domain.Edge
 import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
 
-class FOLFunction(
-    name: String,
-    children: Set<FOLFormula>
-) : FOLFormula(
-    name = name,
-    children = children
-) {
-    private val isInfix = children.size == 2
+sealed class FOLFunction(name: String) : FOLFormula(name), Term {
 
-    constructor(
-        name: String,
-        leftOperand: FOLFormula,
-        rightOperand: FOLFormula
-    ) : this(
-        name,
-        setOf(leftOperand, rightOperand)
-    )
+    class Constant(name: String) : FOLFunction(name) {
+        override fun getFormulaString(variableAssignments: Map<String, Node>): String {
+            return buildString {
+                append(name)
+                maybeWrapBracketsAndDot()
+            }
+        }
+
+        override fun interpret(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): Node {
+            return symbolTable.unarySymbols[name]!!.first()
+        }
+    }
+
+    class Unary(name: String, val operand: Term) : FOLFunction(name) {
+        override fun getFormulaString(variableAssignments: Map<String, Node>): String {
+            return buildString {
+                append(name)
+                append("(")
+                append(operand.getFormulaString(variableAssignments))
+                append(")")
+                maybeWrapBracketsAndDot()
+            }
+        }
+
+        override fun interpret(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): Node {
+            val childResult = operand.interpret(symbolTable, variableAssignments)
+            return symbolTable.binarySymbols[name]!!.first { edge: Edge -> edge.source == childResult }.target
+        }
+    }
+
+    class Infix(name: String, val leftOperand: Term, val rightOperand: Term) : FOLFunction(name) {
+        override fun getFormulaString(variableAssignments: Map<String, Node>): String {
+            TODO("Not yet implemented")
+        }
+
+        override fun interpret(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): Node {
+            TODO("Not yet implemented")
+        }
+    }
 
     override fun checkModel(
         graph: Graph,
@@ -31,34 +56,5 @@ class FOLFunction(
         shouldBeModel: Boolean,
     ): ModelCheckerTrace {
         throw ModelCheckerException("[ModelChecker][Internal error] checkModel cannot be called for instances of FOLFunction")
-    }
-
-    override fun getFormulaString(variableAssignments: Map<String, Node>): String {
-        val sb = StringBuilder()
-        if (isInfix) {
-            sb.append(getChildAt(0).getFormulaString(variableAssignments))
-            sb.append(name)
-            sb.append(getChildAt(1).getFormulaString(variableAssignments))
-        } else {
-            sb.append(name)
-            if (children.isNotEmpty()) {
-                sb.append("(")
-                sb.append(getChildAt(0).getFormulaString(variableAssignments))
-                children.drop(1).forEach { child: FOLFormula -> sb.append(", ").append(child.getFormulaString(variableAssignments)) }
-                sb.append(")")
-            }
-        }
-        maybeWrapBracketsAndDot(sb)
-        return sb.toString()
-    }
-
-    companion object {
-        fun prefixFunction(name: String, children: Set<FOLFormula>): FOLFunction {
-            return FOLFunction(name = name, children = children)
-        }
-
-        fun infixFunction(name: String, leftOperand: FOLFormula, rightOperand: FOLFormula): FOLFunction {
-            return FOLFunction(name = name, leftOperand = leftOperand, rightOperand = rightOperand)
-        }
     }
 }

@@ -6,9 +6,7 @@ import eu.yeger.gramofo.fol.SymbolTable
 import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
 
-class FOLBoundVariable(name: String) : FOLFormula(
-    name = name
-) {
+class FOLBoundVariable(name: String) : FOLFormula(name), Term {
     override fun checkModel(
         graph: Graph,
         symbolTable: SymbolTable,
@@ -20,5 +18,9 @@ class FOLBoundVariable(name: String) : FOLFormula(
 
     override fun getFormulaString(variableAssignments: Map<String, Node>): String {
         return variableAssignments[name]?.name ?: name
+    }
+
+    override fun interpret(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): Node {
+        return variableAssignments[name]!!
     }
 }

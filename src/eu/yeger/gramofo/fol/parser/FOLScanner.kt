@@ -21,8 +21,7 @@ class FOLScanner(private val source: String, private val language: Language) {
         FOLToken.EXISTS,
         FOLToken.FOR_ALL,
         FOLToken.INFIX_PRED,
-        FOLToken.EQUAL_SIGN,
-        FOLToken.INFIX_FUNC
+        FOLToken.EQUAL_SIGN
     )
     private lateinit var allSettings: Array<String>
     private val settingType: HashMap<String, Int> = HashMap()

@@ -12,9 +12,9 @@ private val specialNames = mapOf(
     ">=" to "\u2265"
 )
 
-sealed class FOLPredicate(name: String) : FOLFormula(name) {
+sealed class FOLRelation(name: String) : FOLFormula(name) {
 
-    class Unary(name: String, val term: Term) : FOLPredicate(name) {
+    class Unary(name: String, val term: Term) : FOLRelation(name) {
         override fun checkModel(
             graph: Graph,
             symbolTable: SymbolTable,
@@ -32,13 +32,15 @@ sealed class FOLPredicate(name: String) : FOLFormula(name) {
         override fun getFormulaString(variableAssignments: Map<String, Node>): String {
             return buildString {
                 append(specialNames.getOrDefault(name, name))
-                append("()")
+                append("(")
+                append(term.getFormulaString(variableAssignments))
+                append(")")
                 maybeWrapBracketsAndDot()
             }
         }
     }
 
-    class Binary(name: String, val firstTerm: Term, val secondTerm: Term, val isInfix: Boolean) : FOLPredicate(name) {
+    class Binary(name: String, val firstTerm: Term, val secondTerm: Term, val isInfix: Boolean) : FOLRelation(name) {
         override fun checkModel(
             graph: Graph,
             symbolTable: SymbolTable,

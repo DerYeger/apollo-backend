@@ -255,10 +255,10 @@ private class FOLParser(private val language: Language) {
                 scanner.nextToken()
             } else {
                 // parse terms
-                termChildren.add(parseInfixTerm(scanner))
+                termChildren.add(parseNormalTerm(scanner))
                 while (scanner.curType() == FOLToken.COMMA) {
                     scanner.nextToken()
-                    termChildren.add(parseInfixTerm(scanner))
+                    termChildren.add(parseNormalTerm(scanner))
                 }
                 if (scanner.curType() != FOLToken.BRACKET || scanner.curValue() != ")") {
                     throw ParseException(language.getString("FOP_MISSING_OPERATOR", symbol))
@@ -270,8 +270,8 @@ private class FOLParser(private val language: Language) {
         checkSymbolInfo(symbol, symbolType)
         val children = termChildren.toList()
         return when (children.size) {
-            1 -> FOLPredicate.Unary(name = symbol, term = children[0])
-            2 -> FOLPredicate.Binary(name = symbol, firstTerm = children[0], secondTerm = children[1], isInfix = false)
+            1 -> FOLRelation.Unary(name = symbol, term = children[0])
+            2 -> FOLRelation.Binary(name = symbol, firstTerm = children[0], secondTerm = children[1], isInfix = false)
             else -> throw ParseException(language.getString("FOP_RELATION_INVALID_CHILDREN", symbol, children.size))
         }
     }
@@ -279,7 +279,7 @@ private class FOLParser(private val language: Language) {
     // InfixPredicate ::= Term InfixPred Term
     @Throws(ParseException::class)
     private fun parseInfixPredicate(scanner: FOLScanner): FOLFormula {
-        val leftOperand = parseInfixTerm(scanner)
+        val leftOperand = parseNormalTerm(scanner)
         if (!(scanner.curType() == FOLToken.INFIX_PRED || scanner.curType() == FOLToken.EQUAL_SIGN)) {
             throw ParseException(language.getString("FOP_INFIX_EXPECTED", leftOperand.name, scanner.curValue()))
         } // else
@@ -287,8 +287,8 @@ private class FOLParser(private val language: Language) {
         val symbolType = "P-" + 2
         checkSymbolInfo(symbol, symbolType)
         scanner.nextToken()
-        val rightOperand = parseInfixTerm(scanner)
-        return FOLPredicate.Binary(
+        val rightOperand = parseNormalTerm(scanner)
+        return FOLRelation.Binary(
             name = symbol,
             firstTerm = leftOperand,
             secondTerm = rightOperand,
@@ -296,30 +296,12 @@ private class FOLParser(private val language: Language) {
         )
     }
 
-    // InfixTerm ::= NormalTerm [infixFunc NormalTerm]*
-    @Throws(ParseException::class)
-    private fun parseInfixTerm(scanner: FOLScanner): Term {
-        var infixTerm = parseNormalTerm(scanner)
-        while (scanner.curType() == FOLToken.INFIX_FUNC) {
-            val symbol = scanner.curValue()
-            checkSymbolInfo(symbol, "F-2")
-            scanner.nextToken()
-            val normalTerm = parseNormalTerm(scanner)
-            infixTerm = FOLFunction.Infix(
-                name = symbol,
-                leftOperand = infixTerm,
-                rightOperand = normalTerm
-            )
-        }
-        return infixTerm
-    }
-
     // NormalTerm ::='(' infixTerm ')' | Variable | FuncSymbol '(' ((InfixTerm) [',' InfixTerm]* )? ')'
     @Throws(ParseException::class)
     private fun parseNormalTerm(scanner: FOLScanner): Term {
         if (scanner.curType() == FOLToken.BRACKET && scanner.curValue() == "(") {
             scanner.nextToken()
-            val termNode = parseInfixTerm(scanner)
+            val termNode = parseNormalTerm(scanner)
             return if (scanner.curType() == FOLToken.BRACKET && scanner.curValue() == ")") {
                 scanner.nextToken()
                 termNode.hasBrackets = true
@@ -344,10 +326,10 @@ private class FOLParser(private val language: Language) {
                 scanner.nextToken()
             } else {
                 // parse terms
-                termChildren.add(parseInfixTerm(scanner))
+                termChildren.add(parseNormalTerm(scanner))
                 while (scanner.curType() == FOLToken.COMMA) {
                     scanner.nextToken()
-                    termChildren.add(parseInfixTerm(scanner))
+                    termChildren.add(parseNormalTerm(scanner))
                 }
                 if (scanner.curType() != FOLToken.BRACKET || scanner.curValue() != ")") {
                     throw ParseException(language.getString("FOP_MISSING_PARAMETER_LIST_CLOSING_BRACKET", symbol))

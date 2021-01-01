@@ -35,14 +35,4 @@ sealed class FOLFunction(name: String) : Term(name) {
             return symbolTable.binarySymbols[name]!!.first { edge: Edge -> edge.source == childResult }.target
         }
     }
-
-    class Infix(name: String, val leftOperand: Term, val rightOperand: Term) : FOLFunction(name) {
-        override fun getFormulaString(variableAssignments: Map<String, Node>): String {
-            TODO("Not yet implemented")
-        }
-
-        override fun interpret(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): Node {
-            TODO("Not yet implemented")
-        }
-    }
 }

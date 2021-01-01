@@ -1,6 +1,7 @@
 package eu.yeger.gramofo.fol.parser
 
 class FOLToken(var type: Int, var value: String) {
+
     fun setTypeAndValue(type: Int, value: String) {
         this.type = type
         this.value = value
@@ -21,9 +22,8 @@ class FOLToken(var type: Int, var value: String) {
         const val FOR_ALL = 11
         const val INFIX_PRED = 12
         const val EQUAL_SIGN = 13
-        const val INFIX_FUNC = 14
-        const val BRACKET = 15
-        const val DOT = 16
-        const val COMMA = 17
+        const val BRACKET = 14
+        const val DOT = 15
+        const val COMMA = 16
     }
 }

@@ -2,13 +2,12 @@ package eu.yeger.gramofo.fol.formula
 
 import eu.yeger.gramofo.model.domain.Node
 
-interface FOLEntity {
+abstract class FOLEntity(val name: String) {
 
-    val name: String
-    var hasBrackets: Boolean
-    var hasDot: Boolean
+    var hasBrackets: Boolean = false
+    var hasDot: Boolean = false
 
-    fun getFormulaString(variableAssignments: Map<String, Node>): String
+    abstract fun getFormulaString(variableAssignments: Map<String, Node>): String
 
     fun toString(variableAssignments: Map<String, Node>): String {
         return getFormulaString(variableAssignments).removePrefix(". ")

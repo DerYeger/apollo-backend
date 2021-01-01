@@ -1,13 +1,10 @@
 package eu.yeger.gramofo.fol.formula
 
-import eu.yeger.gramofo.fol.ModelCheckerException
-import eu.yeger.gramofo.fol.ModelCheckerTrace
 import eu.yeger.gramofo.fol.SymbolTable
 import eu.yeger.gramofo.model.domain.Edge
-import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
 
-sealed class FOLFunction(name: String) : FOLFormula(name), Term {
+sealed class FOLFunction(name: String) : Term(name) {
 
     class Constant(name: String) : FOLFunction(name) {
         override fun getFormulaString(variableAssignments: Map<String, Node>): String {
@@ -47,14 +44,5 @@ sealed class FOLFunction(name: String) : FOLFormula(name), Term {
         override fun interpret(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): Node {
             TODO("Not yet implemented")
         }
-    }
-
-    override fun checkModel(
-        graph: Graph,
-        symbolTable: SymbolTable,
-        variableAssignments: Map<String, Node>,
-        shouldBeModel: Boolean,
-    ): ModelCheckerTrace {
-        throw ModelCheckerException("[ModelChecker][Internal error] checkModel cannot be called for instances of FOLFunction")
     }
 }

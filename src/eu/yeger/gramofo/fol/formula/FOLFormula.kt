@@ -6,9 +6,7 @@ import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.model.dto.TranslationDTO
 
-abstract class FOLFormula(override val name: String) : FOLEntity {
-    override var hasBrackets: Boolean = false
-    override var hasDot: Boolean = false
+abstract class FOLFormula(name: String) : FOLEntity(name) {
 
     abstract fun checkModel(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>, shouldBeModel: Boolean): ModelCheckerTrace
 

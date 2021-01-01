@@ -7,6 +7,7 @@ import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.model.dto.TranslationDTO
 
 sealed class FOLConstant(name: String) : FOLFormula(name = name) {
+
     class True : FOLConstant(TT)
     class False : FOLConstant(FF)
 

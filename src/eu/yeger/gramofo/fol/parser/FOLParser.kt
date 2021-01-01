@@ -406,12 +406,7 @@ private class FOLParser(private val language: Language) {
         return getForSymbol(curBoundedVars, symbol) !== null
     }
 
-    private fun getForSymbol(curBoundedVars: HashSet<FOLBoundVariable>?, symbol: String): FOLFormula? {
-        for (curBoundedVar in curBoundedVars!!) {
-            if (curBoundedVar.name == symbol) {
-                return curBoundedVar
-            }
-        }
-        return null
+    private fun getForSymbol(curBoundedVars: HashSet<FOLBoundVariable>?, symbol: String): FOLBoundVariable? {
+        return curBoundedVars?.firstOrNull { curBoundedVar -> curBoundedVar.name == symbol }
     }
 }

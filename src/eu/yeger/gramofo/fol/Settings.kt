@@ -1,6 +1,5 @@
 package eu.yeger.gramofo.fol
 
-// a hash for the stored settings for fast accessibility
 private val settingsMap: Map<String, List<String>> = mapOf(
     Settings.NOT to listOf("!"),
     Settings.TRUE to listOf("tt"),

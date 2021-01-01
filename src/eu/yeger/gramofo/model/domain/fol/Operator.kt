@@ -1,4 +1,4 @@
-package eu.yeger.gramofo.fol.formula
+package eu.yeger.gramofo.model.domain.fol
 
 import eu.yeger.gramofo.fol.ModelCheckerTrace
 import eu.yeger.gramofo.fol.SymbolTable
@@ -6,10 +6,10 @@ import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.model.dto.TranslationDTO
 
-sealed class FOLOperator(name: String) : FOLFormula(name) {
+sealed class Operator(name: String) : Formula(name) {
 
-    sealed class Unary(name: String, val operand: FOLFormula) : FOLOperator(name) {
-        class Not(operand: FOLFormula) : Unary(NOT, operand) {
+    sealed class Unary(name: String, val operand: Formula) : Operator(name) {
+        class Not(operand: Formula) : Unary(NOT, operand) {
             override fun checkModel(
                 graph: Graph,
                 symbolTable: SymbolTable,
@@ -33,9 +33,9 @@ sealed class FOLOperator(name: String) : FOLFormula(name) {
         }
     }
 
-    sealed class Binary(name: String, val firstOperand: FOLFormula, val secondOperand: FOLFormula) : FOLOperator(name) {
+    sealed class Binary(name: String, val firstOperand: Formula, val secondOperand: Formula) : Operator(name) {
 
-        class And(firstOperand: FOLFormula, secondOperand: FOLFormula) : Binary(AND, firstOperand, secondOperand) {
+        class And(firstOperand: Formula, secondOperand: Formula) : Binary(AND, firstOperand, secondOperand) {
             override fun checkModel(
                 graph: Graph,
                 symbolTable: SymbolTable,
@@ -53,7 +53,7 @@ sealed class FOLOperator(name: String) : FOLFormula(name) {
             }
         }
 
-        class Or(firstOperand: FOLFormula, secondOperand: FOLFormula) : Binary(OR, firstOperand, secondOperand) {
+        class Or(firstOperand: Formula, secondOperand: Formula) : Binary(OR, firstOperand, secondOperand) {
             override fun checkModel(
                 graph: Graph,
                 symbolTable: SymbolTable,
@@ -71,7 +71,7 @@ sealed class FOLOperator(name: String) : FOLFormula(name) {
             }
         }
 
-        class Implication(firstOperand: FOLFormula, secondOperand: FOLFormula) : Binary(IMPLICATION, firstOperand, secondOperand) {
+        class Implication(firstOperand: Formula, secondOperand: Formula) : Binary(IMPLICATION, firstOperand, secondOperand) {
             override fun checkModel(
                 graph: Graph,
                 symbolTable: SymbolTable,
@@ -88,7 +88,7 @@ sealed class FOLOperator(name: String) : FOLFormula(name) {
             }
         }
 
-        class BiImplication(firstOperand: FOLFormula, secondOperand: FOLFormula) : Binary(BI_IMPLICATION, firstOperand, secondOperand) {
+        class BiImplication(firstOperand: Formula, secondOperand: Formula) : Binary(BI_IMPLICATION, firstOperand, secondOperand) {
             override fun checkModel(
                 graph: Graph,
                 symbolTable: SymbolTable,

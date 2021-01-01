@@ -1,4 +1,4 @@
-package eu.yeger.gramofo.fol.formula
+package eu.yeger.gramofo.model.domain.fol
 
 import eu.yeger.gramofo.fol.*
 import eu.yeger.gramofo.model.domain.Edge
@@ -12,9 +12,9 @@ private val specialNames = mapOf(
     ">=" to "\u2265"
 )
 
-sealed class FOLRelation(name: String) : FOLFormula(name) {
+sealed class Relation(name: String) : Formula(name) {
 
-    class Unary(name: String, val term: Term) : FOLRelation(name) {
+    class Unary(name: String, val term: Term) : Relation(name) {
         override fun checkModel(
             graph: Graph,
             symbolTable: SymbolTable,
@@ -40,7 +40,7 @@ sealed class FOLRelation(name: String) : FOLFormula(name) {
         }
     }
 
-    class Binary(name: String, val firstTerm: Term, val secondTerm: Term, val isInfix: Boolean) : FOLRelation(name) {
+    class Binary(name: String, val firstTerm: Term, val secondTerm: Term, val isInfix: Boolean) : Relation(name) {
         override fun checkModel(
             graph: Graph,
             symbolTable: SymbolTable,

@@ -1,4 +1,4 @@
-package eu.yeger.gramofo.fol.formula
+package eu.yeger.gramofo.model.domain.fol
 
 import eu.yeger.gramofo.fol.ModelCheckerTrace
 import eu.yeger.gramofo.fol.SymbolTable
@@ -6,7 +6,7 @@ import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.model.dto.TranslationDTO
 
-abstract class FOLFormula(name: String) : FOLEntity(name) {
+abstract class Formula(name: String) : FOLEntity(name) {
 
     abstract fun checkModel(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>, shouldBeModel: Boolean): ModelCheckerTrace
 

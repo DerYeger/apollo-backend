@@ -1,4 +1,4 @@
-package eu.yeger.gramofo.fol.formula
+package eu.yeger.gramofo.model.domain.fol
 
 import eu.yeger.gramofo.fol.ModelCheckerTrace
 import eu.yeger.gramofo.fol.SymbolTable
@@ -6,13 +6,13 @@ import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.model.dto.TranslationDTO
 
-sealed class FOLQuantifier(
+sealed class Quantifier(
     name: String,
-    val variable: FOLBoundVariable,
-    val operand: FOLFormula,
-) : FOLFormula(name) {
+    val variable: BoundVariable,
+    val operand: Formula,
+) : Formula(name) {
 
-    class Existential(variable: FOLBoundVariable, operand: FOLFormula) : FOLQuantifier(EXISTS, variable, operand) {
+    class Existential(variable: BoundVariable, operand: Formula) : Quantifier(EXISTS, variable, operand) {
         override fun checkModel(
             graph: Graph,
             symbolTable: SymbolTable,
@@ -30,7 +30,7 @@ sealed class FOLQuantifier(
         }
     }
 
-    class Universal(variable: FOLBoundVariable, operand: FOLFormula) : FOLQuantifier(FOR_ALL, variable, operand) {
+    class Universal(variable: BoundVariable, operand: Formula) : Quantifier(FOR_ALL, variable, operand) {
         override fun checkModel(
             graph: Graph,
             symbolTable: SymbolTable,
@@ -60,11 +60,11 @@ sealed class FOLQuantifier(
         }
     }
 
-    private fun isUnary(formula: FOLFormula): Boolean {
+    private fun isUnary(formula: Formula): Boolean {
         return when (formula) {
             is Existential -> true
             is Universal -> true
-            is FOLOperator.Unary.Not -> true
+            is Operator.Unary.Not -> true
             else -> true
         }
     }

@@ -1,9 +1,9 @@
-package eu.yeger.gramofo.fol.formula
+package eu.yeger.gramofo.model.domain.fol
 
 import eu.yeger.gramofo.fol.SymbolTable
 import eu.yeger.gramofo.model.domain.Node
 
-class FOLBoundVariable(name: String) : Term(name) {
+class BoundVariable(name: String) : Term(name) {
 
     override fun getFormulaString(variableAssignments: Map<String, Node>): String {
         return variableAssignments[name]?.name ?: name

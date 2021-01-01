@@ -6,11 +6,10 @@ import com.github.michaelbull.result.Result
 import eu.yeger.gramofo.fol.English
 import eu.yeger.gramofo.fol.Language
 import eu.yeger.gramofo.fol.Settings
-import eu.yeger.gramofo.fol.formula.*
-import kotlin.collections.HashMap
-import kotlin.collections.HashSet
+import eu.yeger.gramofo.model.domain.fol.*
+import eu.yeger.gramofo.model.domain.fol.Function
 
-typealias ParserResult = Result<FOLFormulaHead, String>
+typealias ParserResult = Result<FormulaHead, String>
 
 fun parseFormula(formula: String, language: Language = English): ParserResult {
     return FOLParser(language).parseFormula(formula)
@@ -22,7 +21,7 @@ fun parseFormula(formula: String, language: Language = English): ParserResult {
  */
 private class FOLParser(private val language: Language) {
     private val symbolTable: HashMap<String, String> = HashMap()
-    private var curBoundedVars: HashSet<FOLBoundVariable>? = null
+    private var curBoundedVars: HashSet<BoundVariable>? = null
 
     private fun addOperatorsToSymbolTable() {
         for (infixFunc in Settings[Settings.TRUE]) {
@@ -68,7 +67,7 @@ private class FOLParser(private val language: Language) {
      * @param sFormula string to be parsed
      * @return a ParseResult containing either the result or an error message
      */
-    fun parseFormula(sFormula: String): Result<FOLFormulaHead, String> {
+    fun parseFormula(sFormula: String): Result<FormulaHead, String> {
         symbolTable.clear()
         curBoundedVars = HashSet()
         return try {
@@ -78,7 +77,7 @@ private class FOLParser(private val language: Language) {
             if (scanner.curType() != FOLToken.END_OF_SOURCE) {
                 throw ParseException(language.getString("FOP_END_OF_INPUT", scanner.curValue(), scanner.restOfText))
             }
-            Ok(FOLFormulaHead(formula, symbolTable))
+            Ok(FormulaHead(formula, symbolTable))
         } catch (e: ParseException) {
             Err(e.message)
         }
@@ -86,68 +85,68 @@ private class FOLParser(private val language: Language) {
 
     // Formula ::= Biimpl
     @Throws(ParseException::class)
-    private fun parseFormula(scanner: FOLScanner): FOLFormula {
+    private fun parseFormula(scanner: FOLScanner): Formula {
         return parseBiImplication(scanner)
     }
 
     // Biimpl ::= Impl ['<->' Impl]* 
     @Throws(ParseException::class)
-    private fun parseBiImplication(scanner: FOLScanner): FOLFormula {
+    private fun parseBiImplication(scanner: FOLScanner): Formula {
         var biimpl = parseImplication(scanner)
         while (scanner.curType() == FOLToken.BI_IMPLICATION) {
             scanner.nextToken()
             val impl = parseImplication(scanner)
-            biimpl = FOLOperator.Binary.BiImplication(biimpl, impl)
+            biimpl = Operator.Binary.BiImplication(biimpl, impl)
         }
         return biimpl
     }
 
     // Impl ::= Or ['->' Or]* 
     @Throws(ParseException::class)
-    private fun parseImplication(scanner: FOLScanner): FOLFormula {
+    private fun parseImplication(scanner: FOLScanner): Formula {
         var impl = parseOr(scanner)
         while (scanner.curType() == FOLToken.IMPLICATION) {
             scanner.nextToken()
             val or = parseOr(scanner)
-            impl = FOLOperator.Binary.Implication(impl, or)
+            impl = Operator.Binary.Implication(impl, or)
         }
         return impl
     }
 
     // Or ::= And ['||' And]* 
     @Throws(ParseException::class)
-    private fun parseOr(scanner: FOLScanner): FOLFormula {
+    private fun parseOr(scanner: FOLScanner): Formula {
         var or = parseAnd(scanner)
         while (scanner.curType() == FOLToken.OR) {
             scanner.nextToken()
             val and = parseAnd(scanner)
-            or = FOLOperator.Binary.Or(or, and)
+            or = Operator.Binary.Or(or, and)
         }
         return or
     }
 
     // And ::= UnaryOperator ['&&' UnaryOperator]* 
     @Throws(ParseException::class)
-    private fun parseAnd(scanner: FOLScanner): FOLFormula {
+    private fun parseAnd(scanner: FOLScanner): Formula {
         var and = parseUnaryOperator(scanner)
         while (scanner.curType() == FOLToken.AND) {
             scanner.nextToken()
             val unaryOperator = parseUnaryOperator(scanner)
-            and = FOLOperator.Binary.And(and, unaryOperator)
+            and = Operator.Binary.And(and, unaryOperator)
         }
         return and
     }
 
     // UnaryOperator ::= Operand | ['-' | 'forall' VarSymbol | 'exists' VarSymbol] UnaryOperator
     @Throws(ParseException::class)
-    private fun parseUnaryOperator(scanner: FOLScanner): FOLFormula {
-        val unaryOperator: FOLFormula
-        val variable: FOLBoundVariable
+    private fun parseUnaryOperator(scanner: FOLScanner): Formula {
+        val unaryOperator: Formula
+        val variable: BoundVariable
         return when (scanner.curType()) {
             FOLToken.NOT -> {
                 scanner.nextToken()
                 unaryOperator = parseUnaryOperator(scanner)
-                FOLOperator.Unary.Not(unaryOperator)
+                Operator.Unary.Not(unaryOperator)
             }
             FOLToken.FOR_ALL -> {
                 scanner.nextToken()
@@ -155,7 +154,7 @@ private class FOLParser(private val language: Language) {
                 curBoundedVars!!.add(variable)
                 unaryOperator = parseUnaryOperator(scanner)
                 curBoundedVars!!.remove(variable)
-                FOLQuantifier.Universal(variable, unaryOperator)
+                Quantifier.Universal(variable, unaryOperator)
             }
             FOLToken.EXISTS -> {
                 scanner.nextToken()
@@ -163,7 +162,7 @@ private class FOLParser(private val language: Language) {
                 curBoundedVars!!.add(variable)
                 unaryOperator = parseUnaryOperator(scanner)
                 curBoundedVars!!.remove(variable)
-                FOLQuantifier.Existential(variable, unaryOperator)
+                Quantifier.Existential(variable, unaryOperator)
             }
             else -> parseOperand(scanner)
         }
@@ -171,7 +170,7 @@ private class FOLParser(private val language: Language) {
 
     // VarSymbol: Symbol with first lower case letter
     @Throws(ParseException::class)
-    private fun parseVarSymbol(scanner: FOLScanner): FOLBoundVariable {
+    private fun parseVarSymbol(scanner: FOLScanner): BoundVariable {
         if (scanner.curType() != FOLToken.SYMBOL) {
             throw ParseException(language.getString("FOP_VARIABLE_EXPECTED", scanner.curValue()))
         } // else
@@ -184,22 +183,22 @@ private class FOLParser(private val language: Language) {
             throw ParseException(language.getString("FOP_VARIABLE_ALREADY_BOUND", symbol))
         }
         scanner.nextToken()
-        return FOLBoundVariable(symbol)
+        return BoundVariable(symbol)
     }
 
     // Operand ::= Predicate | Constant | '(' Formula ')' | '.' Formula
     // Constant ::= True | False
     @Throws(ParseException::class)
-    private fun parseOperand(scanner: FOLScanner): FOLFormula {
-        val formula: FOLFormula
+    private fun parseOperand(scanner: FOLScanner): Formula {
+        val formula: Formula
         return when (scanner.curType()) {
             FOLToken.TRUE -> {
                 scanner.nextToken()
-                FOLConstant.True()
+                Constant.True()
             }
             FOLToken.FALSE -> {
                 scanner.nextToken()
-                FOLConstant.False()
+                Constant.False()
             }
             FOLToken.BRACKET -> {
                 if (scanner.curValue() == ")") {
@@ -226,7 +225,7 @@ private class FOLParser(private val language: Language) {
 
     // Predicate ::= NormalPredicate | InfixPredicate
     @Throws(ParseException::class)
-    private fun parsePredicate(scanner: FOLScanner): FOLFormula {
+    private fun parsePredicate(scanner: FOLScanner): Formula {
         if (scanner.curType() != FOLToken.SYMBOL) {
             throw ParseException(language.getString("FOP_MISSING_OPERATOR", scanner.curValue()))
         }
@@ -244,7 +243,7 @@ private class FOLParser(private val language: Language) {
 
     // NormalPredicate ::= (  PredSymbol '(' ((Term) [',' Term]* )?  ')'  ) 
     @Throws(ParseException::class)
-    private fun parseNormalPredicate(scanner: FOLScanner): FOLFormula {
+    private fun parseNormalPredicate(scanner: FOLScanner): Formula {
         val symbol = scanner.curValue()
         scanner.nextToken()
         val termChildren = mutableSetOf<Term>()
@@ -270,15 +269,15 @@ private class FOLParser(private val language: Language) {
         checkSymbolInfo(symbol, symbolType)
         val children = termChildren.toList()
         return when (children.size) {
-            1 -> FOLRelation.Unary(name = symbol, term = children[0])
-            2 -> FOLRelation.Binary(name = symbol, firstTerm = children[0], secondTerm = children[1], isInfix = false)
+            1 -> Relation.Unary(name = symbol, term = children[0])
+            2 -> Relation.Binary(name = symbol, firstTerm = children[0], secondTerm = children[1], isInfix = false)
             else -> throw ParseException(language.getString("FOP_RELATION_INVALID_CHILDREN", symbol, children.size))
         }
     }
 
     // InfixPredicate ::= Term InfixPred Term
     @Throws(ParseException::class)
-    private fun parseInfixPredicate(scanner: FOLScanner): FOLFormula {
+    private fun parseInfixPredicate(scanner: FOLScanner): Formula {
         val leftOperand = parseNormalTerm(scanner)
         if (!(scanner.curType() == FOLToken.INFIX_PRED || scanner.curType() == FOLToken.EQUAL_SIGN)) {
             throw ParseException(language.getString("FOP_INFIX_EXPECTED", leftOperand.name, scanner.curValue()))
@@ -288,7 +287,7 @@ private class FOLParser(private val language: Language) {
         checkSymbolInfo(symbol, symbolType)
         scanner.nextToken()
         val rightOperand = parseNormalTerm(scanner)
-        return FOLRelation.Binary(
+        return Relation.Binary(
             name = symbol,
             firstTerm = leftOperand,
             secondTerm = rightOperand,
@@ -340,12 +339,12 @@ private class FOLParser(private val language: Language) {
         return if (!containsSymbol(curBoundedVars, symbol)) {
             checkSymbolInfo(symbol, "F-" + termChildren.size)
             when (termChildren.size) {
-                0 -> FOLFunction.Constant(symbol)
-                1 -> FOLFunction.Unary(symbol, termChildren.first())
+                0 -> Function.Constant(symbol)
+                1 -> Function.Unary(symbol, termChildren.first())
                 else -> throw ParseException(language.getString("FOP_FUNCTION_TOO_MANY_CHILDREN", symbol, termChildren.size))
             }
         } else if (termChildren.size == 0) {
-            FOLBoundVariable(symbol)
+            BoundVariable(symbol)
         } else {
             throw ParseException(language.getString("FOP_SYMBOL_ALREADY_IN_USE_AS_BOUND_VARIABLE", symbol))
         }
@@ -384,11 +383,11 @@ private class FOLParser(private val language: Language) {
         throw ParseException(language.getString("FOP_SYMBOL_ALREADY_IN_USE_AS", symbol, info))
     }
 
-    private fun containsSymbol(curBoundedVars: HashSet<FOLBoundVariable>?, symbol: String): Boolean {
+    private fun containsSymbol(curBoundedVars: HashSet<BoundVariable>?, symbol: String): Boolean {
         return getForSymbol(curBoundedVars, symbol) !== null
     }
 
-    private fun getForSymbol(curBoundedVars: HashSet<FOLBoundVariable>?, symbol: String): FOLBoundVariable? {
+    private fun getForSymbol(curBoundedVars: HashSet<BoundVariable>?, symbol: String): BoundVariable? {
         return curBoundedVars?.firstOrNull { curBoundedVar -> curBoundedVar.name == symbol }
     }
 }

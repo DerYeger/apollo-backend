@@ -1,12 +1,12 @@
-package eu.yeger.gramofo.fol.formula
+package eu.yeger.gramofo.model.domain.fol
 
 import eu.yeger.gramofo.fol.SymbolTable
 import eu.yeger.gramofo.model.domain.Edge
 import eu.yeger.gramofo.model.domain.Node
 
-sealed class FOLFunction(name: String) : Term(name) {
+sealed class Function(name: String) : Term(name) {
 
-    class Constant(name: String) : FOLFunction(name) {
+    class Constant(name: String) : Function(name) {
         override fun getFormulaString(variableAssignments: Map<String, Node>): String {
             return buildString {
                 append(name)
@@ -19,7 +19,7 @@ sealed class FOLFunction(name: String) : Term(name) {
         }
     }
 
-    class Unary(name: String, val operand: Term) : FOLFunction(name) {
+    class Unary(name: String, val operand: Term) : Function(name) {
         override fun getFormulaString(variableAssignments: Map<String, Node>): String {
             return buildString {
                 append(name)

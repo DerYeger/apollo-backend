@@ -1,4 +1,4 @@
-package eu.yeger.gramofo.fol.formula
+package eu.yeger.gramofo.model.domain.fol
 
 import eu.yeger.gramofo.fol.ModelCheckerTrace
 import eu.yeger.gramofo.fol.SymbolTable
@@ -6,10 +6,10 @@ import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.model.dto.TranslationDTO
 
-sealed class FOLConstant(name: String) : FOLFormula(name = name) {
+sealed class Constant(name: String) : Formula(name = name) {
 
-    class True : FOLConstant(TT)
-    class False : FOLConstant(FF)
+    class True : Constant(TT)
+    class False : Constant(FF)
 
     override fun checkModel(
         graph: Graph,

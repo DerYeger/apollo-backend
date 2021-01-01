@@ -2,22 +2,12 @@ package eu.yeger.gramofo.fol
 
 import com.github.michaelbull.result.*
 import com.github.michaelbull.result.binding
-import eu.yeger.gramofo.fol.formula.*
 import eu.yeger.gramofo.model.domain.Edge
 import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
+import eu.yeger.gramofo.model.domain.fol.*
 import eu.yeger.gramofo.model.dto.TranslationDTO
 import java.util.*
-import kotlin.collections.MutableSet
-import kotlin.collections.Set
-import kotlin.collections.any
-import kotlin.collections.component1
-import kotlin.collections.component2
-import kotlin.collections.forEach
-import kotlin.collections.mutableMapOf
-import kotlin.collections.none
-import kotlin.collections.set
-import kotlin.collections.toSet
 
 typealias ModelCheckerResult = Result<ModelCheckerTrace, TranslationDTO>
 
@@ -37,9 +27,7 @@ data class SymbolTable(
     val symbolTypes: Map<String, String>,
 )
 
-class ModelCheckerException(message: String) : RuntimeException(message)
-
-fun checkModel(graph: Graph, formulaHead: FOLFormulaHead): ModelCheckerResult = binding {
+fun checkModel(graph: Graph, formulaHead: FormulaHead): ModelCheckerResult = binding {
     val symbolTable = graph.loadSymbols()
         .andThen { symbolTable -> formulaHead.loadSymbols(symbolTable) }
         .andThen { symbolTable -> checkTotality(graph, symbolTable) }.bind()
@@ -94,9 +82,9 @@ private fun Graph.loadSymbols(): Result<SymbolTable, TranslationDTO> {
 }
 
 /**
- * Iterates over the formula and add new symbols to the symbol tables.
+ * Iterates over the formula and adds new symbols to a symbol table.
  */
-private fun FOLFormulaHead.loadSymbols(symbolTable: SymbolTable): Result<SymbolTable, TranslationDTO> {
+private fun FormulaHead.loadSymbols(symbolTable: SymbolTable): Result<SymbolTable, TranslationDTO> {
     val unarySymbols = symbolTable.unarySymbols.toMutableMap()
     val binarySymbols = symbolTable.binarySymbols.toMutableMap()
     val symbolTypes = symbolTable.symbolTypes.toMutableMap()

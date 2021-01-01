@@ -5,6 +5,4 @@ data class Edge(
     val target: Node,
     val relations: List<String>,
     val functions: List<String>
-) {
-    val stringAttachments = relations + functions
-}
+)

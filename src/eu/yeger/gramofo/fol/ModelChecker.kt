@@ -55,31 +55,39 @@ private fun Graph.loadSymbols(): Result<SymbolTable, TranslationDTO> {
     val binarySymbols = mutableMapOf<String, MutableSet<Edge>>()
     val symbolTypes = mutableMapOf<String, String>()
     nodes.forEach { node: Node ->
-        node.stringAttachments.forEach { symbol: String ->
-            val symbolType = if (Character.isUpperCase(symbol[0])) "P-1" else "F-0"
-            symbolTypes[symbol] = symbolType
-            val relationSet = unarySymbols.getOrDefault(symbol, HashSet())
-            if (symbolType == "F-0" && relationSet.size != 0) {
-                return@loadSymbols Err(TranslationDTO(key = "api.error.duplicate-constant", "constant" to symbol))
+        node.constants.forEach { constant ->
+            symbolTypes[constant] = "F-0"
+            val relationSet = unarySymbols.getOrPut(constant) { mutableSetOf() }
+            if (relationSet.isNotEmpty()) {
+                return@loadSymbols Err(TranslationDTO(key = "api.error.duplicate-constant", "constant" to constant))
             }
             relationSet.add(node)
-            unarySymbols[symbol] = relationSet
+        }
+        node.relations.forEach { relation ->
+            symbolTypes[relation] = "P-1"
+            val relationSet = unarySymbols.getOrPut(relation) { mutableSetOf() }
+            relationSet.add(node)
         }
     }
     edges.forEach { edge: Edge ->
-        edge.stringAttachments.forEach { symbol: String ->
-            val symbolType =
-                if (Character.isUpperCase(symbol[0]) || infixPredicates.contains(symbol)) "P-2" else "F-1"
-            symbolTypes.putIfAbsent(symbol, symbolType)
-            if (symbolType != symbolTypes[symbol]) {
-                return@loadSymbols Err(TranslationDTO("api.error.different-arities", "symbol" to symbol))
+        edge.functions.forEach { function ->
+            symbolTypes.putIfAbsent(function, "F-1")
+            if (symbolTypes[function] != "F-1") {
+                return@loadSymbols Err(TranslationDTO("api.error.different-arities", "symbol" to function))
             }
-            val relationSet = binarySymbols.getOrDefault(symbol, HashSet())
-            if (symbolType == "F-1" && relationSet.any { otherEdge: Edge -> edge.source == otherEdge.source }) {
-                return@loadSymbols Err(TranslationDTO("api.error.different-function-values", "function" to symbol))
+            val relationSet = binarySymbols.getOrPut(function) { mutableSetOf() }
+            if (relationSet.any { otherEdge: Edge -> edge.source == otherEdge.source }) {
+                return@loadSymbols Err(TranslationDTO("api.error.different-function-values", "function" to function))
             }
             relationSet.add(edge)
-            binarySymbols[symbol] = relationSet
+        }
+        edge.relations.forEach { relation ->
+            symbolTypes.putIfAbsent(relation, "P-2")
+            if (symbolTypes[relation] != "P-2") {
+                return@loadSymbols Err(TranslationDTO("api.error.different-arities", "symbol" to relation))
+            }
+            val relationSet = binarySymbols.getOrPut(relation) { mutableSetOf() }
+            relationSet.add(edge)
         }
     }
     return Ok(SymbolTable(unarySymbols = unarySymbols, binarySymbols = binarySymbols, symbolTypes = symbolTypes))

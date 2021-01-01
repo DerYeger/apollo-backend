@@ -11,8 +11,6 @@ import java.util.*
 
 typealias ModelCheckerResult = Result<ModelCheckerTrace, TranslationDTO>
 
-private val infixPredicates = Settings[Settings.INFIX_PRED].toSet()
-
 data class ModelCheckerTrace(
     val formula: String,
     val description: TranslationDTO,

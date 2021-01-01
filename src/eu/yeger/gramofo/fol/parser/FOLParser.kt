@@ -24,38 +24,35 @@ private class FOLParser(private val language: Language) {
     private var curBoundedVars: HashSet<BoundVariable>? = null
 
     private fun addOperatorsToSymbolTable() {
-        for (infixFunc in Settings[Settings.TRUE]) {
-            symbolTable[infixFunc] = "TT"
+        for (symbol in Settings[Settings.TRUE]) {
+            symbolTable[symbol] = "TT"
         }
-        for (infixFunc in Settings[Settings.FALSE]) {
-            symbolTable[infixFunc] = "FF"
+        for (symbol in Settings[Settings.FALSE]) {
+            symbolTable[symbol] = "FF"
         }
-        for (infixFunc in Settings[Settings.OR]) {
-            symbolTable[infixFunc] = "OR"
+        for (symbol in Settings[Settings.OR]) {
+            symbolTable[symbol] = "OR"
         }
-        for (infixFunc in Settings[Settings.AND]) {
-            symbolTable[infixFunc] = "AND"
+        for (symbol in Settings[Settings.AND]) {
+            symbolTable[symbol] = "AND"
         }
-        for (infixFunc in Settings[Settings.NOT]) {
-            symbolTable[infixFunc] = "NOT"
+        for (symbol in Settings[Settings.NOT]) {
+            symbolTable[symbol] = "NOT"
         }
-        for (infixFunc in Settings[Settings.IMPLICATION]) {
-            symbolTable[infixFunc] = "IMP"
+        for (symbol in Settings[Settings.IMPLICATION]) {
+            symbolTable[symbol] = "IMP"
         }
-        for (infixFunc in Settings[Settings.BI_IMPLICATION]) {
-            symbolTable[infixFunc] = "BIIMP"
+        for (symbol in Settings[Settings.BI_IMPLICATION]) {
+            symbolTable[symbol] = "BIIMP"
         }
-        for (infixFunc in Settings[Settings.EXISTS]) {
-            symbolTable[infixFunc] = "EX"
+        for (symbol in Settings[Settings.EXISTS]) {
+            symbolTable[symbol] = "EX"
         }
         for (infixFunc in Settings[Settings.FOR_ALL]) {
             symbolTable[infixFunc] = "FOR"
         }
         for (infixPred in Settings[Settings.INFIX_PRED]) {
             symbolTable[infixPred] = "P-2"
-        }
-        for (infixFunc in Settings[Settings.INFIX_FUNC]) {
-            symbolTable[infixFunc] = "F-2"
         }
         for (infixFunc in Settings[Settings.EQUAL_SIGN]) {
             symbolTable[infixFunc] = "P-2"

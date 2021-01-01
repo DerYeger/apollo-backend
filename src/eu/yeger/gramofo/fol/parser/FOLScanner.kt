@@ -45,10 +45,9 @@ class FOLScanner(private val source: String, private val language: Language) {
         val forAll = Settings[Settings.FOR_ALL]
         val infixPred = Settings[Settings.INFIX_PRED]
         val equalSigns = Settings[Settings.EQUAL_SIGN]
-        val infixFunc = Settings[Settings.INFIX_FUNC]
         val settingBundle = arrayOf(
             tt, ff, or, and, not, implication, biImplication, exists,
-            forAll, infixPred, equalSigns, infixFunc
+            forAll, infixPred, equalSigns
         )
         val temp = ArrayList<String>()
         for (i in settingBundle.indices) {

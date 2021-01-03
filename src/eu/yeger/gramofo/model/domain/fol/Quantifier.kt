@@ -49,15 +49,13 @@ sealed class Quantifier(
     }
 
     override fun getFormulaString(variableAssignments: Map<String, Node>): String {
-        return buildString {
-            append(name)
-            append(variable.getFormulaString(variableAssignments))
-            if (!operand.hasDot && !isUnary(operand)) {
-                append(" ")
-            }
-            append(operand.getFormulaString(variableAssignments))
-            maybeWrapBracketsAndDot()
+        val variableString = variable.getFormulaString(variableAssignments)
+        val operandString = operand.getFormulaString(variableAssignments)
+        val separator = when (!operand.hasDot && !isUnary(operand)) {
+            true -> " "
+            false -> ""
         }
+        return "$name$variableString$separator$operandString".maybeWrapBracketsAndDot()
     }
 
     private fun isUnary(formula: Formula): Boolean {
@@ -65,7 +63,7 @@ sealed class Quantifier(
             is Existential -> true
             is Universal -> true
             is Operator.Unary.Not -> true
-            else -> true
+            else -> false
         }
     }
 }

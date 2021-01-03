@@ -9,7 +9,7 @@ class BoundVariable(name: String) : Term(name) {
         return variableAssignments[name]?.name ?: name
     }
 
-    override fun interpret(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): Node {
+    override fun evaluate(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): Node {
         return variableAssignments[name]!!
     }
 }

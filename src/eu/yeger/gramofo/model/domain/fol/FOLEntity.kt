@@ -13,9 +13,15 @@ abstract class FOLEntity(val name: String) {
         return getFormulaString(variableAssignments).removePrefix(". ")
     }
 
-    fun StringBuilder.maybeWrapBracketsAndDot() = apply {
-        insert(0, if (hasBrackets) "(" else "")
-        insert(0, if (hasDot) ". " else "")
-        append(if (hasBrackets) ")" else "")
+    protected fun String.maybeWrapBracketsAndDot(): String {
+        return when (hasBrackets) {
+            true -> "($this)"
+            false -> this
+        }.let {
+            when (hasDot) {
+                true -> ". $this"
+                false -> this
+            }
+        }
     }
 }

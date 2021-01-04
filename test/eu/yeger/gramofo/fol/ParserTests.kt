@@ -1,5 +1,8 @@
 package eu.yeger.gramofo.fol
 
+import com.github.michaelbull.result.get
+import com.github.michaelbull.result.getError
+import eu.yeger.gramofo.fol.parser.parseFormula
 import eu.yeger.gramofo.utils.shouldNotBe
 import org.junit.jupiter.api.Test
 
@@ -7,64 +10,63 @@ class ParserTests {
 
     @Test
     fun `verify that parsing constants works`() {
-        parseFormula("a = b").result shouldNotBe null
+        parseFormula("a = b").get()shouldNotBe null
     }
 
     @Test
     fun `verify that parsing functions works`() {
-        parseFormula("f(x) = y").result shouldNotBe null
-        parseFormula("f(x, z) = y").result shouldNotBe null
+        parseFormula("f(x) = y").get()shouldNotBe null
+        parseFormula("f(g(x)) = y").get()shouldNotBe null
     }
 
     @Test
     fun `verify that parsing predicates works`() {
-        parseFormula("A()").result shouldNotBe null
-        parseFormula("A(x)").result shouldNotBe null
-        parseFormula("A(x,y)").result shouldNotBe null
+        parseFormula("A(x)").get()shouldNotBe null
+        parseFormula("A(x,y)").get()shouldNotBe null
     }
 
     @Test
     fun `verify that parsing negations works`() {
-        parseFormula("!A()").result shouldNotBe null
+        parseFormula("!A(x)").get()shouldNotBe null
     }
 
     @Test
     fun `verify that parsing junction works`() {
-        parseFormula("A() && B()").result shouldNotBe null
-        parseFormula("A() & B()").result shouldNotBe null
+        parseFormula("A(x) && B(x)").get()shouldNotBe null
+        parseFormula("A(x) & B(x)").get()shouldNotBe null
     }
 
     @Test
     fun `verify that parsing disjunction works`() {
-        parseFormula("A() || B()").result shouldNotBe null
-        parseFormula("A() | B()").result shouldNotBe null
+        parseFormula("A(x) || B(x)").get()shouldNotBe null
+        parseFormula("A(x) | B(x)").get()shouldNotBe null
     }
 
     @Test
     fun `verify that parsing implication works`() {
-        parseFormula("A() -> B()").result shouldNotBe null
+        parseFormula("A(x) -> B(x)").get()shouldNotBe null
     }
 
     @Test
     fun `verify that parsing bi-implication works`() {
-        parseFormula("A() <-> B()").result shouldNotBe null
+        parseFormula("A(x) <-> B(x)").get()shouldNotBe null
     }
 
     @Test
     fun `verify that parsing existential quantifier works`() {
-        parseFormula("exists x. A(x)").result shouldNotBe null
+        parseFormula("exists x. A(x)").get()shouldNotBe null
     }
 
     @Test
     fun `verify that parsing universal quantifier works`() {
-        parseFormula("forall x. A(x)").result shouldNotBe null
-        parseFormula("forall x. forall y. A(x, y)").result shouldNotBe null
-        parseFormula("(forall x. A(x)) && (exists x. B(x))").result shouldNotBe null
+        parseFormula("forall x. A(x)").get()shouldNotBe null
+        parseFormula("forall x. forall y. A(x, y)").get()shouldNotBe null
+        parseFormula("(forall x. A(x)) && (exists x. B(x))").get()shouldNotBe null
     }
 
     @Test
     fun `verify that parsing nested formulas works`() {
-        parseFormula("forall x. exists y. forall z. f(x) = y && R(y,z) && R(z,y) || (f(x) = x -> f(z) = a <-> ff)").result shouldNotBe null
+        parseFormula("forall x. exists y. forall z. f(x) = y && R(y,z) && R(z,y) || (f(x) = x -> f(z) = a <-> ff)").get()shouldNotBe null
     }
 
     @Test
@@ -79,6 +81,6 @@ class ParserTests {
             "(tt &&",
             "y = f(x,y"
         )
-        formulas.forEach { formula -> parseFormula(formula).errorMessage shouldNotBe null }
+        formulas.forEach { formula -> parseFormula(formula).getError() shouldNotBe null }
     }
 }

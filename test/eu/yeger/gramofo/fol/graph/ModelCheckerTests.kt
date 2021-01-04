@@ -1,7 +1,11 @@
 package eu.yeger.gramofo.fol.graph
 
 import com.github.michaelbull.result.get
-import eu.yeger.gramofo.fol.parseFormula
+import eu.yeger.gramofo.fol.checkModel
+import eu.yeger.gramofo.fol.parser.parseFormula
+import eu.yeger.gramofo.model.domain.Edge
+import eu.yeger.gramofo.model.domain.Graph
+import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.utils.shouldBe
 import org.junit.jupiter.api.Test
 
@@ -14,7 +18,7 @@ class ModelCheckerTests {
             "tt" to true,
             "ff" to false
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).result!!).get()?.isModel shouldBe expectedResult
+            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
         }
     }
 
@@ -25,7 +29,7 @@ class ModelCheckerTests {
             "!tt" to false,
             "!ff" to true
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).result!!).get()?.isModel shouldBe expectedResult
+            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
         }
     }
 
@@ -38,7 +42,7 @@ class ModelCheckerTests {
             "ff && tt" to false,
             "ff && ff" to false,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).result!!).get()?.isModel shouldBe expectedResult
+            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
         }
     }
 
@@ -51,7 +55,7 @@ class ModelCheckerTests {
             "ff || tt" to true,
             "ff || ff" to false,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).result!!).get()?.isModel shouldBe expectedResult
+            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
         }
     }
 
@@ -64,7 +68,7 @@ class ModelCheckerTests {
             "ff -> tt" to true,
             "ff -> ff" to true,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).result!!).get()?.isModel shouldBe expectedResult
+            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
         }
     }
 
@@ -77,7 +81,7 @@ class ModelCheckerTests {
             "ff <-> tt" to false,
             "ff <-> ff" to true,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).result!!).get()?.isModel shouldBe expectedResult
+            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
         }
     }
 
@@ -96,7 +100,7 @@ class ModelCheckerTests {
             "U(a)" to false,
             "U(b)" to false,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).result!!).get()?.isModel shouldBe expectedResult
+            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
         }
     }
 
@@ -116,7 +120,7 @@ class ModelCheckerTests {
             "U(a, b)" to false,
             "U(b, a)" to false,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).result!!).get()?.isModel shouldBe expectedResult
+            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
         }
     }
 
@@ -139,7 +143,7 @@ class ModelCheckerTests {
             "f(f(a))=b" to true,
             "f(f(b))=b" to true,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).result!!).get()?.isModel shouldBe expectedResult
+            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
         }
     }
 
@@ -159,7 +163,7 @@ class ModelCheckerTests {
             "exists x. f(x)=b" to true,
             "exists x. f(x)=a" to false,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).result!!).get()?.isModel shouldBe expectedResult
+            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
         }
     }
 
@@ -181,7 +185,7 @@ class ModelCheckerTests {
             "forall x. f(b)=x" to false,
             "forall x f(x)=b && forall x !(f(x)=a) " to true,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).result!!).get()?.isModel shouldBe expectedResult
+            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
         }
     }
 }

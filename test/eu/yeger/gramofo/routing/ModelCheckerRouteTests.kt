@@ -18,12 +18,13 @@ class ModelCheckerRouteTests {
             routingModule()
         }) {
             runBlocking {
-                (0..10).forEach { _ -> launch { makeCall() } }
+                (0..5).forEach { _ -> launch { makeCall("en", true) } }
+                (0..5).forEach { _ -> launch { makeCall("de", false) } }
             }
         }
     }
 
-    private fun TestApplicationEngine.makeCall() {
+    private fun TestApplicationEngine.makeCall(language: String, minimizeResult: Boolean) {
         handleRequest {
             method = HttpMethod.Post
             uri = "/modelchecker"
@@ -32,7 +33,8 @@ class ModelCheckerRouteTests {
                 """
                     {
                         "formula": "exists x. exists y. B(x,y)",
-                        "language": "en",
+                        "language": "$language",
+                        "minimizeResult": $minimizeResult,
                         "graph": {
                             "name": "Demo Graph",
                             "description": "A simple demonstration Graph.",

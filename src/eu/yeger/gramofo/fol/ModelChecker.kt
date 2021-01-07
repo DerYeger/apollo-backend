@@ -7,23 +7,8 @@ import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.model.domain.fol.*
 import eu.yeger.gramofo.model.dto.TranslationDTO
-import java.util.*
 
 typealias ModelCheckerResult = Result<ModelCheckerTrace, TranslationDTO>
-
-data class ModelCheckerTrace(
-    val formula: String,
-    val description: TranslationDTO,
-    val isModel: Boolean,
-    val shouldBeModel: Boolean,
-    val children: List<ModelCheckerTrace>,
-)
-
-data class SymbolTable(
-    val unarySymbols: Map<String, Set<Node>>,
-    val binarySymbols: Map<String, Set<Edge>>,
-    val symbolTypes: Map<String, String>,
-)
 
 fun checkModel(graph: Graph, formulaHead: FormulaHead): ModelCheckerResult = binding {
     val symbolTable = graph.loadSymbols()
@@ -33,6 +18,25 @@ fun checkModel(graph: Graph, formulaHead: FormulaHead): ModelCheckerResult = bin
         .mapError { error -> TranslationDTO(error.message ?: "api.error.unknown") }
         .bind()
 }
+
+fun Formula.validated(description: TranslationDTO, variableAssignments: Map<String, Node>, shouldBeModel: Boolean, vararg children: ModelCheckerTrace) =
+    ModelCheckerTrace(
+        formula = this.toString(variableAssignments, false),
+        description = description,
+        isModel = true,
+        shouldBeModel = shouldBeModel,
+        children = children.toList().takeUnless { it.isEmpty() }
+    )
+
+fun Formula.invalidated(description: TranslationDTO, variableAssignments: Map<String, Node>, shouldBeModel: Boolean, vararg children: ModelCheckerTrace) =
+    ModelCheckerTrace(
+        formula = this.toString(variableAssignments, false),
+        description = description,
+        isModel = false,
+        shouldBeModel = shouldBeModel,
+        children = children.toList().takeUnless { it.isEmpty() }
+    )
+
 /**
  * Iterates over the graph and puts all found symbols in a symbol table.
  */

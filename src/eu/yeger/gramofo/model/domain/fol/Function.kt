@@ -1,6 +1,5 @@
 package eu.yeger.gramofo.model.domain.fol
 
-import eu.yeger.gramofo.fol.SymbolTable
 import eu.yeger.gramofo.model.domain.Edge
 import eu.yeger.gramofo.model.domain.Node
 

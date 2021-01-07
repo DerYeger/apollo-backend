@@ -1,6 +1,5 @@
 package eu.yeger.gramofo.routing
 
-import com.fasterxml.jackson.core.JsonProcessingException
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
@@ -21,9 +20,9 @@ fun Application.routingModule() = routing {
             call.respond(HttpStatusCode.InternalServerError)
             throw cause
         }
-        exception<JsonProcessingException> { cause ->
-            call.respond(HttpStatusCode.BadRequest)
-            throw cause
-        }
+//        exception<> { cause ->
+//            call.respond(HttpStatusCode.BadRequest)
+//            throw cause
+//        }
     }
 }

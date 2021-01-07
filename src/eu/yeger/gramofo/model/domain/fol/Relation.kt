@@ -1,7 +1,7 @@
 package eu.yeger.gramofo.model.domain.fol
 
-import eu.yeger.gramofo.fol.ModelCheckerTrace
-import eu.yeger.gramofo.fol.SymbolTable
+import eu.yeger.gramofo.fol.invalidated
+import eu.yeger.gramofo.fol.validated
 import eu.yeger.gramofo.model.domain.Edge
 import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node

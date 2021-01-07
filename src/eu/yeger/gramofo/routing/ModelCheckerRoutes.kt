@@ -1,15 +1,10 @@
 package eu.yeger.gramofo.routing
 
-import com.github.michaelbull.result.Err
-import com.github.michaelbull.result.Ok
-import eu.yeger.gramofo.fol.ModelCheckerTrace
 import eu.yeger.gramofo.model.api.ModelCheckerRequest
-import eu.yeger.gramofo.model.dto.TranslationDTO
 import eu.yeger.gramofo.service.ModelCheckerService
+import eu.yeger.gramofo.utils.respondWithResult
 import io.ktor.application.*
-import io.ktor.http.*
 import io.ktor.request.*
-import io.ktor.response.*
 import io.ktor.routing.*
 import org.koin.ktor.ext.inject
 
@@ -18,9 +13,7 @@ fun Route.modelCheckerRoutes() {
 
     post("modelchecker") {
         val request = call.receive<ModelCheckerRequest>()
-        when (val result = modelCheckerService.checkModel(request)) {
-            is Ok<ModelCheckerTrace> -> call.respond(result.value)
-            is Err<TranslationDTO> -> call.respond(HttpStatusCode.UnprocessableEntity, mapOf("message" to result.error))
-        }
+        val result = modelCheckerService.checkModel(request)
+        call.respondWithResult(result)
     }
 }

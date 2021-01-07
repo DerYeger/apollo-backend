@@ -1,6 +1,5 @@
 package eu.yeger.gramofo.model.api
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
@@ -9,8 +8,9 @@ import eu.yeger.gramofo.model.domain.Edge
 import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.model.dto.TranslationDTO
+import kotlinx.serialization.Serializable
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Serializable
 data class ApiGraph(
     val nodes: List<ApiNode>,
     val edges: List<ApiEdge>

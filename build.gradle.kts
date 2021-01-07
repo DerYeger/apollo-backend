@@ -10,6 +10,7 @@ val logbackVersion: String by project
 plugins {
     application
     kotlin("jvm")
+    kotlin("plugin.serialization")
     id("org.jetbrains.dokka")
     id("org.jlleitschuh.gradle.ktlint")
     id("com.github.johnrengelman.shadow")
@@ -50,7 +51,7 @@ dependencies {
     implementation("io.ktor:ktor-server-host-common:$ktorVersion")
     implementation("io.ktor:ktor-auth:$ktorVersion")
     implementation("io.ktor:ktor-auth-jwt:$ktorVersion")
-    implementation("io.ktor:ktor-jackson:$ktorVersion")
+    implementation("io.ktor:ktor-serialization:$ktorVersion")
 
     // Other dependencies
     implementation("org.koin:koin-ktor:$koinVersion")

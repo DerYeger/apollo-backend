@@ -1,9 +1,10 @@
 package eu.yeger.gramofo.service
 
-import eu.yeger.gramofo.fol.ModelCheckerResult
+import eu.yeger.gramofo.model.api.ApiResult
 import eu.yeger.gramofo.model.api.ModelCheckerRequest
+import eu.yeger.gramofo.model.domain.fol.ModelCheckerTrace
 
 interface ModelCheckerService {
 
-    fun checkModel(modelCheckerRequest: ModelCheckerRequest): ModelCheckerResult
+    fun checkModel(modelCheckerRequest: ModelCheckerRequest): ApiResult<ModelCheckerTrace>
 }

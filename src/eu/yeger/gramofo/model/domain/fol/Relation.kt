@@ -16,7 +16,7 @@ private val specialNames = mapOf(
 sealed class Relation(name: String) : Formula(name) {
 
     class Unary(name: String, val term: Term) : Relation(name) {
-        override fun checkModel(
+        override fun fullCheck(
             graph: Graph,
             symbolTable: SymbolTable,
             variableAssignments: Map<String, Node>,
@@ -38,6 +38,15 @@ sealed class Relation(name: String) : Formula(name) {
             }
         }
 
+        override fun partialCheck(
+            graph: Graph,
+            symbolTable: SymbolTable,
+            variableAssignments: Map<String, Node>,
+            shouldBeModel: Boolean,
+        ): ModelCheckerTrace {
+            return fullCheck(graph, symbolTable, variableAssignments, shouldBeModel)
+        }
+
         override fun getFormulaString(variableAssignments: Map<String, Node>): String {
             val relation = specialNames.getOrDefault(name, name)
             val termString = term.toString(variableAssignments, true)
@@ -46,7 +55,7 @@ sealed class Relation(name: String) : Formula(name) {
     }
 
     class Binary(name: String, val firstTerm: Term, val secondTerm: Term, val isInfix: Boolean) : Relation(name) {
-        override fun checkModel(
+        override fun fullCheck(
             graph: Graph,
             symbolTable: SymbolTable,
             variableAssignments: Map<String, Node>,
@@ -88,6 +97,15 @@ sealed class Relation(name: String) : Formula(name) {
                     )
                 }
             }
+        }
+
+        override fun partialCheck(
+            graph: Graph,
+            symbolTable: SymbolTable,
+            variableAssignments: Map<String, Node>,
+            shouldBeModel: Boolean,
+        ): ModelCheckerTrace {
+            return fullCheck(graph, symbolTable, variableAssignments, shouldBeModel)
         }
 
         override fun getFormulaString(variableAssignments: Map<String, Node>): String {

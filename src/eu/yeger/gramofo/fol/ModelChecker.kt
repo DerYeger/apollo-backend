@@ -10,13 +10,16 @@ import eu.yeger.gramofo.model.dto.TranslationDTO
 
 typealias ModelCheckerResult = Result<ModelCheckerTrace, TranslationDTO>
 
-fun checkModel(graph: Graph, formulaHead: FormulaHead): ModelCheckerResult = binding {
+fun checkModel(graph: Graph, formulaHead: FormulaHead, partialCheck: Boolean): ModelCheckerResult = binding {
     val symbolTable = graph.loadSymbols()
         .andThen { symbolTable -> formulaHead.loadSymbols(symbolTable) }
         .andThen { symbolTable -> checkTotality(graph, symbolTable) }.bind()
-    runCatching { formulaHead.formula.checkModel(graph, symbolTable, emptyMap(), true) }
-        .mapError { error -> TranslationDTO(error.message ?: "api.error.unknown") }
-        .bind()
+    runCatching {
+        when (partialCheck) {
+            true -> formulaHead.formula.partialCheck(graph, symbolTable, emptyMap(), true)
+            false -> formulaHead.formula.fullCheck(graph, symbolTable, emptyMap(), true)
+        }
+    }.mapError { error -> TranslationDTO(error.message ?: error.printStackTrace().let { "api.error.unknown" }) }.bind()
 }
 
 fun Formula.validated(description: TranslationDTO, variableAssignments: Map<String, Node>, shouldBeModel: Boolean, vararg children: ModelCheckerTrace) =

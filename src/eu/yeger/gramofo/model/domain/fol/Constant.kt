@@ -11,7 +11,7 @@ sealed class Constant(name: String) : Formula(name = name) {
     class True : Constant(TT)
     class False : Constant(FF)
 
-    override fun checkModel(
+    override fun fullCheck(
         graph: Graph,
         symbolTable: SymbolTable,
         variableAssignments: Map<String, Node>,
@@ -21,6 +21,15 @@ sealed class Constant(name: String) : Formula(name = name) {
             is True -> validated(TranslationDTO("api.constant.true"), variableAssignments, shouldBeModel)
             is False -> invalidated(TranslationDTO("api.constant.false"), variableAssignments, shouldBeModel)
         }
+    }
+
+    override fun partialCheck(
+        graph: Graph,
+        symbolTable: SymbolTable,
+        variableAssignments: Map<String, Node>,
+        shouldBeModel: Boolean,
+    ): ModelCheckerTrace {
+        return fullCheck(graph, symbolTable, variableAssignments, shouldBeModel)
     }
 
     override fun getFormulaString(variableAssignments: Map<String, Node>): String {

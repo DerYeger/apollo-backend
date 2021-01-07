@@ -5,7 +5,9 @@ import eu.yeger.gramofo.model.domain.Node
 
 abstract class Formula(name: String) : FOLEntity(name) {
 
-    abstract fun checkModel(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>, shouldBeModel: Boolean): ModelCheckerTrace
+    abstract fun fullCheck(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>, shouldBeModel: Boolean): ModelCheckerTrace
+
+    abstract fun partialCheck(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>, shouldBeModel: Boolean): ModelCheckerTrace
 
     companion object {
         const val TT = "tt"

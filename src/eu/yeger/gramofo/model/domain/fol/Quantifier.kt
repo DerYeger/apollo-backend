@@ -14,14 +14,14 @@ sealed class Quantifier(
 
     class Existential(variable: BoundVariable, operand: Formula) : Quantifier(EXISTS, variable, operand) {
 
-        override fun checkModel(
+        override fun fullCheck(
             graph: Graph,
             symbolTable: SymbolTable,
             variableAssignments: Map<String, Node>,
             shouldBeModel: Boolean,
         ): ModelCheckerTrace {
             val children = graph.nodes.map { node: Node ->
-                operand.checkModel(graph, symbolTable, variableAssignments + (variable.name to node), shouldBeModel)
+                operand.fullCheck(graph, symbolTable, variableAssignments + (variable.name to node), shouldBeModel)
             }
             return if (children.any(ModelCheckerTrace::isModel)) {
                 validated(TranslationDTO("api.exists.valid"), variableAssignments, shouldBeModel, *children.toTypedArray())
@@ -29,23 +29,55 @@ sealed class Quantifier(
                 invalidated(TranslationDTO("api.exists.invalid"), variableAssignments, shouldBeModel, *children.toTypedArray())
             }
         }
-    }
 
-    class Universal(variable: BoundVariable, operand: Formula) : Quantifier(FOR_ALL, variable, operand) {
-        override fun checkModel(
+        override fun partialCheck(
             graph: Graph,
             symbolTable: SymbolTable,
             variableAssignments: Map<String, Node>,
             shouldBeModel: Boolean,
         ): ModelCheckerTrace {
             val children = graph.nodes.map { node: Node ->
-                operand.checkModel(graph, symbolTable, variableAssignments + (variable.name to node), shouldBeModel)
+                val childTrace = operand.partialCheck(graph, symbolTable, variableAssignments + (variable.name to node), shouldBeModel)
+                if (childTrace.isModel) {
+                    return@partialCheck validated(TranslationDTO("api.exists.valid"), variableAssignments, shouldBeModel, childTrace)
+                }
+                childTrace
+            }
+            return invalidated(TranslationDTO("api.exists.invalid"), variableAssignments, shouldBeModel, *children.toTypedArray())
+        }
+    }
+
+    class Universal(variable: BoundVariable, operand: Formula) : Quantifier(FOR_ALL, variable, operand) {
+        override fun fullCheck(
+            graph: Graph,
+            symbolTable: SymbolTable,
+            variableAssignments: Map<String, Node>,
+            shouldBeModel: Boolean,
+        ): ModelCheckerTrace {
+            val children = graph.nodes.map { node: Node ->
+                operand.fullCheck(graph, symbolTable, variableAssignments + (variable.name to node), shouldBeModel)
             }
             return if (children.all(ModelCheckerTrace::isModel)) {
                 validated(TranslationDTO("api.forall.valid"), variableAssignments, shouldBeModel, *children.toTypedArray())
             } else {
                 invalidated(TranslationDTO("api.forall.invalid"), variableAssignments, shouldBeModel, *children.toTypedArray())
             }
+        }
+
+        override fun partialCheck(
+            graph: Graph,
+            symbolTable: SymbolTable,
+            variableAssignments: Map<String, Node>,
+            shouldBeModel: Boolean,
+        ): ModelCheckerTrace {
+            val children = graph.nodes.map { node: Node ->
+                val childTrace = operand.partialCheck(graph, symbolTable, variableAssignments + (variable.name to node), shouldBeModel)
+                if (childTrace.isModel.not()) {
+                    return@partialCheck invalidated(TranslationDTO("api.forall.invalid"), variableAssignments, shouldBeModel, childTrace)
+                }
+                childTrace
+            }
+            return validated(TranslationDTO("api.forall.valid"), variableAssignments, shouldBeModel, *children.toTypedArray())
         }
     }
 

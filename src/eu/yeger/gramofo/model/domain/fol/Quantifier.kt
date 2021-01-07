@@ -49,13 +49,13 @@ sealed class Quantifier(
     }
 
     override fun getFormulaString(variableAssignments: Map<String, Node>): String {
-        val variableString = variable.getFormulaString(variableAssignments)
-        val operandString = operand.getFormulaString(variableAssignments)
+        val variableString = variable.toString(variableAssignments, true)
+        val operandString = operand.toString(variableAssignments, true)
         val separator = when (!operand.hasDot && !isUnary(operand)) {
             true -> " "
             false -> ""
         }
-        return "$name$variableString$separator$operandString".maybeWrapBracketsAndDot()
+        return "$name$variableString$separator$operandString"
     }
 
     private fun isUnary(formula: Formula): Boolean {

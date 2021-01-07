@@ -9,18 +9,24 @@ abstract class FOLEntity(val name: String) {
 
     abstract fun getFormulaString(variableAssignments: Map<String, Node>): String
 
-    fun toString(variableAssignments: Map<String, Node>): String {
-        return getFormulaString(variableAssignments).removePrefix(". ")
+    final override fun toString() = toString(emptyMap(), false)
+
+    fun toString(variableAssignments: Map<String, Node>, wrap: Boolean): String {
+        val formulaString = getFormulaString(variableAssignments)
+        return when (wrap) {
+            true -> formulaString.wrapBracketsAndDot()
+            false -> formulaString
+        }
     }
 
-    protected fun String.maybeWrapBracketsAndDot(): String {
+    private fun String.wrapBracketsAndDot(): String {
         return when (hasBrackets) {
             true -> "($this)"
             false -> this
         }.let {
             when (hasDot) {
-                true -> ". $this"
-                false -> this
+                true -> ". $it"
+                false -> it
             }
         }
     }

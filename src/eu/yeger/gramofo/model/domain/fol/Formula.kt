@@ -10,12 +10,6 @@ abstract class Formula(name: String) : FOLEntity(name) {
 
     abstract fun checkModel(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>, shouldBeModel: Boolean): ModelCheckerTrace
 
-    abstract override fun getFormulaString(variableAssignments: Map<String, Node>): String
-
-    final override fun toString(): String {
-        return toString(emptyMap())
-    }
-
     companion object {
         const val TT = "tt"
         const val FF = "ff"
@@ -31,7 +25,7 @@ abstract class Formula(name: String) : FOLEntity(name) {
 
     protected fun validated(description: TranslationDTO, variableAssignments: Map<String, Node>, shouldBeModel: Boolean, vararg children: ModelCheckerTrace) =
         ModelCheckerTrace(
-            formula = this.toString(variableAssignments),
+            formula = this.toString(variableAssignments, false),
             description = description,
             isModel = true,
             shouldBeModel = shouldBeModel,
@@ -40,7 +34,7 @@ abstract class Formula(name: String) : FOLEntity(name) {
 
     protected fun invalidated(description: TranslationDTO, variableAssignments: Map<String, Node>, shouldBeModel: Boolean, vararg children: ModelCheckerTrace) =
         ModelCheckerTrace(
-            formula = this.toString(variableAssignments),
+            formula = this.toString(variableAssignments, false),
             description = description,
             isModel = false,
             shouldBeModel = shouldBeModel,

@@ -40,8 +40,8 @@ sealed class Relation(name: String) : Formula(name) {
 
         override fun getFormulaString(variableAssignments: Map<String, Node>): String {
             val relation = specialNames.getOrDefault(name, name)
-            val termString = term.getFormulaString(variableAssignments)
-            return "$relation($termString)".maybeWrapBracketsAndDot()
+            val termString = term.toString(variableAssignments, true)
+            return "$relation($termString)"
         }
     }
 
@@ -55,8 +55,8 @@ sealed class Relation(name: String) : Formula(name) {
             val left = firstTerm.evaluate(symbolTable, variableAssignments)
             val right = secondTerm.evaluate(symbolTable, variableAssignments)
             val translationParams = mapOf(
-                "firstTerm" to firstTerm.toString(variableAssignments),
-                "secondTerm" to secondTerm.toString(variableAssignments),
+                "firstTerm" to firstTerm.toString(variableAssignments, false),
+                "secondTerm" to secondTerm.toString(variableAssignments, false),
                 "firstResult" to left.name,
                 "secondResult" to right.name
             )
@@ -92,11 +92,11 @@ sealed class Relation(name: String) : Formula(name) {
 
         override fun getFormulaString(variableAssignments: Map<String, Node>): String {
             val relation = specialNames.getOrDefault(name, name)
-            val first = firstTerm.getFormulaString(variableAssignments)
-            val second = secondTerm.getFormulaString(variableAssignments)
+            val first = firstTerm.toString(variableAssignments, true)
+            val second = secondTerm.toString(variableAssignments, true)
             return when (isInfix) {
-                true -> "$first $relation $second".maybeWrapBracketsAndDot()
-                false -> "$relation($first, $second)".maybeWrapBracketsAndDot()
+                true -> "$first $relation $second"
+                false -> "$relation($first, $second)"
             }
         }
     }

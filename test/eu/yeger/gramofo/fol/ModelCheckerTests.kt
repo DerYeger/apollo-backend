@@ -1,7 +1,6 @@
-package eu.yeger.gramofo.fol.graph
+package eu.yeger.gramofo.fol
 
 import com.github.michaelbull.result.get
-import eu.yeger.gramofo.fol.checkModel
 import eu.yeger.gramofo.fol.parser.parseFormula
 import eu.yeger.gramofo.model.domain.Edge
 import eu.yeger.gramofo.model.domain.Graph

@@ -25,7 +25,7 @@ sealed class Operator(name: String) : Formula(name) {
         }
 
         override fun getFormulaString(variableAssignments: Map<String, Node>): String {
-            return "$name${operand.getFormulaString(variableAssignments)}".maybeWrapBracketsAndDot()
+            return "$name${operand.toString(variableAssignments, true)}"
         }
     }
 
@@ -130,9 +130,9 @@ sealed class Operator(name: String) : Formula(name) {
         }
 
         override fun getFormulaString(variableAssignments: Map<String, Node>): String {
-            val first = firstOperand.getFormulaString(variableAssignments)
-            val second = secondOperand.getFormulaString(variableAssignments)
-            return "$first $name $second".maybeWrapBracketsAndDot()
+            val first = firstOperand.toString(variableAssignments, true)
+            val second = secondOperand.toString(variableAssignments, true)
+            return "$first $name $second"
         }
     }
 }

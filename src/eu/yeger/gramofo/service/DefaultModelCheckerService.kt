@@ -18,9 +18,9 @@ class DefaultModelCheckerService : ModelCheckerService {
         extractLanguage(modelCheckerRequest)
             .andThen { language -> parseFormula(modelCheckerRequest.formula, language) }
             .mapError { error -> TranslationDTO(error) }
-            .andThen { formula -> checkModel(domainGraph, formula, modelCheckerRequest.minimizeResult) }
+            .andThen { formula -> checkModel(domainGraph, formula, modelCheckerRequest.feedback) }
             .mapError { translationDTO -> HttpEntity.UnprocessableEntity(translationDTO) }
-            .map { trace -> HttpEntity.Ok(ModelCheckerResponse(trace, modelCheckerRequest.minimizeResult)) }
+            .map { trace -> HttpEntity.Ok(ModelCheckerResponse(trace, modelCheckerRequest.feedback)) }
             .bind()
     }
 

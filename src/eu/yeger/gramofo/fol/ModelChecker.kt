@@ -2,6 +2,7 @@ package eu.yeger.gramofo.fol
 
 import com.github.michaelbull.result.*
 import com.github.michaelbull.result.binding
+import eu.yeger.gramofo.model.api.Feedback
 import eu.yeger.gramofo.model.domain.Edge
 import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
@@ -10,14 +11,15 @@ import eu.yeger.gramofo.model.dto.TranslationDTO
 
 typealias ModelCheckerResult = Result<ModelCheckerTrace, TranslationDTO>
 
-fun checkModel(graph: Graph, formulaHead: FormulaHead, partialCheck: Boolean): ModelCheckerResult = binding {
+fun checkModel(graph: Graph, formulaHead: FormulaHead, feedback: Feedback): ModelCheckerResult = binding {
     val symbolTable = graph.loadSymbols()
         .andThen { symbolTable -> formulaHead.loadSymbols(symbolTable) }
         .andThen { symbolTable -> checkTotality(graph, symbolTable) }.bind()
     runCatching {
-        when (partialCheck) {
-            true -> formulaHead.formula.partialCheck(graph, symbolTable, emptyMap(), true)
-            false -> formulaHead.formula.fullCheck(graph, symbolTable, emptyMap(), true)
+        when (feedback) {
+            Feedback.full -> formulaHead.formula.fullCheck(graph, symbolTable, emptyMap(), true)
+            Feedback.relevant -> formulaHead.formula.partialCheck(graph, symbolTable, emptyMap(), true)
+            Feedback.minimal -> formulaHead.formula.partialCheck(graph, symbolTable, emptyMap(), true).copy(children = null)
         }
     }.mapError { error -> TranslationDTO(error.message ?: error.printStackTrace().let { "api.error.unknown" }) }.bind()
 }

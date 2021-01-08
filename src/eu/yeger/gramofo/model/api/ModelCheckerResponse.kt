@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ModelCheckerResponse(
     val rootTrace: ModelCheckerTrace,
-    val isMinimized: Boolean,
+    val feedback: Feedback,
 )

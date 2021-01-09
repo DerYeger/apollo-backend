@@ -32,8 +32,6 @@ fun Application.mainModule() {
         )
     }
 
-    install(Compression)
-
     install(CORS) {
         method(HttpMethod.Options)
         method(HttpMethod.Put)

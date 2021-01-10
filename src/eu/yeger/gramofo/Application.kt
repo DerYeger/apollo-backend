@@ -1,12 +1,12 @@
 package eu.yeger.gramofo
 
-import com.fasterxml.jackson.databind.SerializationFeature
 import eu.yeger.gramofo.di.serviceModule
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
-import io.ktor.jackson.*
 import io.ktor.request.*
+import io.ktor.serialization.*
+import kotlinx.serialization.json.Json
 import org.koin.ktor.ext.Koin
 import org.slf4j.event.Level
 
@@ -24,9 +24,12 @@ fun Application.mainModule() {
     }
 
     install(ContentNegotiation) {
-        jackson {
-            enable(SerializationFeature.INDENT_OUTPUT)
-        }
+        json(
+            json = Json {
+                encodeDefaults = false
+                ignoreUnknownKeys = true
+            }
+        )
     }
 
     install(CORS) {

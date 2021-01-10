@@ -1,11 +1,11 @@
 package eu.yeger.gramofo.routing
 
-import com.fasterxml.jackson.core.JsonProcessingException
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.routing.*
+import kotlinx.serialization.SerializationException
 
 fun Application.routingModule() = routing {
     route("/") {
@@ -18,11 +18,11 @@ fun Application.routingModule() = routing {
 
     install(StatusPages) {
         exception<Throwable> { cause ->
-            call.respond(HttpStatusCode.InternalServerError)
+            call.respond(HttpStatusCode.InternalServerError, cause.message ?: "api.error.unknown")
             throw cause
         }
-        exception<JsonProcessingException> { cause ->
-            call.respond(HttpStatusCode.BadRequest)
+        exception<SerializationException> { cause ->
+            call.respond(HttpStatusCode.BadRequest, cause.message ?: "api.error.unknown")
             throw cause
         }
     }

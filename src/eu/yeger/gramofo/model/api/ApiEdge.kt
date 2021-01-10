@@ -1,5 +1,8 @@
 package eu.yeger.gramofo.model.api
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class ApiEdge(
     val source: String,
     val target: String,

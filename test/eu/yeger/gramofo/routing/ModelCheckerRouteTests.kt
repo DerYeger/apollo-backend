@@ -1,6 +1,7 @@
 package eu.yeger.gramofo.routing
 
 import eu.yeger.gramofo.mainModule
+import eu.yeger.gramofo.model.api.Feedback
 import eu.yeger.gramofo.utils.shouldBe
 import eu.yeger.gramofo.utils.shouldNotBe
 import io.ktor.http.*
@@ -18,12 +19,14 @@ class ModelCheckerRouteTests {
             routingModule()
         }) {
             runBlocking {
-                (0..10).forEach { _ -> launch { makeCall() } }
+                (0..5).forEach { _ -> launch { makeCall("en", Feedback.full) } }
+                (0..5).forEach { _ -> launch { makeCall("de", Feedback.relevant) } }
+                (0..5).forEach { _ -> launch { makeCall("de", Feedback.minimal) } }
             }
         }
     }
 
-    private fun TestApplicationEngine.makeCall() {
+    private fun TestApplicationEngine.makeCall(language: String, feedback: Feedback) {
         handleRequest {
             method = HttpMethod.Post
             uri = "/modelchecker"
@@ -32,7 +35,8 @@ class ModelCheckerRouteTests {
                 """
                     {
                         "formula": "exists x. exists y. B(x,y)",
-                        "language": "en",
+                        "language": "$language",
+                        "feedback": "$feedback",
                         "graph": {
                             "name": "Demo Graph",
                             "description": "A simple demonstration Graph.",

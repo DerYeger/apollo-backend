@@ -1,7 +1,7 @@
 package eu.yeger.gramofo.model.domain.fol
 
-import eu.yeger.gramofo.fol.ModelCheckerTrace
-import eu.yeger.gramofo.fol.SymbolTable
+import eu.yeger.gramofo.fol.invalidated
+import eu.yeger.gramofo.fol.validated
 import eu.yeger.gramofo.model.domain.Edge
 import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
@@ -16,7 +16,7 @@ private val specialNames = mapOf(
 sealed class Relation(name: String) : Formula(name) {
 
     class Unary(name: String, val term: Term) : Relation(name) {
-        override fun checkModel(
+        override fun fullCheck(
             graph: Graph,
             symbolTable: SymbolTable,
             variableAssignments: Map<String, Node>,
@@ -38,15 +38,24 @@ sealed class Relation(name: String) : Formula(name) {
             }
         }
 
+        override fun partialCheck(
+            graph: Graph,
+            symbolTable: SymbolTable,
+            variableAssignments: Map<String, Node>,
+            shouldBeModel: Boolean,
+        ): ModelCheckerTrace {
+            return fullCheck(graph, symbolTable, variableAssignments, shouldBeModel)
+        }
+
         override fun getFormulaString(variableAssignments: Map<String, Node>): String {
             val relation = specialNames.getOrDefault(name, name)
-            val termString = term.getFormulaString(variableAssignments)
-            return "$relation($termString)".maybeWrapBracketsAndDot()
+            val termString = term.toString(variableAssignments, true)
+            return "$relation($termString)"
         }
     }
 
     class Binary(name: String, val firstTerm: Term, val secondTerm: Term, val isInfix: Boolean) : Relation(name) {
-        override fun checkModel(
+        override fun fullCheck(
             graph: Graph,
             symbolTable: SymbolTable,
             variableAssignments: Map<String, Node>,
@@ -55,8 +64,8 @@ sealed class Relation(name: String) : Formula(name) {
             val left = firstTerm.evaluate(symbolTable, variableAssignments)
             val right = secondTerm.evaluate(symbolTable, variableAssignments)
             val translationParams = mapOf(
-                "firstTerm" to firstTerm.toString(variableAssignments),
-                "secondTerm" to secondTerm.toString(variableAssignments),
+                "firstTerm" to firstTerm.toString(variableAssignments, false),
+                "secondTerm" to secondTerm.toString(variableAssignments, false),
                 "firstResult" to left.name,
                 "secondResult" to right.name
             )
@@ -90,13 +99,22 @@ sealed class Relation(name: String) : Formula(name) {
             }
         }
 
+        override fun partialCheck(
+            graph: Graph,
+            symbolTable: SymbolTable,
+            variableAssignments: Map<String, Node>,
+            shouldBeModel: Boolean,
+        ): ModelCheckerTrace {
+            return fullCheck(graph, symbolTable, variableAssignments, shouldBeModel)
+        }
+
         override fun getFormulaString(variableAssignments: Map<String, Node>): String {
             val relation = specialNames.getOrDefault(name, name)
-            val first = firstTerm.getFormulaString(variableAssignments)
-            val second = secondTerm.getFormulaString(variableAssignments)
+            val first = firstTerm.toString(variableAssignments, true)
+            val second = secondTerm.toString(variableAssignments, true)
             return when (isInfix) {
-                true -> "$first $relation $second".maybeWrapBracketsAndDot()
-                false -> "$relation($first, $second)".maybeWrapBracketsAndDot()
+                true -> "$first $relation $second"
+                false -> "$relation($first, $second)"
             }
         }
     }

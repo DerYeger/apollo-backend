@@ -1,8 +1,8 @@
-package eu.yeger.gramofo.fol.graph
+package eu.yeger.gramofo.fol
 
 import com.github.michaelbull.result.get
-import eu.yeger.gramofo.fol.checkModel
 import eu.yeger.gramofo.fol.parser.parseFormula
+import eu.yeger.gramofo.model.api.Feedback
 import eu.yeger.gramofo.model.domain.Edge
 import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
@@ -11,6 +11,13 @@ import org.junit.jupiter.api.Test
 
 class ModelCheckerTests {
 
+    private fun testForAllFeedbackOptions(graph: Graph, formulaString: String, expectedResult: Boolean) {
+        val formula = parseFormula(formulaString).get()!!
+        Feedback.values().forEach { feedback ->
+            checkModel(graph, formula, feedback).get()?.isModel shouldBe expectedResult
+        }
+    }
+
     @Test
     fun `verify that checking constants works`() {
         val graph = Graph(listOf(), listOf())
@@ -18,7 +25,7 @@ class ModelCheckerTests {
             "tt" to true,
             "ff" to false
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
+            testForAllFeedbackOptions(graph, formula, expectedResult)
         }
     }
 
@@ -29,7 +36,7 @@ class ModelCheckerTests {
             "!tt" to false,
             "!ff" to true
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
+            testForAllFeedbackOptions(graph, formula, expectedResult)
         }
     }
 
@@ -42,7 +49,7 @@ class ModelCheckerTests {
             "ff && tt" to false,
             "ff && ff" to false,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
+            testForAllFeedbackOptions(graph, formula, expectedResult)
         }
     }
 
@@ -55,7 +62,7 @@ class ModelCheckerTests {
             "ff || tt" to true,
             "ff || ff" to false,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
+            testForAllFeedbackOptions(graph, formula, expectedResult)
         }
     }
 
@@ -68,7 +75,7 @@ class ModelCheckerTests {
             "ff -> tt" to true,
             "ff -> ff" to true,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
+            testForAllFeedbackOptions(graph, formula, expectedResult)
         }
     }
 
@@ -81,7 +88,7 @@ class ModelCheckerTests {
             "ff <-> tt" to false,
             "ff <-> ff" to true,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
+            testForAllFeedbackOptions(graph, formula, expectedResult)
         }
     }
 
@@ -100,7 +107,7 @@ class ModelCheckerTests {
             "U(a)" to false,
             "U(b)" to false,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
+            testForAllFeedbackOptions(graph, formula, expectedResult)
         }
     }
 
@@ -120,7 +127,7 @@ class ModelCheckerTests {
             "U(a, b)" to false,
             "U(b, a)" to false,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
+            testForAllFeedbackOptions(graph, formula, expectedResult)
         }
     }
 
@@ -143,7 +150,7 @@ class ModelCheckerTests {
             "f(f(a))=b" to true,
             "f(f(b))=b" to true,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
+            testForAllFeedbackOptions(graph, formula, expectedResult)
         }
     }
 
@@ -163,7 +170,7 @@ class ModelCheckerTests {
             "exists x. f(x)=b" to true,
             "exists x. f(x)=a" to false,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
+            testForAllFeedbackOptions(graph, formula, expectedResult)
         }
     }
 
@@ -185,7 +192,7 @@ class ModelCheckerTests {
             "forall x. f(b)=x" to false,
             "forall x f(x)=b && forall x !(f(x)=a) " to true,
         ).forEach { (formula, expectedResult) ->
-            checkModel(graph, parseFormula(formula).get()!!).get()?.isModel shouldBe expectedResult
+            testForAllFeedbackOptions(graph, formula, expectedResult)
         }
     }
 }

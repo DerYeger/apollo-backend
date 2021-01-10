@@ -1,38 +1,63 @@
 package eu.yeger.gramofo.fol
 
 import com.github.michaelbull.result.*
-import com.github.michaelbull.result.binding
+import eu.yeger.gramofo.model.api.Feedback
 import eu.yeger.gramofo.model.domain.Edge
 import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.model.domain.fol.*
 import eu.yeger.gramofo.model.dto.TranslationDTO
-import java.util.*
 
 typealias ModelCheckerResult = Result<ModelCheckerTrace, TranslationDTO>
 
-data class ModelCheckerTrace(
-    val formula: String,
-    val description: TranslationDTO,
-    val isModel: Boolean,
-    val shouldBeModel: Boolean,
-    val children: List<ModelCheckerTrace>,
-)
-
-data class SymbolTable(
-    val unarySymbols: Map<String, Set<Node>>,
-    val binarySymbols: Map<String, Set<Edge>>,
-    val symbolTypes: Map<String, String>,
-)
-
-fun checkModel(graph: Graph, formulaHead: FormulaHead): ModelCheckerResult = binding {
+fun checkModel(graph: Graph, formulaHead: FormulaHead, feedback: Feedback): ModelCheckerResult = binding {
     val symbolTable = graph.loadSymbols()
         .andThen { symbolTable -> formulaHead.loadSymbols(symbolTable) }
         .andThen { symbolTable -> checkTotality(graph, symbolTable) }.bind()
-    runCatching { formulaHead.formula.checkModel(graph, symbolTable, emptyMap(), true) }
-        .mapError { error -> TranslationDTO(error.message ?: "api.error.unknown") }
-        .bind()
+    runCatching {
+        when (feedback) {
+            Feedback.full -> formulaHead.formula.fullCheck(graph, symbolTable, emptyMap(), true)
+            Feedback.relevant -> formulaHead.formula.partialCheck(graph, symbolTable, emptyMap(), true)
+            Feedback.minimal ->
+                formulaHead.formula.partialCheck(graph, symbolTable, emptyMap(), true)
+                    .copy(children = null)
+        }
+    }.mapError { error ->
+        when (error) {
+            is OutOfMemoryError -> TranslationDTO("api.error.request-too-big")
+            else -> TranslationDTO(error.message ?: error.printStackTrace().let { "api.error.unknown" })
+        }
+    }.bind()
 }
+
+fun Formula.validated(
+    description: TranslationDTO,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+    vararg children: ModelCheckerTrace,
+) =
+    ModelCheckerTrace(
+        formula = this.toString(variableAssignments, false),
+        description = description,
+        isModel = true,
+        shouldBeModel = shouldBeModel,
+        children = children.toList().takeUnless { it.isEmpty() }
+    )
+
+fun Formula.invalidated(
+    description: TranslationDTO,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+    vararg children: ModelCheckerTrace,
+) =
+    ModelCheckerTrace(
+        formula = this.toString(variableAssignments, false),
+        description = description,
+        isModel = false,
+        shouldBeModel = shouldBeModel,
+        children = children.toList().takeUnless { it.isEmpty() }
+    )
+
 /**
  * Iterates over the graph and puts all found symbols in a symbol table.
  */

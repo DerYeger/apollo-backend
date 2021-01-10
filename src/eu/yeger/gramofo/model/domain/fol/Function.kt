@@ -1,6 +1,5 @@
 package eu.yeger.gramofo.model.domain.fol
 
-import eu.yeger.gramofo.fol.SymbolTable
 import eu.yeger.gramofo.model.domain.Edge
 import eu.yeger.gramofo.model.domain.Node
 
@@ -8,7 +7,7 @@ sealed class Function(name: String) : Term(name) {
 
     class Constant(name: String) : Function(name) {
         override fun getFormulaString(variableAssignments: Map<String, Node>): String {
-            return name.maybeWrapBracketsAndDot()
+            return name
         }
 
         override fun evaluate(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): Node {
@@ -18,7 +17,7 @@ sealed class Function(name: String) : Term(name) {
 
     class Unary(name: String, val operand: Term) : Function(name) {
         override fun getFormulaString(variableAssignments: Map<String, Node>): String {
-            return "$name(${operand.getFormulaString(variableAssignments)})".maybeWrapBracketsAndDot()
+            return "$name(${operand.toString(variableAssignments, true)})"
         }
 
         override fun evaluate(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): Node {

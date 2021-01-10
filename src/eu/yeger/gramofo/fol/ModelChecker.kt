@@ -1,7 +1,6 @@
 package eu.yeger.gramofo.fol
 
 import com.github.michaelbull.result.*
-import com.github.michaelbull.result.binding
 import eu.yeger.gramofo.model.api.Feedback
 import eu.yeger.gramofo.model.domain.Edge
 import eu.yeger.gramofo.model.domain.Graph
@@ -19,12 +18,24 @@ fun checkModel(graph: Graph, formulaHead: FormulaHead, feedback: Feedback): Mode
         when (feedback) {
             Feedback.full -> formulaHead.formula.fullCheck(graph, symbolTable, emptyMap(), true)
             Feedback.relevant -> formulaHead.formula.partialCheck(graph, symbolTable, emptyMap(), true)
-            Feedback.minimal -> formulaHead.formula.partialCheck(graph, symbolTable, emptyMap(), true).copy(children = null)
+            Feedback.minimal ->
+                formulaHead.formula.partialCheck(graph, symbolTable, emptyMap(), true)
+                    .copy(children = null)
         }
-    }.mapError { error -> TranslationDTO(error.message ?: error.printStackTrace().let { "api.error.unknown" }) }.bind()
+    }.mapError { error ->
+        when (error) {
+            is OutOfMemoryError -> TranslationDTO("api.error.request-too-big")
+            else -> TranslationDTO(error.message ?: error.printStackTrace().let { "api.error.unknown" })
+        }
+    }.bind()
 }
 
-fun Formula.validated(description: TranslationDTO, variableAssignments: Map<String, Node>, shouldBeModel: Boolean, vararg children: ModelCheckerTrace) =
+fun Formula.validated(
+    description: TranslationDTO,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+    vararg children: ModelCheckerTrace,
+) =
     ModelCheckerTrace(
         formula = this.toString(variableAssignments, false),
         description = description,
@@ -33,7 +44,12 @@ fun Formula.validated(description: TranslationDTO, variableAssignments: Map<Stri
         children = children.toList().takeUnless { it.isEmpty() }
     )
 
-fun Formula.invalidated(description: TranslationDTO, variableAssignments: Map<String, Node>, shouldBeModel: Boolean, vararg children: ModelCheckerTrace) =
+fun Formula.invalidated(
+    description: TranslationDTO,
+    variableAssignments: Map<String, Node>,
+    shouldBeModel: Boolean,
+    vararg children: ModelCheckerTrace,
+) =
     ModelCheckerTrace(
         formula = this.toString(variableAssignments, false),
         description = description,

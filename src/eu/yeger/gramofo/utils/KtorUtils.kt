@@ -9,7 +9,7 @@ import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.response.*
 
-suspend fun <T : Any> ApplicationCall.respondWithResult(result: ApiResult<T>) {
+suspend inline fun <reified T : Any> ApplicationCall.respondWithResult(result: ApiResult<T>) {
     try {
         when (result) {
             is Ok<HttpEntity<T>> -> respond(result.value.status, result.value.data)

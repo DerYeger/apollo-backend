@@ -6,6 +6,8 @@ import eu.yeger.gramofo.model.api.Feedback
 import eu.yeger.gramofo.model.domain.Edge
 import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
+import eu.yeger.gramofo.model.domain.fol.ModelCheckerTrace
+import eu.yeger.gramofo.utils.checkRecursive
 import eu.yeger.gramofo.utils.shouldBe
 import org.junit.jupiter.api.Test
 
@@ -14,7 +16,14 @@ class ModelCheckerTests {
     private fun testForAllFeedbackOptions(graph: Graph, formulaString: String, expectedResult: Boolean) {
         val formula = parseFormula(formulaString).get()!!
         Feedback.values().forEach { feedback ->
-            checkModel(graph, formula, feedback).get()?.isModel shouldBe expectedResult
+            val result = checkModel(graph, formula, feedback).get()
+            result?.isModel shouldBe expectedResult
+            if (feedback === Feedback.relevant) {
+                // Validate implementation of partialCheck
+                checkRecursive(result!!, ModelCheckerTrace::children) { trace ->
+                    ((trace.isModel == trace.shouldBeModel) == expectedResult) shouldBe true
+                }
+            }
         }
     }
 

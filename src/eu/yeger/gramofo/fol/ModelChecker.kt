@@ -132,6 +132,7 @@ private fun FormulaHead.loadSymbols(symbolTable: SymbolTable): Result<SymbolTabl
 
 /**
  * Functions mus be left total. Therefore this method checks if all function symbols are defined for all inputs.
+ *
  */
 private fun checkTotality(graph: Graph, symbolTable: SymbolTable): Result<SymbolTable, TranslationDTO> {
     symbolTable.symbolTypes.forEach { (symbol: String, type: String) ->

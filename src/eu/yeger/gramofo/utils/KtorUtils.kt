@@ -9,6 +9,16 @@ import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.response.*
 
+/**
+ * Responds to a call, using the given [ApiResult].
+ * If an [OutOfMemoryError] occurs during serialization, it will be reported to the client as a 507 status code.
+ *
+ * @receiver The [ApplicationCall] that will receive the response.
+ * @param T Reified type of the data for successful responses.
+ * @param result The [ApiResult] used for the response.
+ *
+ * @author Jan Müller
+ */
 suspend inline fun <reified T : Any> ApplicationCall.respondWithResult(result: ApiResult<T>) {
     try {
         when (result) {

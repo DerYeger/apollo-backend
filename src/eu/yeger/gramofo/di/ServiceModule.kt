@@ -5,7 +5,9 @@ import eu.yeger.gramofo.service.ModelCheckerService
 import org.koin.dsl.module
 
 /**
- * DI-module containing all services for the backend.
+ * Koin-module containing all services of the backend.
+ *
+ * @author Jan Müller
  */
 val serviceModule = module {
     single<ModelCheckerService> {

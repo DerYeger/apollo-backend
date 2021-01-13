@@ -3,14 +3,25 @@ package eu.yeger.gramofo.fol.parser
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
-import eu.yeger.gramofo.fol.English
-import eu.yeger.gramofo.fol.Language
-import eu.yeger.gramofo.fol.Settings
 import eu.yeger.gramofo.model.domain.fol.*
 import eu.yeger.gramofo.model.domain.fol.Function
 
+/**
+ * [Result] that either contains a parsed [FormulaHead] or a translated error message.
+ *
+ * @author Jan Müller
+ */
 typealias ParserResult = Result<FormulaHead, String>
 
+/**
+ * Attempts to parse a formula.
+ *
+ * @param formula The source [String].
+ * @param language The [Language] used for translating error messages.
+ * @return The [ParserResult].
+ *
+ * @author Jan Müller
+ */
 fun parseFormula(formula: String, language: Language = English): ParserResult {
     return FOLParser(language).parseFormula(formula)
 }
@@ -18,6 +29,11 @@ fun parseFormula(formula: String, language: Language = English): ParserResult {
 /**
  * This class provides a singleton object, which can parse input strings into
  * data structures. It works like a recursive descent parser.
+ *
+ * This is legacy code.
+ *
+ * @property language The [Language] used for translating error messages.
+ * @constructor Creates an [FOLParser] with the given [language].
  */
 private class FOLParser(private val language: Language) {
     private val symbolTable: HashMap<String, String> = HashMap()

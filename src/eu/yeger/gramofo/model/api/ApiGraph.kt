@@ -10,18 +10,43 @@ import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.model.dto.TranslationDTO
 import kotlinx.serialization.Serializable
 
+/**
+ * Represents a graph consisting of [ApiNode]s and [ApiEdge]s.
+ *
+ * @property nodes [List] of [ApiNode]s that are part of the graph.
+ * @property edges [List] of [ApiEdge]s that are part of the graph.
+ * @constructor Creates an [ApiGraph] with the given parameters.
+ *
+ * @author Jan Müller
+ */
 @Serializable
 data class ApiGraph(
     val nodes: List<ApiNode>,
     val edges: List<ApiEdge>
 )
 
+/**
+ * Attempts to create a domain [Graph] from an [ApiGraph] or returns an error if it is invalid.
+ *
+ * @receiver The source [ApiGraph].
+ * @return [Result] containing either the created [Graph] or a [TranslationDTO] containing an error message.
+ *
+ * @author Jan Müller
+ */
 fun ApiGraph.toDomainModel(): Result<Graph, TranslationDTO> = binding {
     val domainNodes = nodes.toDomainNodes().bind()
     val domainEdges = edges.toDomainEdges(domainNodes).bind()
     Graph(domainNodes, domainEdges)
 }
 
+/**
+ * Attempts to transform a [List] of [ApiNode]s into domain [Node]s or returns an error any are invalid.
+ *
+ * @receiver The source [List] of [ApiNode]s.
+ * @return [Result] containing either the transformed domain [Node]s or a [TranslationDTO] containing an error message.
+ *
+ * @author Jan Müller
+ */
 private fun List<ApiNode>.toDomainNodes(): Result<List<Node>, TranslationDTO> = binding {
     map { node ->
         Node(
@@ -36,6 +61,14 @@ private fun List<ApiNode>.toDomainNodes(): Result<List<Node>, TranslationDTO> = 
     }
 }
 
+/**
+ * Attempts to transform a [List] of [ApiEdge]s into domain [Edge]s or returns an error any are invalid.
+ *
+ * @receiver The source [List] of [ApiEdge]s.
+ * @return [Result] containing either the transformed domain [ApiEdge]s or a [TranslationDTO] containing an error message.
+ *
+ * @author Jan Müller
+ */
 private fun List<ApiEdge>.toDomainEdges(nodes: List<Node>): Result<List<Edge>, TranslationDTO> = binding {
     val nodeMap = nodes.associateBy(Node::name)
     map { edge ->
@@ -48,6 +81,14 @@ private fun List<ApiEdge>.toDomainEdges(nodes: List<Node>): Result<List<Edge>, T
     }
 }
 
+/**
+ * Validates a [List] of relations and returns an error any are invalid.
+ *
+ * @receiver The [List] of relations.
+ * @return [Result] containing either the [List] of relations or a [TranslationDTO] containing an error message.
+ *
+ * @author Jan Müller
+ */
 private fun List<String>.validatedRelations(): Result<List<String>, TranslationDTO> {
     forEach { relation ->
         if (!(relation.isNotBlank() && relation.first().isUpperCase())) {
@@ -57,6 +98,14 @@ private fun List<String>.validatedRelations(): Result<List<String>, TranslationD
     return Ok(this)
 }
 
+/**
+ * Validates a [List] of functions and returns an error any are invalid.
+ *
+ * @receiver The [List] of functions.
+ * @return [Result] containing either the [List] of functions or a [TranslationDTO] containing an error message.
+ *
+ * @author Jan Müller
+ */
 private fun List<String>.validatedFunctions(): Result<List<String>, TranslationDTO> {
     forEach { function ->
         if (!(function.isNotBlank() && function.first().isLowerCase())) {
@@ -66,6 +115,14 @@ private fun List<String>.validatedFunctions(): Result<List<String>, TranslationD
     return Ok(this)
 }
 
+/**
+ * Validates a [List] of constants and returns an error any are invalid.
+ *
+ * @receiver The [List] of constants.
+ * @return [Result] containing either the [List] of constants or a [TranslationDTO] containing an error message.
+ *
+ * @author Jan Müller
+ */
 private fun List<String>.validatedConstants(): Result<List<String>, TranslationDTO> {
     forEach { constant ->
         if (!(constant.isNotBlank() && constant.first().isLowerCase())) {

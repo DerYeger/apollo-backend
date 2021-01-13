@@ -1,4 +1,4 @@
-package eu.yeger.gramofo.fol
+package eu.yeger.gramofo.fol.parser
 
 import org.slf4j.LoggerFactory
 import java.lang.Exception
@@ -9,7 +9,15 @@ import java.util.MissingResourceException
 import java.util.ResourceBundle
 
 /**
- * Used to simplify internationalization.
+ * Represents a language and offers key-bases translations with optional arguments.
+ * Because the parser was supposed to remain largely untouched, I (Jan Müller) did not move the parser-translations to the web-frontend, as I did with all other translations.
+ *
+ * This is legacy code.
+ *
+ * @constructor Creates a [Language] using the given [Locale]. This will non-lazy load the translations. If the translation file does not exist, all translations attempts will return the translation key.
+ * @param locale The [Locale] of the language.
+ *
+
  */
 sealed class Language(locale: Locale) {
     private val resourceBundle =
@@ -25,26 +33,25 @@ sealed class Language(locale: Locale) {
         }
 
     /**
-     * Get a internationalized string for the given key
+     * Fetches the translation for a given key.
      *
-     * @param key the key to get a associated string for.
-     * @return a internationalized string
+     * @param key The key for the translation.
+     * @return The translated [String].
      */
     fun getString(key: String): String {
         return try {
             resourceBundle.getString(key)
         } catch (e: MissingResourceException) {
-            "[$key]"
+            key
         }
     }
 
     /**
-     * Get a internationalized string for the given key
+     * Fetches the translation for a given key and parameters.
      *
-     * @param key  the key to get a associated string for.
-     * @param args a list of object, which should be integrated in the string. Which and how many arguments are needed
-     * is specified by the string itself
-     * @return a internationalized string
+     * @param key  The key for the translation.
+     * @param args [List] of arguments, which are used for formatting.
+     * @return The translated [String].
      */
     fun getString(key: String, vararg args: Any?): String {
         return try {
@@ -55,5 +62,16 @@ sealed class Language(locale: Locale) {
     }
 }
 
+/**
+ * English [Language] object.
+ *
+ * @author Jan Müller
+ */
 object English : Language(Locale.ENGLISH)
+
+/**
+ * German [Language] object.
+ *
+ * @author Jan Müller
+ */
 object German : Language(Locale.GERMAN)

@@ -1,10 +1,10 @@
 package eu.yeger.gramofo.service
 
 import com.github.michaelbull.result.*
-import eu.yeger.gramofo.fol.English
-import eu.yeger.gramofo.fol.German
-import eu.yeger.gramofo.fol.Language
 import eu.yeger.gramofo.fol.checkModel
+import eu.yeger.gramofo.fol.parser.English
+import eu.yeger.gramofo.fol.parser.German
+import eu.yeger.gramofo.fol.parser.Language
 import eu.yeger.gramofo.fol.parser.parseFormula
 import eu.yeger.gramofo.model.api.*
 import eu.yeger.gramofo.model.dto.TranslationDTO
@@ -27,14 +27,14 @@ class DefaultModelCheckerService : ModelCheckerService {
      */
     override fun checkModel(modelCheckerRequest: ModelCheckerRequest): ApiResult<ModelCheckerResponse> = binding {
         val domainGraph = modelCheckerRequest.graph.toDomainModel()
-            .mapError { translationDTO -> HttpEntity.UnprocessableEntity(translationDTO) }
+            .mapError { translationDTO -> HttpResponseEntity.unprocessableEntity(translationDTO) }
             .bind()
         extractLanguage(modelCheckerRequest)
             .andThen { language -> parseFormula(modelCheckerRequest.formula, language) }
             .mapError { error -> TranslationDTO(error) }
             .andThen { formula -> checkModel(domainGraph, formula, modelCheckerRequest.feedback) }
-            .mapError { translationDTO -> HttpEntity.UnprocessableEntity(translationDTO) }
-            .map { trace -> HttpEntity.Ok(ModelCheckerResponse(trace, modelCheckerRequest.feedback)) }
+            .mapError { translationDTO -> HttpResponseEntity.unprocessableEntity(translationDTO) }
+            .map { trace -> HttpResponseEntity.ok(ModelCheckerResponse(trace, modelCheckerRequest.feedback)) }
             .bind()
     }
 

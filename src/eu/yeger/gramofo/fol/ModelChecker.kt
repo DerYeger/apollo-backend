@@ -16,9 +16,9 @@ fun checkModel(graph: Graph, formulaHead: FormulaHead, feedback: Feedback): Mode
         .andThen { symbolTable -> checkTotality(graph, symbolTable) }.bind()
     runCatching {
         when (feedback) {
-            Feedback.full -> formulaHead.formula.fullCheck(graph, symbolTable, emptyMap(), true)
-            Feedback.relevant -> formulaHead.formula.partialCheck(graph, symbolTable, emptyMap(), true)
-            Feedback.minimal ->
+            Feedback.Full -> formulaHead.formula.fullCheck(graph, symbolTable, emptyMap(), true)
+            Feedback.Relevant -> formulaHead.formula.partialCheck(graph, symbolTable, emptyMap(), true)
+            Feedback.Minimal ->
                 formulaHead.formula.partialCheck(graph, symbolTable, emptyMap(), true)
                     .copy(children = null)
         }

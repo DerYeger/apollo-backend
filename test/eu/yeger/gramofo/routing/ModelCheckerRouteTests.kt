@@ -19,9 +19,9 @@ class ModelCheckerRouteTests {
             routingModule()
         }) {
             runBlocking {
-                (0..5).forEach { _ -> launch { makeCall("en", Feedback.full) } }
-                (0..5).forEach { _ -> launch { makeCall("de", Feedback.relevant) } }
-                (0..5).forEach { _ -> launch { makeCall("de", Feedback.minimal) } }
+                (0..5).forEach { _ -> launch { makeCall("en", Feedback.Full) } }
+                (0..5).forEach { _ -> launch { makeCall("de", Feedback.Relevant) } }
+                (0..5).forEach { _ -> launch { makeCall("de", Feedback.Minimal) } }
             }
         }
     }
@@ -36,7 +36,7 @@ class ModelCheckerRouteTests {
                     {
                         "formula": "exists x. exists y. B(x,y)",
                         "language": "$language",
-                        "feedback": "$feedback",
+                        "feedback": "${feedback.name.toLowerCase()}",
                         "graph": {
                             "name": "Demo Graph",
                             "description": "A simple demonstration Graph.",

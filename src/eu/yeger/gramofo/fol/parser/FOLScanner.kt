@@ -1,10 +1,14 @@
 package eu.yeger.gramofo.fol.parser
 
-import eu.yeger.gramofo.fol.Language
-import eu.yeger.gramofo.fol.Settings
-
 /**
- * This is the scanner for the parser class. It translates a stream of chars to a stream of tokens.
+ * This is the scanner of the [FOLParser].
+ * It translates a stream of chars to a stream of tokens.
+ *
+ * This is legacy code.
+ *
+ * @property source The source [String] representing a formula.
+ * @property language The [Language] used for translating error messages.
+ * @constructor Creates a [FOLScanner] with the given [source] and [language].
  */
 class FOLScanner(private val source: String, private val language: Language) {
     private var pos: Int = 0

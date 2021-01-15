@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
  * @author Jan Müller
  */
 @Serializable
-enum class Feedback {
+public enum class Feedback {
     /**
      * Indicates that redundant checks are evaluated.
      */

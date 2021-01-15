@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
  * @author Jan Müller
  */
 @Serializable
-data class ModelCheckerResponse(
+public data class ModelCheckerResponse(
     val rootTrace: ModelCheckerTrace,
     val feedback: Feedback,
 )

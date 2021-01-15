@@ -15,7 +15,7 @@ import org.koin.ktor.ext.inject
  *
  * @author Jan Müller
  */
-fun Route.modelCheckerRoutes() {
+public fun Route.modelCheckerRoutes() {
     val modelCheckerService: ModelCheckerService by inject()
 
     post("modelchecker") {

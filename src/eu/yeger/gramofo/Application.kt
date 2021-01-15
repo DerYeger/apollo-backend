@@ -10,10 +10,10 @@ import kotlinx.serialization.json.Json
 import org.koin.ktor.ext.Koin
 import org.slf4j.event.Level
 
-fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+public fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @Suppress("unused") // Referenced in application.conf
-fun Application.mainModule() {
+public fun Application.mainModule() {
     install(Koin) {
         modules(serviceModule)
     }

@@ -9,7 +9,7 @@ package eu.yeger.gramofo.model.domain
  *
  * @author Jan Müller
  */
-data class Graph(
+public data class Graph(
     val nodes: List<Node>,
     val edges: List<Edge>
 )

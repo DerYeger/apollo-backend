@@ -12,9 +12,9 @@ import kotlinx.serialization.Serializable
  * @author Jan Müller
  */
 @Serializable
-data class TranslationDTO(
+public data class TranslationDTO(
     val key: String,
     val params: Map<String, String>? = null
 ) {
-    constructor(key: String, vararg params: Pair<String, String>) : this(key, mapOf(*params).takeUnless { it.isEmpty() })
+    public constructor(key: String, vararg params: Pair<String, String>) : this(key, mapOf(*params).takeUnless { it.isEmpty() })
 }

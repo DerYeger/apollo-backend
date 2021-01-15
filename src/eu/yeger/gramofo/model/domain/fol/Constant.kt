@@ -15,7 +15,7 @@ import eu.yeger.gramofo.model.dto.TranslationDTO
  *
  * @author Jan Müller
  */
-sealed class Constant(name: String) : Formula(name = name) {
+public sealed class Constant(name: String) : Formula(name = name) {
 
     /**
      * The true-constant.
@@ -26,7 +26,7 @@ sealed class Constant(name: String) : Formula(name = name) {
      *
      * @author Jan Müller
      */
-    class True : Constant("tt")
+    public class True : Constant("tt")
 
     /**
      * The false-constant.
@@ -37,7 +37,7 @@ sealed class Constant(name: String) : Formula(name = name) {
      *
      * @author Jan Müller
      */
-    class False : Constant("ff")
+    public class False : Constant("ff")
 
     /**
      * Checks if this constant is [True] or [False].

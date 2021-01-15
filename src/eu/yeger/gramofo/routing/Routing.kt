@@ -15,7 +15,7 @@ import kotlinx.serialization.SerializationException
  *
  * @author Jan Müller
  */
-fun Application.routingModule() = routing {
+public fun Application.routingModule(): Routing = routing {
     route("/") {
         get {
             call.respondText("gramoFO-Backend is available!", contentType = ContentType.Text.Plain)

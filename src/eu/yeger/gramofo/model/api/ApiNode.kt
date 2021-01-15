@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
  * @author Jan Müller
  */
 @Serializable
-data class ApiNode(
+public data class ApiNode(
     val name: String,
     val relations: List<String>,
     val constants: List<String>

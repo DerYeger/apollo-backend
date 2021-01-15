@@ -20,7 +20,7 @@ import kotlinx.serialization.Serializable
  * @author Jan Müller
  */
 @Serializable
-data class ApiGraph(
+public data class ApiGraph(
     val nodes: List<ApiNode>,
     val edges: List<ApiEdge>
 )
@@ -33,7 +33,7 @@ data class ApiGraph(
  *
  * @author Jan Müller
  */
-fun ApiGraph.toDomainModel(): Result<Graph, TranslationDTO> = binding {
+public fun ApiGraph.toDomainModel(): Result<Graph, TranslationDTO> = binding {
     val domainNodes = nodes.toDomainNodes().bind()
     val domainEdges = edges.toDomainEdges(domainNodes).bind()
     Graph(domainNodes, domainEdges)

@@ -10,7 +10,7 @@ package eu.yeger.gramofo.fol.parser
  * @property language The [Language] used for translating error messages.
  * @constructor Creates a [FOLScanner] with the given [source] and [language].
  */
-class FOLScanner(private val source: String, private val language: Language) {
+internal class FOLScanner(private val source: String, private val language: Language) {
     private var pos: Int = 0
     private var curToken: FOLToken = FOLToken(0, "")
     private var lookAHeadToken: FOLToken = FOLToken(0, "")

@@ -9,7 +9,7 @@ package eu.yeger.gramofo.model.domain.fol
  * @property symbolTable The extracted, raw symbol table.
  * @constructor Creates a [FormulaHead] with the given parameters.
  */
-data class FormulaHead(
+public data class FormulaHead(
     val formula: Formula,
     val symbolTable: Map<String, String>
 )

@@ -11,7 +11,7 @@ import io.ktor.http.*
  *
  * @author Jan Müller
  */
-typealias ApiResult<Data> = Result<HttpResponseEntity<Data>, HttpResponseEntity<TranslationDTO>>
+public typealias ApiResult<Data> = Result<HttpResponseEntity<Data>, HttpResponseEntity<TranslationDTO>>
 
 /**
  * Represents an entity used for responding to request.
@@ -23,11 +23,12 @@ typealias ApiResult<Data> = Result<HttpResponseEntity<Data>, HttpResponseEntity<
  *
  * @author Jan Müller
  */
-class HttpResponseEntity<Data>(val status: HttpStatusCode, val data: Data) {
+public data class HttpResponseEntity<Data>(val status: HttpStatusCode, val data: Data) {
+
     /**
      * Companion object that contains helper-methods.
      */
-    companion object {
+    public companion object {
 
         /**
          * Helper-method for responses with [HttpStatusCode.OK].
@@ -35,7 +36,8 @@ class HttpResponseEntity<Data>(val status: HttpStatusCode, val data: Data) {
          * @param Data Type of [data].
          * @param data The data used as the response body.
          */
-        fun <Data> ok(data: Data) = HttpResponseEntity(HttpStatusCode.OK, data)
+        public fun <Data> ok(data: Data): HttpResponseEntity<Data> =
+            HttpResponseEntity(HttpStatusCode.OK, data)
 
         /**
          * Helper-method for responses with [HttpStatusCode.UnprocessableEntity].
@@ -43,6 +45,7 @@ class HttpResponseEntity<Data>(val status: HttpStatusCode, val data: Data) {
          * @param Data Type of [data].
          * @param data The data used as the response body.
          */
-        fun <Data> unprocessableEntity(data: Data) = HttpResponseEntity(HttpStatusCode.UnprocessableEntity, data)
+        public fun <Data> unprocessableEntity(data: Data): HttpResponseEntity<Data> =
+            HttpResponseEntity(HttpStatusCode.UnprocessableEntity, data)
     }
 }

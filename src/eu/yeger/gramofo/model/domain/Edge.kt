@@ -11,7 +11,7 @@ package eu.yeger.gramofo.model.domain
  *
  * @author Jan Müller
  */
-data class Edge(
+public data class Edge(
     val source: Node,
     val target: Node,
     val relations: List<String>,

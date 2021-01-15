@@ -11,7 +11,7 @@ import eu.yeger.gramofo.model.domain.fol.Function
  *
  * @author Jan Müller
  */
-typealias ParserResult = Result<FormulaHead, String>
+public typealias ParserResult = Result<FormulaHead, String>
 
 /**
  * Attempts to parse a formula.
@@ -22,7 +22,7 @@ typealias ParserResult = Result<FormulaHead, String>
  *
  * @author Jan Müller
  */
-fun parseFormula(formula: String, language: Language = English): ParserResult {
+public fun parseFormula(formula: String, language: Language = English): ParserResult {
     return FOLParser(language).parseFormula(formula)
 }
 

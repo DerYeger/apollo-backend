@@ -10,7 +10,7 @@ package eu.yeger.gramofo.model.domain
  *
  * @author Jan Müller
  */
-data class Node(
+public data class Node(
     val name: String,
     val relations: List<String>,
     val constants: List<String>

@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
  * @author Jan Müller
  */
 @Serializable
-data class ApiEdge(
+public data class ApiEdge(
     val source: String,
     val target: String,
     val relations: List<String>,

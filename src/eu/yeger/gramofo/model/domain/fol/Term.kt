@@ -12,7 +12,7 @@ import eu.yeger.gramofo.model.domain.Node
  *
  * @author Jan Müller
  */
-abstract class Term(name: String) : FOLEntity(name) {
+public abstract class Term(name: String) : FOLEntity(name) {
 
     /**
      * Evaluates this term to a [Node].
@@ -21,5 +21,5 @@ abstract class Term(name: String) : FOLEntity(name) {
      * @param variableAssignments [Map] of [BoundVariable] names and their assigned [Node]s.
      * @return The [Node] this [Term] evaluates to with the given [symbolTable] and [variableAssignments].
      */
-    abstract fun evaluate(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): Node
+    public abstract fun evaluate(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): Node
 }

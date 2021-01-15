@@ -9,7 +9,7 @@ import eu.yeger.gramofo.model.api.ModelCheckerResponse
  *
  * @author Jan Müller
  */
-interface ModelCheckerService {
+public interface ModelCheckerService {
 
     /**
      * Checks if a graph is a model of a formula.
@@ -18,5 +18,5 @@ interface ModelCheckerService {
      * @param modelCheckerRequest The request data, containing the selected language, graph, formula and desired feedback.
      * @return The [ApiResult] of the ModelChecking request.
      */
-    fun checkModel(modelCheckerRequest: ModelCheckerRequest): ApiResult<ModelCheckerResponse>
+    public fun checkModel(modelCheckerRequest: ModelCheckerRequest): ApiResult<ModelCheckerResponse>
 }

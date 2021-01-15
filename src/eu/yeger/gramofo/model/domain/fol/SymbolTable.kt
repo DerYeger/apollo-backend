@@ -15,7 +15,7 @@ import eu.yeger.gramofo.model.domain.Node
  *
  * @author Jan Müller
  */
-data class SymbolTable(
+public data class SymbolTable(
     val unarySymbols: Map<String, Set<Node>>,
     val binarySymbols: Map<String, Set<Edge>>,
     val symbolTypes: Map<String, String>,

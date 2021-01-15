@@ -22,7 +22,7 @@ private val specialNames = mapOf(
  *
  * @author Jan Müller
  */
-sealed class Relation(name: String) : Formula(name) {
+public sealed class Relation(name: String) : Formula(name) {
 
     /**
      * Represents an unary FOL relation.
@@ -34,7 +34,7 @@ sealed class Relation(name: String) : Formula(name) {
      *
      * @author Jan Müller
      */
-    class Unary(name: String, val term: Term) : Relation(name) {
+    public class Unary(name: String, public val term: Term) : Relation(name) {
 
         /**
          * Checks if the [Node] which [term] evaluates to is part of this [Relation].
@@ -110,7 +110,12 @@ sealed class Relation(name: String) : Formula(name) {
      *
      * @author Jan Müller
      */
-    class Binary(name: String, val firstTerm: Term, val secondTerm: Term, val isInfix: Boolean) : Relation(name) {
+    public class Binary(
+        name: String,
+        public val firstTerm: Term,
+        public val secondTerm: Term,
+        public val isInfix: Boolean,
+    ) : Relation(name) {
 
         /**
          * Checks if the [Node]s which [firstTerm] and [secondTerm] evaluate to are part of this [Relation].

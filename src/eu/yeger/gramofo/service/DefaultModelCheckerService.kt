@@ -16,7 +16,7 @@ import eu.yeger.gramofo.model.dto.TranslationDTO
  *
  * @author Jan Müller
  */
-class DefaultModelCheckerService : ModelCheckerService {
+public class DefaultModelCheckerService : ModelCheckerService {
 
     /**
      * Checks if a graph is a model of a formula.

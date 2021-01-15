@@ -12,7 +12,7 @@ import eu.yeger.gramofo.model.domain.Node
  *
  * @author Jan Müller
  */
-class BoundVariable(name: String) : Term(name) {
+public class BoundVariable(name: String) : Term(name) {
 
     /**
      * Returns the name of the assigned [Node] or the [name] of this [BoundVariable] if none is assigned.

@@ -13,7 +13,7 @@ import eu.yeger.gramofo.model.domain.Node
  *
  * @author Jan Müller
  */
-sealed class Function(name: String) : Term(name) {
+public sealed class Function(name: String) : Term(name) {
 
     /**
      * Represents a [Term] constant.
@@ -24,7 +24,7 @@ sealed class Function(name: String) : Term(name) {
      *
      * @author Jan Müller
      */
-    class Constant(name: String) : Function(name) {
+    public class Constant(name: String) : Function(name) {
         /**
          * Returns the [name] of this constant.
          *
@@ -58,7 +58,7 @@ sealed class Function(name: String) : Term(name) {
      *
      * @author Jan Müller
      */
-    class Unary(name: String, val operand: Term) : Function(name) {
+    public class Unary(name: String, public val operand: Term) : Function(name) {
 
         /**
          * Returns raw [String] representation of this unary term.

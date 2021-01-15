@@ -9,7 +9,7 @@ package eu.yeger.gramofo.fol.parser
  * @property value The current value of the token.
  * @constructor Creates an [FOLToken] with the given [type] and [value].
  */
-class FOLToken(var type: Int, var value: String) {
+internal class FOLToken(var type: Int, var value: String) {
 
     /**
      * Sets [type] and [value] of an [FOLToken].

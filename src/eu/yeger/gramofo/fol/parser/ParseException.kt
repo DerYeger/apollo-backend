@@ -8,4 +8,4 @@ package eu.yeger.gramofo.fol.parser
  * @property message The message of the exception. Required.
  * @constructor Creates a [ParseException] with the given [message].
  */
-class ParseException(override val message: String) : Exception(message)
+internal class ParseException(override val message: String) : Exception(message)

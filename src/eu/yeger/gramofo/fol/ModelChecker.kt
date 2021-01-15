@@ -13,7 +13,7 @@ import eu.yeger.gramofo.model.dto.TranslationDTO
  *
  * @author Jan Müller
  */
-typealias ModelCheckerResult = Result<ModelCheckerTrace, TranslationDTO>
+public typealias ModelCheckerResult = Result<ModelCheckerTrace, TranslationDTO>
 
 /**
  * Performs the ModelChecking algorithm for the given [Graph], [FormulaHead] and with the selected [Feedback]-option.
@@ -23,7 +23,7 @@ typealias ModelCheckerResult = Result<ModelCheckerTrace, TranslationDTO>
  * @param feedback The selected [Feedback].
  * @return The calculated [ModelCheckerResult].
  */
-fun checkModel(graph: Graph, formulaHead: FormulaHead, feedback: Feedback): ModelCheckerResult = binding {
+public fun checkModel(graph: Graph, formulaHead: FormulaHead, feedback: Feedback): ModelCheckerResult = binding {
     val symbolTable = graph.loadSymbols()
         .andThen { symbolTable -> formulaHead.loadSymbols(symbolTable) }
         .andThen { symbolTable -> checkTotality(graph, symbolTable) }.bind()
@@ -54,7 +54,7 @@ fun checkModel(graph: Graph, formulaHead: FormulaHead, feedback: Feedback): Mode
  *
  * @author Jan Müller
  */
-fun Formula.validated(
+internal fun Formula.validated(
     description: TranslationDTO,
     variableAssignments: Map<String, Node>,
     shouldBeModel: Boolean,
@@ -79,7 +79,7 @@ fun Formula.validated(
  *
  * @author Jan Müller
  */
-fun Formula.invalidated(
+internal fun Formula.invalidated(
     description: TranslationDTO,
     variableAssignments: Map<String, Node>,
     shouldBeModel: Boolean,

@@ -15,7 +15,7 @@ import eu.yeger.gramofo.model.dto.TranslationDTO
  *
  * @author Jan Müller
  */
-sealed class Operator(name: String) : Formula(name) {
+public sealed class Operator(name: String) : Formula(name) {
 
     /**
      * Represents an unary FOL operator.
@@ -27,7 +27,7 @@ sealed class Operator(name: String) : Formula(name) {
      *
      * @author Jan Müller
      */
-    sealed class Unary(name: String, val operand: Formula) : Operator(name) {
+    public sealed class Unary(name: String, public val operand: Formula) : Operator(name) {
 
         /**
          * Represents the unary negation operator.
@@ -38,7 +38,7 @@ sealed class Operator(name: String) : Formula(name) {
          *
          * @author Jan Müller
          */
-        class Negation(operand: Formula) : Unary("\u00AC", operand) {
+        public class Negation(operand: Formula) : Unary("\u00AC", operand) {
 
             /**
              * Checks the [operand] by inverting [shouldBeModel].
@@ -107,7 +107,7 @@ sealed class Operator(name: String) : Formula(name) {
      *
      * @author Jan Müller
      */
-    sealed class Binary(name: String, val firstOperand: Formula, val secondOperand: Formula) : Operator(name) {
+    public sealed class Binary(name: String, public val firstOperand: Formula, public val secondOperand: Formula) : Operator(name) {
 
         /**
          * Represents a conjunction operator.
@@ -119,7 +119,7 @@ sealed class Operator(name: String) : Formula(name) {
          *
          * @author Jan Müller
          */
-        class And(firstOperand: Formula, secondOperand: Formula) : Binary("\u2227", firstOperand, secondOperand) {
+        public class And(firstOperand: Formula, secondOperand: Formula) : Binary("\u2227", firstOperand, secondOperand) {
 
             /**
              * Checks if both conjuncts hold.
@@ -182,7 +182,7 @@ sealed class Operator(name: String) : Formula(name) {
          *
          * @author Jan Müller
          */
-        class Or(firstOperand: Formula, secondOperand: Formula) : Binary("\u2228", firstOperand, secondOperand) {
+        public class Or(firstOperand: Formula, secondOperand: Formula) : Binary("\u2228", firstOperand, secondOperand) {
 
             /**
              * Checks if either disjunct hold.
@@ -245,7 +245,7 @@ sealed class Operator(name: String) : Formula(name) {
          *
          * @author Jan Müller
          */
-        class Implication(firstOperand: Formula, secondOperand: Formula) : Binary("\u2192", firstOperand, secondOperand) {
+        public class Implication(firstOperand: Formula, secondOperand: Formula) : Binary("\u2192", firstOperand, secondOperand) {
 
             /**
              * Checks if consequent holds or antecedent does not hold.
@@ -307,7 +307,7 @@ sealed class Operator(name: String) : Formula(name) {
          *
          * @author Jan Müller
          */
-        class BiImplication(firstOperand: Formula, secondOperand: Formula) : Binary("\u2194", firstOperand, secondOperand) {
+        public class BiImplication(firstOperand: Formula, secondOperand: Formula) : Binary("\u2194", firstOperand, secondOperand) {
 
             /**
              * Checks if antecedent holds if and only if consequent holds.

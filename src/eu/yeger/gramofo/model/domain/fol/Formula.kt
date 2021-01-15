@@ -12,7 +12,7 @@ import eu.yeger.gramofo.model.domain.Node
  *
  * @author Jan Müller
  */
-abstract class Formula(name: String) : FOLEntity(name) {
+public abstract class Formula(name: String) : FOLEntity(name) {
 
     /**
      * Recursively evaluate all subformulas, including redundant checks.
@@ -23,7 +23,7 @@ abstract class Formula(name: String) : FOLEntity(name) {
      * @param shouldBeModel Indicates the expected result. Can be false for subformulas of [Operator.Unary.Negation].
      * @return [ModelCheckerTrace] that contains the results of this check.
      */
-    abstract fun fullCheck(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>, shouldBeModel: Boolean): ModelCheckerTrace
+    public abstract fun fullCheck(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>, shouldBeModel: Boolean): ModelCheckerTrace
 
     /**
      * Recursively evaluate some subformulas, excluding redundant checks.
@@ -34,5 +34,5 @@ abstract class Formula(name: String) : FOLEntity(name) {
      * @param shouldBeModel Indicates the expected result. Can be false for subformulas of [Operator.Unary.Negation].
      * @return [ModelCheckerTrace] that contains the results of this check.
      */
-    abstract fun partialCheck(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>, shouldBeModel: Boolean): ModelCheckerTrace
+    public abstract fun partialCheck(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>, shouldBeModel: Boolean): ModelCheckerTrace
 }

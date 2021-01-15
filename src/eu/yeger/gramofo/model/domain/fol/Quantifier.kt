@@ -17,10 +17,10 @@ import eu.yeger.gramofo.model.dto.TranslationDTO
  *
  * @author Jan Müller
  */
-sealed class Quantifier(
+public sealed class Quantifier(
     name: String,
-    val variable: BoundVariable,
-    val operand: Formula,
+    public val variable: BoundVariable,
+    public val operand: Formula,
 ) : Formula(name) {
 
     /**
@@ -33,7 +33,7 @@ sealed class Quantifier(
      *
      * @author Jan Müller
      */
-    class Existential(variable: BoundVariable, operand: Formula) : Quantifier("\u2203", variable, operand) {
+    public class Existential(variable: BoundVariable, operand: Formula) : Quantifier("\u2203", variable, operand) {
 
         /**
          * Checks all possible variable assignments.
@@ -96,7 +96,7 @@ sealed class Quantifier(
      *
      * @author Jan Müller
      */
-    class Universal(variable: BoundVariable, operand: Formula) : Quantifier("\u2200", variable, operand) {
+    public class Universal(variable: BoundVariable, operand: Formula) : Quantifier("\u2200", variable, operand) {
 
         /**
          * Checks all possible variable assignments.

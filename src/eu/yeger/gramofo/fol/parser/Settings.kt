@@ -24,7 +24,7 @@ private val settingsMap: Map<String, List<String>> = mapOf(
  *
  * This is legacy code.
  */
-object Settings : Map<String, List<String>> by settingsMap {
+internal object Settings : Map<String, List<String>> by settingsMap {
     const val TRUE = "true"
     const val FALSE = "false"
     const val OR = "\u2228"

@@ -19,7 +19,7 @@ import java.util.ResourceBundle
  *
 
  */
-sealed class Language(locale: Locale) {
+public sealed class Language(locale: Locale) {
     private val resourceBundle =
         try {
             ResourceBundle.getBundle("language.lang", locale)
@@ -38,7 +38,7 @@ sealed class Language(locale: Locale) {
      * @param key The key for the translation.
      * @return The translated [String].
      */
-    fun getString(key: String): String {
+    public fun getString(key: String): String {
         return try {
             resourceBundle.getString(key)
         } catch (e: MissingResourceException) {
@@ -53,7 +53,7 @@ sealed class Language(locale: Locale) {
      * @param args [List] of arguments, which are used for formatting.
      * @return The translated [String].
      */
-    fun getString(key: String, vararg args: Any?): String {
+    public fun getString(key: String, vararg args: Any?): String {
         return try {
             MessageFormat.format(resourceBundle.getString(key), *args)
         } catch (e: MissingResourceException) {
@@ -67,11 +67,11 @@ sealed class Language(locale: Locale) {
  *
  * @author Jan Müller
  */
-object English : Language(Locale.ENGLISH)
+public object English : Language(Locale.ENGLISH)
 
 /**
  * German [Language] object.
  *
  * @author Jan Müller
  */
-object German : Language(Locale.GERMAN)
+public object German : Language(Locale.GERMAN)

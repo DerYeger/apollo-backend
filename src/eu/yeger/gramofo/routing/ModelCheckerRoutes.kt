@@ -8,7 +8,14 @@ import io.ktor.request.*
 import io.ktor.routing.*
 import org.koin.ktor.ext.inject
 
-fun Route.modelCheckerRoutes() {
+/**
+ * Appends all routes for ModelChecking to the given [Route].
+ *
+ * @receiver The base [Route].
+ *
+ * @author Jan Müller
+ */
+public fun Route.modelCheckerRoutes() {
     val modelCheckerService: ModelCheckerService by inject()
 
     post("modelchecker") {

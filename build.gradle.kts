@@ -21,7 +21,13 @@ group = "eu.yeger"
 version = "0.0.1"
 
 application {
+    mainClass.set("io.ktor.server.netty.EngineMain")
+    // The following line is deprecated, but required for the shadowJar task
     mainClassName = "io.ktor.server.netty.EngineMain"
+}
+
+kotlin {
+    explicitApi()
 }
 
 sourceSets {
@@ -96,6 +102,19 @@ tasks {
         reports {
             xml.isEnabled = true
             html.isEnabled = false
+        }
+    }
+
+    withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
+        dokkaSourceSets {
+            named("main") {
+                displayName.set("gramoFO-Backend")
+                reportUndocumented.set(true)
+                sourceLink {
+                    localDirectory.set(file("src/main/kotlin"))
+                    remoteUrl.set(uri("https://github.com/DerYeger/gramofo-backend/tree/develop/src").toURL())
+                }
+            }
         }
     }
 }

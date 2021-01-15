@@ -18,7 +18,7 @@ class ModelCheckerTests {
         Feedback.values().forEach { feedback ->
             val result = checkModel(graph, formula, feedback).get()
             result?.isModel shouldBe expectedResult
-            if (feedback === Feedback.relevant) {
+            if (feedback === Feedback.Relevant) {
                 // Validate implementation of partialCheck
                 checkRecursive(result!!, ModelCheckerTrace::children) { trace ->
                     ((trace.isModel == trace.shouldBeModel) == expectedResult) shouldBe true

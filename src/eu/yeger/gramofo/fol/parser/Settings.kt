@@ -1,5 +1,10 @@
-package eu.yeger.gramofo.fol
+package eu.yeger.gramofo.fol.parser
 
+/**
+ * Backing [Map] that associates a setting with its values.
+ *
+ * This is legacy code.
+ */
 private val settingsMap: Map<String, List<String>> = mapOf(
     Settings.NOT to listOf("!"),
     Settings.TRUE to listOf("tt"),
@@ -14,7 +19,12 @@ private val settingsMap: Map<String, List<String>> = mapOf(
     Settings.EQUAL_SIGN to listOf("=")
 )
 
-object Settings : Map<String, List<String>> by settingsMap {
+/**
+ * Global settings [Map] used for configuring the parser.
+ *
+ * This is legacy code.
+ */
+internal object Settings : Map<String, List<String>> by settingsMap {
     const val TRUE = "true"
     const val FALSE = "false"
     const val OR = "\u2228"
@@ -27,5 +37,10 @@ object Settings : Map<String, List<String>> by settingsMap {
     const val INFIX_PRED = "infix_predicates"
     const val EQUAL_SIGN = "equality"
 
+    /**
+     * Gets the settings associated with a key or an empty [List] if that key is not known.
+     *
+     * @param key The key of the settings.
+     */
     override fun get(key: String) = settingsMap[key] ?: emptyList()
 }

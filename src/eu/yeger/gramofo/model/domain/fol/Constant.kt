@@ -6,11 +6,48 @@ import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.model.dto.TranslationDTO
 
-sealed class Constant(name: String) : Formula(name = name) {
+/**
+ * Represents an FOL constant that is either [True] or [False].
+ *
+ * @constructor Creates a [Constant] with the given name.
+ *
+ * @param name The name if this constant.
+ *
+ * @author Jan Müller
+ */
+public sealed class Constant(name: String) : Formula(name = name) {
 
-    class True : Constant(TT)
-    class False : Constant(FF)
+    /**
+     * The true-constant.
+     *
+     * Can NOT be a Kotlin-object for compatibility with the legacy parser.
+     *
+     * @constructor Creates a [True]-constant.
+     *
+     * @author Jan Müller
+     */
+    public class True : Constant("tt")
 
+    /**
+     * The false-constant.
+     *
+     * Can NOT be a Kotlin-object for compatibility with the legacy parser.
+     *
+     * @constructor Creates a [False]-constant.
+     *
+     * @author Jan Müller
+     */
+    public class False : Constant("ff")
+
+    /**
+     * Checks if this constant is [True] or [False].
+     *
+     * @param graph The [Graph] that will be checked.
+     * @param symbolTable [SymbolTable] that contains all symbols of the parsed root formula and [graph].
+     * @param variableAssignments [Map] of [BoundVariable] names and their assigned [Node]s.
+     * @param shouldBeModel Indicates the expected result. Can be false for subformulas of [Operator.Unary.Negation].
+     * @return [ModelCheckerTrace] that contains the results of this check.
+     */
     override fun fullCheck(
         graph: Graph,
         symbolTable: SymbolTable,
@@ -23,6 +60,15 @@ sealed class Constant(name: String) : Formula(name = name) {
         }
     }
 
+    /**
+     * Checks if this constant is [True] or [False].
+     *
+     * @param graph The [Graph] that will be checked.
+     * @param symbolTable [SymbolTable] that contains all symbols of the parsed root formula and [graph].
+     * @param variableAssignments [Map] of [BoundVariable] names and their assigned [Node]s.
+     * @param shouldBeModel Indicates the expected result. Can be false for subformulas of [Operator.Unary.Negation].
+     * @return [ModelCheckerTrace] that contains the results of this check.
+     */
     override fun partialCheck(
         graph: Graph,
         symbolTable: SymbolTable,
@@ -32,7 +78,13 @@ sealed class Constant(name: String) : Formula(name = name) {
         return fullCheck(graph, symbolTable, variableAssignments, shouldBeModel)
     }
 
-    override fun getFormulaString(variableAssignments: Map<String, Node>): String {
+    /**
+     * Returns the [name] of this constant.
+     *
+     * @param variableAssignments [Map] of [BoundVariable] names and [Node]s that will replace them in the [String] representation. Unused.
+     * @return The [name] of this constant.
+     */
+    override fun getRawString(variableAssignments: Map<String, Node>): String {
         return name
     }
 }

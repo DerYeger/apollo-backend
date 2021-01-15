@@ -1,7 +1,22 @@
 package eu.yeger.gramofo.fol.parser
 
-class FOLToken(var type: Int, var value: String) {
+/**
+ * Token used for parsing formulas.
+ *
+ * This is legacy code.
+ *
+ * @property type The current type of the token.
+ * @property value The current value of the token.
+ * @constructor Creates an [FOLToken] with the given [type] and [value].
+ */
+internal class FOLToken(var type: Int, var value: String) {
 
+    /**
+     * Sets [type] and [value] of an [FOLToken].
+     *
+     * @param type The new type of the token.
+     * @param value The new value of the token.
+     */
     fun setTypeAndValue(type: Int, value: String) {
         this.type = type
         this.value = value

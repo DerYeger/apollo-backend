@@ -159,7 +159,7 @@ private class FOLParser(private val language: Language) {
             FOLToken.NOT -> {
                 scanner.nextToken()
                 unaryOperator = parseUnaryOperator(scanner)
-                Operator.Unary.Not(unaryOperator)
+                Operator.Unary.Negation(unaryOperator)
             }
             FOLToken.FOR_ALL -> {
                 scanner.nextToken()

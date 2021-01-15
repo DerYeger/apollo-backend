@@ -4,16 +4,22 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Represents a feedback-selection of a ModelChecking request.
- * [Full] indicates that redundant checks are evaluated.
- * [Relevant] indicates that only required checks are evaluated.
- * [Minimal] indicates that only required checks are evaluated and only the result is returned.
+ * Represents the feedback-selection of a ModelChecking request.
  *
  * @author Jan Müller
  */
 @Serializable
 enum class Feedback {
+    /**
+     * Indicates that redundant checks are evaluated.
+     */
     @SerialName("full") Full,
+    /**
+     * Indicates that only required checks are evaluated.
+     */
     @SerialName("relevant") Relevant,
-    @SerialName("minimal") Minimal
+    /**
+     * Indicates that only required checks are evaluated and only the result is returned.
+     */
+    @SerialName("minimal") Minimal,
 }

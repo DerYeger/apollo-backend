@@ -8,8 +8,21 @@ import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.model.domain.fol.*
 import eu.yeger.gramofo.model.dto.TranslationDTO
 
+/**
+ * [Result] that either contains the result of the ModelChecking algorithm or the translation key of an error message.
+ *
+ * @author Jan Müller
+ */
 typealias ModelCheckerResult = Result<ModelCheckerTrace, TranslationDTO>
 
+/**
+ * Performs the ModelChecking algorithm for the given [Graph], [FormulaHead] and with the selected [Feedback]-option.
+ *
+ * @param graph The [Graph] that will be checked.
+ * @param formulaHead The [Formula] that will be checked as well as its meta-information.
+ * @param feedback The selected [Feedback].
+ * @return The calculated [ModelCheckerResult].
+ */
 fun checkModel(graph: Graph, formulaHead: FormulaHead, feedback: Feedback): ModelCheckerResult = binding {
     val symbolTable = graph.loadSymbols()
         .andThen { symbolTable -> formulaHead.loadSymbols(symbolTable) }
@@ -30,6 +43,17 @@ fun checkModel(graph: Graph, formulaHead: FormulaHead, feedback: Feedback): Mode
     }.bind()
 }
 
+/**
+ * Creates a validated [ModelCheckerTrace] using the given information.
+ *
+ * @receiver The source [Formula].
+ * @param description [TranslationDTO] with a description key for this check.
+ * @param variableAssignments [Map] of [BoundVariable] names and [Node]s that will replace them in the [String] representation.
+ * @param shouldBeModel Indicates that the [Graph] is supposed to be model of checked [Formula].
+ * @param children [List] of child-traces.
+ *
+ * @author Jan Müller
+ */
 fun Formula.validated(
     description: TranslationDTO,
     variableAssignments: Map<String, Node>,
@@ -44,6 +68,17 @@ fun Formula.validated(
         children = children.toList().takeUnless { it.isEmpty() }
     )
 
+/**
+ * Creates a invalidated [ModelCheckerTrace] using the given information.
+ *
+ * @receiver The source [Formula].
+ * @param description [TranslationDTO] with a description key for this check.
+ * @param variableAssignments [Map] of [BoundVariable] names and [Node]s that will replace them in the [String] representation.
+ * @param shouldBeModel Indicates that the [Graph] is supposed to be model of checked [Formula].
+ * @param children [List] of child-traces.
+ *
+ * @author Jan Müller
+ */
 fun Formula.invalidated(
     description: TranslationDTO,
     variableAssignments: Map<String, Node>,
@@ -60,6 +95,12 @@ fun Formula.invalidated(
 
 /**
  * Iterates over the graph and puts all found symbols in a symbol table.
+ *
+ * This is legacy code, modified to accommodate the new model.
+ *
+ * @return [Result] containing either the created [SymbolTable] or a [TranslationDTO] containing an error message.
+ *
+ * @author Jan Müller
  */
 private fun Graph.loadSymbols(): Result<SymbolTable, TranslationDTO> {
     val unarySymbols = mutableMapOf<String, MutableSet<Node>>()
@@ -105,7 +146,15 @@ private fun Graph.loadSymbols(): Result<SymbolTable, TranslationDTO> {
 }
 
 /**
- * Iterates over the formula and adds new symbols to a symbol table.
+ * Iterates over a [FormulaHead] and adds new symbols to the [symbolTable].
+ *
+ * This is legacy code, modified to accommodate the new model.
+ *
+ * @receiver The source [FormulaHead].
+ * @param symbolTable The [SymbolTable] that will be validated and expanded.
+ * @return [Result] containing either the expanded [SymbolTable] or a [TranslationDTO] containing an error message.
+ *
+ * @author Jan Müller
  */
 private fun FormulaHead.loadSymbols(symbolTable: SymbolTable): Result<SymbolTable, TranslationDTO> {
     val unarySymbols = symbolTable.unarySymbols.toMutableMap()
@@ -131,8 +180,15 @@ private fun FormulaHead.loadSymbols(symbolTable: SymbolTable): Result<SymbolTabl
 }
 
 /**
- * Functions mus be left total. Therefore this method checks if all function symbols are defined for all inputs.
+ * Functions mus be left total. Therefore, this method checks if all function symbols are defined for all inputs.
  *
+ * This is legacy code, modified to accommodate the new model.
+ *
+ * @param graph The [Graph] that will be checked.
+ * @param symbolTable The [SymbolTable] that will be validated.
+ * @return [Result] containing either the validated [SymbolTable] or a [TranslationDTO] containing an error message.
+ *
+ * @author Jan Müller
  */
 private fun checkTotality(graph: Graph, symbolTable: SymbolTable): Result<SymbolTable, TranslationDTO> {
     symbolTable.symbolTypes.forEach { (symbol: String, type: String) ->

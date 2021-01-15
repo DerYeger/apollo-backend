@@ -3,22 +3,36 @@ package eu.yeger.gramofo.model.domain.fol
 import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
 
+/**
+ * Represents an FOL formula and contains methods for ModelChecking.
+ *
+ * @constructor Creates a [Formula] with the given name.
+ *
+ * @param name The name this formula.
+ *
+ * @author Jan Müller
+ */
 abstract class Formula(name: String) : FOLEntity(name) {
 
+    /**
+     * Recursively evaluate all subformulas, including redundant checks.
+     *
+     * @param graph The [Graph] that will be checked.
+     * @param symbolTable [SymbolTable] that contains all symbols of the parsed root formula and [graph].
+     * @param variableAssignments [Map] of [BoundVariable] names and their assigned [Node]s.
+     * @param shouldBeModel Indicates the expected result. Can be false for subformulas of [Operator.Unary.Negation].
+     * @return [ModelCheckerTrace] that contains the results of this check.
+     */
     abstract fun fullCheck(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>, shouldBeModel: Boolean): ModelCheckerTrace
 
+    /**
+     * Recursively evaluate some subformulas, excluding redundant checks.
+     *
+     * @param graph The [Graph] that will be checked.
+     * @param symbolTable [SymbolTable] that contains all symbols of the parsed root formula and [graph].
+     * @param variableAssignments [Map] of [BoundVariable] names and their assigned [Node]s.
+     * @param shouldBeModel Indicates the expected result. Can be false for subformulas of [Operator.Unary.Negation].
+     * @return [ModelCheckerTrace] that contains the results of this check.
+     */
     abstract fun partialCheck(graph: Graph, symbolTable: SymbolTable, variableAssignments: Map<String, Node>, shouldBeModel: Boolean): ModelCheckerTrace
-
-    companion object {
-        const val TT = "tt"
-        const val FF = "ff"
-        const val NOT = "\u00AC"
-        const val AND = "\u2227"
-        const val OR = "\u2228"
-        const val IMPLICATION = "\u2192"
-        const val BI_IMPLICATION = "\u2194"
-        const val EXISTS = "\u2203"
-        const val FOR_ALL = "\u2200"
-        const val INFIX_EQUALITY = "=" // equal sign with a dot on top
-    }
 }

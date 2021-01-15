@@ -6,14 +6,44 @@ import eu.yeger.gramofo.model.domain.Graph
 import eu.yeger.gramofo.model.domain.Node
 import eu.yeger.gramofo.model.dto.TranslationDTO
 
+/**
+ * Represents an FOL quantifier.
+ *
+ * @property variable The [BoundVariable] of this quantifier.
+ * @property operand The operand of this quantifier.
+ * @constructor Creates a [Quantifier] with the given name, variable and operand.
+ *
+ * @param name The name of this quantifier.
+ *
+ * @author Jan Müller
+ */
 sealed class Quantifier(
     name: String,
     val variable: BoundVariable,
     val operand: Formula,
 ) : Formula(name) {
 
-    class Existential(variable: BoundVariable, operand: Formula) : Quantifier(EXISTS, variable, operand) {
+    /**
+     * Represents an existential FOL quantifier.
+     *
+     * @constructor Creates an [Existential] quantifier with the given variable and operand.
+     *
+     * @param variable The [BoundVariable] of this existential quantifier.
+     * @param operand The operand of this existential quantifier.
+     *
+     * @author Jan Müller
+     */
+    class Existential(variable: BoundVariable, operand: Formula) : Quantifier("\u2203", variable, operand) {
 
+        /**
+         * Checks all possible variable assignments.
+         *
+         * @param graph The [Graph] that will be checked.
+         * @param symbolTable [SymbolTable] that contains all symbols of the parsed root formula and [graph].
+         * @param variableAssignments [Map] of [BoundVariable] names and their assigned [Node]s.
+         * @param shouldBeModel Indicates the expected result. Can be false for subformulas of [Operator.Unary.Negation].
+         * @return [ModelCheckerTrace] that contains the results of this check.
+         */
         override fun fullCheck(
             graph: Graph,
             symbolTable: SymbolTable,
@@ -30,6 +60,15 @@ sealed class Quantifier(
             }
         }
 
+        /**
+         * Checks all possible variable assignments, until one is positive.
+         *
+         * @param graph The [Graph] that will be checked.
+         * @param symbolTable [SymbolTable] that contains all symbols of the parsed root formula and [graph].
+         * @param variableAssignments [Map] of [BoundVariable] names and their assigned [Node]s.
+         * @param shouldBeModel Indicates the expected result. Can be false for subformulas of [Operator.Unary.Negation].
+         * @return [ModelCheckerTrace] that contains the results of this check.
+         */
         override fun partialCheck(
             graph: Graph,
             symbolTable: SymbolTable,
@@ -47,7 +86,27 @@ sealed class Quantifier(
         }
     }
 
-    class Universal(variable: BoundVariable, operand: Formula) : Quantifier(FOR_ALL, variable, operand) {
+    /**
+     * Represents a universal FOL quantifier.
+     *
+     * @constructor Creates an [Universal] quantifier with the given variable and operand.
+     *
+     * @param variable The [BoundVariable] of this universal quantifier.
+     * @param operand The operand of this universal quantifier.
+     *
+     * @author Jan Müller
+     */
+    class Universal(variable: BoundVariable, operand: Formula) : Quantifier("\u2200", variable, operand) {
+
+        /**
+         * Checks all possible variable assignments.
+         *
+         * @param graph The [Graph] that will be checked.
+         * @param symbolTable [SymbolTable] that contains all symbols of the parsed root formula and [graph].
+         * @param variableAssignments [Map] of [BoundVariable] names and their assigned [Node]s.
+         * @param shouldBeModel Indicates the expected result. Can be false for subformulas of [Operator.Unary.Negation].
+         * @return [ModelCheckerTrace] that contains the results of this check.
+         */
         override fun fullCheck(
             graph: Graph,
             symbolTable: SymbolTable,
@@ -64,6 +123,15 @@ sealed class Quantifier(
             }
         }
 
+        /**
+         * Checks all possible variable assignments, until one is negative.
+         *
+         * @param graph The [Graph] that will be checked.
+         * @param symbolTable [SymbolTable] that contains all symbols of the parsed root formula and [graph].
+         * @param variableAssignments [Map] of [BoundVariable] names and their assigned [Node]s.
+         * @param shouldBeModel Indicates the expected result. Can be false for subformulas of [Operator.Unary.Negation].
+         * @return [ModelCheckerTrace] that contains the results of this check.
+         */
         override fun partialCheck(
             graph: Graph,
             symbolTable: SymbolTable,
@@ -81,7 +149,13 @@ sealed class Quantifier(
         }
     }
 
-    override fun getFormulaString(variableAssignments: Map<String, Node>): String {
+    /**
+     * Returns raw [String] representation of this quantifier.
+     *
+     * @param variableAssignments [Map] of [BoundVariable] names and [Node]s that will replace them in the [String] representation.
+     * @return The raw [String] representation of this quantifier.
+     */
+    override fun getRawString(variableAssignments: Map<String, Node>): String {
         val variableString = variable.toString(variableAssignments, true)
         val operandString = operand.toString(variableAssignments, true)
         val separator = when (!operand.hasDot && !isUnary(operand)) {
@@ -91,11 +165,17 @@ sealed class Quantifier(
         return "$name$variableString$separator$operandString"
     }
 
+    /**
+     * Checks if a [Formula] is unary.
+     *
+     * @param formula The [Formula] that will be checked.
+     * @return True if [formula] is unary and false otherwise.
+     */
     private fun isUnary(formula: Formula): Boolean {
         return when (formula) {
             is Existential -> true
             is Universal -> true
-            is Operator.Unary.Not -> true
+            is Operator.Unary.Negation -> true
             else -> false
         }
     }

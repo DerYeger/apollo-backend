@@ -24,6 +24,9 @@ typealias ApiResult<Data> = Result<HttpResponseEntity<Data>, HttpResponseEntity<
  * @author Jan Müller
  */
 class HttpResponseEntity<Data>(val status: HttpStatusCode, val data: Data) {
+    /**
+     * Companion object that contains helper-methods.
+     */
     companion object {
 
         /**

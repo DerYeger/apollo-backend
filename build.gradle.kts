@@ -22,6 +22,8 @@ version = "0.0.1"
 
 application {
     mainClass.set("io.ktor.server.netty.EngineMain")
+    // The following line is deprecated, but required for the shadowJar task
+    mainClassName = "io.ktor.server.netty.EngineMain"
 }
 
 kotlin {

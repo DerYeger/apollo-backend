@@ -1,0 +1,15 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+eu.yeger.gramofo
+eu.yeger.gramofo.di
+eu.yeger.gramofo.fol
+eu.yeger.gramofo.fol.parser
+eu.yeger.gramofo.model.api
+eu.yeger.gramofo.model.domain
+eu.yeger.gramofo.model.domain.fol
+eu.yeger.gramofo.model.dto
+eu.yeger.gramofo.routing
+eu.yeger.gramofo.service
+eu.yeger.gramofo.utils
+

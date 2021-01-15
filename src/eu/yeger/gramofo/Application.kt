@@ -10,8 +10,22 @@ import kotlinx.serialization.json.Json
 import org.koin.ktor.ext.Koin
 import org.slf4j.event.Level
 
+/**
+ * Starts the server-engine.
+ *
+ * @param args Arguments of this application.
+ *
+ * @author Jan Müller
+ */
 public fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
+/**
+ * Installs Koin (dependency-injection), logging, (de-)serialization and CORS features.
+ *
+ * @receiver The [Application] the module will be installed in.
+ *
+ * @author Jan Müller
+ */
 @Suppress("unused") // Referenced in application.conf
 public fun Application.mainModule() {
     install(Koin) {

@@ -15,13 +15,22 @@ class ModelCheckerTests {
 
     private fun testForAllFeedbackOptions(graph: Graph, formulaString: String, expectedResult: Boolean) {
         val formula = parseFormula(formulaString).get()!!
+        val negatedFormula = parseFormula("!($formulaString)").get()!!
         Feedback.values().forEach { feedback ->
             val result = checkModel(graph, formula, feedback).get()
             result?.isModel shouldBe expectedResult
+
+            val negatedResult = checkModel(graph, negatedFormula, feedback).get()
+            negatedResult?.isModel shouldBe expectedResult.not()
+
             if (feedback === Feedback.Relevant) {
                 // Validate implementation of partialCheck
                 checkRecursive(result!!, ModelCheckerTrace::children) { trace ->
                     ((trace.isModel == trace.shouldBeModel) == expectedResult) shouldBe true
+                }
+
+                checkRecursive(negatedResult!!, ModelCheckerTrace::children) { trace ->
+                    ((trace.isModel == trace.shouldBeModel) == expectedResult.not()).also { println(trace) } shouldBe true
                 }
             }
         }

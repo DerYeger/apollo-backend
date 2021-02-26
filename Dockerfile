@@ -1,4 +1,4 @@
-FROM gradle:6.8.2 AS BUILDER
+FROM gradle:6.8.3 AS BUILDER
 
 WORKDIR /usr/app/
 

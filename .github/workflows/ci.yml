@@ -34,42 +34,21 @@ jobs:
         run: |
           rm -f ./.gradle/caches/modules-2/modules-2.lock
           rm -f ./.gradle/caches/modules-2/gc.properties
-  documentation:
-    name: Documentation
-    needs: build
+  release:
+    name: Release
     runs-on: ubuntu-latest
-    timeout-minutes: 5
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup Java
-        uses: actions/setup-java@v2
         with:
-          distribution: zulu
-          java-version: 15
-      - name: Cache Gradle packages
-        uses: actions/cache@v2
+          token: ${{ secrets.PAT }}
+      - name: Semantic release
+        uses: cycjimmy/semantic-release-action@v2.5.4
         with:
-          path: |
-            ./.gradle/caches
-            ./.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-      - name: Change wrapper permissions
-        run: chmod +x ./gradlew
-      - name: Generate Documentation
-        run: ./gradlew dokkaHtml
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          branch: gh-pages
-          folder: build/dokka/html
-          clean: true
-      - name: Cleanup Gradle Cache
-        # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
-        # Restoring these files from a GitHub Actions cache might cause problems for future builds.
-        run: |
-          rm -f ./.gradle/caches/modules-2/modules-2.lock
-          rm -f ./.gradle/caches/modules-2/gc.properties
+          extra_plugins: |
+            @semantic-release/changelog
+            @semantic-release/git
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}

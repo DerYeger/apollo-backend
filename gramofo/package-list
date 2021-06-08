@@ -69,13 +69,11 @@ $dokka.location:eu.yeger.gramofo.model.domain.fol/Constant/fullCheck/#eu.yeger.g
 $dokka.location:eu.yeger.gramofo.model.domain.fol/Constant/getRawString/#kotlin.collections.Map[kotlin.String,eu.yeger.gramofo.model.domain.Node]/PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-constant/get-raw-string.html
 $dokka.location:eu.yeger.gramofo.model.domain.fol/Constant/partialCheck/#eu.yeger.gramofo.model.domain.Graph#eu.yeger.gramofo.model.domain.fol.SymbolTable#kotlin.collections.Map[kotlin.String,eu.yeger.gramofo.model.domain.Node]#kotlin.Boolean/PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-constant/partial-check.html
 $dokka.location:eu.yeger.gramofo.model.domain.fol/FOLEntity///PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-f-o-l-entity/index.html
-$dokka.location:eu.yeger.gramofo.model.domain.fol/FOLEntity/FOLEntity/#kotlin.String/PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-f-o-l-entity/-f-o-l-entity.html
 $dokka.location:eu.yeger.gramofo.model.domain.fol/FOLEntity/getRawString/#kotlin.collections.Map[kotlin.String,eu.yeger.gramofo.model.domain.Node]/PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-f-o-l-entity/get-raw-string.html
 $dokka.location:eu.yeger.gramofo.model.domain.fol/FOLEntity/name/#/PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-f-o-l-entity/name.html
 $dokka.location:eu.yeger.gramofo.model.domain.fol/FOLEntity/toString/#/PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-f-o-l-entity/to-string.html
 $dokka.location:eu.yeger.gramofo.model.domain.fol/FOLEntity/toString/#kotlin.collections.Map[kotlin.String,eu.yeger.gramofo.model.domain.Node]#kotlin.Boolean/PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-f-o-l-entity/to-string.html
 $dokka.location:eu.yeger.gramofo.model.domain.fol/Formula///PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-formula/index.html
-$dokka.location:eu.yeger.gramofo.model.domain.fol/Formula/Formula/#kotlin.String/PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-formula/-formula.html
 $dokka.location:eu.yeger.gramofo.model.domain.fol/Formula/fullCheck/#eu.yeger.gramofo.model.domain.Graph#eu.yeger.gramofo.model.domain.fol.SymbolTable#kotlin.collections.Map[kotlin.String,eu.yeger.gramofo.model.domain.Node]#kotlin.Boolean/PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-formula/full-check.html
 $dokka.location:eu.yeger.gramofo.model.domain.fol/Formula/partialCheck/#eu.yeger.gramofo.model.domain.Graph#eu.yeger.gramofo.model.domain.fol.SymbolTable#kotlin.collections.Map[kotlin.String,eu.yeger.gramofo.model.domain.Node]#kotlin.Boolean/PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-formula/partial-check.html
 $dokka.location:eu.yeger.gramofo.model.domain.fol/FormulaHead///PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-formula-head/index.html
@@ -160,7 +158,6 @@ $dokka.location:eu.yeger.gramofo.model.domain.fol/SymbolTable/binarySymbols/#/Po
 $dokka.location:eu.yeger.gramofo.model.domain.fol/SymbolTable/symbolTypes/#/PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-symbol-table/symbol-types.html
 $dokka.location:eu.yeger.gramofo.model.domain.fol/SymbolTable/unarySymbols/#/PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-symbol-table/unary-symbols.html
 $dokka.location:eu.yeger.gramofo.model.domain.fol/Term///PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-term/index.html
-$dokka.location:eu.yeger.gramofo.model.domain.fol/Term/Term/#kotlin.String/PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-term/-term.html
 $dokka.location:eu.yeger.gramofo.model.domain.fol/Term/evaluate/#eu.yeger.gramofo.model.domain.fol.SymbolTable#kotlin.collections.Map[kotlin.String,eu.yeger.gramofo.model.domain.Node]/PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain.fol/-term/evaluate.html
 $dokka.location:eu.yeger.gramofo.model.domain////PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain/index.html
 $dokka.location:eu.yeger.gramofo.model.domain/Edge///PointingToDeclaration/gramofo/eu.yeger.gramofo.model.domain/-edge/index.html

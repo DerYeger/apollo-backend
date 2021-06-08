@@ -82,7 +82,7 @@ internal class FOLScanner(private val source: String, private val language: Lang
         lookAHeadToken = temp
         var next = sourceCharAt(pos)
         while (isWhiteSpace(next)) {
-            if (next.toInt() == 0) {
+            if (next.code == 0) {
                 lookAHeadToken.setTypeAndValue(FOLToken.END_OF_SOURCE, "")
                 return
             }
@@ -156,7 +156,7 @@ internal class FOLScanner(private val source: String, private val language: Lang
     }
 
     private fun isWhiteSpace(c: Char): Boolean {
-        return Character.isWhitespace(c) || c.toInt() == 0
+        return Character.isWhitespace(c) || c.code == 0
     }
 
     private fun isLetter(c: Char): Boolean {

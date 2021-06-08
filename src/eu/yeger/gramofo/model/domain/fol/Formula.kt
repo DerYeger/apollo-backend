@@ -12,7 +12,7 @@ import eu.yeger.gramofo.model.domain.Node
  *
  * @author Jan Müller
  */
-public abstract class Formula(name: String) : FOLEntity(name) {
+public sealed class Formula(name: String) : FOLEntity(name) {
 
     /**
      * Recursively evaluate all subformulas, including redundant checks.

@@ -10,7 +10,7 @@ import eu.yeger.gramofo.model.domain.Node
  *
  * @author Jan Müller
  */
-public abstract class FOLEntity(public val name: String) {
+public sealed class FOLEntity(public val name: String) {
 
     /**
      * Indicates that the [String] representation of this entity has brackets. Defaults to false.

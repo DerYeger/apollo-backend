@@ -12,7 +12,7 @@ import eu.yeger.gramofo.model.domain.Node
  *
  * @author Jan Müller
  */
-public abstract class Term(name: String) : FOLEntity(name) {
+public sealed class Term(name: String) : FOLEntity(name) {
 
     /**
      * Evaluates this term to a [Node].

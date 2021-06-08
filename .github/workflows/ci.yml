@@ -1,43 +1,75 @@
 name: CI
 
-on:
-  push:
-    branches: [master, develop, feature/*, renovate/*, release/*]
-  pull_request:
-    branches: [master, develop, feature/*, renovate/*, release/*]
+on: [pull_request, push]
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v2
         with:
           distribution: zulu
-          java-version: 14
+          java-version: 15
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./.gradle/caches
+            ./.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
-      - uses: eskatos/gradle-command-action@v1
-        with:
-          arguments: build
+      - name: Build
+        run: ./gradlew build
+      - name: Cleanup Gradle Cache
+        # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
+        # Restoring these files from a GitHub Actions cache might cause problems for future builds.
+        run: |
+          rm -f ./.gradle/caches/modules-2/modules-2.lock
+          rm -f ./.gradle/caches/modules-2/gc.properties
   documentation:
+    name: Documentation
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
+    timeout-minutes: 5
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v2
         with:
           distribution: zulu
-          java-version: 14
+          java-version: 15
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./.gradle/caches
+            ./.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
-      - uses: eskatos/gradle-command-action@v1
-        with:
-          arguments: dokkaHtml
+      - name: Generate Documentation
+        run: ./gradlew dokkaHtml
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages
           folder: build/dokka/html
           clean: true
+      - name: Cleanup Gradle Cache
+        # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
+        # Restoring these files from a GitHub Actions cache might cause problems for future builds.
+        run: |
+          rm -f ./.gradle/caches/modules-2/modules-2.lock
+          rm -f ./.gradle/caches/modules-2/gc.properties

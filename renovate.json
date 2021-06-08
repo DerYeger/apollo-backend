@@ -1,14 +1,9 @@
 {
   "automerge": true,
   "automergeType": "branch",
-  "docker": {
-    "major": {
-      "enabled": true
-    },
-    "pinDigests": false
-  },
   "extends": ["config:base"],
   "major": {
     "automerge": false
-  }
+  },
+  "schedule": ["after 1am", "before 6am"]
 }

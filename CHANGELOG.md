@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/DerYeger/gramofo-backend/compare/v1.0.1...v1.0.2) (2021-06-08)
+
+
+### Bug Fixes
+
+* use sealed classes wherever possible ([eeecc16](https://github.com/DerYeger/gramofo-backend/commit/eeecc1685583bca822aaf51c0112e124b5514cb6))
+
 ## [1.0.1](https://github.com/DerYeger/gramofo-backend/compare/v1.0.0...v1.0.1) (2021-06-08)
 
 

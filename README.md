@@ -1,8 +1,39 @@
-# gramoFO-Backend
+<h1 align="center">gramoFO-Backend</h1>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/DerYeger/gramofo-frontend/master/src/assets/icons/android-chrome-512x512.png" alt="Logo" width="128" height="128">
+</p>
+
+<p align="center">
+  <a href="https://github.com/DerYeger/gramofo-backend/actions/workflows/ci.yml">
+    <img alt="CI" src="https://github.com/DerYeger/gramofo-backend/actions/workflows/ci.yml/badge.svg?event=push">
+  </a>
+  <a href="https://github.com/DerYeger/gramofo-backend/actions/workflows/cd.yml">
+    <img alt="CD" src="https://github.com/DerYeger/gramofo-backend/actions/workflows/cd.yml/badge.svg">
+  </a>
+  <a href="https://github.com/DerYeger/gramofo-backend/actions/workflows/maintenance.yml">
+    <img alt="Maintenance" src="https://github.com/DerYeger/gramofo-backend/actions/workflows/maintenance.yml/badge.svg">
+  </a>
+</p>
+
+<p align="center">
+   <a href="https://gramofo.yeger.eu/">
+    gramofo.yeger.eu
+  </a>
+</p>
 
 > A web application for first-order model checking in graph structures
 
-Documentation is available [here](https://gramofo-backend.yeger.eu/).
+## Features
+
+- ✨ **Model Checking**: First-order-logic model checking in graph structures
+- 💹 **Feedback**: Three different feedback levels provide insight on model-checking results
+
+## Links
+
+- [gramoFO](https://github.com/DerYeger/gramofo)
+- [gramoFO-Frontend](https://github.com/DerYeger/gramofo-frontend)
+- [Documentation](https://gramofo-backend.yeger.eu/)
 
 ## Development
 
@@ -37,3 +68,7 @@ Run the Gradle `dokkaHtml` task to generate the documentation. It will be stored
 
 Run `docker-compose up -d --build` to build and start a container. Alternatively, build the image via the Dockerfile.
 >Note: Default port is 8080.
+
+## License
+
+[BSD 3-Clause License](./LICENSE) - Copyright &copy; Jan Müller

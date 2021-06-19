@@ -8,11 +8,11 @@ RUN gradle shadowJar
 
 FROM adoptopenjdk/openjdk14:alpine
 
-COPY --from=BUILDER /usr/app/build/libs/gramofo.jar .
+COPY --from=BUILDER /usr/app/build/libs/apollo.jar .
 
 ENTRYPOINT [ \
     "java", \
     "-server", \
     "-jar", \
-    "gramofo.jar" \
+    "apollo.jar" \
 ]

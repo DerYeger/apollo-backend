@@ -1,13 +1,13 @@
-## [1.0.2](https://github.com/DerYeger/gramofo-backend/compare/v1.0.1...v1.0.2) (2021-06-08)
+## [1.0.2](https://github.com/DerYeger/apollo-backend/compare/v1.0.1...v1.0.2) (2021-06-08)
 
 
 ### Bug Fixes
 
-* use sealed classes wherever possible ([eeecc16](https://github.com/DerYeger/gramofo-backend/commit/eeecc1685583bca822aaf51c0112e124b5514cb6))
+* use sealed classes wherever possible ([eeecc16](https://github.com/DerYeger/apollo-backend/commit/eeecc1685583bca822aaf51c0112e124b5514cb6))
 
-## [1.0.1](https://github.com/DerYeger/gramofo-backend/compare/v1.0.0...v1.0.1) (2021-06-08)
+## [1.0.1](https://github.com/DerYeger/apollo-backend/compare/v1.0.0...v1.0.1) (2021-06-08)
 
 
 ### Bug Fixes
 
-* use Char::code instead of Char::toInt ([07493c1](https://github.com/DerYeger/gramofo-backend/commit/07493c126f1b6a422f9c07693006b5ca148ce7bb))
+* use Char::code instead of Char::toInt ([07493c1](https://github.com/DerYeger/apollo-backend/commit/07493c126f1b6a422f9c07693006b5ca148ce7bb))

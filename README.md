@@ -1,28 +1,30 @@
-<h1 align="center">gramoFO-Backend</h1>
+<h1 align="center">Apollo-Backend</h1>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/DerYeger/gramofo-frontend/master/src/assets/icons/android-chrome-512x512.png" alt="Logo" width="128" height="128">
+  <img src="https://raw.githubusercontent.com/DerYeger/apollo-frontend/master/src/assets/icons/android-chrome-512x512.png" alt="Logo" width="128" height="128">
 </p>
 
 <p align="center">
-  <a href="https://github.com/DerYeger/gramofo-backend/actions/workflows/ci.yml">
-    <img alt="CI" src="https://github.com/DerYeger/gramofo-backend/actions/workflows/ci.yml/badge.svg?event=push">
+  <a href="https://github.com/DerYeger/apollo-backend/actions/workflows/ci.yml">
+    <img alt="CI" src="https://github.com/DerYeger/apollo-backend/actions/workflows/ci.yml/badge.svg?event=push">
   </a>
-  <a href="https://github.com/DerYeger/gramofo-backend/actions/workflows/cd.yml">
-    <img alt="CD" src="https://github.com/DerYeger/gramofo-backend/actions/workflows/cd.yml/badge.svg">
+  <a href="https://github.com/DerYeger/apollo-backend/actions/workflows/cd.yml">
+    <img alt="CD" src="https://github.com/DerYeger/apollo-backend/actions/workflows/cd.yml/badge.svg">
   </a>
-  <a href="https://github.com/DerYeger/gramofo-backend/actions/workflows/maintenance.yml">
-    <img alt="Maintenance" src="https://github.com/DerYeger/gramofo-backend/actions/workflows/maintenance.yml/badge.svg">
+  <a href="https://github.com/DerYeger/apollo-backend/actions/workflows/maintenance.yml">
+    <img alt="Maintenance" src="https://github.com/DerYeger/apollo-backend/actions/workflows/maintenance.yml/badge.svg">
   </a>
 </p>
 
 <p align="center">
-   <a href="https://gramofo.yeger.eu/">
-    gramofo.yeger.eu
+   <a href="https://apollo.yeger.eu/">
+    apollo.yeger.eu
   </a>
 </p>
 
 > A web application for first-order model checking in graph structures
+
+> NOTE: This project was previously known as **gramoFO**
 
 ## Features
 
@@ -31,9 +33,9 @@
 
 ## Links
 
-- [gramoFO](https://github.com/DerYeger/gramofo)
-- [gramoFO-Frontend](https://github.com/DerYeger/gramofo-frontend)
-- [Documentation](https://gramofo-backend.yeger.eu/)
+- [Apollo](https://github.com/DerYeger/apollo)
+- [Apollo-Frontend](https://github.com/DerYeger/apollo-frontend)
+- [Documentation](https://apollo-backend.yeger.eu/)
 
 ## Development
 

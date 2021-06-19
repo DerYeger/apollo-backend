@@ -108,11 +108,11 @@ tasks {
     withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
         dokkaSourceSets {
             named("main") {
-                displayName.set("gramoFO-Backend")
+                displayName.set("Apollo-Backend")
                 reportUndocumented.set(true)
                 sourceLink {
                     localDirectory.set(file("src/main/kotlin"))
-                    remoteUrl.set(uri("https://github.com/DerYeger/gramofo-backend/tree/develop/src").toURL())
+                    remoteUrl.set(uri("https://github.com/DerYeger/apollo-backend/tree/develop/src").toURL())
                 }
             }
         }

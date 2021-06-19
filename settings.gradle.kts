@@ -13,4 +13,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "gramofo"
+rootProject.name = "apollo"

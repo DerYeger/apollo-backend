@@ -16,11 +16,11 @@ import org.koin.ktor.ext.inject
  * @author Jan Müller
  */
 public fun Route.modelCheckerRoutes() {
-    val modelCheckerService: ModelCheckerService by inject()
+  val modelCheckerService: ModelCheckerService by inject()
 
-    post("model-checker") {
-        val request = call.receive<ModelCheckerRequest>()
-        val result = modelCheckerService.checkModel(request)
-        call.respondWithResult(result)
-    }
+  post("model-checker") {
+    val request = call.receive<ModelCheckerRequest>()
+    val result = modelCheckerService.checkModel(request)
+    call.respondWithResult(result)
+  }
 }

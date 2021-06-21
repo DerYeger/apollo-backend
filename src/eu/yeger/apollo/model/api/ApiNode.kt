@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 public data class ApiNode(
-    val name: String,
-    val relations: List<String>,
-    val constants: List<String>
+  val name: String,
+  val relations: List<String>,
+  val constants: List<String>
 )

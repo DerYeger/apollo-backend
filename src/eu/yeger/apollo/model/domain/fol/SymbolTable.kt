@@ -16,7 +16,7 @@ import eu.yeger.apollo.model.domain.Node
  * @author Jan Müller
  */
 public data class SymbolTable(
-    val unarySymbols: Map<String, Set<Node>>,
-    val binarySymbols: Map<String, Set<Edge>>,
-    val symbolTypes: Map<String, String>,
+  val unarySymbols: Map<String, Set<Node>>,
+  val binarySymbols: Map<String, Set<Edge>>,
+  val symbolTypes: Map<String, String>,
 )

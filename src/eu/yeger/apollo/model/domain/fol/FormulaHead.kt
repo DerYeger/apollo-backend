@@ -10,6 +10,6 @@ package eu.yeger.apollo.model.domain.fol
  * @constructor Creates a [FormulaHead] with the given parameters.
  */
 public data class FormulaHead(
-    val formula: Formula,
-    val symbolTable: Map<String, String>
+  val formula: Formula,
+  val symbolTable: Map<String, String>
 )

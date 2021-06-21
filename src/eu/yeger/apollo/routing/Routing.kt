@@ -16,21 +16,21 @@ import kotlinx.serialization.SerializationException
  * @author Jan Müller
  */
 public fun Application.routingModule(): Routing = routing {
-    route("/") {
-        get {
-            call.respondText("Apollo-Backend is available!", contentType = ContentType.Text.Plain)
-        }
-
-        modelCheckerRoutes()
+  route("/") {
+    get {
+      call.respondText("Apollo-Backend is available!", contentType = ContentType.Text.Plain)
     }
 
-    install(StatusPages) {
-        exception<Throwable> { cause ->
-            call.respond(HttpStatusCode.InternalServerError, cause.message ?: "api.error.unknown")
-            throw cause
-        }
-        exception<SerializationException> { cause ->
-            call.respond(HttpStatusCode.BadRequest, cause.message ?: "api.error.unknown")
-        }
+    modelCheckerRoutes()
+  }
+
+  install(StatusPages) {
+    exception<Throwable> { cause ->
+      call.respond(HttpStatusCode.InternalServerError, cause.message ?: "api.error.unknown")
+      throw cause
     }
+    exception<SerializationException> { cause ->
+      call.respond(HttpStatusCode.BadRequest, cause.message ?: "api.error.unknown")
+    }
+  }
 }

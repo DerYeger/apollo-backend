@@ -14,6 +14,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 public data class ModelCheckerResponse(
-    val rootTrace: ModelCheckerTrace,
-    val feedback: Feedback,
+  val rootTrace: ModelCheckerTrace,
+  val feedback: Feedback,
 )

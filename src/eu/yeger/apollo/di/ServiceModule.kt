@@ -11,7 +11,7 @@ import org.koin.dsl.module
  * @author Jan Müller
  */
 public val serviceModule: Module = module {
-    single<ModelCheckerService> {
-        DefaultModelCheckerService()
-    }
+  single<ModelCheckerService> {
+    DefaultModelCheckerService()
+  }
 }

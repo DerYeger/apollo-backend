@@ -19,9 +19,9 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 public data class ModelCheckerTrace(
-    val formula: String,
-    val description: TranslationDTO,
-    val isModel: Boolean,
-    val shouldBeModel: Boolean,
-    val children: List<ModelCheckerTrace>? = null,
+  val formula: String,
+  val description: TranslationDTO,
+  val isModel: Boolean,
+  val shouldBeModel: Boolean,
+  val children: List<ModelCheckerTrace>? = null,
 )

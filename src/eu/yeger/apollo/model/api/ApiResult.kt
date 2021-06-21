@@ -25,27 +25,27 @@ public typealias ApiResult<Data> = Result<HttpResponseEntity<Data>, HttpResponse
  */
 public data class HttpResponseEntity<Data>(val status: HttpStatusCode, val data: Data) {
 
+  /**
+   * Companion object that contains helper-methods.
+   */
+  public companion object {
+
     /**
-     * Companion object that contains helper-methods.
+     * Helper-method for responses with [HttpStatusCode.OK].
+     *
+     * @param Data Type of [data].
+     * @param data The data used as the response body.
      */
-    public companion object {
+    public fun <Data> ok(data: Data): HttpResponseEntity<Data> =
+      HttpResponseEntity(HttpStatusCode.OK, data)
 
-        /**
-         * Helper-method for responses with [HttpStatusCode.OK].
-         *
-         * @param Data Type of [data].
-         * @param data The data used as the response body.
-         */
-        public fun <Data> ok(data: Data): HttpResponseEntity<Data> =
-            HttpResponseEntity(HttpStatusCode.OK, data)
-
-        /**
-         * Helper-method for responses with [HttpStatusCode.UnprocessableEntity].
-         *
-         * @param Data Type of [data].
-         * @param data The data used as the response body.
-         */
-        public fun <Data> unprocessableEntity(data: Data): HttpResponseEntity<Data> =
-            HttpResponseEntity(HttpStatusCode.UnprocessableEntity, data)
-    }
+    /**
+     * Helper-method for responses with [HttpStatusCode.UnprocessableEntity].
+     *
+     * @param Data Type of [data].
+     * @param data The data used as the response body.
+     */
+    public fun <Data> unprocessableEntity(data: Data): HttpResponseEntity<Data> =
+      HttpResponseEntity(HttpStatusCode.UnprocessableEntity, data)
+  }
 }

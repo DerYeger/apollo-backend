@@ -10,6 +10,6 @@ package eu.yeger.apollo.model.domain
  * @author Jan Müller
  */
 public data class Graph(
-    val nodes: List<Node>,
-    val edges: List<Edge>
+  val nodes: List<Node>,
+  val edges: List<Edge>
 )

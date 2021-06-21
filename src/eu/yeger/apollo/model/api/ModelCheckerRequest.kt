@@ -15,8 +15,8 @@ import kotlinx.serialization.*
  */
 @Serializable
 public data class ModelCheckerRequest(
-    val formula: String,
-    val graph: ApiGraph,
-    val language: String,
-    val feedback: Feedback,
+  val formula: String,
+  val graph: ApiGraph,
+  val language: String,
+  val feedback: Feedback,
 )

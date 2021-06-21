@@ -14,12 +14,12 @@ import eu.yeger.apollo.model.domain.Node
  */
 public sealed class Term(name: String) : FOLEntity(name) {
 
-    /**
-     * Evaluates this term to a [Node].
-     *
-     * @param symbolTable [SymbolTable] that contains all symbols of the parsed root formula and [Graph].
-     * @param variableAssignments [Map] of [BoundVariable] names and their assigned [Node]s.
-     * @return The [Node] this [Term] evaluates to with the given [symbolTable] and [variableAssignments].
-     */
-    public abstract fun evaluate(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): Node
+  /**
+   * Evaluates this term to a [Node].
+   *
+   * @param symbolTable [SymbolTable] that contains all symbols of the parsed root formula and [Graph].
+   * @param variableAssignments [Map] of [BoundVariable] names and their assigned [Node]s.
+   * @return The [Node] this [Term] evaluates to with the given [symbolTable] and [variableAssignments].
+   */
+  public abstract fun evaluate(symbolTable: SymbolTable, variableAssignments: Map<String, Node>): Node
 }

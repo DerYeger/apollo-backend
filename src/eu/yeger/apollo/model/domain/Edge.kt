@@ -12,8 +12,8 @@ package eu.yeger.apollo.model.domain
  * @author Jan Müller
  */
 public data class Edge(
-    val source: Node,
-    val target: Node,
-    val relations: List<String>,
-    val functions: List<String>
+  val source: Node,
+  val target: Node,
+  val relations: List<String>,
+  val functions: List<String>
 )

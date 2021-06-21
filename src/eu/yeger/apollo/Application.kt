@@ -28,31 +28,31 @@ public fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.mai
  */
 @Suppress("unused") // Referenced in application.conf
 public fun Application.mainModule() {
-    install(Koin) {
-        modules(serviceModule)
-    }
+  install(Koin) {
+    modules(serviceModule)
+  }
 
-    install(CallLogging) {
-        level = Level.INFO
-        filter { call -> call.request.path().startsWith("/") }
-    }
+  install(CallLogging) {
+    level = Level.INFO
+    filter { call -> call.request.path().startsWith("/") }
+  }
 
-    install(ContentNegotiation) {
-        json(
-            json = Json {
-                encodeDefaults = false
-                ignoreUnknownKeys = true
-            }
-        )
-    }
+  install(ContentNegotiation) {
+    json(
+      json = Json {
+        encodeDefaults = false
+        ignoreUnknownKeys = true
+      }
+    )
+  }
 
-    install(CORS) {
-        method(HttpMethod.Options)
-        method(HttpMethod.Put)
-        method(HttpMethod.Delete)
-        method(HttpMethod.Patch)
-        anyHost()
-        allowNonSimpleContentTypes = true
-        allowSameOrigin = true
-    }
+  install(CORS) {
+    method(HttpMethod.Options)
+    method(HttpMethod.Put)
+    method(HttpMethod.Delete)
+    method(HttpMethod.Patch)
+    anyHost()
+    allowNonSimpleContentTypes = true
+    allowSameOrigin = true
+  }
 }

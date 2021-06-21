@@ -8,16 +8,16 @@ import kotlin.test.assertEquals
 
 class ApplicationTest {
 
-    @Test
-    fun testRoot() {
-        withTestApplication({
-            mainModule()
-            routingModule()
-        }) {
-            handleRequest(HttpMethod.Get, "/").apply {
-                assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("Apollo-Backend is available!", response.content)
-            }
-        }
+  @Test
+  fun testRoot() {
+    withTestApplication({
+      mainModule()
+      routingModule()
+    }) {
+      handleRequest(HttpMethod.Get, "/").apply {
+        assertEquals(HttpStatusCode.OK, response.status())
+        assertEquals("Apollo-Backend is available!", response.content)
+      }
     }
+  }
 }

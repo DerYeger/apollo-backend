@@ -20,46 +20,46 @@ import java.util.ResourceBundle
 
  */
 public sealed class Language(locale: Locale) {
-    private val resourceBundle =
-        try {
-            ResourceBundle.getBundle("language.lang", locale)
-        } catch (e: Exception) {
-            LoggerFactory.getLogger(Language::class.java).error("\nCouldn't find language-files on path 'language'")
-            object : ListResourceBundle() {
-                override fun getContents(): Array<Array<Any>> {
-                    return arrayOf()
-                }
-            }
+  private val resourceBundle =
+    try {
+      ResourceBundle.getBundle("language.lang", locale)
+    } catch (e: Exception) {
+      LoggerFactory.getLogger(Language::class.java).error("\nCouldn't find language-files on path 'language'")
+      object : ListResourceBundle() {
+        override fun getContents(): Array<Array<Any>> {
+          return arrayOf()
         }
-
-    /**
-     * Fetches the translation for a given key.
-     *
-     * @param key The key for the translation.
-     * @return The translated [String].
-     */
-    public fun getString(key: String): String {
-        return try {
-            resourceBundle.getString(key)
-        } catch (e: MissingResourceException) {
-            key
-        }
+      }
     }
 
-    /**
-     * Fetches the translation for a given key and parameters.
-     *
-     * @param key  The key for the translation.
-     * @param args [List] of arguments, which are used for formatting.
-     * @return The translated [String].
-     */
-    public fun getString(key: String, vararg args: Any?): String {
-        return try {
-            MessageFormat.format(resourceBundle.getString(key), *args)
-        } catch (e: MissingResourceException) {
-            key
-        }
+  /**
+   * Fetches the translation for a given key.
+   *
+   * @param key The key for the translation.
+   * @return The translated [String].
+   */
+  public fun getString(key: String): String {
+    return try {
+      resourceBundle.getString(key)
+    } catch (e: MissingResourceException) {
+      key
     }
+  }
+
+  /**
+   * Fetches the translation for a given key and parameters.
+   *
+   * @param key  The key for the translation.
+   * @param args [List] of arguments, which are used for formatting.
+   * @return The translated [String].
+   */
+  public fun getString(key: String, vararg args: Any?): String {
+    return try {
+      MessageFormat.format(resourceBundle.getString(key), *args)
+    } catch (e: MissingResourceException) {
+      key
+    }
+  }
 }
 
 /**

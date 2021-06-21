@@ -12,27 +12,27 @@ import org.junit.jupiter.api.Test
 
 class ModelCheckerRouteTests {
 
-    @Test
-    fun `verify that the route is configured properly`() {
-        withTestApplication({
-            mainModule()
-            routingModule()
-        }) {
-            runBlocking {
-                (0..5).forEach { _ -> launch { makeCall("en", Feedback.Full) } }
-                (0..5).forEach { _ -> launch { makeCall("de", Feedback.Relevant) } }
-                (0..5).forEach { _ -> launch { makeCall("de", Feedback.Minimal) } }
-            }
-        }
+  @Test
+  fun `verify that the route is configured properly`() {
+    withTestApplication({
+      mainModule()
+      routingModule()
+    }) {
+      runBlocking {
+        (0..5).forEach { _ -> launch { makeCall("en", Feedback.Full) } }
+        (0..5).forEach { _ -> launch { makeCall("de", Feedback.Relevant) } }
+        (0..5).forEach { _ -> launch { makeCall("de", Feedback.Minimal) } }
+      }
     }
+  }
 
-    private fun TestApplicationEngine.makeCall(language: String, feedback: Feedback) {
-        handleRequest {
-            method = HttpMethod.Post
-            uri = "/model-checker"
-            addHeader("Content-Type", "application/json")
-            setBody(
-                """
+  private fun TestApplicationEngine.makeCall(language: String, feedback: Feedback) {
+    handleRequest {
+      method = HttpMethod.Post
+      uri = "/model-checker"
+      addHeader("Content-Type", "application/json")
+      setBody(
+        """
                     {
                         "formula": "exists x. exists y. B(x,y)",
                         "language": "$language",
@@ -76,12 +76,12 @@ class ModelCheckerRouteTests {
                             ]
                         }
                     }
-                """.trimIndent()
-            )
-        }.run {
-            requestHandled shouldBe true
-            response.status() shouldBe HttpStatusCode.OK
-            response.content shouldNotBe null
-        }
+        """.trimIndent()
+      )
+    }.run {
+      requestHandled shouldBe true
+      response.status() shouldBe HttpStatusCode.OK
+      response.content shouldNotBe null
     }
+  }
 }

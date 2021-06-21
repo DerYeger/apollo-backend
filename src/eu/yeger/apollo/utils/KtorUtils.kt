@@ -20,12 +20,12 @@ import io.ktor.response.*
  * @author Jan Müller
  */
 public suspend inline fun <reified T : Any> ApplicationCall.respondWithResult(result: ApiResult<T>) {
-    try {
-        when (result) {
-            is Ok<HttpResponseEntity<T>> -> respond(result.value.status, result.value.data)
-            is Err<HttpResponseEntity<TranslationDTO>> -> respond(result.error.status, mapOf("message" to result.error.data))
-        }
-    } catch (outOfMemoryError: OutOfMemoryError) {
-        respond(HttpStatusCode.InsufficientStorage, mapOf("message" to "api.error.response-too-big"))
+  try {
+    when (result) {
+      is Ok<HttpResponseEntity<T>> -> respond(result.value.status, result.value.data)
+      is Err<HttpResponseEntity<TranslationDTO>> -> respond(result.error.status, mapOf("message" to result.error.data))
     }
+  } catch (outOfMemoryError: OutOfMemoryError) {
+    respond(HttpStatusCode.InsufficientStorage, mapOf("message" to "api.error.response-too-big"))
+  }
 }

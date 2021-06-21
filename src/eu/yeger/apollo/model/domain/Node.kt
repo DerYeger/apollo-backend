@@ -11,7 +11,7 @@ package eu.yeger.apollo.model.domain
  * @author Jan Müller
  */
 public data class Node(
-    val name: String,
-    val relations: List<String>,
-    val constants: List<String>
+  val name: String,
+  val relations: List<String>,
+  val constants: List<String>
 )

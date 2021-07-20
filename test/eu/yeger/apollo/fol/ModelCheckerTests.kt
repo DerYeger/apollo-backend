@@ -30,7 +30,7 @@ class ModelCheckerTests {
         }
 
         checkRecursive(negatedResult!!, ModelCheckerTrace::children) { trace ->
-          ((trace.isModel == trace.shouldBeModel) == expectedResult.not()).also { println(trace) } shouldBe true
+          ((trace.isModel == trace.shouldBeModel) == expectedResult.not()) shouldBe true
         }
       }
     }

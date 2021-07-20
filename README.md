@@ -27,9 +27,12 @@
   </a>
 </p>
 
-> A web application for first-order model checking in graph structures
+> A web application for first-order model checking in graph structures.
 
-> NOTE: This project was previously known as **gramoFO**
+This project and the accompanying bachelor's thesis were inspired by the research group *Theoretical Computer Science / Formal Methods* by the University of Kassel.
+The parsing and validation logic of the backend is built upon a Java desktop application by Arno Ehle and Benedikt Hruschka.
+
+> Note: This project is also known as **gramoFO**.
 
 ## Features
 
@@ -41,6 +44,8 @@
 - [Apollo](https://github.com/DerYeger/apollo)
 - [Apollo-Frontend](https://github.com/DerYeger/apollo-frontend)
 - [Documentation](https://apollo-backend.yeger.eu/)
+- [Bachelor's thesis (German)](https://jan-mueller.at/documents/bachelor-thesis)
+- [Docker](https://hub.docker.com/repository/docker/deryeger/apollo-backend?)
 
 ## Development
 
@@ -51,6 +56,7 @@ Importing or reloading the Gradle project will also install all required depende
 ### Development server
 
 The Gradle `run` task will start the development server.
+
 >Note: Default port is 8080.
 
 ### Linting & formatting
@@ -76,6 +82,11 @@ Run the Gradle `dokkaHtml` task to generate the documentation. It will be stored
 Run `docker-compose up -d --build` to build and start a container. Alternatively, build the image via the Dockerfile.
 >Note: Default port is 8080.
 
-## License
+## Licenses
 
 [BSD 3-Clause License](./LICENSE) - Copyright &copy; Jan Müller
+
+The parsing and validation logic is built upon a Java desktop application by Arno Ehle and Benedikt Hruschka.
+The following license precedes the affected code.
+
+[BSD 3-Clause License](./src/eu/yeger/apollo/fol/LICENSE) - Copyright &copy; Arno Ehle, Benedikt Hruschka

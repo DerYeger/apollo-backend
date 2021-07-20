@@ -27,13 +27,46 @@ public fun parseFormula(formula: String, language: Language = English): ParserRe
 }
 
 /**
+ * BSD 3-Clause License
+ *
+ * Copyright (c) 2021, Arno Ehle, Benedikt Hruschka
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ * this list of conditions and the following disclaimer in the documentation
+ * and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its
+ * contributors may be used to endorse or promote products derived from
+ * this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/**
  * This class provides a singleton object, which can parse input strings into
  * data structures. It works like a recursive descent parser.
  *
- * This is legacy code.
- *
  * @property language The [Language] used for translating error messages.
  * @constructor Creates an [FOLParser] with the given [language].
+ *
+ * @author Arno Ehle
+ * @author Benedikt Hruschka
  */
 private class FOLParser(private val language: Language) {
   private val symbolTable: HashMap<String, String> = HashMap()
@@ -102,7 +135,7 @@ private class FOLParser(private val language: Language) {
     return parseBiImplication(scanner)
   }
 
-  // Biimpl ::= Impl ['<->' Impl]* 
+  // Biimpl ::= Impl ['<->' Impl]*
   @Throws(ParseException::class)
   private fun parseBiImplication(scanner: FOLScanner): Formula {
     var biimpl = parseImplication(scanner)
@@ -114,7 +147,7 @@ private class FOLParser(private val language: Language) {
     return biimpl
   }
 
-  // Impl ::= Or ['->' Or]* 
+  // Impl ::= Or ['->' Or]*
   @Throws(ParseException::class)
   private fun parseImplication(scanner: FOLScanner): Formula {
     var impl = parseOr(scanner)
@@ -126,7 +159,7 @@ private class FOLParser(private val language: Language) {
     return impl
   }
 
-  // Or ::= And ['||' And]* 
+  // Or ::= And ['||' And]*
   @Throws(ParseException::class)
   private fun parseOr(scanner: FOLScanner): Formula {
     var or = parseAnd(scanner)
@@ -138,7 +171,7 @@ private class FOLParser(private val language: Language) {
     return or
   }
 
-  // And ::= UnaryOperator ['&&' UnaryOperator]* 
+  // And ::= UnaryOperator ['&&' UnaryOperator]*
   @Throws(ParseException::class)
   private fun parseAnd(scanner: FOLScanner): Formula {
     var and = parseUnaryOperator(scanner)
@@ -254,7 +287,7 @@ private class FOLParser(private val language: Language) {
     }
   }
 
-  // NormalPredicate ::= (  PredSymbol '(' ((Term) [',' Term]* )?  ')'  ) 
+  // NormalPredicate ::= (  PredSymbol '(' ((Term) [',' Term]* )?  ')'  )
   @Throws(ParseException::class)
   private fun parseNormalPredicate(scanner: FOLScanner): Formula {
     val symbol = scanner.curValue()
@@ -277,7 +310,7 @@ private class FOLParser(private val language: Language) {
         }
         scanner.nextToken()
       }
-    } // else no opening bracket -> no term		
+    } // else no opening bracket -> no term
     val symbolType = "P-" + termChildren.size
     checkSymbolInfo(symbol, symbolType)
     val children = termChildren.toList()
@@ -348,7 +381,7 @@ private class FOLParser(private val language: Language) {
         }
         scanner.nextToken()
       }
-    } // else not opening bracket -> no term		
+    } // else not opening bracket -> no term
     return if (!containsSymbol(curBoundedVars, symbol)) {
       checkSymbolInfo(symbol, "F-" + termChildren.size)
       when (termChildren.size) {

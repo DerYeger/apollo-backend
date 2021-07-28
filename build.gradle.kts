@@ -43,7 +43,7 @@ sourceSets {
 
 repositories {
   mavenLocal()
-  jcenter()
+  mavenCentral()
   maven(url = uri("https://kotlin.bintray.com/ktor"))
 }
 
@@ -60,7 +60,7 @@ dependencies {
   implementation("io.ktor:ktor-serialization:$ktorVersion")
 
   // Other dependencies
-  implementation("org.koin:koin-ktor:$koinVersion")
+  implementation("io.insert-koin:koin-ktor:$koinVersion")
   implementation("ch.qos.logback:logback-classic:$logbackVersion")
   implementation("com.michael-bull.kotlin-result:kotlin-result:$kotlinResultVersion")
 

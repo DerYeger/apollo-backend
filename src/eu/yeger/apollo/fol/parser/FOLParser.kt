@@ -276,7 +276,7 @@ private class FOLParser(private val language: Language) {
       throw ParseException(language.getString("FOP_MISSING_OPERATOR", scanner.curValue()))
     }
     val symbol = scanner.curValue()
-    // its not yet read, because scanner.nextToken isn't called
+    // it's not yet read, because scanner.nextToken isn't called
 
     // if it starts with a big letter it is a Predicate
     // else it is a term and must be followed by an infix-Predicate
@@ -399,7 +399,7 @@ private class FOLParser(private val language: Language) {
   /**
    * throws a ParseException, if the symbol is already in use
    *
-   * (adds a a info-string for printing)
+   * (adds an info-string for printing)
    * @param symbol the symbol to be checked
    */
   @Throws(ParseException::class)

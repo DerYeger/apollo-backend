@@ -33,7 +33,7 @@ package eu.yeger.apollo.model.domain.fol
  */
 
 /**
- * This class is used to store meta data for a FOLFormula.
+ * This class is used to store metadata for a FOLFormula.
  *
  * @property formula The root [Formula].
  * @property symbolTable The extracted, raw symbol table.

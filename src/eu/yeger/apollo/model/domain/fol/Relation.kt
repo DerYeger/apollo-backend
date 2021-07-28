@@ -25,7 +25,7 @@ private val specialNames = mapOf(
 public sealed class Relation(name: String) : Formula(name) {
 
   /**
-   * Represents an unary FOL relation.
+   * Represents a unary FOL relation.
    *
    * @property term The [Term] of this unary relation.
    * @constructor Creates an [Unary] relation with the given name.

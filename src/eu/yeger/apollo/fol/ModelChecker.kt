@@ -69,7 +69,7 @@ internal fun Formula.validated(
   )
 
 /**
- * Creates a invalidated [ModelCheckerTrace] using the given information.
+ * Creates an invalidated [ModelCheckerTrace] using the given information.
  *
  * @receiver The source [Formula].
  * @param description [TranslationDTO] with a description key for this check.

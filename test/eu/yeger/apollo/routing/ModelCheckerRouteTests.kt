@@ -80,7 +80,6 @@ class ModelCheckerRouteTests {
         """.trimIndent()
       )
     }.run {
-      requestHandled shouldBe true
       response.status() shouldBe HttpStatusCode.OK
       response.content shouldNotBe null
     }

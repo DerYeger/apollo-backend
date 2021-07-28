@@ -115,6 +115,10 @@ tasks {
       }
     }
   }
+
+  withType<Jar> {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+  }
 }
 
 jacoco {

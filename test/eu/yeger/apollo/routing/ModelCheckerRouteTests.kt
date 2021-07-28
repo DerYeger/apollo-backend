@@ -9,6 +9,7 @@ import io.ktor.server.testing.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
+import java.util.*
 
 class ModelCheckerRouteTests {
 
@@ -36,7 +37,7 @@ class ModelCheckerRouteTests {
                     {
                         "formula": "exists x. exists y. B(x,y)",
                         "language": "$language",
-                        "feedback": "${feedback.name.toLowerCase()}",
+                        "feedback": "${feedback.name.lowercase(Locale.getDefault())}",
                         "graph": {
                             "name": "Demo Graph",
                             "description": "A simple demonstration Graph.",

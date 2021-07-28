@@ -73,14 +73,12 @@ dependencies {
 tasks {
   compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
-    kotlinOptions.useIR = true
     // Format the code before compilation
     dependsOn(ktlintFormat)
   }
 
   compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
-    kotlinOptions.useIR = true
   }
 
   ktlintFormat {
@@ -100,8 +98,8 @@ tasks {
 
   jacocoTestReport {
     reports {
-      xml.isEnabled = true
-      html.isEnabled = false
+      xml.required.set(true)
+      html.required.set(false)
     }
   }
 

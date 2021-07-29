@@ -107,8 +107,8 @@ tasks {
         displayName.set("Apollo-Backend")
         reportUndocumented.set(true)
         sourceLink {
-          localDirectory.set(file("src/main/kotlin"))
-          remoteUrl.set(uri("https://github.com/DerYeger/apollo-backend/tree/develop/src").toURL())
+          localDirectory.set(file("src/"))
+          remoteUrl.set(uri("https://github.com/DerYeger/apollo-backend/tree/master/src").toURL())
         }
       }
     }

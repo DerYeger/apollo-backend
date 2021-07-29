@@ -2,11 +2,11 @@ package eu.yeger.apollo.fol
 
 import com.github.michaelbull.result.get
 import eu.yeger.apollo.fol.parser.parseFormula
-import eu.yeger.apollo.model.api.Feedback
-import eu.yeger.apollo.model.domain.Edge
-import eu.yeger.apollo.model.domain.Graph
-import eu.yeger.apollo.model.domain.Node
-import eu.yeger.apollo.model.domain.fol.ModelCheckerTrace
+import eu.yeger.apollo.shared.model.api.Feedback
+import eu.yeger.apollo.shared.model.domain.Edge
+import eu.yeger.apollo.shared.model.domain.Graph
+import eu.yeger.apollo.shared.model.domain.Node
+import eu.yeger.apollo.shared.model.fol.ModelCheckerTrace
 import eu.yeger.apollo.utils.checkRecursive
 import eu.yeger.apollo.utils.shouldBe
 import org.junit.jupiter.api.Test

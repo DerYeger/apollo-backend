@@ -1,12 +1,15 @@
 package eu.yeger.apollo.fol
 
 import com.github.michaelbull.result.*
-import eu.yeger.apollo.model.api.Feedback
-import eu.yeger.apollo.model.domain.Edge
-import eu.yeger.apollo.model.domain.Graph
-import eu.yeger.apollo.model.domain.Node
-import eu.yeger.apollo.model.domain.fol.*
-import eu.yeger.apollo.model.dto.TranslationDTO
+import eu.yeger.apollo.shared.model.api.Feedback
+import eu.yeger.apollo.shared.model.api.TranslationDTO
+import eu.yeger.apollo.shared.model.domain.Edge
+import eu.yeger.apollo.shared.model.domain.Graph
+import eu.yeger.apollo.shared.model.domain.Node
+import eu.yeger.apollo.shared.model.fol.Formula
+import eu.yeger.apollo.shared.model.fol.FormulaHead
+import eu.yeger.apollo.shared.model.fol.ModelCheckerTrace
+import eu.yeger.apollo.shared.model.fol.SymbolTable
 
 /**
  * [Result] that either contains the result of the ModelChecking algorithm or the translation key of an error message.
@@ -23,16 +26,16 @@ public typealias ModelCheckerResult = Result<ModelCheckerTrace, TranslationDTO>
  * @param feedback The selected [Feedback].
  * @return The calculated [ModelCheckerResult].
  */
-public fun checkModel(graph: Graph, formulaHead: FormulaHead, feedback: Feedback): ModelCheckerResult = binding {
+public fun checkModel(graph: Graph, formulaHead: FormulaHead, feedback: Feedback, shouldBeModel: Boolean = true): ModelCheckerResult = binding {
   val symbolTable = graph.loadSymbols()
     .andThen { symbolTable -> formulaHead.loadSymbols(symbolTable) }
     .andThen { symbolTable -> checkTotality(graph, symbolTable) }.bind()
   runCatching {
     when (feedback) {
-      Feedback.Full -> formulaHead.formula.fullCheck(graph, symbolTable, emptyMap(), true)
-      Feedback.Relevant -> formulaHead.formula.partialCheck(graph, symbolTable, emptyMap(), true)
+      Feedback.Full -> formulaHead.formula.fullCheck(graph, symbolTable, emptyMap(), shouldBeModel)
+      Feedback.Relevant -> formulaHead.formula.partialCheck(graph, symbolTable, emptyMap(), shouldBeModel)
       Feedback.Minimal ->
-        formulaHead.formula.partialCheck(graph, symbolTable, emptyMap(), true)
+        formulaHead.formula.partialCheck(graph, symbolTable, emptyMap(), shouldBeModel)
           .copy(children = null)
     }
   }.mapError { error ->

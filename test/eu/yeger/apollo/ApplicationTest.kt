@@ -1,6 +1,5 @@
 package eu.yeger.apollo
 
-import eu.yeger.apollo.routing.routingModule
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import org.junit.jupiter.api.Test

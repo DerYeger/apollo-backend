@@ -3,8 +3,8 @@ package eu.yeger.apollo.fol.parser
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
-import eu.yeger.apollo.model.domain.fol.*
-import eu.yeger.apollo.model.domain.fol.Function
+import eu.yeger.apollo.shared.model.fol.*
+import eu.yeger.apollo.shared.model.fol.Function
 
 /**
  * [Result] that either contains a parsed [FormulaHead] or a translated error message.

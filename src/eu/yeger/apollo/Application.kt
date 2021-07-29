@@ -1,13 +1,11 @@
 package eu.yeger.apollo
 
-import eu.yeger.apollo.di.serviceModule
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.serialization.*
 import kotlinx.serialization.json.Json
-import org.koin.ktor.ext.Koin
 import org.slf4j.event.Level
 
 /**
@@ -28,10 +26,6 @@ public fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.mai
  */
 @Suppress("unused") // Referenced in application.conf
 public fun Application.mainModule() {
-  install(Koin) {
-    modules(serviceModule)
-  }
-
   install(CallLogging) {
     level = Level.INFO
     filter { call -> call.request.path().startsWith("/") }
@@ -51,6 +45,7 @@ public fun Application.mainModule() {
     method(HttpMethod.Put)
     method(HttpMethod.Delete)
     method(HttpMethod.Patch)
+    header(HttpHeaders.Authorization)
     anyHost()
     allowNonSimpleContentTypes = true
     allowSameOrigin = true

@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/DerYeger/apollo-backend/compare/v2.0.0...v2.1.0) (2021-07-29)
+
+
+### Features
+
+* add assignments ([4904176](https://github.com/DerYeger/apollo-backend/commit/4904176e8f306aceab129c51bec7271b06e2ee6a))
+
 # [2.0.0](https://github.com/DerYeger/apollo-backend/compare/v1.0.2...v2.0.0) (2021-06-21)
 
 

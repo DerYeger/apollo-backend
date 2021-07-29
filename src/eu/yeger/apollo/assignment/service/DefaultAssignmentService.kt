@@ -62,7 +62,6 @@ public class DefaultAssignmentService(private val assignmentRepository: Assignme
           ok(
             AssignmentCheckResponse(
               correct,
-              if (correct) null else Feedback.Relevant,
               if (!correct && firstCheck.isModel.not()) firstCheck else null,
               if (!correct && secondCheck.isModel) secondCheck else null,
             )

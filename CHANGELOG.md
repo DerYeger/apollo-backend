@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/DerYeger/apollo-backend/compare/v2.1.0...v2.1.1) (2021-07-29)
+
+
+### Bug Fixes
+
+* remove feedback level from assignment check response ([790336a](https://github.com/DerYeger/apollo-backend/commit/790336adafa713803c9e261248662f872d9d6642))
+
 # [2.1.0](https://github.com/DerYeger/apollo-backend/compare/v2.0.0...v2.1.0) (2021-07-29)
 
 

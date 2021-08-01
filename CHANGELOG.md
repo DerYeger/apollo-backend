@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/DerYeger/apollo-backend/compare/v2.2.1...v2.3.0) (2021-08-01)
+
+
+### Features
+
+* add user management ([891d2af](https://github.com/DerYeger/apollo-backend/commit/891d2affd0f92cdd8f9b18d71a51fdc2bd6165c5))
+
 ## [2.2.1](https://github.com/DerYeger/apollo-backend/compare/v2.2.0...v2.2.1) (2021-08-01)
 
 

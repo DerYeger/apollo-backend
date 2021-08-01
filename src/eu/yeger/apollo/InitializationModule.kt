@@ -4,7 +4,10 @@ import eu.yeger.apollo.assignment.model.api.ApiAssignment
 import eu.yeger.apollo.assignment.service.AssignmentService
 import io.ktor.application.*
 import kotlinx.coroutines.runBlocking
+import mu.KotlinLogging
 import org.koin.ktor.ext.inject
+
+private val logger = KotlinLogging.logger { }
 
 public fun Application.initializationModule() {
   val assignmentService: AssignmentService by inject()
@@ -24,4 +27,6 @@ public fun Application.initializationModule() {
     )
     assignmentService.create(secondExampleAssignment)
   }
+
+  logger.info { "InitializationModule installed" }
 }

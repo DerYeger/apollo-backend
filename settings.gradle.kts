@@ -13,4 +13,4 @@ pluginManagement {
   }
 }
 
-rootProject.name = "apollo"
+rootProject.name = "apollo-backend"

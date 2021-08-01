@@ -1,9 +1,41 @@
 version: "3.7"
 
 services:
+  # Apollo backend
   apollo-backend:
+    container_name: apollo-backend
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    networks:
+      - apollo-network
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_HOST: "postgres"
+      DATABASE_PORT: "5432"
+      DATABASE_NAME: "apollo-database"
+      DATABASE_USER: "apollo-database"
+      DATABASE_PASSWORD: "apollo-database"
+  # SQL database
+  postgres:
+    image: postgres:13.3
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - "apollo-data:/var/lib/postgresql/data"
+    networks:
+      - apollo-network
+    environment:
+      POSTGRES_USER: "apollo-database"
+      POSTGRES_PASSWORD: "apollo-database"
+      POSTGRES_DB: "apollo-database"
+
+volumes:
+  apollo-data:
+
+networks:
+  apollo-network:

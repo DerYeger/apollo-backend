@@ -16,10 +16,6 @@ public class InMemoryRepository<T : Entity>(
     return entityMap[id]
   }
 
-  override suspend fun isEmpty(): Boolean {
-    return entityMap.isEmpty()
-  }
-
   override suspend fun save(entity: T) {
     entityMap[entity.id] = entity
   }

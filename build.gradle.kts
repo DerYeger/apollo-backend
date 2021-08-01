@@ -1,11 +1,18 @@
 val arkenvVersion: String by project
+val exposedVersion: String by project
+val flywayVersion: String by project
+val hikariVersion: String by project
 val jacocoVersion: String by project
+val jbcryptVersion: String by project
 val jUnitVersion: String by project
 val koinVersion: String by project
-val kotlinVersion: String by project
+val kotlinLoggingVersion: String by project
 val kotlinResultVersion: String by project
+val kotlinVersion: String by project
 val ktorVersion: String by project
 val logbackVersion: String by project
+val postgresqlVersion: String by project
+val prometheusVersion: String by project
 
 plugins {
   application
@@ -46,23 +53,38 @@ repositories {
 }
 
 dependencies {
-  // Kotlin dependencies
+  // Kotlin
   implementation(kotlin("test"))
 
-  // Ktor dependencies
+  // Ktor
   implementation("io.ktor:ktor-server-netty:$ktorVersion")
   implementation("io.ktor:ktor-server-core:$ktorVersion")
   implementation("io.ktor:ktor-server-host-common:$ktorVersion")
   implementation("io.ktor:ktor-auth:$ktorVersion")
   implementation("io.ktor:ktor-auth-jwt:$ktorVersion")
   implementation("io.ktor:ktor-serialization:$ktorVersion")
+  implementation("io.ktor:ktor-metrics-micrometer:$ktorVersion")
 
-  // Other dependencies
-  implementation("io.insert-koin:koin-ktor:$koinVersion")
+  // Database
+  implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
+  implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+
+  // Logging & monitoring
   implementation("ch.qos.logback:logback-classic:$logbackVersion")
+  implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
+  implementation("io.micrometer:micrometer-registry-prometheus:$prometheusVersion")
+
+  // Other
+  implementation("com.apurebase:arkenv:$arkenvVersion")
+  implementation("io.insert-koin:koin-ktor:$koinVersion")
   implementation("com.michael-bull.kotlin-result:kotlin-result:$kotlinResultVersion")
 
-  // Test dependencies
+  // TODO
+  implementation("com.zaxxer:HikariCP:$hikariVersion")
+  implementation("org.postgresql:postgresql:$postgresqlVersion")
+  implementation("org.flywaydb:flyway-core:$flywayVersion")
+
+  // Test
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
   testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
   testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
@@ -84,6 +106,16 @@ tasks {
     doLast {
       delete("/src/main", "/src/test")
     }
+  }
+
+  run.configure {
+    environment(
+      "DATABASE_HOST" to "localhost",
+      "DATABASE_PORT" to "5432",
+      "DATABASE_NAME" to "apollo-database",
+      "DATABASE_USER" to "apollo-database",
+      "DATABASE_PASSWORD" to "apollo-database"
+    )
   }
 
   test {

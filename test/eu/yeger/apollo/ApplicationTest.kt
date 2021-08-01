@@ -10,8 +10,12 @@ class ApplicationTest {
   @Test
   fun testRoot() {
     withTestApplication({
+      monitoringModule()
       mainModule()
+      databaseModule()
+      koinModule()
       routingModule()
+      initializationModule()
     }) {
       handleRequest(HttpMethod.Get, "/").apply {
         assertEquals(HttpStatusCode.OK, response.status())

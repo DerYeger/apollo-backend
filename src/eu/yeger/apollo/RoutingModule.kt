@@ -8,6 +8,9 @@ import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import kotlinx.serialization.SerializationException
+import mu.KotlinLogging
+
+private val logger = KotlinLogging.logger { }
 
 /**
  * Root routing module of the backend.
@@ -36,4 +39,6 @@ public fun Application.routingModule(): Routing = routing {
       call.respond(HttpStatusCode.BadRequest, cause.message ?: "api.error.unknown")
     }
   }
+
+  logger.info { "RoutingModule installed" }
 }

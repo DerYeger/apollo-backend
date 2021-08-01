@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: jar-artifact
-          path: ./build/libs/apollo.jar
+          path: ./build/libs/apollo-backend.jar
           if-no-files-found: error
       - name: Cleanup Gradle Cache
         # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
@@ -57,7 +57,7 @@ jobs:
       - name: Release assets
         uses: softprops/action-gh-release@v1
         with:
-          files: ./apollo.jar
+          files: ./apollo-backend.jar
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
   documentation:

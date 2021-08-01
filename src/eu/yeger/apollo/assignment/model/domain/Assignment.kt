@@ -19,7 +19,7 @@ public fun Assignment.toPersistenceModel(): PersistentAssignment {
   return PersistentAssignment(
     id = id,
     title = title,
-    rawFormula = rawFormula,
+    formula = rawFormula,
     description = description,
   )
 }

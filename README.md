@@ -37,7 +37,8 @@ The parsing and validation logic of the backend is built upon a Java desktop app
 ## Features
 
 - ✨ **Model Checking**: First-order-logic model checking in graph structures
-- 💹 **Feedback**: Three different feedback levels provide insight on model-checking results
+- ☑️ **Assignments**: Multiple assignments, which build an understanding for first-order logic and model checking
+- 💹 **Feedback**: Three different feedback levels provide insight on model-checking results and assignment solutions
 
 ## Links
 

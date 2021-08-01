@@ -1,8 +1,8 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:eu.yeger.apollo.assignment.model.api////PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.api/index.html
-$dokka.location:eu.yeger.apollo.assignment.model.api//toDomainModel/eu.yeger.apollo.assignment.model.api.ApiAssignment#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.api/to-domain-model.html
-$dokka.location:eu.yeger.apollo.assignment.model.api//toDomainModel/eu.yeger.apollo.assignment.model.api.ApiAssignmentSolution#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.api/to-domain-model.html
+$dokka.location:eu.yeger.apollo.assignment.model.api//toDomainAssignment/eu.yeger.apollo.assignment.model.api.ApiAssignment#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.api/to-domain-assignment.html
+$dokka.location:eu.yeger.apollo.assignment.model.api//toDomainAssignmentSolution/eu.yeger.apollo.assignment.model.api.ApiAssignmentSolution#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.api/to-domain-assignment-solution.html
 $dokka.location:eu.yeger.apollo.assignment.model.api/ApiAssignment///PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.api/-api-assignment/index.html
 $dokka.location:eu.yeger.apollo.assignment.model.api/ApiAssignment/ApiAssignment/#kotlin.String#kotlin.String#kotlin.String#kotlin.String?/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.api/-api-assignment/-api-assignment.html
 $dokka.location:eu.yeger.apollo.assignment.model.api/ApiAssignment/description/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.api/-api-assignment/description.html
@@ -20,8 +20,8 @@ $dokka.location:eu.yeger.apollo.assignment.model.api/AssignmentCheckResponse/cor
 $dokka.location:eu.yeger.apollo.assignment.model.api/AssignmentCheckResponse/firstTrace/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.api/-assignment-check-response/first-trace.html
 $dokka.location:eu.yeger.apollo.assignment.model.api/AssignmentCheckResponse/secondTrace/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.api/-assignment-check-response/second-trace.html
 $dokka.location:eu.yeger.apollo.assignment.model.domain////PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.domain/index.html
-$dokka.location:eu.yeger.apollo.assignment.model.domain//toApiModel/eu.yeger.apollo.assignment.model.domain.Assignment#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.domain/to-api-model.html
-$dokka.location:eu.yeger.apollo.assignment.model.domain//toPersistenceModel/eu.yeger.apollo.assignment.model.domain.Assignment#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.domain/to-persistence-model.html
+$dokka.location:eu.yeger.apollo.assignment.model.domain//toApiAssignment/eu.yeger.apollo.assignment.model.domain.Assignment#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.domain/to-api-assignment.html
+$dokka.location:eu.yeger.apollo.assignment.model.domain//toPersistentAssignment/eu.yeger.apollo.assignment.model.domain.Assignment#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.domain/to-persistent-assignment.html
 $dokka.location:eu.yeger.apollo.assignment.model.domain/Assignment///PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.domain/-assignment/index.html
 $dokka.location:eu.yeger.apollo.assignment.model.domain/Assignment/Assignment/#kotlin.String#kotlin.String#kotlin.String#eu.yeger.apollo.shared.model.fol.FormulaHead#kotlin.String?/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.domain/-assignment/-assignment.html
 $dokka.location:eu.yeger.apollo.assignment.model.domain/Assignment/description/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.domain/-assignment/description.html
@@ -36,7 +36,7 @@ $dokka.location:eu.yeger.apollo.assignment.model.domain/AssignmentSolution/first
 $dokka.location:eu.yeger.apollo.assignment.model.domain/AssignmentSolution/secondGraph/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.domain/-assignment-solution/second-graph.html
 $dokka.location:eu.yeger.apollo.assignment.model.persistence////PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.persistence/index.html
 $dokka.location:eu.yeger.apollo.assignment.model.persistence//toApiModel/eu.yeger.apollo.assignment.model.persistence.PersistentAssignment#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.persistence/to-api-model.html
-$dokka.location:eu.yeger.apollo.assignment.model.persistence//toDomainModel/eu.yeger.apollo.assignment.model.persistence.PersistentAssignment#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.persistence/to-domain-model.html
+$dokka.location:eu.yeger.apollo.assignment.model.persistence//toDomainAssignment/eu.yeger.apollo.assignment.model.persistence.PersistentAssignment#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.persistence/to-domain-assignment.html
 $dokka.location:eu.yeger.apollo.assignment.model.persistence/PersistentAssignment///PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html
 $dokka.location:eu.yeger.apollo.assignment.model.persistence/PersistentAssignment/PersistentAssignment/#kotlin.String#kotlin.String#kotlin.String#kotlin.String?/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/-persistent-assignment.html
 $dokka.location:eu.yeger.apollo.assignment.model.persistence/PersistentAssignment/description/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/description.html
@@ -127,6 +127,10 @@ $dokka.location:eu.yeger.apollo.shared.model.api/ApiNode/ApiNode/#kotlin.String#
 $dokka.location:eu.yeger.apollo.shared.model.api/ApiNode/constants/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-api-node/constants.html
 $dokka.location:eu.yeger.apollo.shared.model.api/ApiNode/name/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-api-node/name.html
 $dokka.location:eu.yeger.apollo.shared.model.api/ApiNode/relations/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-api-node/relations.html
+$dokka.location:eu.yeger.apollo.shared.model.api/ApiToken///PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-api-token/index.html
+$dokka.location:eu.yeger.apollo.shared.model.api/ApiToken/ApiToken/#kotlin.String#kotlin.Long/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-api-token/-api-token.html
+$dokka.location:eu.yeger.apollo.shared.model.api/ApiToken/expiryDate/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-api-token/expiry-date.html
+$dokka.location:eu.yeger.apollo.shared.model.api/ApiToken/token/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-api-token/token.html
 $dokka.location:eu.yeger.apollo.shared.model.api/Feedback.Full///PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-feedback/-full/index.html
 $dokka.location:eu.yeger.apollo.shared.model.api/Feedback.Full/name/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-feedback/-full/name.html
 $dokka.location:eu.yeger.apollo.shared.model.api/Feedback.Full/ordinal/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-feedback/-full/ordinal.html
@@ -279,18 +283,87 @@ $dokka.location:eu.yeger.apollo.shared.repository/ExposedRepository/ExposedRepos
 $dokka.location:eu.yeger.apollo.shared.repository/ExposedRepository/deleteById/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-exposed-repository/delete-by-id.html
 $dokka.location:eu.yeger.apollo.shared.repository/ExposedRepository/getAll/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-exposed-repository/get-all.html
 $dokka.location:eu.yeger.apollo.shared.repository/ExposedRepository/getById/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-exposed-repository/get-by-id.html
+$dokka.location:eu.yeger.apollo.shared.repository/ExposedRepository/isEmpty/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-exposed-repository/is-empty.html
 $dokka.location:eu.yeger.apollo.shared.repository/ExposedRepository/toEntity/org.jetbrains.exposed.sql.ResultRow#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-exposed-repository/to-entity.html
 $dokka.location:eu.yeger.apollo.shared.repository/InMemoryRepository///PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-in-memory-repository/index.html
 $dokka.location:eu.yeger.apollo.shared.repository/InMemoryRepository/InMemoryRepository/#java.util.concurrent.ConcurrentMap[kotlin.String,TypeParam(bounds=[eu.yeger.apollo.shared.model.persistence.Entity])]/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-in-memory-repository/-in-memory-repository.html
 $dokka.location:eu.yeger.apollo.shared.repository/InMemoryRepository/deleteById/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-in-memory-repository/delete-by-id.html
 $dokka.location:eu.yeger.apollo.shared.repository/InMemoryRepository/getAll/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-in-memory-repository/get-all.html
 $dokka.location:eu.yeger.apollo.shared.repository/InMemoryRepository/getById/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-in-memory-repository/get-by-id.html
+$dokka.location:eu.yeger.apollo.shared.repository/InMemoryRepository/isEmpty/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-in-memory-repository/is-empty.html
 $dokka.location:eu.yeger.apollo.shared.repository/InMemoryRepository/save/#TypeParam(bounds=[eu.yeger.apollo.shared.model.persistence.Entity])/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-in-memory-repository/save.html
 $dokka.location:eu.yeger.apollo.shared.repository/Repository///PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-repository/index.html
 $dokka.location:eu.yeger.apollo.shared.repository/Repository/deleteById/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-repository/delete-by-id.html
 $dokka.location:eu.yeger.apollo.shared.repository/Repository/getAll/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-repository/get-all.html
 $dokka.location:eu.yeger.apollo.shared.repository/Repository/getById/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-repository/get-by-id.html
+$dokka.location:eu.yeger.apollo.shared.repository/Repository/isEmpty/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-repository/is-empty.html
 $dokka.location:eu.yeger.apollo.shared.repository/Repository/save/#TypeParam(bounds=[eu.yeger.apollo.shared.model.persistence.Entity])/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.repository/-repository/save.html
+$dokka.location:eu.yeger.apollo.user.model.api////PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.api/index.html
+$dokka.location:eu.yeger.apollo.user.model.api/ApiUser///PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.api/-api-user/index.html
+$dokka.location:eu.yeger.apollo.user.model.api/ApiUser/ApiUser/#kotlin.String#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.api/-api-user/-api-user.html
+$dokka.location:eu.yeger.apollo.user.model.api/ApiUser/id/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.api/-api-user/id.html
+$dokka.location:eu.yeger.apollo.user.model.api/ApiUser/name/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.api/-api-user/name.html
+$dokka.location:eu.yeger.apollo.user.model.api/Credentials///PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.api/-credentials/index.html
+$dokka.location:eu.yeger.apollo.user.model.api/Credentials/Credentials/#kotlin.String#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.api/-credentials/-credentials.html
+$dokka.location:eu.yeger.apollo.user.model.api/Credentials/password/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.api/-credentials/password.html
+$dokka.location:eu.yeger.apollo.user.model.api/Credentials/username/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.api/-credentials/username.html
+$dokka.location:eu.yeger.apollo.user.model.domain////PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.domain/index.html
+$dokka.location:eu.yeger.apollo.user.model.domain//toApiUser/eu.yeger.apollo.user.model.domain.User#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.domain/to-api-user.html
+$dokka.location:eu.yeger.apollo.user.model.domain//toPersistentUser/eu.yeger.apollo.user.model.domain.User#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.domain/to-persistent-user.html
+$dokka.location:eu.yeger.apollo.user.model.domain/User///PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.domain/-user/index.html
+$dokka.location:eu.yeger.apollo.user.model.domain/User/User/#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.domain/-user/-user.html
+$dokka.location:eu.yeger.apollo.user.model.domain/User/id/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.domain/-user/id.html
+$dokka.location:eu.yeger.apollo.user.model.domain/User/name/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.domain/-user/name.html
+$dokka.location:eu.yeger.apollo.user.model.domain/User/password/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.domain/-user/password.html
+$dokka.location:eu.yeger.apollo.user.model.persistence////PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.persistence/index.html
+$dokka.location:eu.yeger.apollo.user.model.persistence//toApiUser/eu.yeger.apollo.user.model.persistence.PersistentUser#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.persistence/to-api-user.html
+$dokka.location:eu.yeger.apollo.user.model.persistence//toDomainUser/eu.yeger.apollo.user.model.persistence.PersistentUser#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.persistence/to-domain-user.html
+$dokka.location:eu.yeger.apollo.user.model.persistence/PersistentUser///PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.persistence/-persistent-user/index.html
+$dokka.location:eu.yeger.apollo.user.model.persistence/PersistentUser/PersistentUser/#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.persistence/-persistent-user/-persistent-user.html
+$dokka.location:eu.yeger.apollo.user.model.persistence/PersistentUser/id/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.persistence/-persistent-user/id.html
+$dokka.location:eu.yeger.apollo.user.model.persistence/PersistentUser/name/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.persistence/-persistent-user/name.html
+$dokka.location:eu.yeger.apollo.user.model.persistence/PersistentUser/password/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.model.persistence/-persistent-user/password.html
+$dokka.location:eu.yeger.apollo.user.repository////PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/index.html
+$dokka.location:eu.yeger.apollo.user.repository//USER_NAME_MAX_LENGTH/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-u-s-e-r_-n-a-m-e_-m-a-x_-l-e-n-g-t-h.html
+$dokka.location:eu.yeger.apollo.user.repository/ExposedUserRepository///PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-exposed-user-repository/index.html
+$dokka.location:eu.yeger.apollo.user.repository/ExposedUserRepository/ExposedUserRepository/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-exposed-user-repository/-exposed-user-repository.html
+$dokka.location:eu.yeger.apollo.user.repository/ExposedUserRepository/getByName/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-exposed-user-repository/get-by-name.html
+$dokka.location:eu.yeger.apollo.user.repository/ExposedUserRepository/save/#eu.yeger.apollo.user.model.persistence.PersistentUser/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-exposed-user-repository/save.html
+$dokka.location:eu.yeger.apollo.user.repository/ExposedUserRepository/toEntity/org.jetbrains.exposed.sql.ResultRow#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-exposed-user-repository/to-entity.html
+$dokka.location:eu.yeger.apollo.user.repository/InMemoryUserRepository///PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-in-memory-user-repository/index.html
+$dokka.location:eu.yeger.apollo.user.repository/InMemoryUserRepository/InMemoryUserRepository/#java.util.concurrent.ConcurrentMap[kotlin.String,eu.yeger.apollo.user.model.persistence.PersistentUser]/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-in-memory-user-repository/-in-memory-user-repository.html
+$dokka.location:eu.yeger.apollo.user.repository/InMemoryUserRepository/getByName/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-in-memory-user-repository/get-by-name.html
+$dokka.location:eu.yeger.apollo.user.repository/UserRepository///PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-user-repository/index.html
+$dokka.location:eu.yeger.apollo.user.repository/UserRepository/getByName/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-user-repository/get-by-name.html
+$dokka.location:eu.yeger.apollo.user.repository/UserRepository/validateUpdateIsPossible/#eu.yeger.apollo.user.model.domain.User/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-user-repository/validate-update-is-possible.html
+$dokka.location:eu.yeger.apollo.user.repository/UserRepository/validateUserIdIsAvailable/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-user-repository/validate-user-id-is-available.html
+$dokka.location:eu.yeger.apollo.user.repository/UserRepository/validateUserNameIsAvailable/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-user-repository/validate-user-name-is-available.html
+$dokka.location:eu.yeger.apollo.user.repository/UserRepository/validateUserWithIdExists/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-user-repository/validate-user-with-id-exists.html
+$dokka.location:eu.yeger.apollo.user.repository/UserRepository/validateUserWithNameExists/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-user-repository/validate-user-with-name-exists.html
+$dokka.location:eu.yeger.apollo.user.repository/Users///PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-users/index.html
+$dokka.location:eu.yeger.apollo.user.repository/Users/name/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-users/name.html
+$dokka.location:eu.yeger.apollo.user.repository/Users/password/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.repository/-users/password.html
+$dokka.location:eu.yeger.apollo.user.service////PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/index.html
+$dokka.location:eu.yeger.apollo.user.service/DefaultUserService///PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-default-user-service/index.html
+$dokka.location:eu.yeger.apollo.user.service/DefaultUserService/DefaultUserService/#eu.yeger.apollo.user.repository.UserRepository/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-default-user-service/-default-user-service.html
+$dokka.location:eu.yeger.apollo.user.service/DefaultUserService/create/#eu.yeger.apollo.user.model.domain.User/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-default-user-service/create.html
+$dokka.location:eu.yeger.apollo.user.service/DefaultUserService/createDefaultUserIfRequired/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-default-user-service/create-default-user-if-required.html
+$dokka.location:eu.yeger.apollo.user.service/DefaultUserService/deleteById/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-default-user-service/delete-by-id.html
+$dokka.location:eu.yeger.apollo.user.service/DefaultUserService/getAll/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-default-user-service/get-all.html
+$dokka.location:eu.yeger.apollo.user.service/DefaultUserService/getById/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-default-user-service/get-by-id.html
+$dokka.location:eu.yeger.apollo.user.service/DefaultUserService/login/#eu.yeger.apollo.user.model.api.Credentials/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-default-user-service/login.html
+$dokka.location:eu.yeger.apollo.user.service/DefaultUserService/update/#eu.yeger.apollo.user.model.domain.User/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-default-user-service/update.html
+$dokka.location:eu.yeger.apollo.user.service/UserService///PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-user-service/index.html
+$dokka.location:eu.yeger.apollo.user.service/UserService/create/#eu.yeger.apollo.user.model.domain.User/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-user-service/create.html
+$dokka.location:eu.yeger.apollo.user.service/UserService/createDefaultUserIfRequired/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-user-service/create-default-user-if-required.html
+$dokka.location:eu.yeger.apollo.user.service/UserService/deleteById/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-user-service/delete-by-id.html
+$dokka.location:eu.yeger.apollo.user.service/UserService/getAll/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-user-service/get-all.html
+$dokka.location:eu.yeger.apollo.user.service/UserService/getById/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-user-service/get-by-id.html
+$dokka.location:eu.yeger.apollo.user.service/UserService/login/#eu.yeger.apollo.user.model.api.Credentials/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-user-service/login.html
+$dokka.location:eu.yeger.apollo.user.service/UserService/update/#eu.yeger.apollo.user.model.domain.User/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user.service/-user-service/update.html
+$dokka.location:eu.yeger.apollo.user////PointingToDeclaration/apollo-backend/eu.yeger.apollo.user/index.html
+$dokka.location:eu.yeger.apollo.user//userModule/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user/user-module.html
+$dokka.location:eu.yeger.apollo.user//userRoutes/io.ktor.routing.Route#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.user/user-routes.html
 $dokka.location:eu.yeger.apollo.utils////PointingToDeclaration/apollo-backend/eu.yeger.apollo.utils/index.html
 $dokka.location:eu.yeger.apollo.utils//delete/io.ktor.routing.Route#kotlin.String#kotlin.coroutines.SuspendFunction1[io.ktor.util.pipeline.PipelineContext[kotlin.Unit,io.ktor.application.ApplicationCall],com.github.michaelbull.result.Result[eu.yeger.apollo.shared.model.api.ResponseEntity[TypeParam(bounds=[kotlin.Any])],eu.yeger.apollo.shared.model.api.ResponseEntity[eu.yeger.apollo.shared.model.api.TranslationDTO]]]/PointingToDeclaration/apollo-backend/eu.yeger.apollo.utils/delete.html
 $dokka.location:eu.yeger.apollo.utils//docker/#kotlin.String#kotlin.Function0[kotlin.String?]/PointingToDeclaration/apollo-backend/eu.yeger.apollo.utils/docker.html
@@ -305,13 +378,16 @@ $dokka.location:eu.yeger.apollo.utils/DockerDelegate///PointingToDeclaration/ap
 $dokka.location:eu.yeger.apollo.utils/DockerDelegate/DockerDelegate/#kotlin.String#kotlin.Function0[kotlin.String?]/PointingToDeclaration/apollo-backend/eu.yeger.apollo.utils/-docker-delegate/-docker-delegate.html
 $dokka.location:eu.yeger.apollo.utils/DockerDelegate/getValue/#eu.yeger.apollo.Arguments#kotlin.reflect.KProperty[*]/PointingToDeclaration/apollo-backend/eu.yeger.apollo.utils/-docker-delegate/get-value.html
 $dokka.location:eu.yeger.apollo////PointingToDeclaration/apollo-backend/eu.yeger.apollo/index.html
+$dokka.location:eu.yeger.apollo//authModule/io.ktor.application.Application#/PointingToDeclaration/apollo-backend/eu.yeger.apollo/auth-module.html
 $dokka.location:eu.yeger.apollo//databaseModule/io.ktor.application.Application#/PointingToDeclaration/apollo-backend/eu.yeger.apollo/database-module.html
 $dokka.location:eu.yeger.apollo//initializationModule/io.ktor.application.Application#/PointingToDeclaration/apollo-backend/eu.yeger.apollo/initialization-module.html
 $dokka.location:eu.yeger.apollo//koinModule/io.ktor.application.Application#/PointingToDeclaration/apollo-backend/eu.yeger.apollo/koin-module.html
 $dokka.location:eu.yeger.apollo//main/#kotlin.Array[kotlin.String]/PointingToDeclaration/apollo-backend/eu.yeger.apollo/main.html
 $dokka.location:eu.yeger.apollo//mainModule/io.ktor.application.Application#/PointingToDeclaration/apollo-backend/eu.yeger.apollo/main-module.html
+$dokka.location:eu.yeger.apollo//matches/eu.yeger.apollo.user.model.api.Credentials#eu.yeger.apollo.user.model.domain.User/PointingToDeclaration/apollo-backend/eu.yeger.apollo/matches.html
 $dokka.location:eu.yeger.apollo//monitoringModule/io.ktor.application.Application#/PointingToDeclaration/apollo-backend/eu.yeger.apollo/monitoring-module.html
 $dokka.location:eu.yeger.apollo//routingModule/io.ktor.application.Application#/PointingToDeclaration/apollo-backend/eu.yeger.apollo/routing-module.html
+$dokka.location:eu.yeger.apollo//withHashedPassword/eu.yeger.apollo.user.model.domain.User#/PointingToDeclaration/apollo-backend/eu.yeger.apollo/with-hashed-password.html
 $dokka.location:eu.yeger.apollo/Arguments///PointingToDeclaration/apollo-backend/eu.yeger.apollo/-arguments/index.html
 $dokka.location:eu.yeger.apollo/Arguments/databaseHost/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo/-arguments/database-host.html
 $dokka.location:eu.yeger.apollo/Arguments/databaseName/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo/-arguments/database-name.html
@@ -324,6 +400,10 @@ $dokka.location:eu.yeger.apollo/Arguments/defaultUsername/#/PointingToDeclaratio
 $dokka.location:eu.yeger.apollo/Arguments/jwtSecret/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo/-arguments/jwt-secret.html
 $dokka.location:eu.yeger.apollo/Arguments/url/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo/-arguments/url.html
 $dokka.location:eu.yeger.apollo/Arguments/useDatabase/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo/-arguments/use-database.html
+$dokka.location:eu.yeger.apollo/JWTConfiguration///PointingToDeclaration/apollo-backend/eu.yeger.apollo/-j-w-t-configuration/index.html
+$dokka.location:eu.yeger.apollo/JWTConfiguration/audience/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo/-j-w-t-configuration/audience.html
+$dokka.location:eu.yeger.apollo/JWTConfiguration/makeToken/#eu.yeger.apollo.user.model.domain.User/PointingToDeclaration/apollo-backend/eu.yeger.apollo/-j-w-t-configuration/make-token.html
+$dokka.location:eu.yeger.apollo/JWTConfiguration/verifier/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo/-j-w-t-configuration/verifier.html
 eu.yeger.apollo
 eu.yeger.apollo.assignment
 eu.yeger.apollo.assignment.model.api
@@ -341,5 +421,11 @@ eu.yeger.apollo.shared.model.domain
 eu.yeger.apollo.shared.model.fol
 eu.yeger.apollo.shared.model.persistence
 eu.yeger.apollo.shared.repository
+eu.yeger.apollo.user
+eu.yeger.apollo.user.model.api
+eu.yeger.apollo.user.model.domain
+eu.yeger.apollo.user.model.persistence
+eu.yeger.apollo.user.repository
+eu.yeger.apollo.user.service
 eu.yeger.apollo.utils
 

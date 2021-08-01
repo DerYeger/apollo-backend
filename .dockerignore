@@ -2,7 +2,7 @@
 !gradle/**
 !resources/**
 !src/**
-!test/*8
+!test/**
 !.editorconfig
 !build.gradle.kts
 !gradle.properties

@@ -3,21 +3,15 @@ package eu.yeger.apollo.shared.repository
 import eu.yeger.apollo.shared.model.persistence.Entity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.deleteWhere
+import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
-public abstract class ExposedRepository<T : Entity>(private val table: EntityTable<T>) : Repository<T> {
-
-  public abstract fun ResultRow.toEntity(): T
-
-  protected suspend fun <T> dbQuery(block: () -> T): T =
-    withContext(Dispatchers.IO) {
-      transaction { block() }
-    }
-
+public class ExposedEntityRetriever<T : Entity>(private val table: EntityTable<T>) : EntityRetriever<T> {
   override suspend fun getAll(): List<T> {
     return dbQuery {
-      table.selectAll().map { it.toEntity() }
+      table.selectAll().map(table::rowToEntity)
     }
   }
 
@@ -25,17 +19,9 @@ public abstract class ExposedRepository<T : Entity>(private val table: EntityTab
     return dbQuery {
       table
         .select { table.id eq id }
-        .mapNotNull { it.toEntity() }
+        .map(table::rowToEntity)
         .singleOrNull()
     }
-  }
-
-  override suspend fun deleteById(id: String): Boolean {
-    return dbQuery {
-      table.deleteWhere {
-        table.id eq id
-      }
-    } > 1
   }
 
   override suspend fun isEmpty(): Boolean {
@@ -44,3 +30,22 @@ public abstract class ExposedRepository<T : Entity>(private val table: EntityTab
     }
   }
 }
+
+public class ExposedEntityDeleter<T : Entity>(private val table: EntityTable<T>) : EntityDeleter<T> {
+  override suspend fun deleteById(id: String): Boolean {
+    return dbQuery {
+      table.deleteWhere {
+        table.id eq id
+      }
+    } > 1
+  }
+}
+
+public class ExposedRepositoryBase<T : Entity>(
+  table: EntityTable<T>
+) : EntityRetriever<T> by ExposedEntityRetriever(table), EntityDeleter<T> by ExposedEntityDeleter(table)
+
+public suspend fun <T> dbQuery(block: () -> T): T =
+  withContext(Dispatchers.IO) {
+    transaction { block() }
+  }

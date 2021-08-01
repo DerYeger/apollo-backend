@@ -23,11 +23,9 @@ public val assignmentModule: Module = module {
   }
   single<AssignmentRepository> {
     if (Arguments.useDatabase) {
-      kotlinLogger.debug { "Using ${ExposedAssignmentRepository::class.java.name}" }
       ExposedAssignmentRepository()
     } else {
-      kotlinLogger.debug { "Using ${InMemoryAssignmentRepository::class.java.name}" }
       InMemoryAssignmentRepository()
-    }
+    }.also { kotlinLogger.debug { "Using ${it::class.java.simpleName}" } }
   }
 }

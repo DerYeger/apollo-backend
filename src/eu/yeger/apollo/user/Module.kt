@@ -23,11 +23,9 @@ public val userModule: Module = module {
   }
   single<UserRepository> {
     if (Arguments.useDatabase) {
-      kotlinLogger.debug { "Using ${ExposedUserRepository::class.java.name}" }
       ExposedUserRepository()
     } else {
-      kotlinLogger.debug { "Using ${InMemoryUserRepository::class.java.name}" }
       InMemoryUserRepository()
-    }
+    }.also { kotlinLogger.debug { "Using ${it::class.java.simpleName}" } }
   }
 }

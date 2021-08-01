@@ -11,3 +11,6 @@ disabled_rules=no-wildcard-imports
 [*.md]
 max_line_length = off
 trim_trailing_whitespace = false
+
+[*.secret]
+insert_final_newline = false

@@ -13,5 +13,5 @@ public fun Application.koinModule() {
     modules(assignmentModule, modelCheckerModule)
   }
 
-  logger.info { "KoinModule installed" }
+  logger.info { "Installation complete" }
 }

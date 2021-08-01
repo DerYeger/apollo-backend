@@ -5,6 +5,9 @@ import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.serialization.*
 import kotlinx.serialization.json.Json
+import mu.KotlinLogging
+
+private val logger = KotlinLogging.logger { }
 
 /**
  * Installs (de-)serialization and CORS features.
@@ -33,4 +36,6 @@ public fun Application.mainModule() {
     allowNonSimpleContentTypes = true
     allowSameOrigin = true
   }
+
+  logger.info { "Installation complete" }
 }

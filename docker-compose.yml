@@ -11,14 +11,16 @@ services:
       - "8080:8080"
     networks:
       - apollo-network
+    secrets:
+      - database_user
+      - database_password
+      - jwt_secret
     depends_on:
       - postgres
     environment:
       DATABASE_HOST: "postgres"
       DATABASE_PORT: "5432"
       DATABASE_NAME: "apollo-database"
-      DATABASE_USER: "apollo-database"
-      DATABASE_PASSWORD: "apollo-database"
   # SQL database
   postgres:
     image: postgres:13.3@sha256:6647385dd9ae11aa2216bf55c54d126b0a85637b3cf4039ef24e3234113588e3
@@ -29,9 +31,12 @@ services:
       - "apollo-data:/var/lib/postgresql/data"
     networks:
       - apollo-network
+    secrets:
+      - database_user
+      - database_password
     environment:
-      POSTGRES_USER: "apollo-database"
-      POSTGRES_PASSWORD: "apollo-database"
+      POSTGRES_USER_FILE: "/run/secrets/database_user"
+      POSTGRES_PASSWORD_FILE: "/run/secrets/database_password"
       POSTGRES_DB: "apollo-database"
 
 volumes:
@@ -39,3 +44,11 @@ volumes:
 
 networks:
   apollo-network:
+
+secrets:
+  database_user:
+    file: ./secrets/database_user.secret
+  database_password:
+    file: ./secrets/database_password.secret
+  jwt_secret:
+    file: ./secrets/jwt_secret.secret

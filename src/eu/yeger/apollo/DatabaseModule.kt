@@ -46,4 +46,5 @@ public fun Application.databaseModule() {
     .load()
     .migrate()
   logger.info { "Flyway migration completed" }
+  logger.info { "Installation complete" }
 }

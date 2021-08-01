@@ -40,5 +40,5 @@ public fun Application.routingModule(): Routing = routing {
     }
   }
 
-  logger.info { "RoutingModule installed" }
+  logger.info { "Installation complete" }
 }

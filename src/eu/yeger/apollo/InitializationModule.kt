@@ -28,5 +28,5 @@ public fun Application.initializationModule() {
     assignmentService.create(secondExampleAssignment)
   }
 
-  logger.info { "InitializationModule installed" }
+  logger.info { "Installation complete" }
 }

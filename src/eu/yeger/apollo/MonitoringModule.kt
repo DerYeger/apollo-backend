@@ -30,5 +30,5 @@ public fun Application.monitoringModule() {
     }
   }
 
-  logger.info { "MonitoringModule installed" }
+  logger.info { "Installation complete" }
 }

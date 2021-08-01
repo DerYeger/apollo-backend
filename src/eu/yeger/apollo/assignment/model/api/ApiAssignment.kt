@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class ApiAssignment(val id: String, val title: String, val formula: String, val description: String? = null)
 
-public fun ApiAssignment.toDomainModel(): Assignment {
+public fun ApiAssignment.toDomainAssignment(): Assignment {
   return Assignment(
     id = id,
     title = title,

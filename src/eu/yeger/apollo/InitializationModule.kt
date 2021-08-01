@@ -2,6 +2,7 @@ package eu.yeger.apollo
 
 import eu.yeger.apollo.assignment.model.api.ApiAssignment
 import eu.yeger.apollo.assignment.service.AssignmentService
+import eu.yeger.apollo.user.service.UserService
 import io.ktor.application.*
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
@@ -26,6 +27,11 @@ public fun Application.initializationModule() {
       description = null
     )
     assignmentService.create(secondExampleAssignment)
+  }
+
+  val userService: UserService by inject()
+  runBlocking {
+    userService.createDefaultUserIfRequired()
   }
 
   logger.info { "Installation complete" }

@@ -6,7 +6,7 @@ import eu.yeger.apollo.shared.model.fol.FormulaHead
 
 public data class Assignment(val id: String, val title: String, val rawFormula: String, val formulaHead: FormulaHead, val description: String?)
 
-public fun Assignment.toApiModel(): ApiAssignment {
+public fun Assignment.toApiAssignment(): ApiAssignment {
   return ApiAssignment(
     id = id,
     title = title,
@@ -15,7 +15,7 @@ public fun Assignment.toApiModel(): ApiAssignment {
   )
 }
 
-public fun Assignment.toPersistenceModel(): PersistentAssignment {
+public fun Assignment.toPersistentAssignment(): PersistentAssignment {
   return PersistentAssignment(
     id = id,
     title = title,

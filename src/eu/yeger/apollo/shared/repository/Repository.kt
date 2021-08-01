@@ -11,4 +11,6 @@ public interface Repository<T : Entity> {
   public suspend fun save(entity: T)
 
   public suspend fun deleteById(id: String): Boolean
+
+  public suspend fun isEmpty(): Boolean
 }

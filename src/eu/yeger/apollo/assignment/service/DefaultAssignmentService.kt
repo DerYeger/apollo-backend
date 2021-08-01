@@ -4,12 +4,13 @@ import com.github.michaelbull.result.*
 import eu.yeger.apollo.assignment.model.api.ApiAssignment
 import eu.yeger.apollo.assignment.model.api.ApiAssignmentSolution
 import eu.yeger.apollo.assignment.model.api.AssignmentCheckResponse
-import eu.yeger.apollo.assignment.model.api.toDomainModel
-import eu.yeger.apollo.assignment.model.domain.toApiModel
-import eu.yeger.apollo.assignment.model.domain.toPersistenceModel
+import eu.yeger.apollo.assignment.model.api.toDomainAssignment
+import eu.yeger.apollo.assignment.model.api.toDomainAssignmentSolution
+import eu.yeger.apollo.assignment.model.domain.toApiAssignment
+import eu.yeger.apollo.assignment.model.domain.toPersistentAssignment
 import eu.yeger.apollo.assignment.model.persistence.PersistentAssignment
 import eu.yeger.apollo.assignment.model.persistence.toApiModel
-import eu.yeger.apollo.assignment.model.persistence.toDomainModel
+import eu.yeger.apollo.assignment.model.persistence.toDomainAssignment
 import eu.yeger.apollo.assignment.repository.AssignmentRepository
 import eu.yeger.apollo.fol.checkModel
 import eu.yeger.apollo.shared.model.api.*
@@ -34,15 +35,15 @@ public class DefaultAssignmentService(private val assignmentRepository: Assignme
   public override suspend fun create(apiAssignment: ApiAssignment): ApiResult<ApiAssignment> {
     return assignmentRepository
       .validateAssignmentIdIsAvailable(apiAssignment.id)
-      .map { apiAssignment.toDomainModel() }
-      .onSuccess { assignment -> assignmentRepository.save(assignment.toPersistenceModel()) }
-      .map { assignment -> assignment.toApiModel() }
+      .map { apiAssignment.toDomainAssignment() }
+      .onSuccess { assignment -> assignmentRepository.save(assignment.toPersistentAssignment()) }
+      .map { assignment -> assignment.toApiAssignment() }
       .map(::created)
   }
 
   public override suspend fun checkAssignment(apiSolution: ApiAssignmentSolution): ApiResult<AssignmentCheckResponse> {
     return assignmentRepository.validateAssignmentWithIdExists(apiSolution.assignmentId).andThen { assignment ->
-      apiSolution.toDomainModel().map { solution -> assignment.toDomainModel() to solution }
+      apiSolution.toDomainAssignmentSolution().map { solution -> assignment.toDomainAssignment() to solution }
     }
       .andThen { (assignment, solution) ->
         binding {

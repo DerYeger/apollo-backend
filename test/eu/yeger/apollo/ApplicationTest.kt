@@ -12,6 +12,7 @@ class ApplicationTest {
     withTestApplication({
       monitoringModule()
       mainModule()
+      authModule()
       databaseModule()
       koinModule()
       routingModule()

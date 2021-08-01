@@ -2,7 +2,9 @@ package eu.yeger.apollo
 
 import eu.yeger.apollo.assignment.assignmentRoutes
 import eu.yeger.apollo.model_checker.modelCheckerRoutes
+import eu.yeger.apollo.user.userRoutes
 import io.ktor.application.*
+import io.ktor.auth.*
 import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.response.*
@@ -28,6 +30,7 @@ public fun Application.routingModule(): Routing = routing {
 
     assignmentRoutes()
     modelCheckerRoutes()
+    userRoutes()
   }
 
   install(StatusPages) {

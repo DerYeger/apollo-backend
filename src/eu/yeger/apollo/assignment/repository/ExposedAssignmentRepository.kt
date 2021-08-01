@@ -1,9 +1,6 @@
 package eu.yeger.apollo.assignment.repository
 
 import eu.yeger.apollo.assignment.model.persistence.PersistentAssignment
-import eu.yeger.apollo.assignment.repository.Assignments.description
-import eu.yeger.apollo.assignment.repository.Assignments.formula
-import eu.yeger.apollo.assignment.repository.Assignments.title
 import eu.yeger.apollo.shared.repository.EntityTable
 import eu.yeger.apollo.shared.repository.ExposedRepository
 import org.jetbrains.exposed.sql.Column

@@ -1,9 +1,6 @@
 package eu.yeger.apollo.routing
 
-import eu.yeger.apollo.initializationModule
-import eu.yeger.apollo.koinModule
-import eu.yeger.apollo.mainModule
-import eu.yeger.apollo.routingModule
+import eu.yeger.apollo.*
 import eu.yeger.apollo.shared.model.api.Feedback
 import eu.yeger.apollo.utils.shouldBe
 import eu.yeger.apollo.utils.shouldNotBe
@@ -20,6 +17,7 @@ class ModelCheckerRouteTests {
   fun `verify that the route is configured properly`() {
     withTestApplication({
       mainModule()
+      authModule()
       koinModule()
       routingModule()
       initializationModule()

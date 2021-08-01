@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class ApiAssignmentSolution(val assignmentId: String, val firstGraph: ApiGraph, val secondGraph: ApiGraph)
 
-public fun ApiAssignmentSolution.toDomainModel(): IntermediateResult<AssignmentSolution> = binding {
+public fun ApiAssignmentSolution.toDomainAssignmentSolution(): IntermediateResult<AssignmentSolution> = binding {
   val firstGraph = firstGraph.toDomainModel().mapError { translationDTO -> unprocessableEntity(translationDTO) }.bind()
   val secondGraph = secondGraph.toDomainModel().mapError { translationDTO -> unprocessableEntity(translationDTO) }.bind()
   AssignmentSolution(

@@ -23,4 +23,8 @@ public class InMemoryRepository<T : Entity>(
   override suspend fun deleteById(id: String): Boolean {
     return entityMap.remove(id) != null
   }
+
+  override suspend fun isEmpty(): Boolean {
+    return entityMap.isEmpty()
+  }
 }

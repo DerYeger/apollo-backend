@@ -78,11 +78,10 @@ dependencies {
   implementation("com.apurebase:arkenv:$arkenvVersion")
   implementation("io.insert-koin:koin-ktor:$koinVersion")
   implementation("com.michael-bull.kotlin-result:kotlin-result:$kotlinResultVersion")
-
-  // TODO
   implementation("com.zaxxer:HikariCP:$hikariVersion")
   implementation("org.postgresql:postgresql:$postgresqlVersion")
   implementation("org.flywaydb:flyway-core:$flywayVersion")
+  implementation("org.mindrot:jbcrypt:$jbcryptVersion")
 
   // Test
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
@@ -93,8 +92,6 @@ dependencies {
 tasks {
   compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
-    // Format the code before compilation
-    dependsOn(ktlintFormat)
   }
 
   compileTestKotlin {

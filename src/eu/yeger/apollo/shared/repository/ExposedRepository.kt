@@ -23,7 +23,10 @@ public abstract class ExposedRepository<T : Entity>(private val table: EntityTab
 
   override suspend fun getById(id: String): T? {
     return dbQuery {
-      table.select { table.id eq id }.mapNotNull { it.toEntity() }.singleOrNull()
+      table
+        .select { table.id eq id }
+        .mapNotNull { it.toEntity() }
+        .singleOrNull()
     }
   }
 
@@ -33,5 +36,11 @@ public abstract class ExposedRepository<T : Entity>(private val table: EntityTab
         table.id eq id
       }
     } > 1
+  }
+
+  override suspend fun isEmpty(): Boolean {
+    return dbQuery {
+      table.selectAll().count() <= 0
+    }
   }
 }

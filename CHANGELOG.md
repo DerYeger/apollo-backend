@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/DerYeger/apollo-backend/compare/v2.2.0...v2.2.1) (2021-08-01)
+
+
+### Bug Fixes
+
+* use secrets for database connection ([89b0c3f](https://github.com/DerYeger/apollo-backend/commit/89b0c3f3fc36c4478cedeadfb4e0dd15412ae19c))
+
 # [2.2.0](https://github.com/DerYeger/apollo-backend/compare/v2.1.1...v2.2.0) (2021-08-01)
 
 

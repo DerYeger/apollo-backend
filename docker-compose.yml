@@ -21,7 +21,7 @@ services:
       DATABASE_PASSWORD: "apollo-database"
   # SQL database
   postgres:
-    image: postgres:13.3
+    image: postgres:13.3@sha256:6647385dd9ae11aa2216bf55c54d126b0a85637b3cf4039ef24e3234113588e3
     container_name: postgres
     ports:
       - "5432:5432"

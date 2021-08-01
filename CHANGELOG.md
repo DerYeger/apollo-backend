@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/DerYeger/apollo-backend/compare/v2.1.1...v2.2.0) (2021-08-01)
+
+
+### Features
+
+* add persistence via Exposed ([50f0246](https://github.com/DerYeger/apollo-backend/commit/50f0246c43dde8dae279c4a61199a958d0ee908f))
+
 ## [2.1.1](https://github.com/DerYeger/apollo-backend/compare/v2.1.0...v2.1.1) (2021-07-29)
 
 

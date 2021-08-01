@@ -92,6 +92,8 @@ jobs:
           branch: gh-pages
           folder: build/dokka/html
           clean: true
+          git-config-name: Jan Müller
+          git-config-email: janmueller3698@gmail.com
       - name: Cleanup Gradle Cache
         # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
         # Restoring these files from a GitHub Actions cache might cause problems for future builds.

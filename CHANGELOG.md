@@ -1,3 +1,16 @@
+# [2.5.0](https://github.com/DerYeger/apollo-backend/compare/v2.4.0...v2.5.0) (2021-08-02)
+
+
+### Bug Fixes
+
+* use DTO for user creation ([da5545b](https://github.com/DerYeger/apollo-backend/commit/da5545bc6007777bb92d3661da7969d3c27644bd))
+* use secrets for default user data ([b53d769](https://github.com/DerYeger/apollo-backend/commit/b53d769ed3e1270a4140bb62196369822f5130b1))
+
+
+### Features
+
+* implement assignment creation and deletion ([9b050ab](https://github.com/DerYeger/apollo-backend/commit/9b050abd644e3df8da5fe60c6705e70f9cd39dbe))
+
 # [2.4.0](https://github.com/DerYeger/apollo-backend/compare/v2.3.0...v2.4.0) (2021-08-02)
 
 

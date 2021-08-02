@@ -4,12 +4,11 @@ import com.github.michaelbull.result.*
 import eu.yeger.apollo.assignment.model.api.ApiAssignment
 import eu.yeger.apollo.assignment.model.api.ApiAssignmentSolution
 import eu.yeger.apollo.assignment.model.api.AssignmentCheckResponse
-import eu.yeger.apollo.assignment.model.api.toDomainAssignment
 import eu.yeger.apollo.assignment.model.api.toDomainAssignmentSolution
-import eu.yeger.apollo.assignment.model.domain.toApiAssignment
+import eu.yeger.apollo.assignment.model.domain.Assignment
 import eu.yeger.apollo.assignment.model.domain.toPersistentAssignment
 import eu.yeger.apollo.assignment.model.persistence.PersistentAssignment
-import eu.yeger.apollo.assignment.model.persistence.toApiModel
+import eu.yeger.apollo.assignment.model.persistence.toApiAssignment
 import eu.yeger.apollo.assignment.model.persistence.toDomainAssignment
 import eu.yeger.apollo.assignment.repository.AssignmentRepository
 import eu.yeger.apollo.fol.checkModel
@@ -21,24 +20,40 @@ public class DefaultAssignmentService(private val assignmentRepository: Assignme
   public override suspend fun getAll(): ApiResult<List<ApiAssignment>> {
     return assignmentRepository
       .getAll()
-      .map(PersistentAssignment::toApiModel)
+      .map(PersistentAssignment::toApiAssignment)
       .toResult(::ok)
   }
 
   public override suspend fun getById(id: String): ApiResult<ApiAssignment> {
     return assignmentRepository
       .validateAssignmentWithIdExists(id)
-      .map(PersistentAssignment::toApiModel)
+      .map(PersistentAssignment::toApiAssignment)
       .map(::ok)
   }
 
-  public override suspend fun create(apiAssignment: ApiAssignment): ApiResult<ApiAssignment> {
+  public override suspend fun create(assignment: Assignment): ApiResult<ApiAssignment> {
     return assignmentRepository
-      .validateAssignmentIdIsAvailable(apiAssignment.id)
-      .map { apiAssignment.toDomainAssignment() }
-      .onSuccess { assignment -> assignmentRepository.save(assignment.toPersistentAssignment()) }
-      .map { assignment -> assignment.toApiAssignment() }
+      .validateAssignmentIdIsAvailable(assignment.id)
+      .map { assignment.toPersistentAssignment() }
+      .onSuccess { persistentAssignment -> assignmentRepository.save(persistentAssignment) }
+      .map(PersistentAssignment::toApiAssignment)
       .map(::created)
+  }
+
+  override suspend fun update(assignment: Assignment): ApiResult<ApiAssignment> {
+    return assignmentRepository
+      .validateAssignmentWithIdExists(assignment.id)
+      .map { assignment.toPersistentAssignment() }
+      .onSuccess { persistentAssignment -> assignmentRepository.update(persistentAssignment) }
+      .map(PersistentAssignment::toApiAssignment)
+      .map(::ok)
+  }
+
+  override suspend fun deleteById(id: String): ApiResult<Unit> {
+    return assignmentRepository
+      .validateAssignmentWithIdExists(id)
+      .onSuccess { assignment -> assignmentRepository.deleteById(assignment.id) }
+      .map { ok(Unit) }
   }
 
   public override suspend fun checkAssignment(apiSolution: ApiAssignmentSolution): ApiResult<AssignmentCheckResponse> {

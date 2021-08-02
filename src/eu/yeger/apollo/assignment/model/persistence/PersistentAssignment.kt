@@ -9,7 +9,7 @@ import eu.yeger.apollo.shared.model.persistence.Entity
 
 public data class PersistentAssignment(override val id: String, val title: String, val formula: String, val description: String?) : Entity
 
-public fun PersistentAssignment.toApiModel(): ApiAssignment {
+public fun PersistentAssignment.toApiAssignment(): ApiAssignment {
   return toDomainAssignment().toApiAssignment()
 }
 

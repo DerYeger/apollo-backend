@@ -17,7 +17,7 @@
 </p>
 <p align="center">
   <a href="https://hub.docker.com/repository/docker/deryeger/apollo-backend">
-    <img alt="Docker" src="https://img.shields.io/docker/cloud/build/deryeger/apollo-backend?color=%2300C460&label=Docker%20Hub&logo=docker">
+    <img alt="Docker Image Version (latest semver)" src="https://img.shields.io/docker/v/deryeger/apollo-backend?logo=docker&sort=semver">
   </a>
 </p>
 
@@ -37,13 +37,14 @@ The parsing and validation logic of the backend is built upon a Java desktop app
 ## Features
 
 - ✨ **Model Checking**: First-order-logic model checking in graph structures
-- ☑️ **Assignments**: Multiple assignments, which build an understanding for first-order logic and model checking
+- ☑️ **Assignments**: Various assignments, which build an understanding for first-order logic and model checking
 - 💹 **Feedback**: Three different feedback levels provide insight on model-checking results and assignment solutions
 
 ## Links
 
 - [Apollo](https://github.com/DerYeger/apollo)
 - [Apollo-Frontend](https://github.com/DerYeger/apollo-frontend)
+- [Apollo-Admin](https://github.com/DerYeger/apollo-admin)
 - [Documentation](https://apollo-backend.yeger.eu/)
 - [Bachelor's thesis (German)](https://jan-mueller.at/documents/bachelor-thesis)
 - [Docker](https://hub.docker.com/repository/docker/deryeger/apollo-backend)

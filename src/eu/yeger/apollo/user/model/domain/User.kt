@@ -2,7 +2,6 @@ package eu.yeger.apollo.user.model.domain
 
 import eu.yeger.apollo.user.model.api.ApiUser
 import eu.yeger.apollo.user.model.persistence.PersistentUser
-import java.util.*
 
 public data class User(
   val id: String,

@@ -21,7 +21,7 @@ import java.util.*
 
 private val logger = KotlinLogging.logger {}
 
-private val loginFailed: ResponseEntity<TranslationDTO> = unauthorized(TranslationDTO("login.error.credentials"))
+private val loginFailed: ResponseEntity<TranslationDTO> = unauthorized(TranslationDTO("api.error.auth.invalid-credentials"))
 
 public class DefaultUserService(
   private val userRepository: UserRepository

@@ -111,7 +111,8 @@ tasks {
       "DATABASE_PORT" to "5432",
       "DATABASE_NAME" to "apollo-database",
       "DATABASE_USER" to "apollo-database",
-      "DATABASE_PASSWORD" to "apollo-database"
+      "DATABASE_PASSWORD" to "apollo-database",
+      "JWT_SECRET" to "apollo-admin-secret",
     )
   }
 

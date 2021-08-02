@@ -3,13 +3,21 @@ package eu.yeger.apollo
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.interfaces.JWTVerifier
+import com.github.michaelbull.result.Err
 import eu.yeger.apollo.shared.model.api.ApiToken
+import eu.yeger.apollo.shared.model.api.TranslationDTO
+import eu.yeger.apollo.shared.model.api.unauthorized
 import eu.yeger.apollo.user.model.api.Credentials
 import eu.yeger.apollo.user.model.domain.User
+import eu.yeger.apollo.user.service.UserService
+import eu.yeger.apollo.utils.get
+import eu.yeger.apollo.utils.post
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.auth.jwt.*
+import io.ktor.routing.*
 import mu.KotlinLogging
+import org.koin.ktor.ext.inject
 import org.mindrot.jbcrypt.BCrypt
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -21,7 +29,27 @@ public fun Application.authModule() {
     jwt {
       verifier(JWTConfiguration.verifier)
       validate { credential ->
-        if (credential.payload.audience.contains(JWTConfiguration.audience)) JWTPrincipal(credential.payload) else null
+        if (credential.payload.audience.contains(JWTConfiguration.audience)) {
+          JWTPrincipal(credential.payload)
+        } else {
+          null
+        }
+      }
+    }
+  }
+
+  routing {
+    val userService: UserService by inject()
+
+    route("auth") {
+      post("login") { credentials: Credentials -> userService.login(credentials) }
+
+      authenticate {
+        get("me") {
+          val principal = call.principal<JWTPrincipal>()
+          val userId = principal?.subject ?: return@get Err(unauthorized(TranslationDTO("api.error.auth.missing-subject")))
+          userService.getById(userId)
+        }
       }
     }
   }

@@ -13,15 +13,21 @@ public object Arguments : Arkenv() {
     validate("URL may not be empty or blank.", String::isNotBlank)
   }
 
-  public val defaultUsername: String by argument {
+  private val defaultUsernameDocker: String? by docker("default_username")
+  private val defaultUsernameArgument: String by argument("DEFAULT_USERNAME") {
     defaultValue = { "apollo-admin" }
     validate("Default username may not be empty or blank.", String::isNotBlank)
   }
+  public val defaultUsername: String
+    get() = defaultUsernameDocker ?: defaultUsernameArgument
 
-  public val defaultPassword: String by argument {
+  private val defaultPasswordDocker: String? by docker("default_password")
+  private val defaultPasswordArgument: String by argument("DEFAULT_PASSWORD") {
     defaultValue = { "apollo-admin" }
     validate("Default password may not be empty or blank.", String::isNotBlank)
   }
+  public val defaultPassword: String
+    get() = defaultPasswordDocker ?: defaultPasswordArgument
 
   private val jwtSecretDocker: String? by docker("jwt_secret")
   private val jwtSecretArgument: String? by argument("JWT_SECRET")

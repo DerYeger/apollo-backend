@@ -14,6 +14,8 @@ services:
     secrets:
       - database_user
       - database_password
+      - default_username
+      - default_password
       - jwt_secret
     depends_on:
       - postgres
@@ -50,5 +52,9 @@ secrets:
     file: ./secrets/database_user.secret
   database_password:
     file: ./secrets/database_password.secret
+  default_username:
+    file: ./secrets/default_username.secret
+  default_password:
+    file: ./secrets/default_password.secret
   jwt_secret:
     file: ./secrets/jwt_secret.secret

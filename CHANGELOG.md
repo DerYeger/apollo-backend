@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/DerYeger/apollo-backend/compare/v2.3.0...v2.4.0) (2021-08-02)
+
+
+### Features
+
+* update login implementation ([dde95e7](https://github.com/DerYeger/apollo-backend/commit/dde95e7f20811e24f67ac9c2a4aa308cc259293f))
+
 # [2.3.0](https://github.com/DerYeger/apollo-backend/compare/v2.2.1...v2.3.0) (2021-08-01)
 
 

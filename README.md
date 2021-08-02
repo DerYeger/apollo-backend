@@ -75,20 +75,75 @@ Run the Gradle `test` task to start the development server.
 
 ## Deployment
 
-### Documentation
+Deployment via Docker is highly recommended.
+The following configuration is a baseline.
 
-Run the Gradle `dokkaHtml` task to generate the documentation. It will be stored in the `build/dokka/html/` directory.
+> Please note that manual creation of the `*.secret` files, found at the of the configuration, is required.
+> They must contain a single line.
 
-### Docker
+```yaml
+version: "3.7"
 
-Run `docker-compose up -d --build` to build and start a container. Alternatively, build the image via the Dockerfile.
->Note: Default port is 8080.
+services:
+  # Apollo Backend
+  apollo-backend:
+    container_name: apollo-backend
+    image: deryeger/apollo-backend:v2.5.0
+    ports:
+      - "8080:8080"
+    networks:
+      - apollo-network
+    secrets:
+      - database_user
+      - database_password
+      - default_username
+      - default_password
+      - jwt_secret
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_HOST: "postgres"
+      DATABASE_PORT: "5432"
+      DATABASE_NAME: "apollo-database"
+    restart: unless-stopped
+  # SQL database
+  postgres:
+    image: postgres:13.3@sha256:6647385dd9ae11aa2216bf55c54d126b0a85637b3cf4039ef24e3234113588e3
+    container_name: apollo-postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - "apollo-data:/var/lib/postgresql/data"
+    networks:
+      - apollo-network
+    secrets:
+      - database_user
+      - database_password
+    environment:
+      POSTGRES_USER_FILE: "/run/secrets/database_user"
+      POSTGRES_PASSWORD_FILE: "/run/secrets/database_password"
+      POSTGRES_DB: "apollo-database"
+    restart: unless-stopped
+
+volumes:
+  apollo-data:
+
+networks:
+  apollo-network:
+
+secrets:
+  database_user:
+    file: ./secrets/database_user.secret
+  database_password:
+    file: ./secrets/database_password.secret
+  default_username:
+    file: ./secrets/default_username.secret
+  default_password:
+    file: ./secrets/default_password.secret
+  jwt_secret:
+    file: ./secrets/jwt_secret.secret
+```
 
 ## Licenses
 
 [BSD 3-Clause License](./LICENSE) - Copyright &copy; Jan Müller
-
-The parsing and validation logic is built upon a Java desktop application by Arno Ehle and Benedikt Hruschka.
-The following license precedes the affected code.
-
-[BSD 3-Clause License](./src/eu/yeger/apollo/fol/LICENSE) - Copyright &copy; Arno Ehle, Benedikt Hruschka

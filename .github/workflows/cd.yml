@@ -118,7 +118,7 @@ jobs:
         with:
           images: deryeger/apollo-backend
       - name: Build and push Docker image
-        uses: docker/build-push-action@e06a3af40d8cc14b3bd54805391f880ba1fc11b5
+        uses: docker/build-push-action@6484a61448f22b18b76747816528a5cd989f25fd
         with:
           context: .
           push: true

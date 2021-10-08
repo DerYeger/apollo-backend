@@ -1,4 +1,4 @@
-FROM gradle:7.2.0@sha256:e4701ddcc9c1e239fcc01c191c04cbab0856d4f71dadf3a88af6432738c53ee7 AS BUILDER
+FROM gradle:7.2.0@sha256:b6f7481915b2dc9de4dfc1e3137c109b38d923e81f1e0daffdafcded501079ff AS BUILDER
 
 WORKDIR /app/
 

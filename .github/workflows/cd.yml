@@ -114,7 +114,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@9b5093b231860810fe3ebe99b9372ef975604c49
+        uses: docker/metadata-action@47c365107cb34e788d99cf3d89acf424b505b3e8
         with:
           images: deryeger/apollo-backend
       - name: Build and push Docker image

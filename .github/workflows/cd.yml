@@ -108,7 +108,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Login
-        uses: docker/login-action@7c79b598eaa33458e78e8d0d71e0a9c217dd92af
+        uses: docker/login-action@1edf6180e07d2ffb423fc48a1a552855c0a1f508
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}

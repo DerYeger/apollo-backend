@@ -6,7 +6,7 @@ pluginManagement {
 
   plugins {
     kotlin("jvm") version kotlinVersion
-    kotlin("plugin.serialization") version kotlinVersion
+    kotlin("plugin.serialization") 1.6.21 kotlinVersion
     id("org.jetbrains.dokka") version dokkaVersion
     id("org.jlleitschuh.gradle.ktlint") version ktlintVersion
     id("com.github.johnrengelman.shadow") version shadowVersion

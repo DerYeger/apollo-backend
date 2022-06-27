@@ -1,5 +1,6 @@
 {
   "extends": [
     "github>DerYeger/renovate-config"
-  ]
+  ],
+  "ignoreDeps": ["io.insert-koin:koin-ktor"]
 }

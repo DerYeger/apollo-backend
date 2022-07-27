@@ -1,313 +1,308 @@
+<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>eu.yeger.apollo.shared.model.api</title>
-<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../";</script><script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script><link href="../../styles/style.css" rel="Stylesheet"><link href="../../styles/logo-styles.css" rel="Stylesheet"><link href="../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../styles/main.css" rel="Stylesheet"><script type="text/javascript" src="../../scripts/clipboard.js" async="async"></script><script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script><script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script><script type="text/javascript" src="../../scripts/main.js" async="async"></script>  </head>
-  <body>
-    <div id="container">
-      <div id="leftColumn"><a href="../../index.html">
-          <div id="logo"></div>
-        </a>
-        <div id="paneSearch"></div>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+</head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+            <a href="../../index.html">
+                    <span>apollo-backend</span>
+            </a>
+    </div>
+    <div>
+1.0.0    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
         <div id="sideMenu"></div>
-      </div>
-      <div id="main">
-        <div id="leftToggler"><span class="icon-toggler"></span></div>
-<script type="text/javascript" src="../../scripts/main.js"></script>        <div class="main-content" id="content" pageIds="apollo-backend::eu.yeger.apollo.shared.model.api////PointingToDeclaration//1512141206">
-          <div class="navigation-wrapper" id="navigation-wrapper">
-            <div class="breadcrumbs"><a href="../../index.html">apollo-backend</a>/<a href="index.html">eu.yeger.apollo.shared.model.api</a></div>
-            <div class="pull-right d-flex">
-              <div id="searchBar"></div>
-            </div>
-          </div>
-          <div class="cover ">
-            <h1 class="cover"><span>Package eu.</span><wbr></wbr><span>yeger.</span><wbr></wbr><span>apollo.</span><wbr></wbr><span>shared.</span><wbr></wbr><span>model.</span><wbr></wbr><span>api</span></h1>
-          </div>
-          <div class="tabbedcontent">
-            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Functions">Functions</button></div>
-            <div class="tabs-section-body">
-              <h2 class="">Types</h2>
-              <div class="table" data-togglable="Types"><a data-name="66512226%2FClasslikes%2F1512141206" anchor-label="ApiEdge" id="66512226%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-api-edge/index.html">ApiEdge</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="66512226%2FClasslikes%2F1512141206"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">data class <a href="-api-edge/index.html">ApiEdge</a>(source: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, target: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, relations: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;, functions: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageIds="apollo-backend::eu.yeger.apollo.shared.model.api////PointingToDeclaration//1512141206">
+  <div class="breadcrumbs"><a href="../../index.html">apollo-backend</a><span class="delimiter">/</span><a href="index.html">eu.yeger.apollo.shared.model.api</a></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Package eu.</span><wbr></wbr><span>yeger.</span><wbr></wbr><span>apollo.</span><wbr></wbr><span>shared.</span><wbr></wbr><span>model.</span><wbr></wbr><span>api</span></h1>
   </div>
-<a data-name="66512226%2FClasslikes%2F1512141206" anchor-label="ApiEdge" id="66512226%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="66512226%2FClasslikes%2F1512141206" anchor-label="ApiEdge" id="66512226%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>Represents an edge between to nodes of an <a href="-api-graph/index.html">ApiGraph</a>.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1996936213%2FClasslikes%2F1512141206" anchor-label="ApiGraph" id="1996936213%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-api-graph/index.html">ApiGraph</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1996936213%2FClasslikes%2F1512141206"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">data class <a href="-api-graph/index.html">ApiGraph</a>(nodes: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="-api-node/index.html">ApiNode</a>&gt;, edges: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="-api-edge/index.html">ApiEdge</a>&gt;)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="1996936213%2FClasslikes%2F1512141206" anchor-label="ApiGraph" id="1996936213%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="1996936213%2FClasslikes%2F1512141206" anchor-label="ApiGraph" id="1996936213%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>Represents a graph consisting of <a href="-api-node/index.html">ApiNode</a>s and <a href="-api-edge/index.html">ApiEdge</a>s.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="617483453%2FClasslikes%2F1512141206" anchor-label="ApiNode" id="617483453%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-api-node/index.html">ApiNode</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="617483453%2FClasslikes%2F1512141206"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">data class <a href="-api-node/index.html">ApiNode</a>(name: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, relations: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;, constants: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="617483453%2FClasslikes%2F1512141206" anchor-label="ApiNode" id="617483453%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="617483453%2FClasslikes%2F1512141206" anchor-label="ApiNode" id="617483453%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>Represents a node of an <a href="-api-graph/index.html">ApiGraph</a>.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-989160574%2FClasslikes%2F1512141206" anchor-label="ApiResult" id="-989160574%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-989160574%2FClasslikes%2F1512141206">ApiResult</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-989160574%2FClasslikes%2F1512141206"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">typealias <a href="index.html#-989160574%2FClasslikes%2F1512141206">ApiResult</a>&lt;<a href="index.html#-989160574%2FClasslikes%2F1512141206">T</a>&gt; = <span data-unresolved-link="com.github.michaelbull.result/Result///PointingToDeclaration/">Result</span>&lt;<a href="-response-entity/index.html">ResponseEntity</a>&lt;<a href="index.html#-989160574%2FClasslikes%2F1512141206">T</a>&gt;, <a href="-response-entity/index.html">ResponseEntity</a>&lt;<a href="-translation-d-t-o/index.html">TranslationDTO</a>&gt;&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-989160574%2FClasslikes%2F1512141206" anchor-label="ApiResult" id="-989160574%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="-989160574%2FClasslikes%2F1512141206" anchor-label="ApiResult" id="-989160574%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><p class="paragraph"><span data-unresolved-link="com.github.michaelbull.result/Result///PointingToDeclaration/">Result</span> that either contains a <a href="-response-entity/index.html">ResponseEntity</a> with the given type or a <a href="-response-entity/index.html">ResponseEntity</a> containing a <a href="-translation-d-t-o/index.html">TranslationDTO</a> for error messages.</p></div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="10641866%2FClasslikes%2F1512141206" anchor-label="ApiToken" id="10641866%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-api-token/index.html">ApiToken</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="10641866%2FClasslikes%2F1512141206"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">data class <a href="-api-token/index.html">ApiToken</a>(token: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, expiryDate: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1502013700%2FClasslikes%2F1512141206" anchor-label="Feedback" id="1502013700%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-feedback/index.html">Feedback</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1502013700%2FClasslikes%2F1512141206"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">enum <a href="-feedback/index.html">Feedback</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a>&lt;<a href="-feedback/index.html">Feedback</a>&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="1502013700%2FClasslikes%2F1512141206" anchor-label="Feedback" id="1502013700%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="1502013700%2FClasslikes%2F1512141206" anchor-label="Feedback" id="1502013700%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>Represents the feedback-selection of a ModelChecking request.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-3000013%2FClasslikes%2F1512141206" anchor-label="IntermediateResult" id="-3000013%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="index.html#-3000013%2FClasslikes%2F1512141206">IntermediateResult</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-3000013%2FClasslikes%2F1512141206"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">typealias <a href="index.html#-3000013%2FClasslikes%2F1512141206">IntermediateResult</a>&lt;<a href="index.html#-3000013%2FClasslikes%2F1512141206">T</a>&gt; = <span data-unresolved-link="com.github.michaelbull.result/Result///PointingToDeclaration/">Result</span>&lt;<a href="index.html#-3000013%2FClasslikes%2F1512141206">T</a>, <a href="-response-entity/index.html">ResponseEntity</a>&lt;<a href="-translation-d-t-o/index.html">TranslationDTO</a>&gt;&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1368401893%2FClasslikes%2F1512141206" anchor-label="ResponseEntity" id="1368401893%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-response-entity/index.html">ResponseEntity</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1368401893%2FClasslikes%2F1512141206"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">data class <a href="-response-entity/index.html">ResponseEntity</a>&lt;<a href="-response-entity/index.html">T</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;(status: <span data-unresolved-link="io.ktor.http/HttpStatusCode///PointingToDeclaration/">HttpStatusCode</span>, data: <a href="-response-entity/index.html">T</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-2133957317%2FClasslikes%2F1512141206" anchor-label="TranslationDTO" id="-2133957317%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-translation-d-t-o/index.html">TranslationDTO</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2133957317%2FClasslikes%2F1512141206"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">data class <a href="-translation-d-t-o/index.html">TranslationDTO</a>(key: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, params: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;?)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-2133957317%2FClasslikes%2F1512141206" anchor-label="TranslationDTO" id="-2133957317%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="-2133957317%2FClasslikes%2F1512141206" anchor-label="TranslationDTO" id="-2133957317%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>Data transfer object for translations with optional parameters.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <h2 class="">Functions</h2>
-              <div class="table" data-togglable="Functions"><a data-name="-1529925975%2FFunctions%2F1512141206" anchor-label="conflict" id="-1529925975%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="conflict.html">conflict</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1529925975%2FFunctions%2F1512141206"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">fun <a href="conflict.html">conflict</a>(translationDTO: <a href="-translation-d-t-o/index.html">TranslationDTO</a>): <a href="-response-entity/index.html">ResponseEntity</a>&lt;<a href="-translation-d-t-o/index.html">TranslationDTO</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1778083383%2FFunctions%2F1512141206" anchor-label="created" id="-1778083383%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="created.html">created</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1778083383%2FFunctions%2F1512141206"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">fun &lt;<a href="created.html">T</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="created.html">created</a>(data: <a href="created.html">T</a>): <a href="-response-entity/index.html">ResponseEntity</a>&lt;<a href="created.html">T</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1895270842%2FFunctions%2F1512141206" anchor-label="notFound" id="-1895270842%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="not-found.html">notFound</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1895270842%2FFunctions%2F1512141206"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">fun <a href="not-found.html">notFound</a>(translationDTO: <a href="-translation-d-t-o/index.html">TranslationDTO</a>): <a href="-response-entity/index.html">ResponseEntity</a>&lt;<a href="-translation-d-t-o/index.html">TranslationDTO</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1631924633%2FFunctions%2F1512141206" anchor-label="ok" id="-1631924633%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="ok.html">ok</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1631924633%2FFunctions%2F1512141206"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">fun &lt;<a href="ok.html">T</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="ok.html">ok</a>(data: <a href="ok.html">T</a>): <a href="-response-entity/index.html">ResponseEntity</a>&lt;<a href="ok.html">T</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1228278083%2FFunctions%2F1512141206" anchor-label="toDomainModel" id="-1228278083%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="to-domain-model.html">toDomainModel</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1228278083%2FFunctions%2F1512141206"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">fun <a href="-api-graph/index.html">ApiGraph</a>.<a href="to-domain-model.html">toDomainModel</a>(): <span data-unresolved-link="com.github.michaelbull.result/Result///PointingToDeclaration/">Result</span>&lt;<a href="../eu.yeger.apollo.shared.model.domain/-graph/index.html">Graph</a>, <a href="-translation-d-t-o/index.html">TranslationDTO</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-1228278083%2FFunctions%2F1512141206" anchor-label="toDomainModel" id="-1228278083%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="brief "><a data-name="-1228278083%2FFunctions%2F1512141206" anchor-label="toDomainModel" id="-1228278083%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>Attempts to create a domain <a href="../eu.yeger.apollo.shared.model.domain/-graph/index.html">Graph</a> from an <a href="-api-graph/index.html">ApiGraph</a> or returns an error if it is invalid.</div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1195758005%2FFunctions%2F1512141206" anchor-label="unauthorized" id="-1195758005%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="unauthorized.html">unauthorized</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1195758005%2FFunctions%2F1512141206"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">fun <a href="unauthorized.html">unauthorized</a>(translationDTO: <a href="-translation-d-t-o/index.html">TranslationDTO</a>): <a href="-response-entity/index.html">ResponseEntity</a>&lt;<a href="-translation-d-t-o/index.html">TranslationDTO</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="2049944956%2FFunctions%2F1512141206" anchor-label="unprocessableEntity" id="2049944956%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="unprocessable-entity.html">unprocessableEntity</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2049944956%2FFunctions%2F1512141206"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace">fun <a href="unprocessable-entity.html">unprocessableEntity</a>(translationDTO: <a href="-translation-d-t-o/index.html">TranslationDTO</a>): <a href="-response-entity/index.html">ResponseEntity</a>&lt;<a href="-translation-d-t-o/index.html">TranslationDTO</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Functions">Functions</button></div>
+    <div class="tabs-section-body">
+      <h2 class="">Types</h2>
+      <div class="table" data-togglable="Types"><a data-name="66512226%2FClasslikes%2F1512141206" anchor-label="ApiEdge" id="66512226%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-api-edge/index.html"><span>Api</span><wbr></wbr><span><span>Edge</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="66512226%2FClasslikes%2F1512141206"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-api-edge/index.html">ApiEdge</a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>source<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>target<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>relations<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>functions<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Represents an edge between to nodes of an <a href="-api-graph/index.html">ApiGraph</a>.</p></div></div></div>
               </div>
             </div>
           </div>
         </div>
-        <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2021 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
+<a data-name="1996936213%2FClasslikes%2F1512141206" anchor-label="ApiGraph" id="1996936213%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-api-graph/index.html"><span>Api</span><wbr></wbr><span><span>Graph</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1996936213%2FClasslikes%2F1512141206"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-api-graph/index.html">ApiGraph</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>nodes<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-api-node/index.html">ApiNode</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>edges<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-api-edge/index.html">ApiEdge</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Represents a graph consisting of <a href="-api-node/index.html">ApiNode</a>s and <a href="-api-edge/index.html">ApiEdge</a>s.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="617483453%2FClasslikes%2F1512141206" anchor-label="ApiNode" id="617483453%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-api-node/index.html"><span>Api</span><wbr></wbr><span><span>Node</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="617483453%2FClasslikes%2F1512141206"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-api-node/index.html">ApiNode</a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>relations<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>constants<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Represents a node of an <a href="-api-graph/index.html">ApiGraph</a>.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-989160574%2FClasslikes%2F1512141206" anchor-label="ApiResult" id="-989160574%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#-989160574%2FClasslikes%2F1512141206"><span>Api</span><wbr></wbr><span><span>Result</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-989160574%2FClasslikes%2F1512141206"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">typealias </span><a href="index.html#-989160574%2FClasslikes%2F1512141206">ApiResult</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html#-989160574%2FClasslikes%2F1512141206">T</a><span class="token operator">&gt;</span><span class="token operator"> = </span><span data-unresolved-link="com.github.michaelbull.result/Result///PointingToDeclaration/">Result</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-response-entity/index.html">ResponseEntity</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html#-989160574%2FClasslikes%2F1512141206">T</a><span class="token operator">&gt;</span><span class="token punctuation">, </span><span class="token keyword"></span><a href="-response-entity/index.html">ResponseEntity</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-translation-d-t-o/index.html">TranslationDTO</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph"><span data-unresolved-link="com.github.michaelbull.result/Result///PointingToDeclaration/">Result</span> that either contains a <a href="-response-entity/index.html">ResponseEntity</a> with the given type or a <a href="-response-entity/index.html">ResponseEntity</a> containing a <a href="-translation-d-t-o/index.html">TranslationDTO</a> for error messages.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="10641866%2FClasslikes%2F1512141206" anchor-label="ApiToken" id="10641866%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-api-token/index.html"><span>Api</span><wbr></wbr><span><span>Token</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="10641866%2FClasslikes%2F1512141206"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-api-token/index.html">ApiToken</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>token<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>expiryDate<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1502013700%2FClasslikes%2F1512141206" anchor-label="Feedback" id="1502013700%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-feedback/index.html"><span><span>Feedback</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1502013700%2FClasslikes%2F1512141206"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-feedback/index.html">Feedback</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-feedback/index.html">Feedback</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Represents the feedback-selection of a ModelChecking request.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-3000013%2FClasslikes%2F1512141206" anchor-label="IntermediateResult" id="-3000013%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#-3000013%2FClasslikes%2F1512141206"><span>Intermediate</span><wbr></wbr><span><span>Result</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-3000013%2FClasslikes%2F1512141206"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">typealias </span><a href="index.html#-3000013%2FClasslikes%2F1512141206">IntermediateResult</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html#-3000013%2FClasslikes%2F1512141206">T</a><span class="token operator">&gt;</span><span class="token operator"> = </span><span data-unresolved-link="com.github.michaelbull.result/Result///PointingToDeclaration/">Result</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html#-3000013%2FClasslikes%2F1512141206">T</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="-response-entity/index.html">ResponseEntity</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-translation-d-t-o/index.html">TranslationDTO</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1368401893%2FClasslikes%2F1512141206" anchor-label="ResponseEntity" id="1368401893%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-response-entity/index.html"><span>Response</span><wbr></wbr><span><span>Entity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1368401893%2FClasslikes%2F1512141206"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-response-entity/index.html">ResponseEntity</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-response-entity/index.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>status<span class="token operator">: </span><span data-unresolved-link="io.ktor.http/HttpStatusCode///PointingToDeclaration/">HttpStatusCode</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>data<span class="token operator">: </span><a href="-response-entity/index.html">T</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-2133957317%2FClasslikes%2F1512141206" anchor-label="TranslationDTO" id="-2133957317%2FClasslikes%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-translation-d-t-o/index.html"><span>Translation</span><wbr></wbr><span><span>DTO</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2133957317%2FClasslikes%2F1512141206"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-translation-d-t-o/index.html">TranslationDTO</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>params<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Data transfer object for translations with optional parameters.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Functions</h2>
+      <div class="table" data-togglable="Functions"><a data-name="-1529925975%2FFunctions%2F1512141206" anchor-label="conflict" id="-1529925975%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="conflict.html"><span><span>conflict</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1529925975%2FFunctions%2F1512141206"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="conflict.html"><span class="token function">conflict</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">translationDTO<span class="token operator">: </span><a href="-translation-d-t-o/index.html">TranslationDTO</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-response-entity/index.html">ResponseEntity</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-translation-d-t-o/index.html">TranslationDTO</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1778083383%2FFunctions%2F1512141206" anchor-label="created" id="-1778083383%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="created.html"><span><span>created</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1778083383%2FFunctions%2F1512141206"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="created.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="created.html"><span class="token function">created</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">data<span class="token operator">: </span><a href="created.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-response-entity/index.html">ResponseEntity</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="created.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1895270842%2FFunctions%2F1512141206" anchor-label="notFound" id="-1895270842%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="not-found.html"><span>not</span><wbr></wbr><span><span>Found</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1895270842%2FFunctions%2F1512141206"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="not-found.html"><span class="token function">notFound</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">translationDTO<span class="token operator">: </span><a href="-translation-d-t-o/index.html">TranslationDTO</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-response-entity/index.html">ResponseEntity</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-translation-d-t-o/index.html">TranslationDTO</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1631924633%2FFunctions%2F1512141206" anchor-label="ok" id="-1631924633%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="ok.html"><span><span>ok</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1631924633%2FFunctions%2F1512141206"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="ok.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="ok.html"><span class="token function">ok</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">data<span class="token operator">: </span><a href="ok.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-response-entity/index.html">ResponseEntity</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="ok.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1228278083%2FFunctions%2F1512141206" anchor-label="toDomainModel" id="-1228278083%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="to-domain-model.html"><span>to</span><wbr></wbr><span>Domain</span><wbr></wbr><span><span>Model</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1228278083%2FFunctions%2F1512141206"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-api-graph/index.html">ApiGraph</a><span class="token punctuation">.</span><a href="to-domain-model.html"><span class="token function">toDomainModel</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.github.michaelbull.result/Result///PointingToDeclaration/">Result</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../eu.yeger.apollo.shared.model.domain/-graph/index.html">Graph</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="-translation-d-t-o/index.html">TranslationDTO</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Attempts to create a domain <a href="../eu.yeger.apollo.shared.model.domain/-graph/index.html">Graph</a> from an <a href="-api-graph/index.html">ApiGraph</a> or returns an error if it is invalid.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1195758005%2FFunctions%2F1512141206" anchor-label="unauthorized" id="-1195758005%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="unauthorized.html"><span><span>unauthorized</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1195758005%2FFunctions%2F1512141206"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="unauthorized.html"><span class="token function">unauthorized</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">translationDTO<span class="token operator">: </span><a href="-translation-d-t-o/index.html">TranslationDTO</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-response-entity/index.html">ResponseEntity</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-translation-d-t-o/index.html">TranslationDTO</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="2049944956%2FFunctions%2F1512141206" anchor-label="unprocessableEntity" id="2049944956%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="unprocessable-entity.html"><span>unprocessable</span><wbr></wbr><span><span>Entity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2049944956%2FFunctions%2F1512141206"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="unprocessable-entity.html"><span class="token function">unprocessableEntity</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">translationDTO<span class="token operator">: </span><a href="-translation-d-t-o/index.html">TranslationDTO</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-response-entity/index.html">ResponseEntity</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-translation-d-t-o/index.html">TranslationDTO</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </body>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+</body>
 </html>
-

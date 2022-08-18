@@ -1,3 +1,10 @@
+## [2.5.6](https://github.com/DerYeger/apollo-backend/compare/v2.5.5...v2.5.6) (2022-08-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency org.postgresql:postgresql to v42.4.2 ([cefef70](https://github.com/DerYeger/apollo-backend/commit/cefef7096e92d10e8a2a1f57a1993711a1df53c2))
+
 ## [2.5.5](https://github.com/DerYeger/apollo-backend/compare/v2.5.4...v2.5.5) (2022-08-18)
 
 

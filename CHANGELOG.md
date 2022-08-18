@@ -1,3 +1,10 @@
+## [2.5.5](https://github.com/DerYeger/apollo-backend/compare/v2.5.4...v2.5.5) (2022-08-18)
+
+
+### Bug Fixes
+
+* **deps:** update docker/build-push-action digest to 965c6a4 ([f606724](https://github.com/DerYeger/apollo-backend/commit/f6067247196bc9e46e4bf2d26e172e2f2980b04b))
+
 ## [2.5.4](https://github.com/DerYeger/apollo-backend/compare/v2.5.3...v2.5.4) (2022-08-17)
 
 

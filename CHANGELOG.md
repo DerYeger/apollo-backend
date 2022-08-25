@@ -1,3 +1,10 @@
+## [2.5.12](https://github.com/DerYeger/apollo-backend/compare/v2.5.11...v2.5.12) (2022-08-25)
+
+
+### Bug Fixes
+
+* **deps:** update docker/metadata-action digest to 59bc9dd ([c676b4d](https://github.com/DerYeger/apollo-backend/commit/c676b4d3643d1ea2a674d238e609379131329e42))
+
 ## [2.5.11](https://github.com/DerYeger/apollo-backend/compare/v2.5.10...v2.5.11) (2022-08-25)
 
 

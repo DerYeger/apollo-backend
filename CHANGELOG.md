@@ -1,3 +1,10 @@
+## [2.5.13](https://github.com/DerYeger/apollo-backend/compare/v2.5.12...v2.5.13) (2022-08-25)
+
+
+### Bug Fixes
+
+* **deps:** update plugin org.jlleitschuh.gradle.ktlint to v11 ([85e8f5a](https://github.com/DerYeger/apollo-backend/commit/85e8f5ac116541c1bfa67d6361a1fca374bdcb76))
+
 ## [2.5.12](https://github.com/DerYeger/apollo-backend/compare/v2.5.11...v2.5.12) (2022-08-25)
 
 

@@ -1,3 +1,10 @@
+## [2.5.11](https://github.com/DerYeger/apollo-backend/compare/v2.5.10...v2.5.11) (2022-08-25)
+
+
+### Bug Fixes
+
+* **deps:** update docker/login-action digest to be010b4 ([6f875b0](https://github.com/DerYeger/apollo-backend/commit/6f875b04226dac580e37566341ba330f0d00949a))
+
 ## [2.5.10](https://github.com/DerYeger/apollo-backend/compare/v2.5.9...v2.5.10) (2022-08-24)
 
 

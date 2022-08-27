@@ -100,27 +100,27 @@ jobs:
         run: |
           rm -f ./.gradle/caches/modules-2/modules-2.lock
           rm -f ./.gradle/caches/modules-2/gc.properties
-  push_to_docker_hub:
-    name: Push to Docker Hub
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Login
-        uses: docker/login-action@be010b42938448d8a286c21d5c4ccf2aae1524a1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@59bc9ddfd5a31eb6f5b55e89b65578fe3bbba85e
-        with:
-          images: deryeger/apollo-backend
-      - name: Build and push Docker image
-        uses: docker/build-push-action@965c6a410d446a30e95d35052c67d6eded60dad6
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+#   push_to_docker_hub:
+#     name: Push to Docker Hub
+#     needs: build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#       - name: Login
+#         uses: docker/login-action@be010b42938448d8a286c21d5c4ccf2aae1524a1
+#         with:
+#           username: ${{ secrets.DOCKER_USERNAME }}
+#           password: ${{ secrets.DOCKER_PASSWORD }}
+#       - name: Extract metadata (tags, labels) for Docker
+#         id: meta
+#         uses: docker/metadata-action@59bc9ddfd5a31eb6f5b55e89b65578fe3bbba85e
+#         with:
+#           images: deryeger/apollo-backend
+#       - name: Build and push Docker image
+#         uses: docker/build-push-action@965c6a410d446a30e95d35052c67d6eded60dad6
+#         with:
+#           context: .
+#           push: true
+#           tags: ${{ steps.meta.outputs.tags }}
+#           labels: ${{ steps.meta.outputs.labels }}

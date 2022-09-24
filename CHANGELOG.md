@@ -1,3 +1,10 @@
+## [2.5.21](https://github.com/DerYeger/apollo-backend/compare/v2.5.20...v2.5.21) (2022-09-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency io.github.microutils:kotlin-logging to v3 ([9c63bf8](https://github.com/DerYeger/apollo-backend/commit/9c63bf828efe5b2cbff52048ba1c819804dc8293))
+
 ## [2.5.20](https://github.com/DerYeger/apollo-backend/compare/v2.5.19...v2.5.20) (2022-09-24)
 
 

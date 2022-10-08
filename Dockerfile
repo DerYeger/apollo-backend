@@ -14,7 +14,7 @@ COPY ./ /app/
 # Build jar
 RUN gradle clean shadowJar --no-daemon
 
-FROM adoptopenjdk/openjdk16:alpine@sha256:a793edcfeaaa06622808fc81c9936403360200af9b0e1483f22bd7db87a29de9
+FROM adoptopenjdk/openjdk16:alpine@sha256:9f5f8ccf379283fb7203f2430868f271d91f8a2f832676b3c9984b22776510ad
 
 COPY --from=BUILDER /app/build/libs/apollo-backend.jar .
 

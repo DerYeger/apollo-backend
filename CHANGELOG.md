@@ -1,3 +1,10 @@
+## [2.5.33](https://github.com/DerYeger/apollo-backend/compare/v2.5.32...v2.5.33) (2022-11-05)
+
+
+### Bug Fixes
+
+* **deps:** update adoptopenjdk/openjdk16:alpine docker digest to 7e5e2a4 ([46f294f](https://github.com/DerYeger/apollo-backend/commit/46f294f6b069cb2c8e40a2150eea946748c57c02))
+
 ## [2.5.32](https://github.com/DerYeger/apollo-backend/compare/v2.5.31...v2.5.32) (2022-11-05)
 
 

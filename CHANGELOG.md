@@ -1,3 +1,10 @@
+## [2.5.32](https://github.com/DerYeger/apollo-backend/compare/v2.5.31...v2.5.32) (2022-11-05)
+
+
+### Bug Fixes
+
+* **deps:** update postgres:15.0 docker digest to bab8d7b ([6b42e83](https://github.com/DerYeger/apollo-backend/commit/6b42e837cebe1414b61077a814a341cd5eeb761f))
+
 ## [2.5.31](https://github.com/DerYeger/apollo-backend/compare/v2.5.30...v2.5.31) (2022-10-29)
 
 

@@ -6,10 +6,18 @@
     <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../";</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-const savedDarkMode = storage ? JSON.parse(storage) : false
-if(savedDarkMode === true){
-    document.getElementsByTagName("html")[0].classList.add("theme-dark")
-}</script>
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
 <script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../styles/style.css" rel="Stylesheet">
 <link href="../../styles/jetbrains-mono.css" rel="Stylesheet">
@@ -21,6 +29,7 @@ if(savedDarkMode === true){
 <script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
 <script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
 <script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
 </head>
 <body>
 <div class="navigation-wrapper" id="navigation-wrapper">
@@ -43,9 +52,9 @@ if(savedDarkMode === true){
     </div>
     <div id="main">
 <div class="main-content" id="content" pageIds="apollo-backend::eu.yeger.apollo.assignment.repository////PointingToDeclaration//1512141206">
-  <div class="breadcrumbs"><a href="../../index.html">apollo-backend</a><span class="delimiter">/</span><a href="index.html">eu.yeger.apollo.assignment.repository</a></div>
+  <div class="breadcrumbs"><a href="../../index.html">apollo-backend</a><span class="delimiter">/</span><span class="current">eu.yeger.apollo.assignment.repository</span></div>
   <div class="cover ">
-    <h1 class="cover"><span>Package eu.</span><wbr></wbr><span>yeger.</span><wbr></wbr><span>apollo.</span><wbr></wbr><span>assignment.</span><wbr></wbr><span>repository</span></h1>
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
@@ -61,7 +70,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-assignment-repository/index.html">AssignmentRepository</a> : <a href="../eu.yeger.apollo.shared.repository/-repository/index.html">Repository</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-assignment-repository/index.html">AssignmentRepository</a> : <a href="../eu.yeger.apollo.shared.repository/-repository/index.html">Repository</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt; </span></div></div></div>
               </div>
             </div>
           </div>
@@ -76,7 +85,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-assignments/index.html">Assignments</a> : <a href="../eu.yeger.apollo.shared.repository/-entity-table/index.html">EntityTable</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-assignments/index.html">Assignments</a> : <a href="../eu.yeger.apollo.shared.repository/-entity-table/index.html">EntityTable</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt; </span></div></div></div>
               </div>
             </div>
           </div>
@@ -91,7 +100,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-exposed-assignment-repository/index.html">ExposedAssignmentRepository</a> : <a href="-assignment-repository/index.html">AssignmentRepository</a>, <a href="../eu.yeger.apollo.shared.repository/-entity-saver/index.html">EntitySaver</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt; </span>, <a href="../eu.yeger.apollo.shared.repository/-entity-updater/index.html">EntityUpdater</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt; </span>, <a href="../eu.yeger.apollo.shared.repository/-entity-retriever/index.html">EntityRetriever</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt; </span>, <a href="../eu.yeger.apollo.shared.repository/-entity-deleter/index.html">EntityDeleter</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-exposed-assignment-repository/index.html">ExposedAssignmentRepository</a> : <a href="-assignment-repository/index.html">AssignmentRepository</a>, <a href="../eu.yeger.apollo.shared.repository/-entity-saver/index.html">EntitySaver</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt; </span>, <a href="../eu.yeger.apollo.shared.repository/-entity-updater/index.html">EntityUpdater</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt; </span>, <a href="../eu.yeger.apollo.shared.repository/-entity-retriever/index.html">EntityRetriever</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt; </span>, <a href="../eu.yeger.apollo.shared.repository/-entity-deleter/index.html">EntityDeleter</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt; </span></div></div></div>
               </div>
             </div>
           </div>
@@ -106,7 +115,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-in-memory-assignment-repository/index.html">InMemoryAssignmentRepository</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">assignmentMap<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentMap.html">ConcurrentMap</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt;</span><span class="token operator"> = </span>ConcurrentHashMap()</span></span><span class="token punctuation">)</span> : <a href="-assignment-repository/index.html">AssignmentRepository</a>, <a href="../eu.yeger.apollo.shared.repository/-repository/index.html">Repository</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-in-memory-assignment-repository/index.html">InMemoryAssignmentRepository</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">assignmentMap<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentMap.html">ConcurrentMap</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt;</span><span class="token operator"> = </span>ConcurrentHashMap()</span></span><span class="token punctuation">)</span> : <a href="-assignment-repository/index.html">AssignmentRepository</a>, <a href="../eu.yeger.apollo.shared.repository/-repository/index.html">Repository</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt; </span></div></div></div>
               </div>
             </div>
           </div>
@@ -123,7 +132,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="-1454848841%2FProperties%2F1512141206" anchor-label="ASSIGNMENT_DESCRIPTION_MAX_LENGTH" id="-1454848841%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-s-s-i-g-n-m-e-n-t_-d-e-s-c-r-i-p-t-i-o-n_-m-a-x_-l-e-n-g-t-h.html">ASSIGNMENT_DESCRIPTION_MAX_LENGTH</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">1000</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="-1454848841%2FProperties%2F1512141206" anchor-label="ASSIGNMENT_DESCRIPTION_MAX_LENGTH" id="-1454848841%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-s-s-i-g-n-m-e-n-t_-d-e-s-c-r-i-p-t-i-o-n_-m-a-x_-l-e-n-g-t-h.html">ASSIGNMENT_DESCRIPTION_MAX_LENGTH</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">1000</span></div></div></div>
               </div>
             </div>
           </div>
@@ -138,7 +147,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="-2085303263%2FProperties%2F1512141206" anchor-label="ASSIGNMENT_FORMULA_MAX_LENGTH" id="-2085303263%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-s-s-i-g-n-m-e-n-t_-f-o-r-m-u-l-a_-m-a-x_-l-e-n-g-t-h.html">ASSIGNMENT_FORMULA_MAX_LENGTH</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">1000</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="-2085303263%2FProperties%2F1512141206" anchor-label="ASSIGNMENT_FORMULA_MAX_LENGTH" id="-2085303263%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-s-s-i-g-n-m-e-n-t_-f-o-r-m-u-l-a_-m-a-x_-l-e-n-g-t-h.html">ASSIGNMENT_FORMULA_MAX_LENGTH</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">1000</span></div></div></div>
               </div>
             </div>
           </div>
@@ -153,7 +162,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="2105503635%2FProperties%2F1512141206" anchor-label="ASSIGNMENT_TITLE_MAX_LENGTH" id="2105503635%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-s-s-i-g-n-m-e-n-t_-t-i-t-l-e_-m-a-x_-l-e-n-g-t-h.html">ASSIGNMENT_TITLE_MAX_LENGTH</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">30</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="2105503635%2FProperties%2F1512141206" anchor-label="ASSIGNMENT_TITLE_MAX_LENGTH" id="2105503635%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-s-s-i-g-n-m-e-n-t_-t-i-t-l-e_-m-a-x_-l-e-n-g-t-h.html">ASSIGNMENT_TITLE_MAX_LENGTH</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">30</span></div></div></div>
               </div>
             </div>
           </div>

@@ -3,6 +3,7 @@ package eu.yeger.apollo.shared.repository
 import eu.yeger.apollo.shared.model.persistence.Entity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll

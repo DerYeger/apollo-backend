@@ -1,3 +1,10 @@
+## [2.5.48](https://github.com/DerYeger/apollo-backend/compare/v2.5.47...v2.5.48) (2023-02-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency gradle to v8 ([#49](https://github.com/DerYeger/apollo-backend/issues/49)) ([f28cd7c](https://github.com/DerYeger/apollo-backend/commit/f28cd7c67bdda5365d9987961acf43c9dd5aea59))
+
 ## [2.5.47](https://github.com/DerYeger/apollo-backend/compare/v2.5.46...v2.5.47) (2023-02-25)
 
 

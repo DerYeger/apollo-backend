@@ -1,3 +1,10 @@
+## [2.5.49](https://github.com/DerYeger/apollo-backend/compare/v2.5.48...v2.5.49) (2023-02-26)
+
+
+### Bug Fixes
+
+* **deps:** update plugin com.github.johnrengelman.shadow to v8 ([#50](https://github.com/DerYeger/apollo-backend/issues/50)) ([ade00fd](https://github.com/DerYeger/apollo-backend/commit/ade00fd92b0ced674e7358a811e27817ffb6052f))
+
 ## [2.5.48](https://github.com/DerYeger/apollo-backend/compare/v2.5.47...v2.5.48) (2023-02-26)
 
 

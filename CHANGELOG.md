@@ -1,3 +1,10 @@
+## [2.5.51](https://github.com/DerYeger/apollo-backend/compare/v2.5.50...v2.5.51) (2023-03-18)
+
+
+### Bug Fixes
+
+* **deps:** update kotlin monorepo to v1.8.10 ([99bd7f6](https://github.com/DerYeger/apollo-backend/commit/99bd7f6f8ef5fc046d55fa1ad34fdde61c9394fc))
+
 ## [2.5.50](https://github.com/DerYeger/apollo-backend/compare/v2.5.49...v2.5.50) (2023-03-10)
 
 

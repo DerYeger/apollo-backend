@@ -42,6 +42,9 @@
     <div>
 1.0.0    </div>
     <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":dokkaHtml/main">Apollo-Backend</button>
+        </div>
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
     </div>
@@ -51,158 +54,136 @@
         <div id="sideMenu"></div>
     </div>
     <div id="main">
-<div class="main-content" id="content" pageIds="apollo-backend::eu.yeger.apollo.assignment.repository/AssignmentRepository///PointingToDeclaration//1512141206">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="apollo-backend::eu.yeger.apollo.assignment.repository/AssignmentRepository///PointingToDeclaration//1512141206">
   <div class="breadcrumbs"><a href="../../../index.html">apollo-backend</a><span class="delimiter">/</span><a href="../index.html">eu.yeger.apollo.assignment.repository</a><span class="delimiter">/</span><span class="current">AssignmentRepository</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Assignment</span><wbr></wbr><span><span>Repository</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">AssignmentRepository</a> : <a href="../../eu.yeger.apollo.shared.repository/-repository/index.html">Repository</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt; </span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/DerYeger/apollo-backend/tree/master/src/eu/yeger/apollo/assignment/repository/AssignmentRepository.kt#L13">source</a>)</span></span></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">AssignmentRepository</a> : <a href="../../eu.yeger.apollo.shared.repository/-repository/index.html">Repository</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt; </span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/DerYeger/apollo-backend/tree/master/src/eu/yeger/apollo/assignment/repository/AssignmentRepository.kt#L13">source</a>)</span></span></div><h4 class="">Inheritors</h4><div class="table"><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-exposed-assignment-repository/index.html">ExposedAssignmentRepository</a></div></span></div><div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-in-memory-assignment-repository/index.html">InMemoryAssignmentRepository</a></div></span></div><div></div></div></div></div></div></div>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Inheritors">Inheritors</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,FUNCTION,PROPERTY">Members</button></div>
     <div class="tabs-section-body">
-      <h2 class="">Functions</h2>
-      <div class="table" data-togglable="Functions"><a data-name="-1333557434%2FFunctions%2F1512141206" anchor-label="deleteById" id="-1333557434%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../../eu.yeger.apollo.shared.repository/-entity-deleter/delete-by-id.html"><span>delete</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Id</span></span></a></div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-1333557434%2FFunctions%2F1512141206" anchor-label="deleteById" id="-1333557434%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../eu.yeger.apollo.shared.repository/-entity-deleter/delete-by-id.html"><span>delete</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Id</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1333557434%2FFunctions%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="../../eu.yeger.apollo.shared.repository/-entity-deleter/delete-by-id.html"><span class="token function">deleteById</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="../../eu.yeger.apollo.shared.repository/-entity-deleter/delete-by-id.html"><span class="token function">deleteById</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1190973185%2FFunctions%2F1512141206" anchor-label="getAll" id="-1190973185%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../../eu.yeger.apollo.shared.repository/-entity-retriever/get-all.html"><span>get</span><wbr></wbr><span><span>All</span></span></a></div>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../eu.yeger.apollo.shared.repository/-entity-retriever/get-all.html"><span>get</span><wbr></wbr><span><span>All</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1190973185%2FFunctions%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="../../eu.yeger.apollo.shared.repository/-entity-retriever/get-all.html"><span class="token function">getAll</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt;</span></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="../../eu.yeger.apollo.shared.repository/-entity-retriever/get-all.html"><span class="token function">getAll</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-577411780%2FFunctions%2F1512141206" anchor-label="getById" id="-577411780%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../../eu.yeger.apollo.shared.repository/-entity-retriever/get-by-id.html"><span>get</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Id</span></span></a></div>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../eu.yeger.apollo.shared.repository/-entity-retriever/get-by-id.html"><span>get</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Id</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-577411780%2FFunctions%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="../../eu.yeger.apollo.shared.repository/-entity-retriever/get-by-id.html"><span class="token function">getById</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">?</span></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="../../eu.yeger.apollo.shared.repository/-entity-retriever/get-by-id.html"><span class="token function">getById</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">?</span></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1933188307%2FFunctions%2F1512141206" anchor-label="isEmpty" id="-1933188307%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../../eu.yeger.apollo.shared.repository/-entity-retriever/is-empty.html"><span>is</span><wbr></wbr><span><span>Empty</span></span></a></div>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../eu.yeger.apollo.shared.repository/-entity-retriever/is-empty.html"><span>is</span><wbr></wbr><span><span>Empty</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1933188307%2FFunctions%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="../../eu.yeger.apollo.shared.repository/-entity-retriever/is-empty.html"><span class="token function">isEmpty</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="../../eu.yeger.apollo.shared.repository/-entity-retriever/is-empty.html"><span class="token function">isEmpty</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-363317896%2FFunctions%2F1512141206" anchor-label="save" id="-363317896%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../-in-memory-assignment-repository/index.html#-363317896%2FFunctions%2F1512141206"><span><span>save</span></span></a></div>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-in-memory-assignment-repository/index.html#-363317896%2FFunctions%2F1512141206"><span><span>save</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-363317896%2FFunctions%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="../-in-memory-assignment-repository/index.html#-363317896%2FFunctions%2F1512141206"><span class="token function">save</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">entity<span class="token operator">: </span><a href="../../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a></span></span><span class="token punctuation">)</span></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="../-in-memory-assignment-repository/index.html#-363317896%2FFunctions%2F1512141206"><span class="token function">save</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">entity<span class="token operator">: </span><a href="../../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1197614736%2FFunctions%2F1512141206" anchor-label="update" id="1197614736%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../-in-memory-assignment-repository/index.html#1197614736%2FFunctions%2F1512141206"><span><span>update</span></span></a></div>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-in-memory-assignment-repository/index.html#1197614736%2FFunctions%2F1512141206"><span><span>update</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1197614736%2FFunctions%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="../-in-memory-assignment-repository/index.html#1197614736%2FFunctions%2F1512141206"><span class="token function">update</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">entity<span class="token operator">: </span><a href="../../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a></span></span><span class="token punctuation">)</span></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="../-in-memory-assignment-repository/index.html#1197614736%2FFunctions%2F1512141206"><span class="token function">update</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">entity<span class="token operator">: </span><a href="../../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1293558127%2FFunctions%2F1512141206" anchor-label="validateAssignmentIdIsAvailable" id="1293558127%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="validate-assignment-id-is-available.html"><span>validate</span><wbr></wbr><span>Assignment</span><wbr></wbr><span>Id</span><wbr></wbr><span>Is</span><wbr></wbr><span><span>Available</span></span></a></div>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="validate-assignment-id-is-available.html"><span>validate</span><wbr></wbr><span>Assignment</span><wbr></wbr><span>Id</span><wbr></wbr><span>Is</span><wbr></wbr><span><span>Available</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1293558127%2FFunctions%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="validate-assignment-id-is-available.html"><span class="token function">validateAssignmentIdIsAvailable</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../eu.yeger.apollo.shared.model.api/index.html#-3000013%2FClasslikes%2F1512141206">IntermediateResult</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">&gt;</span></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="validate-assignment-id-is-available.html"><span class="token function">validateAssignmentIdIsAvailable</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../eu.yeger.apollo.shared.model.api/index.html#-3000013%2FClasslikes%2F1512141206">IntermediateResult</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="577476352%2FFunctions%2F1512141206" anchor-label="validateAssignmentWithIdExists" id="577476352%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="validate-assignment-with-id-exists.html"><span>validate</span><wbr></wbr><span>Assignment</span><wbr></wbr><span>With</span><wbr></wbr><span>Id</span><wbr></wbr><span><span>Exists</span></span></a></div>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="validate-assignment-with-id-exists.html"><span>validate</span><wbr></wbr><span>Assignment</span><wbr></wbr><span>With</span><wbr></wbr><span>Id</span><wbr></wbr><span><span>Exists</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="577476352%2FFunctions%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="validate-assignment-with-id-exists.html"><span class="token function">validateAssignmentWithIdExists</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../eu.yeger.apollo.shared.model.api/index.html#-3000013%2FClasslikes%2F1512141206">IntermediateResult</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt;</span></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="validate-assignment-with-id-exists.html"><span class="token function">validateAssignmentWithIdExists</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../eu.yeger.apollo.shared.model.api/index.html#-3000013%2FClasslikes%2F1512141206">IntermediateResult</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../eu.yeger.apollo.assignment.model.persistence/-persistent-assignment/index.html">PersistentAssignment</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <h2 class="">Inheritors</h2>
-      <div class="table" data-togglable="Inheritors"><a data-name="-2124093159%2FInheritors%2F1512141206" anchor-label="ExposedAssignmentRepository" id="-2124093159%2FInheritors%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../-exposed-assignment-repository/index.html">ExposedAssignmentRepository</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2124093159%2FInheritors%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div></div>
-          </div>
-        </div>
-<a data-name="659167445%2FInheritors%2F1512141206" anchor-label="InMemoryAssignmentRepository" id="659167445%2FInheritors%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../-in-memory-assignment-repository/index.html">InMemoryAssignmentRepository</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="659167445%2FInheritors%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div></div>
           </div>
         </div>
       </div>

@@ -42,6 +42,9 @@
     <div>
 1.0.0    </div>
     <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":dokkaHtml/main">Apollo-Backend</button>
+        </div>
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
     </div>
@@ -51,104 +54,108 @@
         <div id="sideMenu"></div>
     </div>
     <div id="main">
-<div class="main-content" id="content" pageIds="apollo-backend::eu.yeger.apollo.shared.model.fol/ModelCheckerTrace///PointingToDeclaration//1512141206">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="apollo-backend::eu.yeger.apollo.shared.model.fol/ModelCheckerTrace///PointingToDeclaration//1512141206">
   <div class="breadcrumbs"><a href="../../../index.html">apollo-backend</a><span class="delimiter">/</span><a href="../index.html">eu.yeger.apollo.shared.model.fol</a><span class="delimiter">/</span><span class="current">ModelCheckerTrace</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Model</span><wbr></wbr><span>Checker</span><wbr></wbr><span><span>Trace</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">ModelCheckerTrace</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>formula<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>description<span class="token operator">: </span><a href="../../eu.yeger.apollo.shared.model.api/-translation-d-t-o/index.html">TranslationDTO</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isModel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>shouldBeModel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>children<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">ModelCheckerTrace</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/DerYeger/apollo-backend/tree/master/src/eu/yeger/apollo/shared/model/fol/ModelCheckerTrace.kt#L7">source</a>)</span></span></div><p class="paragraph">Trace of the ModelChecking algorithm. Contains information about a single check and its child checks.</p><span class="kdoc-tag"><h4 class="">Author</h4><p class="paragraph">Jan Müller</p></span></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">ModelCheckerTrace</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>formula<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>description<span class="token operator">: </span><a href="../../eu.yeger.apollo.shared.model.api/-translation-d-t-o/index.html">TranslationDTO</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isModel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>shouldBeModel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>children<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">ModelCheckerTrace</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/DerYeger/apollo-backend/tree/master/src/eu/yeger/apollo/shared/model/fol/ModelCheckerTrace.kt#L21">source</a>)</span></span></div><p class="paragraph">Trace of the ModelChecking algorithm. Contains information about a single check and its child checks.</p><span class="kdoc-tag"><h4 class="">Author</h4><p class="paragraph">Jan Müller</p></span></div></div>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,FUNCTION,PROPERTY">Members</button></div>
     <div class="tabs-section-body">
-      <h2 class="tabbedcontent">Constructors</h2>
-      <div class="table" data-togglable="Constructors"><a data-name="318380562%2FConstructors%2F1512141206" anchor-label="ModelCheckerTrace" id="318380562%2FConstructors%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue TabbedContent">
-            <div class=""><span class="inline-flex">
-                <div><a href="-model-checker-trace.html"><span>Model</span><wbr></wbr><span>Checker</span><wbr></wbr><span><span>Trace</span></span></a></div>
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="318380562%2FConstructors%2F1512141206" anchor-label="ModelCheckerTrace" id="318380562%2FConstructors%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-checker-trace.html"><span>Model</span><wbr></wbr><span>Checker</span><wbr></wbr><span><span>Trace</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="318380562%2FConstructors%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-model-checker-trace.html"><span class="token function">ModelCheckerTrace</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">formula<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">description<span class="token operator">: </span><a href="../../eu.yeger.apollo.shared.model.api/-translation-d-t-o/index.html">TranslationDTO</a><span class="token punctuation">, </span></span><span class="parameter ">isModel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">shouldBeModel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">children<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">ModelCheckerTrace</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Creates a <a href="index.html">ModelCheckerTrace</a> with the given parameters.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">formula<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">description<span class="token operator">: </span><a href="../../eu.yeger.apollo.shared.model.api/-translation-d-t-o/index.html">TranslationDTO</a><span class="token punctuation">, </span></span><span class="parameter ">isModel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">shouldBeModel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">children<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">ModelCheckerTrace</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Creates a <a href="index.html">ModelCheckerTrace</a> with the given parameters.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <h2 class="">Properties</h2>
-      <div class="table" data-togglable="Properties"><a data-name="1602806601%2FProperties%2F1512141206" anchor-label="children" id="1602806601%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="children.html"><span><span>children</span></span></a></div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="1602806601%2FProperties%2F1512141206" anchor-label="children" id="1602806601%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="children.html"><span><span>children</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1602806601%2FProperties%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="1602806601%2FProperties%2F1512141206" anchor-label="children" id="1602806601%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="children.html">children</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">ModelCheckerTrace</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><a data-name="1602806601%2FProperties%2F1512141206" anchor-label="children" id="1602806601%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><p class="paragraph"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a> of child-traces.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="children.html">children</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">ModelCheckerTrace</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><p class="paragraph"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a> of child-traces.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="784981686%2FProperties%2F1512141206" anchor-label="description" id="784981686%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="description.html"><span><span>description</span></span></a></div>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="description.html"><span><span>description</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="784981686%2FProperties%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="784981686%2FProperties%2F1512141206" anchor-label="description" id="784981686%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="description.html">description</a><span class="token operator">: </span><a href="../../eu.yeger.apollo.shared.model.api/-translation-d-t-o/index.html">TranslationDTO</a></div><div class="brief "><a data-name="784981686%2FProperties%2F1512141206" anchor-label="description" id="784981686%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><p class="paragraph"><a href="../../eu.yeger.apollo.shared.model.api/-translation-d-t-o/index.html">TranslationDTO</a> with a description key for this check.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="description.html">description</a><span class="token operator">: </span><a href="../../eu.yeger.apollo.shared.model.api/-translation-d-t-o/index.html">TranslationDTO</a></div><div class="brief "><p class="paragraph"><a href="../../eu.yeger.apollo.shared.model.api/-translation-d-t-o/index.html">TranslationDTO</a> with a description key for this check.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1688149772%2FProperties%2F1512141206" anchor-label="formula" id="1688149772%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="formula.html"><span><span>formula</span></span></a></div>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="formula.html"><span><span>formula</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1688149772%2FProperties%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="1688149772%2FProperties%2F1512141206" anchor-label="formula" id="1688149772%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="formula.html">formula</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><a data-name="1688149772%2FProperties%2F1512141206" anchor-label="formula" id="1688149772%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><p class="paragraph">The <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> representation of the checked <a href="../-formula/index.html">Formula</a>.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="formula.html">formula</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> representation of the checked <a href="../-formula/index.html">Formula</a>.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="263953011%2FProperties%2F1512141206" anchor-label="isModel" id="263953011%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="is-model.html"><span>is</span><wbr></wbr><span><span>Model</span></span></a></div>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-model.html"><span>is</span><wbr></wbr><span><span>Model</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="263953011%2FProperties%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="263953011%2FProperties%2F1512141206" anchor-label="isModel" id="263953011%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="is-model.html">isModel</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><a data-name="263953011%2FProperties%2F1512141206" anchor-label="isModel" id="263953011%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><p class="paragraph">Indicates that the <a href="../../eu.yeger.apollo.shared.model.domain/-graph/index.html">Graph</a> is a model of the checked <a href="formula.html">formula</a>.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="is-model.html">isModel</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Indicates that the <a href="../../eu.yeger.apollo.shared.model.domain/-graph/index.html">Graph</a> is a model of the checked <a href="formula.html">formula</a>.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1737451999%2FProperties%2F1512141206" anchor-label="shouldBeModel" id="1737451999%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="should-be-model.html"><span>should</span><wbr></wbr><span>Be</span><wbr></wbr><span><span>Model</span></span></a></div>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="should-be-model.html"><span>should</span><wbr></wbr><span>Be</span><wbr></wbr><span><span>Model</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1737451999%2FProperties%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="1737451999%2FProperties%2F1512141206" anchor-label="shouldBeModel" id="1737451999%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="should-be-model.html">shouldBeModel</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><a data-name="1737451999%2FProperties%2F1512141206" anchor-label="shouldBeModel" id="1737451999%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><p class="paragraph">Indicates that the <a href="../../eu.yeger.apollo.shared.model.domain/-graph/index.html">Graph</a> is supposed to be model of checked <a href="formula.html">formula</a>.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="should-be-model.html">shouldBeModel</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Indicates that the <a href="../../eu.yeger.apollo.shared.model.domain/-graph/index.html">Graph</a> is supposed to be model of checked <a href="formula.html">formula</a>.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>

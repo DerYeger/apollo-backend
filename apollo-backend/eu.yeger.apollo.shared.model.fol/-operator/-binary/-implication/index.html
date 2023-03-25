@@ -42,6 +42,9 @@
     <div>
 1.0.0    </div>
     <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":dokkaHtml/main">Apollo-Backend</button>
+        </div>
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
     </div>
@@ -51,140 +54,142 @@
         <div id="sideMenu"></div>
     </div>
     <div id="main">
-<div class="main-content" id="content" pageIds="apollo-backend::eu.yeger.apollo.shared.model.fol/Operator.Binary.Implication///PointingToDeclaration//1512141206">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="apollo-backend::eu.yeger.apollo.shared.model.fol/Operator.Binary.Implication///PointingToDeclaration//1512141206">
   <div class="breadcrumbs"><a href="../../../../../index.html">apollo-backend</a><span class="delimiter">/</span><a href="../../../index.html">eu.yeger.apollo.shared.model.fol</a><span class="delimiter">/</span><a href="../../index.html">Operator</a><span class="delimiter">/</span><a href="../index.html">Binary</a><span class="delimiter">/</span><span class="current">Implication</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Implication</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">Implication</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>firstOperand<span class="token operator">: </span><a href="../../../-formula/index.html">Formula</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>secondOperand<span class="token operator">: </span><a href="../../../-formula/index.html">Formula</a></span></span><span class="token punctuation">)</span> : <a href="../index.html">Operator.Binary</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/DerYeger/apollo-backend/tree/master/src/eu/yeger/apollo/shared/model/fol/Operator.kt#L238">source</a>)</span></span></div><p class="paragraph">Represents an implication operator.</p><span class="kdoc-tag"><h4 class="">Author</h4><p class="paragraph">Jan Müller</p></span></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">Implication</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>firstOperand<span class="token operator">: </span><a href="../../../-formula/index.html">Formula</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>secondOperand<span class="token operator">: </span><a href="../../../-formula/index.html">Formula</a></span></span><span class="token punctuation">)</span> : <a href="../index.html">Operator.Binary</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/DerYeger/apollo-backend/tree/master/src/eu/yeger/apollo/shared/model/fol/Operator.kt#L248">source</a>)</span></span></div><p class="paragraph">Represents an implication operator.</p><span class="kdoc-tag"><h4 class="">Author</h4><p class="paragraph">Jan Müller</p></span><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>first</span><wbr></wbr><span><span>Operand</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The antecedent.</p></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>second</span><wbr></wbr><span><span>Operand</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The consequent.</p></div></div></div></div></div></div></div>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Parameters">Parameters</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,FUNCTION,PROPERTY">Members</button></div>
     <div class="tabs-section-body">
-      <h4 class="">Parameters</h4>
-      <div data-togglable="Parameters">
-        <div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>first</span><wbr></wbr><span><span>Operand</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The antecedent.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>second</span><wbr></wbr><span><span>Operand</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The consequent.</p></div></div></div></div></div></div></div></div></div>
-      </div>
-      <h2 class="tabbedcontent">Constructors</h2>
-      <div class="table" data-togglable="Constructors"><a data-name="-970071065%2FConstructors%2F1512141206" anchor-label="Implication" id="-970071065%2FConstructors%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue TabbedContent">
-            <div class=""><span class="inline-flex">
-                <div><a href="-implication.html"><span><span>Implication</span></span></a></div>
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="-970071065%2FConstructors%2F1512141206" anchor-label="Implication" id="-970071065%2FConstructors%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-implication.html"><span><span>Implication</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-970071065%2FConstructors%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-implication.html"><span class="token function">Implication</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">firstOperand<span class="token operator">: </span><a href="../../../-formula/index.html">Formula</a><span class="token punctuation">, </span></span><span class="parameter ">secondOperand<span class="token operator">: </span><a href="../../../-formula/index.html">Formula</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Creates an <a href="index.html">Implication</a> operator with the given antecedents and consequent.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">firstOperand<span class="token operator">: </span><a href="../../../-formula/index.html">Formula</a><span class="token punctuation">, </span></span><span class="parameter ">secondOperand<span class="token operator">: </span><a href="../../../-formula/index.html">Formula</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Creates an <a href="index.html">Implication</a> operator with the given antecedents and consequent.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <h2 class="">Functions</h2>
-      <div class="table" data-togglable="Functions"><a data-name="381660364%2FFunctions%2F1512141206" anchor-label="fullCheck" id="381660364%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="full-check.html"><span>full</span><wbr></wbr><span><span>Check</span></span></a></div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="381660364%2FFunctions%2F1512141206" anchor-label="fullCheck" id="381660364%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="full-check.html"><span>full</span><wbr></wbr><span><span>Check</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="381660364%2FFunctions%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="full-check.html"><span class="token function">fullCheck</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">graph<span class="token operator">: </span><a href="../../../../eu.yeger.apollo.shared.model.domain/-graph/index.html">Graph</a><span class="token punctuation">, </span></span><span class="parameter ">symbolTable<span class="token operator">: </span><a href="../../../-symbol-table/index.html">SymbolTable</a><span class="token punctuation">, </span></span><span class="parameter ">variableAssignments<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="../../../../eu.yeger.apollo.shared.model.domain/-node/index.html">Node</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">shouldBeModel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../-model-checker-trace/index.html">ModelCheckerTrace</a></div><div class="brief "><p class="paragraph">Checks if consequent holds or antecedent does not hold.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="full-check.html"><span class="token function">fullCheck</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">graph<span class="token operator">: </span><a href="../../../../eu.yeger.apollo.shared.model.domain/-graph/index.html">Graph</a><span class="token punctuation">, </span></span><span class="parameter ">symbolTable<span class="token operator">: </span><a href="../../../-symbol-table/index.html">SymbolTable</a><span class="token punctuation">, </span></span><span class="parameter ">variableAssignments<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="../../../../eu.yeger.apollo.shared.model.domain/-node/index.html">Node</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">shouldBeModel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../-model-checker-trace/index.html">ModelCheckerTrace</a></div><div class="brief "><p class="paragraph">Checks if consequent holds or antecedent does not hold.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1919134758%2FFunctions%2F1512141206" anchor-label="getRawString" id="1919134758%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../get-raw-string.html"><span>get</span><wbr></wbr><span>Raw</span><wbr></wbr><span><span>String</span></span></a></div>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../get-raw-string.html"><span>get</span><wbr></wbr><span>Raw</span><wbr></wbr><span><span>String</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1919134758%2FFunctions%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../get-raw-string.html"><span class="token function">getRawString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">variableAssignments<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="../../../../eu.yeger.apollo.shared.model.domain/-node/index.html">Node</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns raw <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> representation of this binary operator.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../get-raw-string.html"><span class="token function">getRawString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">variableAssignments<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="../../../../eu.yeger.apollo.shared.model.domain/-node/index.html">Node</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns raw <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> representation of this binary operator.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1511371822%2FFunctions%2F1512141206" anchor-label="partialCheck" id="-1511371822%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="partial-check.html"><span>partial</span><wbr></wbr><span><span>Check</span></span></a></div>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="partial-check.html"><span>partial</span><wbr></wbr><span><span>Check</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1511371822%2FFunctions%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="partial-check.html"><span class="token function">partialCheck</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">graph<span class="token operator">: </span><a href="../../../../eu.yeger.apollo.shared.model.domain/-graph/index.html">Graph</a><span class="token punctuation">, </span></span><span class="parameter ">symbolTable<span class="token operator">: </span><a href="../../../-symbol-table/index.html">SymbolTable</a><span class="token punctuation">, </span></span><span class="parameter ">variableAssignments<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="../../../../eu.yeger.apollo.shared.model.domain/-node/index.html">Node</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">shouldBeModel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../-model-checker-trace/index.html">ModelCheckerTrace</a></div><div class="brief "><p class="paragraph">Checks if consequent holds or antecedent does not hold. <span data-unresolved-link="eu.yeger.apollo.shared.model.fol/Operator.Binary.Implication/firstOperand/#/PointingToDeclaration/">firstOperand</span> is only checked if <span data-unresolved-link="eu.yeger.apollo.shared.model.fol/Operator.Binary.Implication/secondOperand/#/PointingToDeclaration/">secondOperand</span> does not hold.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="partial-check.html"><span class="token function">partialCheck</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">graph<span class="token operator">: </span><a href="../../../../eu.yeger.apollo.shared.model.domain/-graph/index.html">Graph</a><span class="token punctuation">, </span></span><span class="parameter ">symbolTable<span class="token operator">: </span><a href="../../../-symbol-table/index.html">SymbolTable</a><span class="token punctuation">, </span></span><span class="parameter ">variableAssignments<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="../../../../eu.yeger.apollo.shared.model.domain/-node/index.html">Node</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">shouldBeModel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../-model-checker-trace/index.html">ModelCheckerTrace</a></div><div class="brief "><p class="paragraph">Checks if consequent holds or antecedent does not hold. <span data-unresolved-link="eu.yeger.apollo.shared.model.fol/Operator.Binary.Implication/firstOperand/#/PointingToDeclaration/">firstOperand</span> is only checked if <span data-unresolved-link="eu.yeger.apollo.shared.model.fol/Operator.Binary.Implication/secondOperand/#/PointingToDeclaration/">secondOperand</span> does not hold.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1189266991%2FFunctions%2F1512141206" anchor-label="toString" id="1189266991%2FFunctions%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../../../-f-o-l-entity/to-string.html"><span>to</span><wbr></wbr><span><span>String</span></span></a></div>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../../-f-o-l-entity/to-string.html"><span>to</span><wbr></wbr><span><span>String</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1189266991%2FFunctions%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../../../-f-o-l-entity/to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> representation with no variable assignments and no brackets or dot at root level.</p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="../../../-f-o-l-entity/to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">variableAssignments<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="../../../../eu.yeger.apollo.shared.model.domain/-node/index.html">Node</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">wrap<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> representation with no variable assignments and optional brackets or dot at root level.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../../../-f-o-l-entity/to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> representation with no variable assignments and no brackets or dot at root level.</p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="../../../-f-o-l-entity/to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">variableAssignments<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="../../../../eu.yeger.apollo.shared.model.domain/-node/index.html">Node</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">wrap<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> representation with no variable assignments and optional brackets or dot at root level.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <h2 class="">Properties</h2>
-      <div class="table" data-togglable="Properties"><a data-name="-371437535%2FProperties%2F1512141206" anchor-label="firstOperand" id="-371437535%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../first-operand.html"><span>first</span><wbr></wbr><span><span>Operand</span></span></a></div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="-371437535%2FProperties%2F1512141206" anchor-label="firstOperand" id="-371437535%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../first-operand.html"><span>first</span><wbr></wbr><span><span>Operand</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-371437535%2FProperties%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="-371437535%2FProperties%2F1512141206" anchor-label="firstOperand" id="-371437535%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="../first-operand.html">firstOperand</a><span class="token operator">: </span><a href="../../../-formula/index.html">Formula</a></div><div class="brief "><a data-name="-371437535%2FProperties%2F1512141206" anchor-label="firstOperand" id="-371437535%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><p class="paragraph">The first/left operand of this binary operator.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="../first-operand.html">firstOperand</a><span class="token operator">: </span><a href="../../../-formula/index.html">Formula</a></div><div class="brief "><p class="paragraph">The first/left operand of this binary operator.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1147687978%2FProperties%2F1512141206" anchor-label="name" id="1147687978%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../../../-f-o-l-entity/name.html"><span><span>name</span></span></a></div>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../../-f-o-l-entity/name.html"><span><span>name</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1147687978%2FProperties%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="1147687978%2FProperties%2F1512141206" anchor-label="name" id="1147687978%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="../../../-f-o-l-entity/name.html">name</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><a data-name="1147687978%2FProperties%2F1512141206" anchor-label="name" id="1147687978%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><p class="paragraph">The name of the entity.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="../../../-f-o-l-entity/name.html">name</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The name of the entity.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1097120501%2FProperties%2F1512141206" anchor-label="secondOperand" id="-1097120501%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../second-operand.html"><span>second</span><wbr></wbr><span><span>Operand</span></span></a></div>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../second-operand.html"><span>second</span><wbr></wbr><span><span>Operand</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1097120501%2FProperties%2F1512141206"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><a data-name="-1097120501%2FProperties%2F1512141206" anchor-label="secondOperand" id="-1097120501%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="../second-operand.html">secondOperand</a><span class="token operator">: </span><a href="../../../-formula/index.html">Formula</a></div><div class="brief "><a data-name="-1097120501%2FProperties%2F1512141206" anchor-label="secondOperand" id="-1097120501%2FProperties%2F1512141206" data-filterable-set=":dokkaHtml/main"></a><p class="paragraph">The second/right operand of this binary operator.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="../second-operand.html">secondOperand</a><span class="token operator">: </span><a href="../../../-formula/index.html">Formula</a></div><div class="brief "><p class="paragraph">The second/right operand of this binary operator.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>

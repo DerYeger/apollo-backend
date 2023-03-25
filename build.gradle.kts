@@ -33,7 +33,7 @@ application {
 
 kotlin {
   explicitApi()
-  jvmToolchain(16)
+  jvmToolchain(17)
 }
 
 sourceSets {

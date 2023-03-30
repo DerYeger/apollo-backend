@@ -1,3 +1,10 @@
+## [2.5.54](https://github.com/DerYeger/apollo-backend/compare/v2.5.53...v2.5.54) (2023-03-30)
+
+
+### Bug Fixes
+
+* **deps:** update cycjimmy/semantic-release-action action to v3.4.2 ([19d622f](https://github.com/DerYeger/apollo-backend/commit/19d622fc1ff1bde316775af8f272acb2bdfd5fef))
+
 ## [2.5.53](https://github.com/DerYeger/apollo-backend/compare/v2.5.52...v2.5.53) (2023-03-25)
 
 

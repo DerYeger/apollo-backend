@@ -1,3 +1,10 @@
+## [2.5.58](https://github.com/DerYeger/apollo-backend/compare/v2.5.57...v2.5.58) (2023-04-29)
+
+
+### Bug Fixes
+
+* **deps:** update junit5 monorepo to v5.9.3 ([291b33f](https://github.com/DerYeger/apollo-backend/commit/291b33fa85dd1b253bc99c4522b3dab442ec3f05))
+
 ## [2.5.57](https://github.com/DerYeger/apollo-backend/compare/v2.5.56...v2.5.57) (2023-04-22)
 
 

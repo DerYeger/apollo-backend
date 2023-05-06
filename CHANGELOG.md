@@ -1,3 +1,10 @@
+## [2.5.59](https://github.com/DerYeger/apollo-backend/compare/v2.5.58...v2.5.59) (2023-05-06)
+
+
+### Bug Fixes
+
+* **deps:** update postgres:15.2 docker digest to 78a275d ([cb2528a](https://github.com/DerYeger/apollo-backend/commit/cb2528a3843953fba9b1a07c390619043cecbfe8))
+
 ## [2.5.58](https://github.com/DerYeger/apollo-backend/compare/v2.5.57...v2.5.58) (2023-04-29)
 
 

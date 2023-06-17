@@ -14,7 +14,7 @@ COPY ./ /app/
 # Build jar
 RUN gradle clean shadowJar --no-daemon
 
-FROM adoptopenjdk/openjdk17:alpine
+FROM eclipse-temurin:17-alpine
 
 COPY --from=BUILDER /app/build/libs/apollo-backend.jar .
 

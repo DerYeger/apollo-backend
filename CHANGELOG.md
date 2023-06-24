@@ -1,3 +1,10 @@
+## [2.5.68](https://github.com/DerYeger/apollo-backend/compare/v2.5.67...v2.5.68) (2023-06-24)
+
+
+### Bug Fixes
+
+* **deps:** pin eclipse-temurin docker tag to 2478889 ([0112be1](https://github.com/DerYeger/apollo-backend/commit/0112be105d101909e578c341a32bcf1c62454651))
+
 ## [2.5.67](https://github.com/DerYeger/apollo-backend/compare/v2.5.66...v2.5.67) (2023-06-17)
 
 

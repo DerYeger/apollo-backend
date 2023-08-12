@@ -1,3 +1,10 @@
+## [2.5.80](https://github.com/DerYeger/apollo-backend/compare/v2.5.79...v2.5.80) (2023-08-12)
+
+
+### Bug Fixes
+
+* **deps:** update postgres docker tag to v15.4 ([dda6ad2](https://github.com/DerYeger/apollo-backend/commit/dda6ad2915dd0e05e687c56dcb25bfcc2e84e99f))
+
 ## [2.5.79](https://github.com/DerYeger/apollo-backend/compare/v2.5.78...v2.5.79) (2023-08-12)
 
 

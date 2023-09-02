@@ -1,3 +1,10 @@
+## [2.5.89](https://github.com/DerYeger/apollo-backend/compare/v2.5.88...v2.5.89) (2023-09-02)
+
+
+### Bug Fixes
+
+* **deps:** update gradle:8.3.0 docker digest to 5f4ab27 ([ed29460](https://github.com/DerYeger/apollo-backend/commit/ed294607530b61210d9fa75e0c1d2024c4ca388f))
+
 ## [2.5.88](https://github.com/DerYeger/apollo-backend/compare/v2.5.87...v2.5.88) (2023-09-02)
 
 

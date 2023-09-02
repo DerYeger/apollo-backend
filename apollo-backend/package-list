@@ -100,8 +100,10 @@ $dokka.location:eu.yeger.apollo.fol.parser/German///PointingToDeclaration/apoll
 $dokka.location:eu.yeger.apollo.fol.parser/Language///PointingToDeclaration/apollo-backend/eu.yeger.apollo.fol.parser/-language/index.html
 $dokka.location:eu.yeger.apollo.fol.parser/Language/getString/#kotlin.String#kotlin.Array[kotlin.Any?]/PointingToDeclaration/apollo-backend/eu.yeger.apollo.fol.parser/-language/get-string.html
 $dokka.location:eu.yeger.apollo.fol.parser/Language/getString/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.fol.parser/-language/get-string.html
+$dokka.location:eu.yeger.apollo.fol.parser/ParserResult///PointingToDeclaration/apollo-backend/eu.yeger.apollo.fol.parser/-parser-result/index.html
 $dokka.location:eu.yeger.apollo.fol////PointingToDeclaration/apollo-backend/eu.yeger.apollo.fol/index.html
 $dokka.location:eu.yeger.apollo.fol//checkModel/#eu.yeger.apollo.shared.model.domain.Graph#eu.yeger.apollo.shared.model.fol.FormulaHead#eu.yeger.apollo.shared.model.api.Feedback#kotlin.Boolean/PointingToDeclaration/apollo-backend/eu.yeger.apollo.fol/check-model.html
+$dokka.location:eu.yeger.apollo.fol/ModelCheckerResult///PointingToDeclaration/apollo-backend/eu.yeger.apollo.fol/-model-checker-result/index.html
 $dokka.location:eu.yeger.apollo.model_checker.model.api////PointingToDeclaration/apollo-backend/eu.yeger.apollo.model_checker.model.api/index.html
 $dokka.location:eu.yeger.apollo.model_checker.model.api/ModelCheckerRequest///PointingToDeclaration/apollo-backend/eu.yeger.apollo.model_checker.model.api/-model-checker-request/index.html
 $dokka.location:eu.yeger.apollo.model_checker.model.api/ModelCheckerRequest/ModelCheckerRequest/#kotlin.String#eu.yeger.apollo.shared.model.api.ApiGraph#kotlin.String#eu.yeger.apollo.shared.model.api.Feedback/PointingToDeclaration/apollo-backend/eu.yeger.apollo.model_checker.model.api/-model-checker-request/-model-checker-request.html
@@ -145,6 +147,7 @@ $dokka.location:eu.yeger.apollo.shared.model.api/ApiNode/ApiNode/#kotlin.String#
 $dokka.location:eu.yeger.apollo.shared.model.api/ApiNode/constants/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-api-node/constants.html
 $dokka.location:eu.yeger.apollo.shared.model.api/ApiNode/name/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-api-node/name.html
 $dokka.location:eu.yeger.apollo.shared.model.api/ApiNode/relations/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-api-node/relations.html
+$dokka.location:eu.yeger.apollo.shared.model.api/ApiResult///PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-api-result/index.html
 $dokka.location:eu.yeger.apollo.shared.model.api/ApiToken///PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-api-token/index.html
 $dokka.location:eu.yeger.apollo.shared.model.api/ApiToken/ApiToken/#kotlin.String#kotlin.Long/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-api-token/-api-token.html
 $dokka.location:eu.yeger.apollo.shared.model.api/ApiToken/expiryDate/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-api-token/expiry-date.html
@@ -153,8 +156,10 @@ $dokka.location:eu.yeger.apollo.shared.model.api/Feedback.Full///PointingToDecla
 $dokka.location:eu.yeger.apollo.shared.model.api/Feedback.Minimal///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}apollo-backend/eu.yeger.apollo.shared.model.api/-feedback/-minimal/index.html
 $dokka.location:eu.yeger.apollo.shared.model.api/Feedback.Relevant///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}apollo-backend/eu.yeger.apollo.shared.model.api/-feedback/-relevant/index.html
 $dokka.location:eu.yeger.apollo.shared.model.api/Feedback///PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-feedback/index.html
+$dokka.location:eu.yeger.apollo.shared.model.api/Feedback/entries/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-feedback/entries.html
 $dokka.location:eu.yeger.apollo.shared.model.api/Feedback/valueOf/#kotlin.String/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-feedback/value-of.html
 $dokka.location:eu.yeger.apollo.shared.model.api/Feedback/values/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-feedback/values.html
+$dokka.location:eu.yeger.apollo.shared.model.api/IntermediateResult///PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-intermediate-result/index.html
 $dokka.location:eu.yeger.apollo.shared.model.api/ResponseEntity///PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-response-entity/index.html
 $dokka.location:eu.yeger.apollo.shared.model.api/ResponseEntity/ResponseEntity/#io.ktor.http.HttpStatusCode#TypeParam(bounds=[kotlin.Any])/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-response-entity/-response-entity.html
 $dokka.location:eu.yeger.apollo.shared.model.api/ResponseEntity/data/#/PointingToDeclaration/apollo-backend/eu.yeger.apollo.shared.model.api/-response-entity/data.html

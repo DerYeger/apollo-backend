@@ -1,3 +1,10 @@
+## [2.5.92](https://github.com/DerYeger/apollo-backend/compare/v2.5.91...v2.5.92) (2023-09-09)
+
+
+### Bug Fixes
+
+* **deps:** update actions/checkout action to v4 ([#54](https://github.com/DerYeger/apollo-backend/issues/54)) ([52b40d8](https://github.com/DerYeger/apollo-backend/commit/52b40d8e192209defb571d3bf1914d6b90890b85))
+
 ## [2.5.91](https://github.com/DerYeger/apollo-backend/compare/v2.5.90...v2.5.91) (2023-09-09)
 
 

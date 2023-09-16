@@ -1,3 +1,10 @@
+## [2.5.93](https://github.com/DerYeger/apollo-backend/compare/v2.5.92...v2.5.93) (2023-09-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency io.micrometer:micrometer-registry-prometheus to v1.11.4 ([97870d8](https://github.com/DerYeger/apollo-backend/commit/97870d8b1103c3b49254d598ac2f37ad1dcd328e))
+
 ## [2.5.92](https://github.com/DerYeger/apollo-backend/compare/v2.5.91...v2.5.92) (2023-09-09)
 
 

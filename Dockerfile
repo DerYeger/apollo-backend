@@ -14,7 +14,7 @@ COPY ./ /app/
 # Build jar
 RUN gradle clean shadowJar --no-daemon
 
-FROM eclipse-temurin:17-alpine@sha256:fe702d6a9b2d0855f29154512358cd5c0c866b8b16544589e254a97743304d1a
+FROM eclipse-temurin:17-alpine@sha256:e890b4f91ec8aa40f1537a50a53ab516fc42341c3b5dd608d1aeee2b1cba55b1
 
 COPY --from=BUILDER /app/build/libs/apollo-backend.jar .
 

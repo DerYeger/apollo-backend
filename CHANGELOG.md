@@ -1,3 +1,10 @@
+## [2.5.106](https://github.com/DerYeger/apollo-backend/compare/v2.5.105...v2.5.106) (2023-10-21)
+
+
+### Bug Fixes
+
+* **deps:** update eclipse-temurin docker tag to v21 ([#56](https://github.com/DerYeger/apollo-backend/issues/56)) ([a06fb01](https://github.com/DerYeger/apollo-backend/commit/a06fb01e2be1ac39a49b7fb67630e4ec9bfc6c7b))
+
 ## [2.5.105](https://github.com/DerYeger/apollo-backend/compare/v2.5.104...v2.5.105) (2023-10-21)
 
 

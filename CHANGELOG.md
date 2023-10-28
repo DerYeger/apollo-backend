@@ -1,3 +1,10 @@
+## [2.5.108](https://github.com/DerYeger/apollo-backend/compare/v2.5.107...v2.5.108) (2023-10-28)
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies to v0.44.1 ([08d8921](https://github.com/DerYeger/apollo-backend/commit/08d89216e858800e711f05a62f8e0a37c2cdbb65))
+
 ## [2.5.107](https://github.com/DerYeger/apollo-backend/compare/v2.5.106...v2.5.107) (2023-10-21)
 
 

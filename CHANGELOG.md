@@ -1,3 +1,10 @@
+## [2.5.109](https://github.com/DerYeger/apollo-backend/compare/v2.5.108...v2.5.109) (2023-11-04)
+
+
+### Bug Fixes
+
+* **deps:** update eclipse-temurin:21-alpine docker digest to 001dfe1 ([409ca31](https://github.com/DerYeger/apollo-backend/commit/409ca318111f7fb60c4f68c1f102dc6b903a2177))
+
 ## [2.5.108](https://github.com/DerYeger/apollo-backend/compare/v2.5.107...v2.5.108) (2023-10-28)
 
 

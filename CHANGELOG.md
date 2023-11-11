@@ -1,3 +1,10 @@
+## [2.5.115](https://github.com/DerYeger/apollo-backend/compare/v2.5.114...v2.5.115) (2023-11-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency com.zaxxer:hikaricp to v5.1.0 ([ad12ad1](https://github.com/DerYeger/apollo-backend/commit/ad12ad11c872d186e1bc953ba378accdec3e0e3a))
+
 ## [2.5.114](https://github.com/DerYeger/apollo-backend/compare/v2.5.113...v2.5.114) (2023-11-11)
 
 

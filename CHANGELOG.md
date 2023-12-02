@@ -1,3 +1,10 @@
+## [2.5.121](https://github.com/DerYeger/apollo-backend/compare/v2.5.120...v2.5.121) (2023-12-02)
+
+
+### Bug Fixes
+
+* **deps:** update actions/setup-java action to v4 ([#58](https://github.com/DerYeger/apollo-backend/issues/58)) ([d4dfa3c](https://github.com/DerYeger/apollo-backend/commit/d4dfa3c1e1a318b3f15ed68a6b2b6880322974b0))
+
 ## [2.5.120](https://github.com/DerYeger/apollo-backend/compare/v2.5.119...v2.5.120) (2023-12-02)
 
 

@@ -31,7 +31,7 @@ jobs:
       - name: Build
         run: ./gradlew shadowJar
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: jar-artifact
           path: ./build/libs/apollo-backend.jar

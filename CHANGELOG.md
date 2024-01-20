@@ -1,3 +1,10 @@
+## [2.5.129](https://github.com/DerYeger/apollo-backend/compare/v2.5.128...v2.5.129) (2024-01-20)
+
+
+### Bug Fixes
+
+* **deps:** update dependency org.flywaydb:flyway-core to v10.6.0 ([2074e6a](https://github.com/DerYeger/apollo-backend/commit/2074e6a4663fd00fa16151462bcf5695e92a7f88))
+
 ## [2.5.128](https://github.com/DerYeger/apollo-backend/compare/v2.5.127...v2.5.128) (2024-01-13)
 
 

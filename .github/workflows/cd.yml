@@ -55,7 +55,7 @@ jobs:
           name: jar-artifact
           path: .
       - name: Release assets
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: ./apollo-backend.jar
         env:

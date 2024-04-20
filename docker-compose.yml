@@ -25,7 +25,7 @@ services:
       DATABASE_NAME: "apollo-database"
   # SQL database
   postgres:
-    image: postgres:16.2@sha256:37a21462f4b4efb16c41b53af4fd31898fa322332a044d730e65bcc0a1ae6a5f
+    image: postgres:16.2@sha256:f4b0987cb4ba8bcc2b90aa33ad8b5786669bec4dc633fc93d1418275e3627b34
     container_name: postgres
     ports:
       - "5432:5432"
